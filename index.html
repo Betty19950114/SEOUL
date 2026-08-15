@@ -1055,6 +1055,13 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     t.addEventListener('click', function () {
       var cur = document.documentElement.getAttribute('data-day');
       setDay(cur === t.dataset.day ? 'all' : t.dataset.day);   // 再點一次 → 全部
+      /* 捲到該天卡片：篩選時直接看到內容，還原時也留在原本那天不跳位 */
+      var card = document.querySelector('.daycard[data-day="' + t.dataset.day + '"]');
+      if (!card) return;
+      var bar = document.querySelector('.tabsbar');
+      var off = (bar ? bar.getBoundingClientRect().height : 0) + 14;
+      window.scrollTo({ top: card.getBoundingClientRect().top + window.scrollY - off,
+                        behavior: 'smooth' });
     });
     t.addEventListener('keydown', function (e) {
       var n = null;
