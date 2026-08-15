@@ -613,10 +613,11 @@
 
   /* 地鐵圖 */
   .mline { opacity: .85; }
-  .mdot { fill: var(--mapbg); stroke: var(--ink-soft); stroke-width: 2.5; }
-  .mdot.ix { stroke: var(--ink); stroke-width: 3; }
-  .mlabel { font-size: 10.5px; font-weight: 650; fill: var(--ink-soft); paint-order: stroke;
-            stroke: var(--mapbg); stroke-width: 3px; stroke-linejoin: round; }
+  .mdot { stroke: var(--mapbg); stroke-width: 2.5; }
+  .mnum { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 10px; font-weight: 700;
+          fill: #fff; pointer-events: none; letter-spacing: -.02em; }
+  .mlabel { font-size: 11px; font-weight: 700; fill: var(--ink); paint-order: stroke;
+            stroke: var(--mapbg); stroke-width: 3.5px; stroke-linejoin: round; }
   .mstation { cursor: pointer; }
   .mhalo { fill: none; stroke: var(--brand); stroke-width: 3; opacity: 0; transition: opacity .18s ease; }
   @media (prefers-reduced-motion: reduce) { .mhalo { transition: none; } }
@@ -626,7 +627,7 @@
   :root[data-day="2"] .mstation:not([data-days~="2"]),
   :root[data-day="3"] .mstation:not([data-days~="3"]),
   :root[data-day="4"] .mstation:not([data-days~="4"]),
-  :root[data-day="5"] .mstation:not([data-days~="5"]) { opacity: .26; }
+  :root[data-day="5"] .mstation:not([data-days~="5"]) { opacity: .3; }
   :root[data-day="1"] .mstation[data-days~="1"] .mhalo,
   :root[data-day="2"] .mstation[data-days~="2"] .mhalo,
   :root[data-day="3"] .mstation[data-days~="3"] .mhalo,
@@ -640,7 +641,7 @@
 
   /* 點選單一行程時標出該站 */
   .mstation.pick .mhalo { opacity: 1; stroke: var(--pick); stroke-width: 4; }
-  .mstation.pick .mdot { fill: var(--pick); stroke: var(--pick); }
+  .mstation.pick .mdot { fill: var(--pick) !important; stroke: var(--mapbg); }
   .mstation.pick .mlabel { fill: var(--ink); font-weight: 800; }
   .mstation.pick { opacity: 1 !important; }
 
@@ -648,3 +649,5 @@
                  padding-top: 12px; border-top: 1px solid var(--line); }
   .mlg { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-soft); }
   .mlg i { width: 14px; height: 4px; border-radius: 2px; display: inline-block; }
+
+  .pkmeta.unk { color: var(--ink-faint); font-style: normal; }

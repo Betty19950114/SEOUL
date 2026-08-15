@@ -2,7 +2,7 @@
 """由 data.py 產生行程頁的各個片段（地圖 SVG、地鐵圖、每日卡片、圖例、快速尋找）。"""
 import math, html, json, urllib.parse
 from data import (PLACES, STATION, CAT, MODE, DAYS, REGIONS, ASK,
-                  METRO_STATIONS, METRO_LINES)
+                  METRO_STATIONS, METRO_LINES, LINE_COLOUR)
 
 def esc(s): return html.escape(str(s), quote=True)
 def naver(q): return "https://map.naver.com/p/search/" + urllib.parse.quote(q)
@@ -111,26 +111,65 @@ open("frag_map.svg.txt", "w", encoding="utf-8").write(
     + '<g class="regionlabels">\n' + "\n".join(region_labels) + '\n</g>')
 
 # ---------------- 地鐵圖 SVG ----------------
-MS = {ko: (zh, lines, *project(lon, lat), days)
-      for ko, zh, lines, lon, lat, days in METRO_STATIONS}
+mpos = {}
+for ko, zh, lines, lon, lat, days, nums in METRO_STATIONS:
+    x, y = project(lon, lat)
+    mpos[ko] = {"ko": ko, "zh": zh, "lines": lines, "x": x, "y": y, "days": days, "nums": nums}
+
+# 圓點放大到能容納站號，故需拉開間距
+ml = list(mpos.values())
+MMIN = 34.0
+for _ in range(600):
+    moved = False
+    for i in range(len(ml)):
+        for j in range(i+1, len(ml)):
+            a, b = ml[i], ml[j]
+            dx, dy = b["x"]-a["x"], b["y"]-a["y"]
+            dist = math.hypot(dx, dy)
+            if dist < MMIN:
+                moved = True
+                if dist < 0.01: dx, dy, dist = 0.6, 0.4, 0.72
+                pu = (MMIN-dist)/2; ux, uy = dx/dist, dy/dist
+                a["x"] -= ux*pu; a["y"] -= uy*pu
+                b["x"] += ux*pu; b["y"] += uy*pu
+    if not moved: break
 
 seg = []
 for lname, colour, path in METRO_LINES:
-    pts = " ".join(f'{MS[s][2]:.1f},{MS[s][3]:.1f}' for s in path if s in MS)
+    pts = " ".join(f'{mpos[st]["x"]:.1f},{mpos[st]["y"]:.1f}' for st in path if st in mpos)
     seg.append(f'<polyline class="mline" data-line="{lname}" points="{pts}" fill="none" '
                f'stroke="{colour}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>')
 
+SHORT = {"東大門歷史文化公園": "東大門歷史文化", "高速巴士客運站": "高速巴士"}
+
+# 標籤預設放上方；若與已放置的標籤重疊就改放下方
+placed = []
+def label_y(st, txt):
+    w = len(txt) * 11.5 + 6
+    for dy, anchor in ((-18, "above"), (24, "below")):
+        box = (st["x"] - w/2, st["y"] + dy - 11, st["x"] + w/2, st["y"] + dy + 3)
+        if not any(box[0] < q[2] and q[0] < box[2] and box[1] < q[3] and q[1] < box[3] for q in placed):
+            placed.append(box)
+            return dy
+    placed.append((st["x"] - w/2, st["y"] + 24 - 11, st["x"] + w/2, st["y"] + 24 + 3))
+    return 24
+
 dots = []
-for ko, zh, lines, lon, lat, days in METRO_STATIONS:
-    x, y = project(lon, lat)
-    interchange = "·" in lines
-    r = 7.5 if interchange else 5.5
+for st in sorted(ml, key=lambda a: (a["y"], a["x"])):
+    x, y = st["x"], st["y"]
+    pline, pnum = st["nums"][0]
+    colour = LINE_COLOUR.get(pline, "#888")
+    allnums = "　".join(f'{l} 號線 {n}' if l != "A" else f'機場快線 {n}' for l, n in st["nums"])
+    txt = SHORT.get(st["zh"], st["zh"])
+    dy = label_y(st, txt)
     dots.append(
-      f'<g class="mstation" data-days="{" ".join(map(str, days))}" data-zh="{esc(zh)}" data-name="{esc(zh)}站" data-time="{esc(lines)} 線">'
-      f'<title>{esc(zh)}站（{esc(lines)}）</title>'
-      f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r+4:.1f}" class="mhalo"/>'
-      f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r}" class="mdot{" ix" if interchange else ""}"/>'
-      f'<text x="{x:.1f}" y="{y-r-6:.1f}" text-anchor="middle" class="mlabel">{esc(zh)}</text></g>')
+      f'<g class="mstation" data-days="{" ".join(map(str, st["days"]))}" data-zh="{esc(st["zh"])}" '
+      f'data-name="{esc(st["zh"])}站 {esc(pnum)}" data-time="{esc(allnums)}">'
+      f'<title>{esc(st["zh"])}站（{esc(allnums)}）</title>'
+      f'<circle cx="{x:.1f}" cy="{y:.1f}" r="17" class="mhalo"/>'
+      f'<circle cx="{x:.1f}" cy="{y:.1f}" r="13" class="mdot" fill="{colour}"/>'
+      f'<text x="{x:.1f}" y="{y+3.6:.1f}" text-anchor="middle" class="mnum">{esc(pnum)}</text>'
+      f'<text x="{x:.1f}" y="{y+dy:.1f}" text-anchor="middle" class="mlabel">{esc(txt)}</text></g>')
 
 legend_lines = "".join(
     f'<span class="mlg"><i style="background:{c}"></i>{("機場快線" if n=="A" else n+" 號線")}</span>'
@@ -142,6 +181,20 @@ open("frag_metro.svg.txt", "w", encoding="utf-8").write(
 open("frag_metrolegend.txt", "w", encoding="utf-8").write(legend_lines)
 
 # ---------------- 每日卡片 ----------------
+def subs_html(it):
+    ss = it.get("sub")
+    if not ss: return ""
+    rows = ""
+    for name, q, note, hrs, addr in ss:
+        known = not addr.startswith("確切門牌") and not addr.startswith("地址依")
+        rows += (f'<li><span class="pkname">{esc(name)}</span>'
+                 f'<span class="pkdesc">{esc(note)}</span>'
+                 f'<span class="pkmeta">🕘 {esc(hrs)}</span>'
+                 f'<span class="pkmeta{"" if known else " unk"}">📍 {esc(addr)}</span>'
+                 f'<a class="pkmap" href="{naver(addr if known else q)}" '
+                 f'target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a></li>')
+    return f'<div class="picks"><div class="pkhead">此站包含 {len(ss)} 家</div><ul>{rows}</ul></div>'
+
 def picks_html(it):
     ps = it.get("picks")
     if not ps: return ""
@@ -168,7 +221,7 @@ def info_block(it):
             f'<summary><span class="sumico" aria-hidden="true"></span>{" · ".join(labels)}</summary>'
             f'<dl class="infogrid">{"".join(rows)}</dl>'
             f'<a class="navermap" href="{naver(addr)}" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>'
-            f'{picks_html(it)}</details>')
+            f'{subs_html(it)}{picks_html(it)}</details>')
 
 cards = []
 for d in sorted(DAYS):
@@ -188,7 +241,7 @@ for d in sorted(DAYS):
             sub = ""
             if it.get("sub"):
                 sub = ('<span class="sublist">'
-                       + "".join(f'<span class="subchip">{esc(x)}</span>' for x in it["sub"])
+                       + "".join(f'<span class="subchip">{esc(x[0])}</span>' for x in it["sub"])
                        + '</span>')
             stn = STATION[it["key"]][0]
             rows.append(
