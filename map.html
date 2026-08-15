@@ -435,6 +435,21 @@
   }
   .pkmap:hover { border-bottom-color: var(--brand); }
 
+  /* ---------- transit legs ---------- */
+  .mbadge {
+    font-size: 10.5px; font-weight: 700; letter-spacing: .03em;
+    padding: 2px 7px; border-radius: 5px; flex: none;
+    color: var(--ink-faint); background: var(--card-2); border: 1px solid var(--line);
+  }
+  .tr.move.subway .mbadge { color: var(--brand); background: var(--brand-soft); border-color: var(--line-2); }
+  .tr.move.subway .tn { color: var(--ink); font-weight: 600; }
+  .tr.move.subway .tbody::before {
+    background: var(--brand); border-color: var(--brand); opacity: 1;
+    width: 9px; height: 9px; left: 8px; top: 9px;
+  }
+  .tr.move.bus .mbadge { color: var(--d4); background: color-mix(in srgb, var(--d4) 14%, transparent); border-color: transparent; }
+  .tr.move.bus .tn { color: var(--ink); font-weight: 600; }
+
 
   /* map.html only */
   .lgroups { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 30px; margin-top: 26px; }
@@ -509,7 +524,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 <rect x="363.0" y="128.6" width="104.5" height="70.3" rx="16" class="regionbox"/>
 <rect x="184.7" y="310.6" width="52.0" height="52.0" rx="16" class="regionbox"/>
 <rect x="549.3" y="101.3" width="52.0" height="52.0" rx="16" class="regionbox"/>
-<rect x="702.3" y="210.2" width="107.6" height="79.8" rx="16" class="regionbox"/>
+<rect x="699.5" y="211.9" width="111.9" height="77.2" rx="16" class="regionbox"/>
 <rect x="565.2" y="364.1" width="52.0" height="52.0" rx="16" class="regionbox"/>
 <rect x="472.4" y="385.4" width="52.0" height="52.0" rx="16" class="regionbox"/>
 </g>
@@ -529,14 +544,14 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 <g class="pin"><circle cx="210.7" cy="336.6" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="210.7" y="340.6" text-anchor="middle" class="pnum">8</text></g>
 </g>
 <g class="dayg" data-day="4">
-<polyline points="575.3,127.3 783.9,264.0 732.3,263.6 777.2,242.0 728.3,241.0 754.9,259.2 755.0,236.2 591.2,390.1 498.4,411.4" fill="none" stroke="var(--d4)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="575.3,127.3 785.4,262.3 772.1,240.4 761.7,261.0 738.8,263.1 725.5,237.9 748.2,241.5 591.2,390.1 498.4,411.4" fill="none" stroke="var(--d4)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="pin"><circle cx="575.3" cy="127.3" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="575.3" y="131.3" text-anchor="middle" class="pnum">1</text></g>
-<g class="pin"><circle cx="783.9" cy="264.0" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="783.9" y="268.0" text-anchor="middle" class="pnum">2</text></g>
-<g class="pin"><circle cx="732.3" cy="263.6" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="732.3" y="267.6" text-anchor="middle" class="pnum">3</text></g>
-<g class="pin"><circle cx="777.2" cy="242.0" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="777.2" y="246.0" text-anchor="middle" class="pnum">4</text></g>
-<g class="pin"><circle cx="728.3" cy="241.0" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="728.3" y="245.0" text-anchor="middle" class="pnum">5</text></g>
-<g class="pin"><circle cx="754.9" cy="259.2" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="754.9" y="263.2" text-anchor="middle" class="pnum">6</text></g>
-<g class="pin"><circle cx="755.0" cy="236.2" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="755.0" y="240.2" text-anchor="middle" class="pnum">7</text></g>
+<g class="pin"><circle cx="785.4" cy="262.3" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="785.4" y="266.3" text-anchor="middle" class="pnum">2</text></g>
+<g class="pin"><circle cx="772.1" cy="240.4" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="772.1" y="244.4" text-anchor="middle" class="pnum">3</text></g>
+<g class="pin"><circle cx="761.7" cy="261.0" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="761.7" y="265.0" text-anchor="middle" class="pnum">4</text></g>
+<g class="pin"><circle cx="738.8" cy="263.1" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="738.8" y="267.1" text-anchor="middle" class="pnum">5</text></g>
+<g class="pin"><circle cx="725.5" cy="237.9" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="725.5" y="241.9" text-anchor="middle" class="pnum">6</text></g>
+<g class="pin"><circle cx="748.2" cy="241.5" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="748.2" y="245.5" text-anchor="middle" class="pnum">7</text></g>
 <g class="pin"><circle cx="591.2" cy="390.1" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="591.2" y="394.1" text-anchor="middle" class="pnum">8</text></g>
 <g class="pin"><circle cx="498.4" cy="411.4" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="498.4" y="415.4" text-anchor="middle" class="pnum">9</text></g>
 </g>
@@ -553,7 +568,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 <g class="region"><rect x="363.0" y="109.6" width="83" height="18" rx="9" class="regionchip"/><text x="370.0" y="122.6" class="regiontext">首爾站・明洞</text></g>
 <g class="region"><rect x="184.7" y="291.6" width="48" height="18" rx="9" class="regionchip"/><text x="191.7" y="304.6" class="regiontext">汝矣島</text></g>
 <g class="region"><rect x="549.3" y="82.3" width="48" height="18" rx="9" class="regionchip"/><text x="556.3" y="95.3" class="regiontext">新堂洞</text></g>
-<g class="region"><rect x="702.3" y="191.2" width="48" height="18" rx="9" class="regionchip"/><text x="709.3" y="204.2" class="regiontext">聖水洞</text></g>
+<g class="region"><rect x="699.5" y="192.9" width="48" height="18" rx="9" class="regionchip"/><text x="706.5" y="205.9" class="regiontext">聖水洞</text></g>
 <g class="region"><rect x="565.2" y="345.1" width="48" height="18" rx="9" class="regionchip"/><text x="572.2" y="358.1" class="regiontext">新沙洞</text></g>
 <g class="region"><rect x="472.4" y="366.4" width="37" height="18" rx="9" class="regionchip"/><text x="479.4" y="379.4" class="regiontext">盤浦</text></g>
 </g>
@@ -575,8 +590,8 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 <div class="lgroup" style="--c:var(--d1)"><h3><span class="lbar"></span>DAY 1 · 抵達首爾・南大門市場</h3><ul><li><span class="lnum">H</span><span class="ltime">18:50</span><span class="lname">서울역 라움169　Check-in<span class="lstn">會賢站 · 4分</span></span><span class="tag stay">住宿</span></li><li><span class="lnum">2</span><span class="ltime">19:20</span><span class="lname">南大門市場<span class="lstn">會賢站 · 1分</span></span><span class="tag food">美食</span></li></ul></div>
 <div class="lgroup" style="--c:var(--d2)"><h3><span class="lbar"></span>DAY 2 · 愛寶樂園 全日遊</h3><ul><li><span class="lnum">1</span><span class="ltime">10:00</span><span class="lname">愛寶樂園 <span class="lo">（地圖外）</span><span class="lstn">前岱·愛寶樂園站 · 4分</span></span><span class="tag sight">景點</span></li></ul></div>
 <div class="lgroup" style="--c:var(--d3)"><h3><span class="lbar"></span>DAY 3 · 北村韓屋村・望遠洞・弘大・汝矣島</h3><ul><li><span class="lnum">1</span><span class="ltime">09:00</span><span class="lname">北村韓屋村<span class="lstn">安國站 · 7分</span></span><span class="tag sight">景點</span></li><li><span class="lnum">2</span><span class="ltime">10:15</span><span class="lname">Artist Bakery<span class="lstn">安國站 · 2分</span></span><span class="tag cafe">咖啡・甜點</span></li><li><span class="lnum">3</span><span class="ltime">12:15</span><span class="lname">望遠市場<span class="lstn">望遠站 · 5分</span></span><span class="tag food">美食</span></li><li><span class="lnum">4</span><span class="ltime">13:45</span><span class="lname">漢江貓咪店<span class="lstn">麻浦區廳站 · 14分</span></span><span class="tag cafe">咖啡・甜點</span></li><li><span class="lnum">5</span><span class="ltime">15:00</span><span class="lname">AEAE 弘大店<span class="lstn">上水站 · 4分</span></span><span class="tag shop">購物</span></li><li><span class="lnum">6</span><span class="ltime">15:45</span><span class="lname">Compose Coffee 弘大<span class="lstn">弘大入口站 · 5分</span></span><span class="tag cafe">咖啡・甜點</span></li><li><span class="lnum">7</span><span class="ltime">16:30</span><span class="lname">星巴克 梨大店<span class="lstn">梨大站 · 2分</span></span><span class="tag cafe">咖啡・甜點</span></li><li><span class="lnum">8</span><span class="ltime">19:00</span><span class="lname">汝矣島漢江公園<span class="lstn">汝矣渡口站 · 2分</span></span><span class="tag sight">景點</span></li></ul></div>
-<div class="lgroup" style="--c:var(--d4)"><h3><span class="lbar"></span>DAY 4 · 新堂洞・聖水洞・新沙洞・盤浦</h3><ul><li><span class="lnum">1</span><span class="ltime">11:30</span><span class="lname">獵奇辣炒年糕 신당본점<span class="lstn">新堂站 · 3分</span></span><span class="tag food">美食</span></li><li><span class="lnum">2</span><span class="ltime">13:30</span><span class="lname">ept鞋子 聖水洞<span class="lstn">聖水站 · 8分</span></span><span class="tag shop">購物</span></li><li><span class="lnum">3</span><span class="ltime">14:15</span><span class="lname">Human Made 服飾<span class="lstn">聖水站 · 4分</span></span><span class="tag shop">購物</span></li><li><span class="lnum">4</span><span class="ltime">15:00</span><span class="lname">烤黨 Ggupdang 聖水店<span class="lstn">聖水站 · 3分</span></span><span class="tag food">美食</span></li><li><span class="lnum">5</span><span class="ltime">15:45</span><span class="lname">蛋塔 Meitawang Egg Tart<span class="lstn">纛島站 · 6分</span></span><span class="tag cafe">咖啡・甜點</span></li><li><span class="lnum">6</span><span class="ltime">16:15</span><span class="lname">冰淇淋 Maman Gelato<span class="lstn">聖水站 · 3分</span></span><span class="tag cafe">咖啡・甜點</span></li><li><span class="lnum">7</span><span class="ltime">18:00</span><span class="lname">祖傳三代馬鈴薯排骨湯<span class="lstn">聖水站 · 3分</span></span><span class="tag food">美食</span></li><li><span class="lnum">8</span><span class="ltime">19:45</span><span class="lname">烤黨 新沙店<span class="lstn">新沙站 · 2分</span></span><span class="tag food">美食</span></li><li><span class="lnum">9</span><span class="ltime">21:00</span><span class="lname">盤浦大橋 月光彩虹噴泉<span class="lstn">高速巴士客運站站 · 14分</span></span><span class="tag sight">景點</span></li></ul></div>
-<div class="lgroup" style="--c:var(--d5)"><h3><span class="lbar"></span>DAY 5 · 明洞早晨・賦歸</h3><ul><li><span class="lnum">1</span><span class="ltime">07:30</span><span class="lname">明洞商圈 散步採買<span class="lstn">明洞站 · 1分</span></span><span class="tag sight">景點</span></li></ul></div>
+<div class="lgroup" style="--c:var(--d4)"><h3><span class="lbar"></span>DAY 4 · 新堂洞・聖水洞・新沙洞・盤浦</h3><ul><li><span class="lnum">1</span><span class="ltime">11:30</span><span class="lname">獵奇辣炒年糕 신당본점<span class="lstn">新堂站 · 3分</span></span><span class="tag food">美食</span></li><li><span class="lnum">2</span><span class="ltime">13:30</span><span class="lname">ept鞋子 聖水洞<span class="lstn">聖水站 · 8分</span></span><span class="tag shop">購物</span></li><li><span class="lnum">3</span><span class="ltime">14:15</span><span class="lname">烤黨 Ggupdang 聖水店<span class="lstn">聖水站 · 3分</span></span><span class="tag food">美食</span></li><li><span class="lnum">4</span><span class="ltime">15:00</span><span class="lname">冰淇淋 Maman Gelato<span class="lstn">聖水站 · 3分</span></span><span class="tag cafe">咖啡・甜點</span></li><li><span class="lnum">5</span><span class="ltime">15:45</span><span class="lname">Human Made 服飾<span class="lstn">聖水站 · 4分</span></span><span class="tag shop">購物</span></li><li><span class="lnum">6</span><span class="ltime">16:30</span><span class="lname">蛋塔 Meitawang Egg Tart<span class="lstn">纛島站 · 6分</span></span><span class="tag cafe">咖啡・甜點</span></li><li><span class="lnum">7</span><span class="ltime">18:00</span><span class="lname">祖傳三代馬鈴薯排骨湯<span class="lstn">聖水站 · 3分</span></span><span class="tag food">美食</span></li><li><span class="lnum">8</span><span class="ltime">19:45</span><span class="lname">烤黨 新沙店<span class="lstn">新沙站 · 2分</span></span><span class="tag food">美食</span></li><li><span class="lnum">9</span><span class="ltime">21:00</span><span class="lname">盤浦大橋 月光彩虹噴泉<span class="lstn">高速巴士客運站站 · 14分</span></span><span class="tag sight">景點</span></li></ul></div>
+<div class="lgroup" style="--c:var(--d5)"><h3><span class="lbar"></span>DAY 5 · 明洞早晨・賦歸</h3><ul><li><span class="lnum">1</span><span class="ltime">07:45</span><span class="lname">明洞商圈 散步採買<span class="lstn">明洞站 · 1分</span></span><span class="tag sight">景點</span></li></ul></div>
   </div>
 
   <footer>

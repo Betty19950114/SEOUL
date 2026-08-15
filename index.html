@@ -434,6 +434,21 @@
     border-bottom: 1px solid color-mix(in srgb, var(--brand) 35%, transparent);
   }
   .pkmap:hover { border-bottom-color: var(--brand); }
+
+  /* ---------- transit legs ---------- */
+  .mbadge {
+    font-size: 10.5px; font-weight: 700; letter-spacing: .03em;
+    padding: 2px 7px; border-radius: 5px; flex: none;
+    color: var(--ink-faint); background: var(--card-2); border: 1px solid var(--line);
+  }
+  .tr.move.subway .mbadge { color: var(--brand); background: var(--brand-soft); border-color: var(--line-2); }
+  .tr.move.subway .tn { color: var(--ink); font-weight: 600; }
+  .tr.move.subway .tbody::before {
+    background: var(--brand); border-color: var(--brand); opacity: 1;
+    width: 9px; height: 9px; left: 8px; top: 9px;
+  }
+  .tr.move.bus .mbadge { color: var(--d4); background: color-mix(in srgb, var(--d4) 14%, transparent); border-color: transparent; }
+  .tr.move.bus .tn { color: var(--ink); font-weight: 600; }
   /* ---------- BTS hero banner ---------- */
   .masthead { margin: 0 -20px 22px; padding: 0; background: none; border-bottom: 1px solid var(--line); }
   .hero {
@@ -592,7 +607,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 <rect x="363.0" y="128.6" width="104.5" height="70.3" rx="16" class="regionbox"/>
 <rect x="184.7" y="310.6" width="52.0" height="52.0" rx="16" class="regionbox"/>
 <rect x="549.3" y="101.3" width="52.0" height="52.0" rx="16" class="regionbox"/>
-<rect x="702.3" y="210.2" width="107.6" height="79.8" rx="16" class="regionbox"/>
+<rect x="699.5" y="211.9" width="111.9" height="77.2" rx="16" class="regionbox"/>
 <rect x="565.2" y="364.1" width="52.0" height="52.0" rx="16" class="regionbox"/>
 <rect x="472.4" y="385.4" width="52.0" height="52.0" rx="16" class="regionbox"/>
 </g>
@@ -612,14 +627,14 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 <g class="pin"><circle cx="210.7" cy="336.6" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="210.7" y="340.6" text-anchor="middle" class="pnum">8</text></g>
 </g>
 <g class="dayg" data-day="4">
-<polyline points="575.3,127.3 783.9,264.0 732.3,263.6 777.2,242.0 728.3,241.0 754.9,259.2 755.0,236.2 591.2,390.1 498.4,411.4" fill="none" stroke="var(--d4)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="575.3,127.3 785.4,262.3 772.1,240.4 761.7,261.0 738.8,263.1 725.5,237.9 748.2,241.5 591.2,390.1 498.4,411.4" fill="none" stroke="var(--d4)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="pin"><circle cx="575.3" cy="127.3" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="575.3" y="131.3" text-anchor="middle" class="pnum">1</text></g>
-<g class="pin"><circle cx="783.9" cy="264.0" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="783.9" y="268.0" text-anchor="middle" class="pnum">2</text></g>
-<g class="pin"><circle cx="732.3" cy="263.6" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="732.3" y="267.6" text-anchor="middle" class="pnum">3</text></g>
-<g class="pin"><circle cx="777.2" cy="242.0" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="777.2" y="246.0" text-anchor="middle" class="pnum">4</text></g>
-<g class="pin"><circle cx="728.3" cy="241.0" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="728.3" y="245.0" text-anchor="middle" class="pnum">5</text></g>
-<g class="pin"><circle cx="754.9" cy="259.2" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="754.9" y="263.2" text-anchor="middle" class="pnum">6</text></g>
-<g class="pin"><circle cx="755.0" cy="236.2" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="755.0" y="240.2" text-anchor="middle" class="pnum">7</text></g>
+<g class="pin"><circle cx="785.4" cy="262.3" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="785.4" y="266.3" text-anchor="middle" class="pnum">2</text></g>
+<g class="pin"><circle cx="772.1" cy="240.4" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="772.1" y="244.4" text-anchor="middle" class="pnum">3</text></g>
+<g class="pin"><circle cx="761.7" cy="261.0" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="761.7" y="265.0" text-anchor="middle" class="pnum">4</text></g>
+<g class="pin"><circle cx="738.8" cy="263.1" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="738.8" y="267.1" text-anchor="middle" class="pnum">5</text></g>
+<g class="pin"><circle cx="725.5" cy="237.9" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="725.5" y="241.9" text-anchor="middle" class="pnum">6</text></g>
+<g class="pin"><circle cx="748.2" cy="241.5" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="748.2" y="245.5" text-anchor="middle" class="pnum">7</text></g>
 <g class="pin"><circle cx="591.2" cy="390.1" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="591.2" y="394.1" text-anchor="middle" class="pnum">8</text></g>
 <g class="pin"><circle cx="498.4" cy="411.4" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="498.4" y="415.4" text-anchor="middle" class="pnum">9</text></g>
 </g>
@@ -636,7 +651,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 <g class="region"><rect x="363.0" y="109.6" width="83" height="18" rx="9" class="regionchip"/><text x="370.0" y="122.6" class="regiontext">首爾站・明洞</text></g>
 <g class="region"><rect x="184.7" y="291.6" width="48" height="18" rx="9" class="regionchip"/><text x="191.7" y="304.6" class="regiontext">汝矣島</text></g>
 <g class="region"><rect x="549.3" y="82.3" width="48" height="18" rx="9" class="regionchip"/><text x="556.3" y="95.3" class="regiontext">新堂洞</text></g>
-<g class="region"><rect x="702.3" y="191.2" width="48" height="18" rx="9" class="regionchip"/><text x="709.3" y="204.2" class="regiontext">聖水洞</text></g>
+<g class="region"><rect x="699.5" y="192.9" width="48" height="18" rx="9" class="regionchip"/><text x="706.5" y="205.9" class="regiontext">聖水洞</text></g>
 <g class="region"><rect x="565.2" y="345.1" width="48" height="18" rx="9" class="regionchip"/><text x="572.2" y="358.1" class="regiontext">新沙洞</text></g>
 <g class="region"><rect x="472.4" y="366.4" width="37" height="18" rx="9" class="regionchip"/><text x="479.4" y="379.4" class="regiontext">盤浦</text></g>
 </g>
@@ -664,20 +679,15 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
   </header>
   <div class="arearoute"><span class="achip">金浦機場</span><span class="asep">→</span><span class="achip">首爾站</span><span class="asep">→</span><span class="achip">南大門市場</span></div>
   <ol class="tl">
-<li class="tr move"><span class="tt">14:00</span><span class="tbody"><span class="tn">松山機場 TSA 起飛</span><span class="tnote">飛行時間約 2 小時 25 分</span></span></li>
-<li class="tr move"><span class="tt">17:25</span><span class="tbody"><span class="tn">抵達金浦機場 GMP</span><span class="tnote">入境＋領行李約 30–40 分，先辦 T-money 卡</span></span></li>
-<li class="tr move"><span class="tt">18:15</span><span class="tbody"><span class="tn">機場鐵路 A&#x27;REX → 首爾站</span><span class="tnote">金浦機場就在機鐵線上，約 20 分鐘直達</span></span></li>
+<li class="tr move air"><span class="tt">14:00</span><span class="tbody"><span class="mbadge">航班</span><span class="tn">松山機場 TSA 起飛</span><span class="tnote">飛行時間約 2 小時 25 分</span></span></li>
+<li class="tr move air"><span class="tt">17:25</span><span class="tbody"><span class="mbadge">航班</span><span class="tn">抵達金浦機場 GMP</span><span class="tnote">入境＋領行李約 30–40 分，先辦 T-money 卡</span></span></li>
+<li class="tr move subway"><span class="tt">18:15</span><span class="tbody"><span class="mbadge">地鐵</span><span class="tn">機場鐵路 A&#x27;REX　金浦機場 → 首爾站</span><span class="tnote">直達約 20 分鐘，不用轉車</span></span></li>
 <li class="tr stop"><span class="tt">18:50</span>
 <span class="tbody"><span class="tnum">H</span><span class="tn">서울역 라움169　Check-in</span>
 <span class="tag stay">住宿</span>
-<span class="tnote">先放行李再出門吃飯，南大門市場步行約 5 分鐘就到</span>
 <details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>會賢站（4線）· 步行約 4 分（278 m）</dd>
-    <dt>營業時間</dt><dd>入住 15:00 後／退房 11:00 前（請向飯店確認）</dd>
-    <dt>地址</dt><dd class="addr">서울특별시 중구 회현동 세종대로2나길 23</dd>
-  </dl>
+  <summary><span class="sumico" aria-hidden="true"></span>說明 · 地鐵站 · 營業時間 · 地址</summary>
+  <dl class="infogrid"><dt>說明</dt><dd>接下來 4 晚都住這裡。先放行李再出門吃飯，南大門市場步行約 4 分鐘就到</dd><dt>最近地鐵站</dt><dd>會賢站（4線）· 步行約 4 分（278 m）</dd><dt>營業時間</dt><dd>入住 15:00 後／退房 11:00 前（請向飯店確認）</dd><dt>地址</dt><dd class="addr">서울특별시 중구 회현동 세종대로2나길 23</dd></dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%A4%91%EA%B5%AC%20%ED%9A%8C%ED%98%84%EB%8F%99%20%EC%84%B8%EC%A2%85%EB%8C%80%EB%A1%9C2%EB%82%98%EA%B8%B8%2023" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
 
 </details>
@@ -685,16 +695,11 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 <li class="tr stop"><span class="tt">19:20</span>
 <span class="tbody"><span class="tnum">2</span><span class="tn">南大門市場</span>
 <span class="tag food">美食</span>
-<span class="tnote">會賢站 5 號出口即達。巷內三家必吃見下方推薦；部分店家 20:30 前後打烊，建議先吃冷麵或갈치조림</span>
 <details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>會賢站（4線）· 步行約 1 分（91 m）</dd>
-    <dt>營業時間</dt><dd>市場多數店家 09:00–21:00（週日多休，8/26 為週三不受影響）</dd>
-    <dt>地址</dt><dd class="addr">서울특별시 중구 회현동 남대문시장4길</dd>
-  </dl>
+  <summary><span class="sumico" aria-hidden="true"></span>說明 · 營業時間 · 地址</summary>
+  <dl class="infogrid"><dt>說明</dt><dd>會賢站 5 號出口即達，與飯店同一站。巷內三家必吃見下方推薦；部分店家 20:30 前後打烊，建議先買餃子邊逛，冷麵與白帶魚擇一坐下吃</dd><dt>營業時間</dt><dd>市場多數店家 09:00–21:00（週日多休，8/26 為週三不受影響）</dd><dt>地址</dt><dd class="addr">서울특별시 중구 회현동 남대문시장4길</dd></dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%A4%91%EA%B5%AC%20%ED%9A%8C%ED%98%84%EB%8F%99%20%EB%82%A8%EB%8C%80%EB%AC%B8%EC%8B%9C%EC%9E%A54%EA%B8%B8" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
-<div class="picks"><div class="pkhead">巷內必吃推薦</div><ul><li><span class="pkname">갈치조림 골목（白帶魚燉菜巷）</span><span class="pkdesc">招牌辣燉白帶魚，整條下鍋配白飯。巷內名店：중앙갈치식당、동화식당、희락갈치</span><span class="pkmeta">🕘 多數 08:30–21:00 前後，午餐時段最擠</span><a class="pkmap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%EB%82%A8%EB%8C%80%EB%AC%B8%EC%8B%9C%EC%9E%A54%EA%B8%B8%2018-6" target="_blank" rel="noopener noreferrer">서울 중구 남대문시장4길 18-6 ↗</a></li><li><span class="pkname">부원면옥（釜院麵屋）</span><span class="pkdesc">平壤式冷麵老店，水冷麵、拌冷麵，另有綠豆煎餅（빈대떡）</span><span class="pkmeta">🕘 11:00–20:30，每月第 1、3 個週日公休</span><a class="pkmap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%EB%82%A8%EB%8C%80%EB%AC%B8%EC%8B%9C%EC%9E%A54%EA%B8%B8%2041-6" target="_blank" rel="noopener noreferrer">서울 중구 남대문시장4길 41-6 ↗</a></li><li><span class="pkname">가메골손왕만두（Gamegol 手工大왕餃）</span><span class="pkdesc">現蒸手工大顆餃子，5 顆 ₩5,000 起，可外帶邊逛邊吃</span><span class="pkmeta">🕘 白天營業為主，傍晚易售完，建議先繞過去買</span><a class="pkmap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%EB%82%A8%EB%8C%80%EB%AC%B8%EC%8B%9C%EC%9E%A5%20%EB%82%B4" target="_blank" rel="noopener noreferrer">서울 중구 남대문시장 내 ↗</a></li></ul></div>
+<div class="picks"><div class="pkhead">巷內必吃推薦</div><ul><li><span class="pkname">갈치조림 골목（白帶魚燉菜巷）</span><span class="pkdesc">招牌辣燉白帶魚，整條下鍋配白飯。巷內名店：중앙갈치식당、동화식당、희락갈치</span><span class="pkmeta">🕘 多數 08:30–21:00 前後，午餐時段最擠</span><a class="pkmap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%EB%82%A8%EB%8C%80%EB%AC%B8%EC%8B%9C%EC%9E%A54%EA%B8%B8%2018-6" target="_blank" rel="noopener noreferrer">서울 중구 남대문시장4길 18-6 ↗</a></li><li><span class="pkname">부원면옥（釜院麵屋）</span><span class="pkdesc">平壤式冷麵老店，水冷麵、拌冷麵，另有綠豆煎餅（빈대떡）</span><span class="pkmeta">🕘 11:00–20:30，每月第 1、3 個週日公休</span><a class="pkmap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%EB%82%A8%EB%8C%80%EB%AC%B8%EC%8B%9C%EC%9E%A54%EA%B8%B8%2041-6" target="_blank" rel="noopener noreferrer">서울 중구 남대문시장4길 41-6 ↗</a></li><li><span class="pkname">가메골손왕만두（Gamegol 手工大餃）</span><span class="pkdesc">現蒸手工大顆餃子，5 顆 ₩5,000 起，可外帶邊逛邊吃</span><span class="pkmeta">🕘 白天營業為主，傍晚易售完，建議一到先繞過去買</span><a class="pkmap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%EB%82%A8%EB%8C%80%EB%AC%B8%EC%8B%9C%EC%9E%A5%20%EB%82%B4" target="_blank" rel="noopener noreferrer">서울 중구 남대문시장 내 ↗</a></li></ul></div>
 </details>
 </span></li>
   </ol>
@@ -709,23 +714,18 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
   </header>
   <div class="arearoute"><span class="achip">首爾站</span><span class="asep">→</span><span class="achip">龍仁・愛寶樂園</span><span class="asep">→</span><span class="achip">首爾站</span></div>
   <ol class="tl">
-<li class="tr move"><span class="tt">08:00</span><span class="tbody"><span class="tn">飯店出發</span><span class="tnote">搭接駁巴士，或至江南／蠶室轉高速巴士，車程約 1.5 小時</span></span></li>
+<li class="tr move bus"><span class="tt">08:00</span><span class="tbody"><span class="mbadge">巴士</span><span class="tn">飯店出發，搭巴士前往龍仁</span><span class="tnote">愛寶樂園接駁巴士，或至江南／蠶室轉高速巴士，車程約 1.5 小時</span></span></li>
 <li class="tr stop offmap"><span class="tt">10:00</span>
 <span class="tbody"><span class="tnum">1</span><span class="tn">愛寶樂園</span>
 <span class="tag sight">景點</span>
-<span class="tnote">T Express 雲霄飛車、Zootopia 動物園區。安排在週四平日，排隊比週末短</span>
 <details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>前岱·愛寶樂園站（愛寶線線）· 步行約 4 分（303 m）</dd>
-    <dt>營業時間</dt><dd>約 10:00–21:00；夏季夜間延長營業至 8/16 為止，8/28 適用一般時間，請以官網當日公告為準</dd>
-    <dt>地址</dt><dd class="addr">용인시 처인구 에버랜드로 199</dd>
-  </dl>
+  <summary><span class="sumico" aria-hidden="true"></span>說明 · 地鐵站 · 營業時間 · 地址</summary>
+  <dl class="infogrid"><dt>說明</dt><dd>T Express 雲霄飛車、Zootopia 動物園區。安排在週四平日，排隊比週末短</dd><dt>最近地鐵站</dt><dd>前岱·愛寶樂園站（愛寶線線）· 步行約 4 分（303 m）</dd><dt>營業時間</dt><dd>約 10:00–21:00；夏季夜間延長營業至 8/16 為止，8/27 適用一般時間，請以官網當日公告為準</dd><dt>地址</dt><dd class="addr">용인시 처인구 에버랜드로 199</dd></dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%9A%A9%EC%9D%B8%EC%8B%9C%20%EC%B2%98%EC%9D%B8%EA%B5%AC%20%EC%97%90%EB%B2%84%EB%9E%9C%EB%93%9C%EB%A1%9C%20199" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
 
 </details>
 </span></li>
-<li class="tr move"><span class="tt">21:30</span><span class="tbody"><span class="tn">返回首爾市區</span><span class="tnote">回程約 1.5 小時，隔天行程滿，建議早點休息</span></span></li>
+<li class="tr move bus"><span class="tt">21:00</span><span class="tbody"><span class="mbadge">巴士</span><span class="tn">巴士返回首爾市區</span><span class="tnote">回程約 1.5 小時，隔天行程滿，建議早點休息</span></span></li>
   </ol>
 </section>
 
@@ -741,14 +741,9 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 <li class="tr stop"><span class="tt">09:00</span>
 <span class="tbody"><span class="tnum">1</span><span class="tn">北村韓屋村</span>
 <span class="tag sight">景點</span>
-<span class="tnote">早上光線好、人少；此處為住宅區，請放低音量</span>
 <details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>安國站（3線）· 步行約 7 分（555 m）</dd>
-    <dt>營業時間</dt><dd>開放式街區・全天可逛（建議 10:00–17:00；巷弄住戶眾多）</dd>
-    <dt>地址</dt><dd class="addr">서울특별시 종로구 가회동 북촌로11길 5</dd>
-  </dl>
+  <summary><span class="sumico" aria-hidden="true"></span>說明 · 地鐵站 · 營業時間 · 地址</summary>
+  <dl class="infogrid"><dt>說明</dt><dd>早上光線好、人少；此處為住宅區，請放低音量</dd><dt>最近地鐵站</dt><dd>安國站（3線）· 步行約 7 分（555 m）</dd><dt>營業時間</dt><dd>開放式街區・全天可逛（建議 10:00–17:00；巷弄住戶眾多）</dd><dt>地址</dt><dd class="addr">서울특별시 종로구 가회동 북촌로11길 5</dd></dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%A2%85%EB%A1%9C%EA%B5%AC%20%EA%B0%80%ED%9A%8C%EB%8F%99%20%EB%B6%81%EC%B4%8C%EB%A1%9C11%EA%B8%B8%205" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
 
 </details>
@@ -756,106 +751,75 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 <li class="tr stop"><span class="tt">10:15</span>
 <span class="tbody"><span class="tnum">2</span><span class="tn">Artist Bakery</span>
 <span class="tag cafe">咖啡・甜點</span>
-<span class="tnote">安國站旁人氣麵包店，順路當早午餐</span>
 <details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>安國站（3線）· 步行約 2 分（113 m）</dd>
-    <dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd>
-    <dt>地址</dt><dd class="addr">서울특별시 종로구 종로1·2·3·4가동 율곡로 45</dd>
-  </dl>
+  <summary><span class="sumico" aria-hidden="true"></span>說明 · 營業時間 · 地址</summary>
+  <dl class="infogrid"><dt>說明</dt><dd>與北村同為安國站，步行約 8 分鐘即達，順路當早午餐</dd><dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd><dt>地址</dt><dd class="addr">서울특별시 종로구 종로1·2·3·4가동 율곡로 45</dd></dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%A2%85%EB%A1%9C%EA%B5%AC%20%EC%A2%85%EB%A1%9C1%C2%B72%C2%B73%C2%B74%EA%B0%80%EB%8F%99%20%EC%9C%A8%EA%B3%A1%EB%A1%9C%2045" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
 
 </details>
 </span></li>
-<li class="tr move"><span class="tt">11:30</span><span class="tbody"><span class="tn">地鐵前往望遠洞</span><span class="tnote">約 30 分鐘，橫跨市區往西</span></span></li>
+<li class="tr move subway"><span class="tt">11:15</span><span class="tbody"><span class="mbadge">地鐵</span><span class="tn">安國站 → 望遠站</span><span class="tnote">3 號線至을지로3가 轉 2 號線至합정，再轉 6 號線，約 40 分鐘（今天唯一的長程移動）</span></span></li>
 <li class="tr stop"><span class="tt">12:15</span>
 <span class="tbody"><span class="tnum">3</span><span class="tn">望遠市場</span>
 <span class="tag food">美食</span>
-<span class="tnote">傳統市場小吃午餐，韓式煎餅、辣炒年糕</span>
 <details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>望遠站（6線）· 步行約 5 分（372 m）</dd>
-    <dt>營業時間</dt><dd>市場約 10:00–20:00（各攤位時間不一）</dd>
-    <dt>地址</dt><dd class="addr">서울특별시 마포구 망원1동 망원로8길</dd>
-  </dl>
+  <summary><span class="sumico" aria-hidden="true"></span>說明 · 地鐵站 · 營業時間 · 地址</summary>
+  <dl class="infogrid"><dt>說明</dt><dd>傳統市場小吃午餐，韓式煎餅、辣炒年糕</dd><dt>最近地鐵站</dt><dd>望遠站（6線）· 步行約 5 分（372 m）</dd><dt>營業時間</dt><dd>市場約 10:00–20:00（各攤位時間不一）</dd><dt>地址</dt><dd class="addr">서울특별시 마포구 망원1동 망원로8길</dd></dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EB%A7%9D%EC%9B%901%EB%8F%99%20%EB%A7%9D%EC%9B%90%EB%A1%9C8%EA%B8%B8" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
 
 </details>
 </span></li>
+<li class="tr move walk"><span class="tt">13:30</span><span class="tbody"><span class="mbadge">步行</span><span class="tn">步行前往漢江貓咪店</span><span class="tnote">沿望遠路往西約 800 公尺，步行約 14 分鐘</span></span></li>
 <li class="tr stop"><span class="tt">13:45</span>
 <span class="tbody"><span class="tnum">4</span><span class="tn">漢江貓咪店</span>
 <span class="tag cafe">咖啡・甜點</span>
-<span class="tnote">距地鐵站較遠，建議從望遠市場步行或搭計程車前往</span>
 <details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>麻浦區廳站（6線）· 步行約 14 分（1026 m）</dd>
-    <dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd>
-    <dt>地址</dt><dd class="addr">서울특별시 마포구 망원2동 망원로 1</dd>
-  </dl>
+  <summary><span class="sumico" aria-hidden="true"></span>說明 · 地鐵站 · 營業時間 · 地址</summary>
+  <dl class="infogrid"><dt>說明</dt><dd>位置離地鐵站較遠，從望遠市場走過來最省事</dd><dt>最近地鐵站</dt><dd>麻浦區廳站（6線）· 步行約 14 分（1026 m）</dd><dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd><dt>地址</dt><dd class="addr">서울특별시 마포구 망원2동 망원로 1</dd></dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EB%A7%9D%EC%9B%902%EB%8F%99%20%EB%A7%9D%EC%9B%90%EB%A1%9C%201" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
 
 </details>
 </span></li>
+<li class="tr move subway"><span class="tt">14:30</span><span class="tbody"><span class="mbadge">地鐵</span><span class="tn">望遠站 → 上水站</span><span class="tnote">步行回망원역，6 號線 2 站（망원－합정－상수），全程約 28 分鐘；趕時間搭計程車約 8 分鐘</span></span></li>
 <li class="tr stop"><span class="tt">15:00</span>
 <span class="tbody"><span class="tnum">5</span><span class="tn">AEAE 弘大店</span>
 <span class="tag shop">購物</span>
-<span class="tnote">往東回到弘大商圈開始逛街</span>
 <details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>上水站（6線）· 步行約 4 分（334 m）</dd>
-    <dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd>
-    <dt>地址</dt><dd class="addr">서울특별시 마포구 서교동 독막로7길 48</dd>
-  </dl>
+  <summary><span class="sumico" aria-hidden="true"></span>說明 · 地鐵站 · 營業時間 · 地址</summary>
+  <dl class="infogrid"><dt>說明</dt><dd>上水站出站即弘大商圈南側，從這裡一路往北逛</dd><dt>最近地鐵站</dt><dd>上水站（6線）· 步行約 4 分（334 m）</dd><dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd><dt>地址</dt><dd class="addr">서울특별시 마포구 서교동 독막로7길 48</dd></dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%84%9C%EA%B5%90%EB%8F%99%20%EB%8F%85%EB%A7%89%EB%A1%9C7%EA%B8%B8%2048" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
 
 </details>
 </span></li>
+<li class="tr move walk"><span class="tt">15:30</span><span class="tbody"><span class="mbadge">步行</span><span class="tn">步行前往弘大商圈北側</span><span class="tnote">上水站往北至弘大入口站一帶約 1.1 公里，步行約 19 分鐘，沿路就是逛街範圍</span></span></li>
 <li class="tr stop"><span class="tt">15:45</span>
 <span class="tbody"><span class="tnum">6</span><span class="tn">Compose Coffee 弘大</span>
 <span class="tag cafe">咖啡・甜點</span>
-<span class="tnote">平價連鎖咖啡，外帶補充體力</span>
 <details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>弘大入口站（2·機場快線·京義中央線）· 步行約 5 分（388 m）</dd>
-    <dt>營業時間</dt><dd>連鎖店・約 08:00–22:00</dd>
-    <dt>地址</dt><dd class="addr">서울특별시 마포구 연남동 동교로27길</dd>
-  </dl>
+  <summary><span class="sumico" aria-hidden="true"></span>說明 · 地鐵站 · 營業時間 · 地址</summary>
+  <dl class="infogrid"><dt>說明</dt><dd>平價連鎖咖啡，外帶補充體力</dd><dt>最近地鐵站</dt><dd>弘大入口站（2·機場快線·京義中央線）· 步行約 5 分（388 m）</dd><dt>營業時間</dt><dd>連鎖店・約 08:00–22:00</dd><dt>地址</dt><dd class="addr">서울특별시 마포구 연남동 동교로27길</dd></dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%97%B0%EB%82%A8%EB%8F%99%20%EB%8F%99%EA%B5%90%EB%A1%9C27%EA%B8%B8" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
 
 </details>
 </span></li>
+<li class="tr move subway"><span class="tt">16:15</span><span class="tbody"><span class="mbadge">地鐵</span><span class="tn">弘大入口站 → 梨大站</span><span class="tnote">2 號線 2 站（홍대입구－신촌－이대），含步行約 10 分鐘</span></span></li>
 <li class="tr stop"><span class="tt">16:30</span>
 <span class="tbody"><span class="tnum">7</span><span class="tn">星巴克 梨大店</span>
 <span class="tag cafe">咖啡・甜點</span>
-<span class="tnote">梨大特色門市，順路再往東</span>
 <details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>梨大站（2線）· 步行約 2 分（181 m）</dd>
-    <dt>營業時間</dt><dd>連鎖店・約 07:00–22:00</dd>
-    <dt>地址</dt><dd class="addr">서울특별시 서대문구 신촌동 이화여대길 34</dd>
-  </dl>
+  <summary><span class="sumico" aria-hidden="true"></span>說明 · 地鐵站 · 營業時間 · 地址</summary>
+  <dl class="infogrid"><dt>說明</dt><dd>梨大特色門市，出站即達</dd><dt>最近地鐵站</dt><dd>梨大站（2線）· 步行約 2 分（181 m）</dd><dt>營業時間</dt><dd>連鎖店・約 07:00–22:00</dd><dt>地址</dt><dd class="addr">서울특별시 서대문구 신촌동 이화여대길 34</dd></dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%9C%EB%8C%80%EB%AC%B8%EA%B5%AC%20%EC%8B%A0%EC%B4%8C%EB%8F%99%20%EC%9D%B4%ED%99%94%EC%97%AC%EB%8C%80%EA%B8%B8%2034" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
 
 </details>
 </span></li>
-<li class="tr move"><span class="tt">18:30</span><span class="tbody"><span class="tn">地鐵前往汝矣島</span><span class="tnote">約 25 分鐘，往南過漢江</span></span></li>
+<li class="tr move subway"><span class="tt">18:30</span><span class="tbody"><span class="mbadge">地鐵</span><span class="tn">梨大站 → 汝矣渡口站</span><span class="tnote">2 號線至충정로 轉 5 號線，約 25 分鐘，往南過漢江</span></span></li>
 <li class="tr stop"><span class="tt">19:00</span>
 <span class="tbody"><span class="tnum">8</span><span class="tn">汝矣島漢江公園</span>
 <span class="tag sight">景點</span>
-<span class="tnote">河濱看夕陽，超商炸雞＋啤酒配漢江夜景</span>
 <details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>汝矣渡口站（5線）· 步行約 2 分（174 m）</dd>
-    <dt>營業時間</dt><dd>公園 24 小時開放</dd>
-    <dt>地址</dt><dd class="addr">서울특별시 영등포구 여의동 한강남자전거길</dd>
-  </dl>
+  <summary><span class="sumico" aria-hidden="true"></span>說明 · 地鐵站 · 營業時間 · 地址</summary>
+  <dl class="infogrid"><dt>說明</dt><dd>河濱看夕陽，超商炸雞＋啤酒配漢江夜景。出站即公園入口</dd><dt>最近地鐵站</dt><dd>汝矣渡口站（5線）· 步行約 2 分（174 m）</dd><dt>營業時間</dt><dd>公園 24 小時開放</dd><dt>地址</dt><dd class="addr">서울특별시 영등포구 여의동 한강남자전거길</dd></dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%98%81%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EC%97%AC%EC%9D%98%EB%8F%99%20%ED%95%9C%EA%B0%95%EB%82%A8%EC%9E%90%EC%A0%84%EA%B1%B0%EA%B8%B8" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
 
 </details>
@@ -875,137 +839,92 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 <li class="tr stop"><span class="tt">11:30</span>
 <span class="tbody"><span class="tnum">1</span><span class="tn">獵奇辣炒年糕 신당본점</span>
 <span class="tag food">美食</span>
-<span class="tnote">엽기떡볶이 本店，超辣名店；新堂站 10 號出口右側巷內（與外送專門店不同址）</span>
 <details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>新堂站（2·6線）· 步行約 3 分（212 m）</dd>
-    <dt>營業時間</dt><dd>週六 10:00–翌日 01:00／平日・週日 10:00–23:30</dd>
-    <dt>地址</dt><dd class="addr">서울 중구 퇴계로75길 15 금호빌딩 1층</dd>
-  </dl>
+  <summary><span class="sumico" aria-hidden="true"></span>說明 · 地鐵站 · 營業時間 · 地址</summary>
+  <dl class="infogrid"><dt>說明</dt><dd>엽기떡볶이 本店，超辣名店；新堂站 10 號出口右側巷內（與外送專門店不同址）</dd><dt>最近地鐵站</dt><dd>新堂站（2·6線）· 步行約 3 分（212 m）</dd><dt>營業時間</dt><dd>週六 10:00–翌日 01:00／平日・週日 10:00–23:30</dd><dt>地址</dt><dd class="addr">서울 중구 퇴계로75길 15 금호빌딩 1층</dd></dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%ED%87%B4%EA%B3%84%EB%A1%9C75%EA%B8%B8%2015%20%EA%B8%88%ED%98%B8%EB%B9%8C%EB%94%A9%201%EC%B8%B5" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
 
 </details>
 </span></li>
-<li class="tr move"><span class="tt">13:00</span><span class="tbody"><span class="tn">地鐵前往聖水洞</span><span class="tnote">約 15 分鐘</span></span></li>
+<li class="tr move subway"><span class="tt">13:00</span><span class="tbody"><span class="mbadge">地鐵</span><span class="tn">新堂站 → 聖水站</span><span class="tnote">2 號線 5 站直達（신당－상왕십리－왕십리－한양대－뚝섬－성수），約 15 分鐘</span></span></li>
 <li class="tr stop"><span class="tt">13:30</span>
 <span class="tbody"><span class="tnum">2</span><span class="tn">ept鞋子 聖水洞</span>
 <span class="tag shop">購物</span>
-<span class="tnote">聖水洞購物起點</span>
 <details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>聖水站（2線）· 步行約 8 分（622 m）</dd>
-    <dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd>
-    <dt>地址</dt><dd class="addr">서울특별시 성동구 성수2가3동 뚝섬로17길</dd>
-  </dl>
+  <summary><span class="sumico" aria-hidden="true"></span>說明 · 地鐵站 · 營業時間 · 地址</summary>
+  <dl class="infogrid"><dt>說明</dt><dd>聖水洞最東側，從這裡一路往西走，後面 5 站全在步行範圍內</dd><dt>最近地鐵站</dt><dd>聖水站（2線）· 步行約 8 分（622 m）</dd><dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd><dt>地址</dt><dd class="addr">서울특별시 성동구 성수2가3동 뚝섬로17길</dd></dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%982%EA%B0%803%EB%8F%99%20%EB%9A%9D%EC%84%AC%EB%A1%9C17%EA%B8%B8" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
 
 </details>
 </span></li>
 <li class="tr stop"><span class="tt">14:15</span>
-<span class="tbody"><span class="tnum">3</span><span class="tn">Human Made 服飾</span>
-<span class="tag shop">購物</span>
-
-<details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>聖水站（2線）· 步行約 4 分（322 m）</dd>
-    <dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd>
-    <dt>地址</dt><dd class="addr">서울특별시 성동구 성수2가1동 성수이로7길</dd>
-  </dl>
-  <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%982%EA%B0%801%EB%8F%99%20%EC%84%B1%EC%88%98%EC%9D%B4%EB%A1%9C7%EA%B8%B8" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
-
-</details>
-</span></li>
-<li class="tr stop"><span class="tt">15:00</span>
-<span class="tbody"><span class="tnum">4</span><span class="tn">烤黨 Ggupdang 聖水店</span>
+<span class="tbody"><span class="tnum">3</span><span class="tn">烤黨 Ggupdang 聖水店</span>
 <span class="tag food">美食</span>
-<span class="tnote">下午點心</span>
 <details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>聖水站（2線）· 步行約 3 分（231 m）</dd>
-    <dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd>
-    <dt>地址</dt><dd class="addr">서울특별시 성동구 성수2가3동 성수이로20길 10</dd>
-  </dl>
+  <summary><span class="sumico" aria-hidden="true"></span>說明 · 營業時間 · 地址</summary>
+  <dl class="infogrid"><dt>說明</dt><dd>往西步行約 5 分鐘，先墊墊胃</dd><dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd><dt>地址</dt><dd class="addr">서울특별시 성동구 성수2가3동 성수이로20길 10</dd></dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%982%EA%B0%803%EB%8F%99%20%EC%84%B1%EC%88%98%EC%9D%B4%EB%A1%9C20%EA%B8%B8%2010" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
 
 </details>
 </span></li>
-<li class="tr stop"><span class="tt">15:45</span>
-<span class="tbody"><span class="tnum">5</span><span class="tn">蛋塔 Meitawang Egg Tart</span>
+<li class="tr stop"><span class="tt">15:00</span>
+<span class="tbody"><span class="tnum">4</span><span class="tn">冰淇淋 Maman Gelato</span>
 <span class="tag cafe">咖啡・甜點</span>
-
 <details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>纛島站（2線）· 步行約 6 分（426 m）</dd>
-    <dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd>
-    <dt>地址</dt><dd class="addr">서울특별시 성동구 성수2가3동 연무장길 5-5</dd>
-  </dl>
-  <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%982%EA%B0%803%EB%8F%99%20%EC%97%B0%EB%AC%B4%EC%9E%A5%EA%B8%B8%205-5" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+  <summary><span class="sumico" aria-hidden="true"></span>說明 · 營業時間 · 地址</summary>
+  <dl class="infogrid"><dt>說明</dt><dd>就在隔壁巷，步行約 2 分鐘</dd><dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd><dt>地址</dt><dd class="addr">서울특별시 성동구 성수2가3동 연무장9길 7</dd></dl>
+  <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%982%EA%B0%803%EB%8F%99%20%EC%97%B0%EB%AC%B4%EC%9E%A59%EA%B8%B8%207" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
 
 </details>
 </span></li>
-<li class="tr stop"><span class="tt">16:15</span>
-<span class="tbody"><span class="tnum">6</span><span class="tn">冰淇淋 Maman Gelato</span>
-<span class="tag cafe">咖啡・甜點</span>
-
+<li class="tr stop"><span class="tt">15:45</span>
+<span class="tbody"><span class="tnum">5</span><span class="tn">Human Made 服飾</span>
+<span class="tag shop">購物</span>
 <details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>聖水站（2線）· 步行約 3 分（198 m）</dd>
-    <dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd>
-    <dt>地址</dt><dd class="addr">서울특별시 성동구 성수2가3동 연무장9길 7</dd>
-  </dl>
-  <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%982%EA%B0%803%EB%8F%99%20%EC%97%B0%EB%AC%B4%EC%9E%A59%EA%B8%B8%207" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+  <summary><span class="sumico" aria-hidden="true"></span>說明 · 營業時間 · 地址</summary>
+  <dl class="infogrid"><dt>說明</dt><dd>再往西約 4 分鐘</dd><dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd><dt>地址</dt><dd class="addr">서울특별시 성동구 성수2가1동 성수이로7길</dd></dl>
+  <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%982%EA%B0%801%EB%8F%99%20%EC%84%B1%EC%88%98%EC%9D%B4%EB%A1%9C7%EA%B8%B8" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+
+</details>
+</span></li>
+<li class="tr stop"><span class="tt">16:30</span>
+<span class="tbody"><span class="tnum">6</span><span class="tn">蛋塔 Meitawang Egg Tart</span>
+<span class="tag cafe">咖啡・甜點</span>
+<details class="stopinfo">
+  <summary><span class="sumico" aria-hidden="true"></span>說明 · 地鐵站 · 營業時間 · 地址</summary>
+  <dl class="infogrid"><dt>說明</dt><dd>聖水洞最西側，靠近纛島站，步行約 5 分鐘</dd><dt>最近地鐵站</dt><dd>纛島站（2線）· 步行約 6 分（426 m）</dd><dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd><dt>地址</dt><dd class="addr">서울특별시 성동구 성수2가3동 연무장길 5-5</dd></dl>
+  <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%982%EA%B0%803%EB%8F%99%20%EC%97%B0%EB%AC%B4%EC%9E%A5%EA%B8%B8%205-5" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
 
 </details>
 </span></li>
 <li class="tr stop"><span class="tt">18:00</span>
 <span class="tbody"><span class="tnum">7</span><span class="tn">祖傳三代馬鈴薯排骨湯</span>
 <span class="tag food">美食</span>
-<span class="tnote">聖水洞晚餐，暖胃排骨湯</span>
 <details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>聖水站（2線）· 步行約 3 分（239 m）</dd>
-    <dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd>
-    <dt>地址</dt><dd class="addr">서울특별시 성동구 성수2가3동 연무장7길 3-1</dd>
-  </dl>
+  <summary><span class="sumico" aria-hidden="true"></span>說明 · 地鐵站 · 營業時間 · 地址</summary>
+  <dl class="infogrid"><dt>說明</dt><dd>往回走約 6 分鐘吃晚餐，暖胃排骨湯</dd><dt>最近地鐵站</dt><dd>聖水站（2線）· 步行約 3 分（239 m）</dd><dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd><dt>地址</dt><dd class="addr">서울특별시 성동구 성수2가3동 연무장7길 3-1</dd></dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%982%EA%B0%803%EB%8F%99%20%EC%97%B0%EB%AC%B4%EC%9E%A57%EA%B8%B8%203-1" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
 
 </details>
 </span></li>
-<li class="tr move"><span class="tt">19:15</span><span class="tbody"><span class="tn">前往新沙洞林蔭道</span><span class="tnote">約 25 分鐘，往西南</span></span></li>
+<li class="tr move subway"><span class="tt">19:00</span><span class="tbody"><span class="mbadge">地鐵</span><span class="tn">聖水站 → 新沙站</span><span class="tnote">2 號線至을지로3가 轉 3 號線，約 40 分鐘；搭計程車過漢江約 20 分鐘較快</span></span></li>
 <li class="tr stop"><span class="tt">19:45</span>
 <span class="tbody"><span class="tnum">8</span><span class="tn">烤黨 新沙店</span>
 <span class="tag food">美食</span>
-<span class="tnote">與下午聖水店是不同分店，逛林蔭道順路</span>
 <details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>新沙站（3線）· 步行約 2 分（120 m）</dd>
-    <dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd>
-    <dt>地址</dt><dd class="addr">서울특별시 서초구 잠원동 강남대로</dd>
-  </dl>
+  <summary><span class="sumico" aria-hidden="true"></span>說明 · 地鐵站 · 營業時間 · 地址</summary>
+  <dl class="infogrid"><dt>說明</dt><dd>與下午聖水店是不同分店，新沙站出站即林蔭道</dd><dt>最近地鐵站</dt><dd>新沙站（3線）· 步行約 2 分（120 m）</dd><dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd><dt>地址</dt><dd class="addr">서울특별시 서초구 잠원동 강남대로</dd></dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%9C%EC%B4%88%EA%B5%AC%20%EC%9E%A0%EC%9B%90%EB%8F%99%20%EA%B0%95%EB%82%A8%EB%8C%80%EB%A1%9C" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
 
 </details>
 </span></li>
-<li class="tr move"><span class="tt">20:30</span><span class="tbody"><span class="tn">計程車前往盤浦漢江公園</span><span class="tnote">約 15 分鐘</span></span></li>
+<li class="tr move subway"><span class="tt">20:40</span><span class="tbody"><span class="mbadge">地鐵</span><span class="tn">新沙站 → 高速巴士客運站</span><span class="tnote">3 號線 2 站（신사－잠원－고속터미널），再步行約 14 分鐘到河濱，共約 20 分鐘</span></span></li>
 <li class="tr stop"><span class="tt">21:00</span>
 <span class="tbody"><span class="tnum">9</span><span class="tn">盤浦大橋 月光彩虹噴泉</span>
 <span class="tag sight">景點</span>
-<span class="tnote">世界最長橋樑噴泉秀，離地鐵站約 14 分鐘步行</span>
 <details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>高速巴士客運站站（3·7·9線）· 步行約 14 分（1020 m）</dd>
-    <dt>營業時間</dt><dd>4–10 月；7–8 月場次 19:30／20:00／20:30／21:00／21:30，每場 15–20 分。雨天、強風或節電政策可能取消</dd>
-    <dt>地址</dt><dd class="addr">서울특별시 서초구 반포2동 반포대로</dd>
-  </dl>
+  <summary><span class="sumico" aria-hidden="true"></span>說明 · 地鐵站 · 營業時間 · 地址</summary>
+  <dl class="infogrid"><dt>說明</dt><dd>世界最長橋樑噴泉秀，從 8-1 號出口往漢江方向走</dd><dt>最近地鐵站</dt><dd>高速巴士客運站站（3·7·9線）· 步行約 14 分（1020 m）</dd><dt>營業時間</dt><dd>4–10 月；7–8 月場次 19:30／20:00／20:30／21:00／21:30，每場 15–20 分。雨天、強風或節電政策可能取消</dd><dt>地址</dt><dd class="addr">서울특별시 서초구 반포2동 반포대로</dd></dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%9C%EC%B4%88%EA%B5%AC%20%EB%B0%98%ED%8F%AC2%EB%8F%99%20%EB%B0%98%ED%8F%AC%EB%8C%80%EB%A1%9C" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
 
 </details>
@@ -1022,24 +941,20 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
   </header>
   <div class="arearoute"><span class="achip">明洞</span><span class="asep">→</span><span class="achip">首爾站</span><span class="asep">→</span><span class="achip">仁川機場</span></div>
   <ol class="tl">
-<li class="tr stop"><span class="tt">07:30</span>
+<li class="tr move walk"><span class="tt">07:30</span><span class="tbody"><span class="mbadge">步行</span><span class="tn">步行前往明洞</span><span class="tnote">從飯店往東約 1 公里，步行約 13 分鐘；也可搭 4 號線會賢站→明洞站 1 站</span></span></li>
+<li class="tr stop"><span class="tt">07:45</span>
 <span class="tbody"><span class="tnum">1</span><span class="tn">明洞商圈 散步採買</span>
 <span class="tag sight">景點</span>
-<span class="tnote">從飯店步行約 10 分鐘，趁人少買早餐與最後伴手禮</span>
 <details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>明洞站（4線）· 步行約 1 分（12 m）</dd>
-    <dt>營業時間</dt><dd>商圈店家約 10:00–22:00；街頭小吃與部分店家較早開</dd>
-    <dt>地址</dt><dd class="addr">서울특별시 중구 명동 퇴계로 127</dd>
-  </dl>
+  <summary><span class="sumico" aria-hidden="true"></span>說明 · 地鐵站 · 營業時間 · 地址</summary>
+  <dl class="infogrid"><dt>說明</dt><dd>趁店家剛開門人少，買早餐與最後伴手禮</dd><dt>最近地鐵站</dt><dd>明洞站（4線）· 步行約 1 分（12 m）</dd><dt>營業時間</dt><dd>商圈店家約 10:00–22:00；街頭小吃與部分店家較早開</dd><dt>地址</dt><dd class="addr">서울특별시 중구 명동 퇴계로 127</dd></dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%A4%91%EA%B5%AC%20%EB%AA%85%EB%8F%99%20%ED%87%B4%EA%B3%84%EB%A1%9C%20127" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
 
 </details>
 </span></li>
-<li class="tr move"><span class="tt">09:00</span><span class="tbody"><span class="tn">首爾站搭 A&#x27;REX 前往仁川</span><span class="tnote">車程約 45–60 分鐘</span></span></li>
-<li class="tr move"><span class="tt">10:30</span><span class="tbody"><span class="tn">抵達 ICN T2，辦理登機</span><span class="tnote">國際線建議提前 2.5 小時抵達</span></span></li>
-<li class="tr move"><span class="tt">12:45</span><span class="tbody"><span class="tn">仁川起飛 → 14:20 抵達桃園 T1</span><span class="tnote">飛行時間約 1 小時 35 分</span></span></li>
+<li class="tr move subway"><span class="tt">09:00</span><span class="tbody"><span class="mbadge">地鐵</span><span class="tn">首爾站搭 A&#x27;REX → 仁川機場</span><span class="tnote">車程約 45–60 分鐘（直達／各站停車班次不同）</span></span></li>
+<li class="tr move air"><span class="tt">10:30</span><span class="tbody"><span class="mbadge">航班</span><span class="tn">抵達 ICN T2，辦理登機</span><span class="tnote">國際線建議提前 2.5 小時抵達</span></span></li>
+<li class="tr move air"><span class="tt">12:45</span><span class="tbody"><span class="mbadge">航班</span><span class="tn">仁川起飛 → 14:20 抵達桃園 T1</span><span class="tnote">飛行時間約 1 小時 35 分</span></span></li>
   </ol>
 </section>
   </div>

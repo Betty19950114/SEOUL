@@ -435,6 +435,21 @@
   }
   .pkmap:hover { border-bottom-color: var(--brand); }
 
+  /* ---------- transit legs ---------- */
+  .mbadge {
+    font-size: 10.5px; font-weight: 700; letter-spacing: .03em;
+    padding: 2px 7px; border-radius: 5px; flex: none;
+    color: var(--ink-faint); background: var(--card-2); border: 1px solid var(--line);
+  }
+  .tr.move.subway .mbadge { color: var(--brand); background: var(--brand-soft); border-color: var(--line-2); }
+  .tr.move.subway .tn { color: var(--ink); font-weight: 600; }
+  .tr.move.subway .tbody::before {
+    background: var(--brand); border-color: var(--brand); opacity: 1;
+    width: 9px; height: 9px; left: 8px; top: 9px;
+  }
+  .tr.move.bus .mbadge { color: var(--d4); background: color-mix(in srgb, var(--d4) 14%, transparent); border-color: transparent; }
+  .tr.move.bus .tn { color: var(--ink); font-weight: 600; }
+
   /* ---------- shopping list ---------- */
   .toolbar {
     display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
