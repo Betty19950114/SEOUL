@@ -244,6 +244,10 @@
   }
   .dayg { transition: opacity .18s ease; }
   .dayg.dim { opacity: .12; }
+  /*全部檢視：只留區域與站點，路線隱藏以免交錯難讀 */
+  :root[data-day="all"] .dayg polyline { opacity: 0; }
+  .dayg polyline { transition: opacity .18s ease; }
+  @media (prefers-reduced-motion: reduce) { .dayg polyline { transition: none; } }
   .regions { transition: opacity .18s ease; }
   @media (prefers-reduced-motion: reduce) { .dayg, .regions { transition: none; } }
   .regionbox { fill: var(--regionfill); stroke: var(--regionline); stroke-width: 1.4; stroke-dasharray: 5 4; }
@@ -481,7 +485,6 @@
         <a class="navlink" href="shopping.html">購物清單</a>
       </div>
     </div>
-    <p class="subline">22 個地標 ｜ 虛線框＝<strong>區域</strong>，顏色＝天數，數字＝<strong>當天的第幾站</strong></p>
   </header>
 
   <figure class="mapcard">
@@ -496,17 +499,17 @@
         <text x="352" y="396" class="rivertext">HAN RIVER 漢江</text>
 
 
-<g class="regions">
-<g class="region"><rect x="118.4" y="126.1" width="80.6" height="113.1" rx="16" class="regionbox"/><rect x="118.4" y="107.1" width="83" height="18" rx="9" class="regionchip"/><text x="125.4" y="120.1" class="regiontext">弘大・延南洞</text></g>
-<g class="region"><rect x="15.0" y="155.3" width="93.5" height="52.0" rx="16" class="regionbox"/><rect x="15.0" y="136.3" width="48" height="18" rx="9" class="regionchip"/><text x="22.0" y="149.3" class="regiontext">望遠洞</text></g>
-<g class="region"><rect x="235.4" y="141.6" width="52.0" height="52.0" rx="16" class="regionbox"/><rect x="235.4" y="122.6" width="37" height="18" rx="9" class="regionchip"/><text x="242.4" y="135.6" class="regiontext">梨大</text></g>
-<g class="region"><rect x="408.3" y="19.4" width="55.0" height="79.9" rx="16" class="regionbox"/><rect x="408.3" y="0.4" width="72" height="18" rx="9" class="regionchip"/><text x="415.3" y="13.4" class="regiontext">北村・安國</text></g>
-<g class="region"><rect x="367.9" y="128.6" width="99.6" height="67.5" rx="16" class="regionbox"/><rect x="367.9" y="109.6" width="83" height="18" rx="9" class="regionchip"/><text x="374.9" y="122.6" class="regiontext">首爾站・明洞</text></g>
-<g class="region"><rect x="184.7" y="310.6" width="52.0" height="52.0" rx="16" class="regionbox"/><rect x="184.7" y="291.6" width="48" height="18" rx="9" class="regionchip"/><text x="191.7" y="304.6" class="regiontext">汝矣島</text></g>
-<g class="region"><rect x="549.3" y="101.3" width="52.0" height="52.0" rx="16" class="regionbox"/><rect x="549.3" y="82.3" width="48" height="18" rx="9" class="regionchip"/><text x="556.3" y="95.3" class="regiontext">新堂洞</text></g>
-<g class="region"><rect x="702.3" y="210.2" width="107.6" height="79.8" rx="16" class="regionbox"/><rect x="702.3" y="191.2" width="48" height="18" rx="9" class="regionchip"/><text x="709.3" y="204.2" class="regiontext">聖水洞</text></g>
-<g class="region"><rect x="565.2" y="364.1" width="52.0" height="52.0" rx="16" class="regionbox"/><rect x="565.2" y="345.1" width="48" height="18" rx="9" class="regionchip"/><text x="572.2" y="358.1" class="regiontext">新沙洞</text></g>
-<g class="region"><rect x="472.4" y="385.4" width="52.0" height="52.0" rx="16" class="regionbox"/><rect x="472.4" y="366.4" width="37" height="18" rx="9" class="regionchip"/><text x="479.4" y="379.4" class="regiontext">盤浦</text></g>
+<g class="regionboxes">
+<rect x="118.4" y="126.1" width="80.6" height="113.1" rx="16" class="regionbox"/>
+<rect x="15.0" y="155.3" width="93.5" height="52.0" rx="16" class="regionbox"/>
+<rect x="235.4" y="141.6" width="52.0" height="52.0" rx="16" class="regionbox"/>
+<rect x="408.3" y="19.4" width="55.0" height="79.9" rx="16" class="regionbox"/>
+<rect x="367.9" y="128.6" width="99.6" height="67.5" rx="16" class="regionbox"/>
+<rect x="184.7" y="310.6" width="52.0" height="52.0" rx="16" class="regionbox"/>
+<rect x="549.3" y="101.3" width="52.0" height="52.0" rx="16" class="regionbox"/>
+<rect x="702.3" y="210.2" width="107.6" height="79.8" rx="16" class="regionbox"/>
+<rect x="565.2" y="364.1" width="52.0" height="52.0" rx="16" class="regionbox"/>
+<rect x="472.4" y="385.4" width="52.0" height="52.0" rx="16" class="regionbox"/>
 </g>
 <g class="dayg" data-day="1">
 <polyline points="173.0,152.1 393.9,170.1" fill="none" stroke="var(--d1)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -540,6 +543,18 @@
 <g class="pin"><circle cx="441.5" cy="154.6" r="11.5" fill="var(--d5)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="441.5" y="158.6" text-anchor="middle" class="pnum">1</text></g>
 </g>
 <g class="anchor"><rect x="383.4" y="159.6" width="21" height="21" rx="5" transform="rotate(45 393.9 170.1)" fill="var(--ink)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="393.9" y="174.1" text-anchor="middle" class="pnum anchor-t">H</text><text x="393.9" y="197.1" text-anchor="middle" class="anchor-l">首爾站・住宿</text></g>
+<g class="regionlabels">
+<g class="region"><rect x="118.4" y="107.1" width="83" height="18" rx="9" class="regionchip"/><text x="125.4" y="120.1" class="regiontext">弘大・延南洞</text></g>
+<g class="region"><rect x="15.0" y="136.3" width="48" height="18" rx="9" class="regionchip"/><text x="22.0" y="149.3" class="regiontext">望遠洞</text></g>
+<g class="region"><rect x="235.4" y="122.6" width="37" height="18" rx="9" class="regionchip"/><text x="242.4" y="135.6" class="regiontext">梨大</text></g>
+<g class="region"><rect x="408.3" y="0.4" width="72" height="18" rx="9" class="regionchip"/><text x="415.3" y="13.4" class="regiontext">北村・安國</text></g>
+<g class="region"><rect x="367.9" y="109.6" width="83" height="18" rx="9" class="regionchip"/><text x="374.9" y="122.6" class="regiontext">首爾站・明洞</text></g>
+<g class="region"><rect x="184.7" y="291.6" width="48" height="18" rx="9" class="regionchip"/><text x="191.7" y="304.6" class="regiontext">汝矣島</text></g>
+<g class="region"><rect x="549.3" y="82.3" width="48" height="18" rx="9" class="regionchip"/><text x="556.3" y="95.3" class="regiontext">新堂洞</text></g>
+<g class="region"><rect x="702.3" y="191.2" width="48" height="18" rx="9" class="regionchip"/><text x="709.3" y="204.2" class="regiontext">聖水洞</text></g>
+<g class="region"><rect x="565.2" y="345.1" width="48" height="18" rx="9" class="regionchip"/><text x="572.2" y="358.1" class="regiontext">新沙洞</text></g>
+<g class="region"><rect x="472.4" y="366.4" width="37" height="18" rx="9" class="regionchip"/><text x="479.4" y="379.4" class="regiontext">盤浦</text></g>
+</g>
 
       </g>
     </svg>
@@ -563,8 +578,7 @@
   </div>
 
   <footer>
-    座標取自附件 SEOUL.kmz（Google 我的地圖匯出）。地圖為示意比例，實際交通時間請見
-    <a href="index.html">逐日行程</a>。
+    開開心心出門～平平安安回來！
   </footer>
 
 </div>
