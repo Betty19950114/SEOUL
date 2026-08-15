@@ -211,8 +211,9 @@ def subs_html(it):
                  f'<span class="pkdesc">{esc(note)}</span>'
                  f'<span class="pkmeta">🕘 {esc(hrs)}</span>'
                  f'<span class="pkmeta{"" if known else " unk"}">📍 {esc(addr)}</span>'
-                 f'<a class="pkmap" href="{naver(addr if known else q)}" '
-                 f'target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a></li>')
+                 f'<a class="actbtn pkmap" href="{naver(addr if known else q)}" '
+                 f'target="_blank" rel="noopener noreferrer">'
+                 f'<span class="aico" aria-hidden="true">📍</span>Naver開啟</a></li>')
     return f'<div class="picks"><div class="pkhead">此站包含 {len(ss)} 家</div><ul>{rows}</ul></div>'
 
 def picks_html(it):
@@ -221,7 +222,9 @@ def picks_html(it):
     rows = "".join(
       f'<li><span class="pkname">{esc(n)}</span><span class="pkdesc">{esc(d)}</span>'
       f'<span class="pkmeta">🕘 {esc(hh)}</span>'
-      f'<a class="pkmap" href="{naver(a)}" target="_blank" rel="noopener noreferrer">{esc(a)} ↗</a></li>'
+      f'<span class="pkmeta">📍 {esc(a)}</span>'
+      f'<a class="actbtn pkmap" href="{naver(a)}" target="_blank" rel="noopener noreferrer">'
+      f'<span class="aico" aria-hidden="true">📍</span>Naver開啟</a></li>'
       for n, d, hh, a in ps)
     return f'<div class="picks"><div class="pkhead">巷內必吃推薦</div><ul>{rows}</ul></div>'
 
@@ -229,9 +232,9 @@ def metro_btn(it):
     zh = STATION[it["key"]][0]
     if zh not in METRO_ZH:
         return ""
-    return (f'<button type="button" class="tometro" data-station="{esc(zh)}" '
+    return (f'<button type="button" class="actbtn tometro" data-station="{esc(zh)}" '
             f'data-stop="stop-{it["key"]}" data-label="{esc(it["n"])}">'
-            f'<span class="mico" aria-hidden="true">🚇</span>在地鐵圖查看 {esc(zh)}站</button>')
+            f'<span class="aico" aria-hidden="true">🚇</span>在地鐵圖查看</button>')
 
 def info_block(it):
     key = it["key"]
@@ -249,7 +252,8 @@ def info_block(it):
             f'<summary><span class="sumico" aria-hidden="true"></span>詳細說明</summary>'
             f'<dl class="infogrid">{"".join(rows)}</dl>'
             f'<div class="stopacts">'
-            f'<a class="navermap" href="{naver(addr)}" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>'
+            f'<a class="actbtn navermap" href="{naver(addr)}" target="_blank" rel="noopener noreferrer">'
+            f'<span class="aico" aria-hidden="true">📍</span>Naver開啟</a>'
             f'{metro_btn(it)}</div>'
             f'{subs_html(it)}{picks_html(it)}</details>')
 

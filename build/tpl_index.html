@@ -295,14 +295,15 @@ __CARDS__
     if (det) det.open = true;
     var y = row.getBoundingClientRect().top + window.scrollY - 84;
     window.scrollTo({ top: y, behavior: 'smooth' });
-    var title = row.querySelector('.tn');
-    if (title) {
-      title.classList.remove('nudge');
-      void title.offsetWidth;
-      title.classList.add('nudge');
-      setTimeout(function () { title.classList.remove('nudge'); }, 900);
-    }
-    if (navigator.vibrate) { try { navigator.vibrate(35); } catch (e) {} }
+    /* 標題與說明視窗一起震動 2 秒 */
+    [row.querySelector('.tn'), det].forEach(function (el) {
+      if (!el) return;
+      el.classList.remove('nudge');
+      void el.offsetWidth;
+      el.classList.add('nudge');
+      setTimeout(function () { el.classList.remove('nudge'); }, 2100);
+    });
+    if (navigator.vibrate) { try { navigator.vibrate([30, 60, 30]); } catch (e) {} }
   };
 
   window.__markStation = function (zh) {

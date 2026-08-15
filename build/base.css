@@ -344,12 +344,16 @@
   .infogrid dd { margin: 0; color: var(--ink); }
   .infogrid dd.unk { color: var(--ink-faint); font-style: normal; }
   .infogrid dd.addr { font-size: 12px; line-height: 1.45; }
-  .navermap {
-    display: inline-block; margin-top: 7px; font-size: 12px; font-weight: 600;
-    color: var(--brand); text-decoration: none;
-    border-bottom: 1px solid color-mix(in srgb, var(--brand) 40%, transparent);
+  .actbtn {
+    font: inherit; font-size: 12px; font-weight: 650; cursor: pointer;
+    color: var(--brand); background: var(--brand-soft); text-decoration: none;
+    border: 1px solid var(--line-2); border-radius: 999px;
+    padding: 5px 12px; display: inline-flex; align-items: center; gap: 6px;
+    white-space: nowrap;
   }
-  .navermap:hover { border-bottom-color: var(--brand); }
+  .actbtn:hover { border-color: var(--brand); }
+  .actbtn:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+  .actbtn .aico { font-size: 12px; line-height: 1; }
 
   /* ---------- notes ---------- */
   .notes {
@@ -655,15 +659,6 @@
   /* ---------- 站點操作列 ---------- */
   .stopacts { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 8px; }
   .stopacts .navermap { margin-top: 0; }
-  .tometro {
-    font: inherit; font-size: 12px; font-weight: 650; cursor: pointer;
-    color: var(--brand); background: var(--brand-soft);
-    border: 1px solid var(--line-2); border-radius: 999px;
-    padding: 5px 12px; display: inline-flex; align-items: center; gap: 6px;
-  }
-  .tometro:hover { border-color: var(--brand); }
-  .tometro:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
-  .tometro .mico { font-size: 12px; }
 
   /* ---------- 回到剛才的行程 ---------- */
   .backfab {
@@ -678,20 +673,46 @@
   .backfab .bfname { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .backfab:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 
-  /* 回到行程時，標題輕微震動提示 */
+  /* 回到行程時的視覺提醒：2 秒遞減震動 */
   @keyframes nudge {
-    0%,100% { transform: translateX(0); }
-    12% { transform: translateX(-5px); }
-    28% { transform: translateX(4px); }
-    44% { transform: translateX(-3px); }
+    0%, 100% { transform: translateX(0); }
+    4%  { transform: translateX(-7px); }
+    9%  { transform: translateX(6px); }
+    15% { transform: translateX(-5px); }
+    21% { transform: translateX(4px); }
+    30% { transform: translateX(-4px); }
+    40% { transform: translateX(3px); }
+    50% { transform: translateX(-3px); }
     60% { transform: translateX(2px); }
-    76% { transform: translateX(-1px); }
+    72% { transform: translateX(-2px); }
+    84% { transform: translateX(1px); }
+    93% { transform: translateX(-1px); }
+  }
+  @keyframes nudgeSoft {
+    0%, 100% { transform: translateX(0); }
+    5%  { transform: translateX(-4px); }
+    12% { transform: translateX(3px); }
+    20% { transform: translateX(-3px); }
+    30% { transform: translateX(2px); }
+    45% { transform: translateX(-2px); }
+    60% { transform: translateX(1.5px); }
+    75% { transform: translateX(-1px); }
+    88% { transform: translateX(1px); }
   }
   .tn.nudge {
     display: inline-block;
-    animation: nudge .55s ease-in-out 1;
+    animation: nudge 2s ease-out 1;
     color: var(--pick);
   }
+  .stopinfo.nudge {
+    animation: nudgeSoft 2s ease-out 1;
+  }
+  .stopinfo.nudge > summary {
+    border-color: var(--pick); color: var(--pick);
+    background: color-mix(in srgb, var(--pick) 14%, transparent);
+  }
+  .stopinfo.nudge .infogrid { border-color: var(--pick); }
   @media (prefers-reduced-motion: reduce) {
     .tn.nudge { animation: none; outline: 2px solid var(--pick); outline-offset: 3px; border-radius: 4px; }
+    .stopinfo.nudge { animation: none; }
   }
