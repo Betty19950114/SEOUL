@@ -326,7 +326,16 @@ __CARDS__
     document.querySelectorAll('.mstation.pick').forEach(function (g) { g.classList.remove('pick'); });
     if (!zh) return;
     var hit = document.querySelector('.mstation[data-zh="' + zh + '"]');
-    if (hit) hit.classList.add('pick');
+    if (!hit) return;
+    hit.classList.add('pick');
+    /* 地鐵圖比螢幕寬，把該站橫向捲到畫面中央 */
+    var sc = document.querySelector('.mapscroll');
+    if (!sc || sc.scrollWidth <= sc.clientWidth) return;
+    var hr = hit.getBoundingClientRect(), sr = sc.getBoundingClientRect();
+    var delta = (hr.left + hr.width / 2) - (sr.left + sr.width / 2);
+    var left = Math.max(0, Math.min(sc.scrollWidth - sc.clientWidth, sc.scrollLeft + delta));
+    if (sc.scrollTo) sc.scrollTo({ left: left, behavior: 'smooth' });
+    else sc.scrollLeft = left;
   };
 })();
 </script>
