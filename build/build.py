@@ -108,7 +108,8 @@ for d in sorted(DAYS):
         if p["cat"] == "stay": continue
         lbl = f'DAY {d} · {p["ord"]} · {p["name"]} · {p["t"]}'
         parts.append(
-          f'<g class="pin" data-name="{esc(p["name"])}" data-time="{p["t"]}" data-d="{d}" data-ord="{p["ord"]}">'
+          f'<g class="pin" data-name="{esc(p["name"])}" data-time="{p["t"]}" data-d="{d}" '
+          f'data-ord="{p["ord"]}" data-stop="stop-{p["key"]}">'
           f'<title>{esc(lbl)}</title>'
           f'<circle cx="{p["x"]:.1f}" cy="{p["y"]:.1f}" r="11.5" fill="var(--d{d})" '
           f'stroke="var(--mapbg)" stroke-width="2.5"/>'
@@ -117,7 +118,7 @@ for d in sorted(DAYS):
     groups.append(f'<g class="dayg" data-day="{d}">\n' + "\n".join(parts) + "\n</g>")
 
 h = nodes["hotel"]
-anchor = (f'<g class="anchor pin" data-name="서울역 라움169（住宿）" data-time="每日出發點" data-d="0" data-ord="住">'
+anchor = (f'<g class="anchor pin" data-name="서울역 라움169（住宿）" data-time="每日出發點" data-d="0" data-ord="住" data-stop="stop-hotel">'
           f'<title>住宿：서울역 라움169</title>'
           f'<rect x="{h["x"]-10.5:.1f}" y="{h["y"]-10.5:.1f}" width="21" height="21" rx="5" '
           f'transform="rotate(45 {h["x"]} {h["y"]})" fill="var(--ink)" stroke="var(--mapbg)" stroke-width="2.5"/>'

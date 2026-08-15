@@ -185,10 +185,10 @@
   .tab .tlab { font-weight: 650; color: var(--ink); }
   .tab .tsub { color: var(--ink-faint); font-size: 12px; }
   .tab:hover { border-color: var(--brand); }
-  .tab[aria-selected="true"] { background: var(--c, var(--brand)); border-color: var(--c, var(--brand)); }
-  .tab[aria-selected="true"] .tlab,
-  .tab[aria-selected="true"] .tsub { color: var(--pin-ink); }
-  .tab[aria-selected="true"] .tdot { background: var(--pin-ink); }
+  .tab[aria-pressed="true"] { background: var(--c, var(--brand)); border-color: var(--c, var(--brand)); }
+  .tab[aria-pressed="true"] .tlab,
+  .tab[aria-pressed="true"] .tsub { color: var(--pin-ink); }
+  .tab[aria-pressed="true"] .tdot { background: var(--pin-ink); }
   .tab:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
 
   /* ---------- map ---------- */

@@ -58,24 +58,20 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
   </header>
 
   <div class="tabsbar">
-    <div class="tabs" role="tablist" aria-label="選擇天數">
-      <button class="tab" role="tab" data-day="all" aria-selected="true">
-        <span class="tdot" style="background:var(--ink-faint)"></span>
-        <span class="tlab">全部</span><span class="tsub">5 天</span>
-      </button>
-      <button class="tab" role="tab" data-day="1" aria-selected="false" style="--c:var(--d1)">
+    <div class="tabs" role="group" aria-label="篩選天數，再點一次可顯示全部">
+      <button class="tab" type="button" data-day="1" aria-pressed="false" style="--c:var(--d1)">
         <span class="tdot"></span><span class="tlab">DAY 1</span><span class="tsub">抵達・南大門</span>
       </button>
-      <button class="tab" role="tab" data-day="2" aria-selected="false" style="--c:var(--d2)">
+      <button class="tab" type="button" data-day="2" aria-pressed="false" style="--c:var(--d2)">
         <span class="tdot"></span><span class="tlab">DAY 2</span><span class="tsub">愛寶樂園</span>
       </button>
-      <button class="tab" role="tab" data-day="3" aria-selected="false" style="--c:var(--d3)">
+      <button class="tab" type="button" data-day="3" aria-pressed="false" style="--c:var(--d3)">
         <span class="tdot"></span><span class="tlab">DAY 3</span><span class="tsub">北村・弘大・汝矣島</span>
       </button>
-      <button class="tab" role="tab" data-day="4" aria-selected="false" style="--c:var(--d4)">
+      <button class="tab" type="button" data-day="4" aria-pressed="false" style="--c:var(--d4)">
         <span class="tdot"></span><span class="tlab">DAY 4</span><span class="tsub">聖水・新沙・盤浦</span>
       </button>
-      <button class="tab" role="tab" data-day="5" aria-selected="false" style="--c:var(--d5)">
+      <button class="tab" type="button" data-day="5" aria-pressed="false" style="--c:var(--d5)">
         <span class="tdot"></span><span class="tlab">DAY 5</span><span class="tsub">明洞・賦歸</span>
       </button>
     </div>
@@ -135,7 +131,7 @@ __CARDS__
 
   function setDay(d) {
     document.documentElement.setAttribute('data-day', d);
-    tabs.forEach(function (t) { t.setAttribute('aria-selected', String(t.dataset.day === d)); });
+    tabs.forEach(function (t) { t.setAttribute('aria-pressed', String(t.dataset.day === d)); });
     cards.forEach(function (c) { c.hidden = !(d === 'all' || c.dataset.day === d); });
     groups.forEach(function (g) { g.classList.toggle('dim', !(d === 'all' || g.dataset.day === d)); });
     flows.forEach(function (f) { f.hidden = !(d === 'all' || f.dataset.day === d); });
@@ -145,7 +141,10 @@ __CARDS__
   setDay('all');
 
   tabs.forEach(function (t, i) {
-    t.addEventListener('click', function () { setDay(t.dataset.day); });
+    t.addEventListener('click', function () {
+      var cur = document.documentElement.getAttribute('data-day');
+      setDay(cur === t.dataset.day ? 'all' : t.dataset.day);   // 再點一次 → 全部
+    });
     t.addEventListener('keydown', function (e) {
       var n = null;
       if (e.key === 'ArrowRight') n = tabs[(i + 1) % tabs.length];
@@ -215,7 +214,14 @@ __CARDS__
     card.querySelectorAll('.pin').forEach(function (pin) {
       pin.addEventListener('mouseenter', function () { show(pin); });
       pin.addEventListener('mouseleave', hide);
-      pin.addEventListener('click', function (e) { e.stopPropagation(); show(pin); });
+      pin.addEventListener('click', function (e) {
+        e.stopPropagation();
+        show(pin);
+        var target = pin.getAttribute('data-stop');
+        if (target && typeof window.__gotoStop === 'function') {
+          setTimeout(function () { window.__gotoStop(target); }, 120);
+        }
+      });
     });
     document.addEventListener('click', hide);
     card.addEventListener('scroll', hide, true);
@@ -279,6 +285,26 @@ __CARDS__
     });
   });
   /* 點選行程時，在地鐵圖標出該站 */
+  /* 共用：跳到某筆行程並震動提示 */
+  window.__gotoStop = function (stopId) {
+    var row = document.getElementById(stopId);
+    if (!row) return;
+    var dc = row.closest('.daycard');
+    if (dc && dc.hidden && typeof window.__setDay === 'function') window.__setDay(dc.dataset.day);
+    var det = row.querySelector('.stopinfo');
+    if (det) det.open = true;
+    var y = row.getBoundingClientRect().top + window.scrollY - 84;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+    var title = row.querySelector('.tn');
+    if (title) {
+      title.classList.remove('nudge');
+      void title.offsetWidth;
+      title.classList.add('nudge');
+      setTimeout(function () { title.classList.remove('nudge'); }, 900);
+    }
+    if (navigator.vibrate) { try { navigator.vibrate(35); } catch (e) {} }
+  };
+
   window.__markStation = function (zh) {
     document.querySelectorAll('.mstation.pick').forEach(function (g) { g.classList.remove('pick'); });
     if (!zh) return;
@@ -319,20 +345,7 @@ __CARDS__
   fab.addEventListener('click', function () {
     var row = lastStop && document.getElementById(lastStop);
     if (!row) { fab.dataset.show = '0'; return; }
-    var cardEl = row.closest('.daycard');
-    if (cardEl && cardEl.hidden && typeof window.__setDay === 'function') window.__setDay(cardEl.dataset.day);
-    var det = row.querySelector('.stopinfo');
-    if (det) det.open = true;
-    goTo(row);
-    /* 標題輕微震動 ＋ 手機震動回饋 */
-    var title = row.querySelector('.tn');
-    if (title) {
-      title.classList.remove('nudge');
-      void title.offsetWidth;
-      title.classList.add('nudge');
-      setTimeout(function () { title.classList.remove('nudge'); }, 900);
-    }
-    if (navigator.vibrate) { try { navigator.vibrate(35); } catch (e) {} }
+    if (typeof window.__gotoStop === 'function') window.__gotoStop(lastStop);
     fab.dataset.show = '0';
   });
 })();
