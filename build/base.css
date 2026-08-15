@@ -44,6 +44,7 @@
     --cafe:  #EDB44F;  --cafe-bg:  #33260F;
     --shop:  #D8A8FC;  --shop-bg:  #2B1B3D;
     --dessert: #F5A3C7; --dessert-bg: #351E2B;
+    --pick: #FF4D5E;
     --stay:  #ADA1C6;  --stay-bg:  #241D33;
 
     --shadow-s: 0 1px 2px rgba(0,0,0,.5);
@@ -84,6 +85,7 @@
     --cafe:  #92610C;  --cafe-bg:  #FBF0D8;
     --shop:  #7E22CE;  --shop-bg:  #F3E8FE;
     --dessert: #BE185D; --dessert-bg: #FCE7F1;
+    --pick: #DC2626;
     --stay:  #52496B;  --stay-bg:  #EDE9F6;
 
     --shadow-s: 0 1px 2px rgba(45,20,85,.06);
@@ -637,8 +639,8 @@
   :root[data-day="5"] .mstation[data-days~="5"] .mlabel { fill: var(--ink); font-weight: 800; }
 
   /* 點選單一行程時標出該站 */
-  .mstation.pick .mhalo { opacity: 1; stroke: var(--brand); stroke-width: 4; }
-  .mstation.pick .mdot { fill: var(--brand); stroke: var(--brand); }
+  .mstation.pick .mhalo { opacity: 1; stroke: var(--pick); stroke-width: 4; }
+  .mstation.pick .mdot { fill: var(--pick); stroke: var(--pick); }
   .mstation.pick .mlabel { fill: var(--ink); font-weight: 800; }
   .mstation.pick { opacity: 1 !important; }
 
