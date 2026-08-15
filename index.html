@@ -244,6 +244,10 @@
   }
   .dayg { transition: opacity .18s ease; }
   .dayg.dim { opacity: .12; }
+  /*全部檢視：只留區域與站點，路線隱藏以免交錯難讀 */
+  :root[data-day="all"] .dayg polyline { opacity: 0; }
+  .dayg polyline { transition: opacity .18s ease; }
+  @media (prefers-reduced-motion: reduce) { .dayg polyline { transition: none; } }
   .regions { transition: opacity .18s ease; }
   @media (prefers-reduced-motion: reduce) { .dayg, .regions { transition: none; } }
   .regionbox { fill: var(--regionfill); stroke: var(--regionline); stroke-width: 1.4; stroke-dasharray: 5 4; }
@@ -433,6 +437,105 @@
     .infogrid dt:first-child { margin-top: 0; }
     .notes { padding: 18px 16px; }
   }
+  /* ---------- area distribution ---------- */
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap;
+  }
+  .areasec {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    box-shadow: var(--shadow-m); margin-top: 22px; padding: 20px 22px 22px;
+  }
+  .areasec > h2 {
+    font-family: 'BigShoulders', sans-serif; font-weight: 800; font-size: 23px;
+    letter-spacing: .02em; margin: 0 0 4px; color: var(--ink);
+  }
+  .areasec > .sub { margin: 0 0 16px; font-size: 12.5px; color: var(--ink-faint); }
+
+  /* matrix */
+  .matrixwrap { overflow-x: auto; margin-bottom: 22px; }
+  .matrix { border-collapse: collapse; width: 100%; min-width: 340px; }
+  .matrix th, .matrix td { padding: 0; }
+  .matrix thead th {
+    padding: 0 0 8px; font-size: 11px; font-weight: 700; text-align: center;
+    color: var(--ink-faint);
+  }
+  .matrix thead th:first-child { text-align: left; padding-left: 2px; }
+  .mday {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 30px; padding: 2px 6px; border-radius: 6px;
+    background: color-mix(in srgb, var(--c) 15%, transparent);
+    color: var(--c); font-family: ui-monospace, monospace; font-weight: 700; font-size: 11px;
+  }
+  .matrix tbody th {
+    text-align: left; font-size: 13px; font-weight: 600; color: var(--ink);
+    padding: 4px 12px 4px 2px; white-space: nowrap;
+    border-top: 1px solid var(--line);
+  }
+  .matrix tbody td { border-top: 1px solid var(--line); text-align: center; }
+  .mcell {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; margin: 4px auto; border-radius: 8px;
+    font-family: ui-monospace, monospace; font-size: 12.5px; font-weight: 700;
+    color: var(--ink-faint); background: transparent;
+  }
+  .mcell::after { content: "·"; color: var(--line-2); }
+  .mcell.on {
+    background: var(--c); color: var(--pin-ink);
+    box-shadow: 0 1px 3px color-mix(in srgb, var(--c) 40%, transparent);
+  }
+  .mcell.on::after { content: none; }
+
+  /* per-day flow */
+  .dayflow { margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--line-2); }
+  .dayflow:first-of-type { border-top: none; padding-top: 0; }
+  .dayflow[hidden] { display: none; }
+  .fhead { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+  .fbadge {
+    font-family: 'BigShoulders', sans-serif; font-weight: 800; font-size: 15px;
+    letter-spacing: .04em; color: var(--pin-ink); background: var(--c);
+    border-radius: 7px; padding: 3px 10px;
+  }
+  .fdate { font-family: ui-monospace, monospace; font-size: 11.5px; color: var(--ink-soft); }
+  .fareas { font-size: 11.5px; color: var(--ink-faint); margin-left: auto; }
+
+  .aflow { display: flex; gap: 8px; align-items: stretch; flex-wrap: wrap; }
+  .ablock {
+    flex: 1 1 190px; min-width: 172px;
+    background: var(--card-2); border: 1px solid var(--line);
+    border-top: 2.5px solid var(--c); border-radius: 11px; padding: 9px 11px 10px;
+  }
+  .ahead { display: flex; align-items: center; gap: 7px; margin-bottom: 7px; }
+  .aname { font-size: 13px; font-weight: 700; color: var(--ink); }
+  .acount {
+    font-family: ui-monospace, monospace; font-size: 10.5px; font-weight: 700;
+    color: var(--c); background: color-mix(in srgb, var(--c) 14%, transparent);
+    border-radius: 999px; padding: 1px 7px; margin-left: auto;
+  }
+  .alist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+  .alist li { display: flex; align-items: center; gap: 7px; font-size: 12.5px; }
+  .fnum {
+    flex: none; width: 17px; height: 17px; border-radius: 50%;
+    background: var(--c); color: var(--pin-ink);
+    font-family: ui-monospace, monospace; font-size: 9.5px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .fname { flex: 1; min-width: 0; color: var(--ink); }
+  .ftime { font-family: ui-monospace, monospace; font-size: 10.5px; color: var(--ink-faint); flex: none; }
+  .aarrow {
+    align-self: center; color: var(--c); font-size: 15px; font-weight: 700;
+    opacity: .55; flex: none;
+  }
+
+  @media (max-width: 720px) {
+    .areasec { padding: 18px 16px; }
+    .mcell { width: 26px; height: 26px; }
+    .matrix tbody th { font-size: 12.5px; padding-right: 8px; }
+    .aflow { flex-direction: column; }
+    .ablock { flex: 1 1 auto; min-width: 0; }
+    .aarrow { align-self: flex-start; margin-left: 14px; transform: rotate(90deg); }
+    .fareas { margin-left: 0; flex-basis: 100%; }
+  }
 
 </style>
 
@@ -499,6 +602,94 @@
       </button>
     </div>
   </div>
+
+  <section class="areasec">
+    <h2>景點分佈區域</h2>
+    <p class="sub">哪一天的景點集中在哪些區域 — 格子內數字為當天在該區的站數</p>
+<div class="matrixwrap">
+<table class="matrix">
+  <caption class="visually-hidden">各區域在每一天的景點數量</caption>
+  <thead><tr><th scope="col">區域</th>
+  <th scope="col"><span class="mday" style="--c:var(--d1)">D1</span></th><th scope="col"><span class="mday" style="--c:var(--d2)">D2</span></th><th scope="col"><span class="mday" style="--c:var(--d3)">D3</span></th><th scope="col"><span class="mday" style="--c:var(--d4)">D4</span></th><th scope="col"><span class="mday" style="--c:var(--d5)">D5</span></th>
+  </tr></thead>
+  <tbody><tr><th scope="row">望遠洞</th><td><span class="mcell"></span></td><td><span class="mcell on" style="--c:var(--d2)">2</span></td><td><span class="mcell"></span></td><td><span class="mcell"></span></td><td><span class="mcell"></span></td></tr><tr><th scope="row">弘大・延南洞</th><td><span class="mcell on" style="--c:var(--d1)">1</span></td><td><span class="mcell on" style="--c:var(--d2)">2</span></td><td><span class="mcell"></span></td><td><span class="mcell"></span></td><td><span class="mcell"></span></td></tr><tr><th scope="row">梨大</th><td><span class="mcell"></span></td><td><span class="mcell on" style="--c:var(--d2)">1</span></td><td><span class="mcell"></span></td><td><span class="mcell"></span></td><td><span class="mcell"></span></td></tr><tr><th scope="row">汝矣島</th><td><span class="mcell"></span></td><td><span class="mcell on" style="--c:var(--d2)">1</span></td><td><span class="mcell"></span></td><td><span class="mcell"></span></td><td><span class="mcell"></span></td></tr><tr><th scope="row">首爾站・明洞</th><td><span class="mcell on" style="--c:var(--d1)">1</span></td><td><span class="mcell"></span></td><td><span class="mcell"></span></td><td><span class="mcell"></span></td><td><span class="mcell on" style="--c:var(--d5)">1</span></td></tr><tr><th scope="row">北村・安國</th><td><span class="mcell"></span></td><td><span class="mcell on" style="--c:var(--d2)">2</span></td><td><span class="mcell"></span></td><td><span class="mcell"></span></td><td><span class="mcell"></span></td></tr><tr><th scope="row">新堂洞</th><td><span class="mcell"></span></td><td><span class="mcell"></span></td><td><span class="mcell"></span></td><td><span class="mcell on" style="--c:var(--d4)">1</span></td><td><span class="mcell"></span></td></tr><tr><th scope="row">新沙洞</th><td><span class="mcell"></span></td><td><span class="mcell"></span></td><td><span class="mcell"></span></td><td><span class="mcell on" style="--c:var(--d4)">1</span></td><td><span class="mcell"></span></td></tr><tr><th scope="row">盤浦</th><td><span class="mcell"></span></td><td><span class="mcell"></span></td><td><span class="mcell"></span></td><td><span class="mcell on" style="--c:var(--d4)">1</span></td><td><span class="mcell"></span></td></tr><tr><th scope="row">聖水洞</th><td><span class="mcell"></span></td><td><span class="mcell"></span></td><td><span class="mcell"></span></td><td><span class="mcell on" style="--c:var(--d4)">6</span></td><td><span class="mcell"></span></td></tr><tr><th scope="row">龍仁・愛寶樂園</th><td><span class="mcell"></span></td><td><span class="mcell"></span></td><td><span class="mcell on" style="--c:var(--d3)">1</span></td><td><span class="mcell"></span></td><td><span class="mcell"></span></td></tr></tbody>
+</table>
+</div>
+<div class="dayflow" data-day="1" style="--c:var(--d1)">
+  <div class="fhead"><span class="fbadge">DAY 1</span>
+    <span class="fdate">08.26 WED 週三</span>
+    <span class="fareas">2 個區域 · 2 站</span>
+  </div>
+  <div class="aflow"><div class="ablock">
+  <div class="ahead"><span class="aname">弘大・延南洞</span><span class="acount">1</span></div>
+  <ul class="alist"><li><span class="fnum">1</span><span class="fname">義大利麵 Camello Yeonnam</span><span class="ftime">19:00</span></li></ul>
+</div><span class="aarrow" aria-hidden="true">→</span><div class="ablock">
+  <div class="ahead"><span class="aname">首爾站・明洞</span><span class="acount">1</span></div>
+  <ul class="alist"><li><span class="fnum">H</span><span class="fname">서울역 라움169　Check-in</span><span class="ftime">21:30</span></li></ul>
+</div></div>
+</div>
+<div class="dayflow" data-day="2" style="--c:var(--d2)">
+  <div class="fhead"><span class="fbadge">DAY 2</span>
+    <span class="fdate">08.27 THU 週四</span>
+    <span class="fareas">5 個區域 · 8 站</span>
+  </div>
+  <div class="aflow"><div class="ablock">
+  <div class="ahead"><span class="aname">北村・安國</span><span class="acount">2</span></div>
+  <ul class="alist"><li><span class="fnum">1</span><span class="fname">北村韓屋村</span><span class="ftime">09:00</span></li><li><span class="fnum">2</span><span class="fname">Artist Bakery</span><span class="ftime">10:15</span></li></ul>
+</div><span class="aarrow" aria-hidden="true">→</span><div class="ablock">
+  <div class="ahead"><span class="aname">望遠洞</span><span class="acount">2</span></div>
+  <ul class="alist"><li><span class="fnum">3</span><span class="fname">望遠市場</span><span class="ftime">12:15</span></li><li><span class="fnum">4</span><span class="fname">漢江貓咪店</span><span class="ftime">13:45</span></li></ul>
+</div><span class="aarrow" aria-hidden="true">→</span><div class="ablock">
+  <div class="ahead"><span class="aname">弘大・延南洞</span><span class="acount">2</span></div>
+  <ul class="alist"><li><span class="fnum">5</span><span class="fname">AEAE 弘大店</span><span class="ftime">15:00</span></li><li><span class="fnum">6</span><span class="fname">Compose Coffee 弘大</span><span class="ftime">15:45</span></li></ul>
+</div><span class="aarrow" aria-hidden="true">→</span><div class="ablock">
+  <div class="ahead"><span class="aname">梨大</span><span class="acount">1</span></div>
+  <ul class="alist"><li><span class="fnum">7</span><span class="fname">星巴克 梨大店</span><span class="ftime">16:30</span></li></ul>
+</div><span class="aarrow" aria-hidden="true">→</span><div class="ablock">
+  <div class="ahead"><span class="aname">汝矣島</span><span class="acount">1</span></div>
+  <ul class="alist"><li><span class="fnum">8</span><span class="fname">汝矣島漢江公園</span><span class="ftime">19:00</span></li></ul>
+</div></div>
+</div>
+<div class="dayflow" data-day="3" style="--c:var(--d3)">
+  <div class="fhead"><span class="fbadge">DAY 3</span>
+    <span class="fdate">08.28 FRI 週五</span>
+    <span class="fareas">1 個區域 · 1 站</span>
+  </div>
+  <div class="aflow"><div class="ablock">
+  <div class="ahead"><span class="aname">龍仁・愛寶樂園</span><span class="acount">1</span></div>
+  <ul class="alist"><li><span class="fnum">1</span><span class="fname">愛寶樂園</span><span class="ftime">10:00</span></li></ul>
+</div></div>
+</div>
+<div class="dayflow" data-day="4" style="--c:var(--d4)">
+  <div class="fhead"><span class="fbadge">DAY 4</span>
+    <span class="fdate">08.29 SAT 週六</span>
+    <span class="fareas">4 個區域 · 9 站</span>
+  </div>
+  <div class="aflow"><div class="ablock">
+  <div class="ahead"><span class="aname">新堂洞</span><span class="acount">1</span></div>
+  <ul class="alist"><li><span class="fnum">1</span><span class="fname">獵奇辣炒年糕 신당본점</span><span class="ftime">11:30</span></li></ul>
+</div><span class="aarrow" aria-hidden="true">→</span><div class="ablock">
+  <div class="ahead"><span class="aname">聖水洞</span><span class="acount">6</span></div>
+  <ul class="alist"><li><span class="fnum">2</span><span class="fname">ept鞋子 聖水洞</span><span class="ftime">13:30</span></li><li><span class="fnum">3</span><span class="fname">Human Made 服飾</span><span class="ftime">14:15</span></li><li><span class="fnum">4</span><span class="fname">烤黨 Ggupdang 聖水店</span><span class="ftime">15:00</span></li><li><span class="fnum">5</span><span class="fname">蛋塔 Meitawang Egg Tart</span><span class="ftime">15:45</span></li><li><span class="fnum">6</span><span class="fname">冰淇淋 Maman Gelato</span><span class="ftime">16:15</span></li><li><span class="fnum">7</span><span class="fname">祖傳三代馬鈴薯排骨湯</span><span class="ftime">18:00</span></li></ul>
+</div><span class="aarrow" aria-hidden="true">→</span><div class="ablock">
+  <div class="ahead"><span class="aname">新沙洞</span><span class="acount">1</span></div>
+  <ul class="alist"><li><span class="fnum">8</span><span class="fname">烤黨 新沙店</span><span class="ftime">19:45</span></li></ul>
+</div><span class="aarrow" aria-hidden="true">→</span><div class="ablock">
+  <div class="ahead"><span class="aname">盤浦</span><span class="acount">1</span></div>
+  <ul class="alist"><li><span class="fnum">9</span><span class="fname">盤浦大橋 月光彩虹噴泉</span><span class="ftime">21:00</span></li></ul>
+</div></div>
+</div>
+<div class="dayflow" data-day="5" style="--c:var(--d5)">
+  <div class="fhead"><span class="fbadge">DAY 5</span>
+    <span class="fdate">08.30 SUN 週日</span>
+    <span class="fareas">1 個區域 · 1 站</span>
+  </div>
+  <div class="aflow"><div class="ablock">
+  <div class="ahead"><span class="aname">首爾站・明洞</span><span class="acount">1</span></div>
+  <ul class="alist"><li><span class="fnum">1</span><span class="fname">明洞商圈 散步採買</span><span class="ftime">07:30</span></li></ul>
+</div></div>
+</div>
+  </section>
 
   <figure class="mapcard" style="margin:22px 0 0;">
     <div class="mapscroll">
@@ -567,7 +758,7 @@
     </div>
   </figure>
   <p class="mapcap">
-    虛線框＝<strong>行政區域</strong>，圓圈數字＝<strong>當天的第幾站</strong>，顏色＝天數，連線＝當天移動路線。展開每個站點可看<strong>最近地鐵站、營業時間、地址</strong>。地圖依實際經緯度等比例繪製，密集處已微調間距。
+    <strong>選擇上方單日可顯示當天路線</strong>；全部檢視時只顯示區域與站點，避免路線交錯。虛線框＝<strong>行政區域</strong>，圓圈數字＝<strong>當天的第幾站</strong>，顏色＝天數，連線＝當天移動路線。展開每個站點可看<strong>最近地鐵站、營業時間、地址</strong>。地圖依實際經緯度等比例繪製，密集處已微調間距。
   </p>
 
   <div class="cards" id="cards">
@@ -963,13 +1154,17 @@
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
   var cards = Array.prototype.slice.call(document.querySelectorAll('.daycard'));
   var groups = Array.prototype.slice.call(document.querySelectorAll('.dayg'));
+  var flows = Array.prototype.slice.call(document.querySelectorAll('.dayflow'));
 
   function setDay(d) {
     document.documentElement.setAttribute('data-day', d);
     tabs.forEach(function (t) { t.setAttribute('aria-selected', String(t.dataset.day === d)); });
     cards.forEach(function (c) { c.hidden = !(d === 'all' || c.dataset.day === d); });
     groups.forEach(function (g) { g.classList.toggle('dim', !(d === 'all' || g.dataset.day === d)); });
+    flows.forEach(function (f) { f.hidden = !(d === 'all' || f.dataset.day === d); });
   }
+
+  setDay('all');
 
   tabs.forEach(function (t, i) {
     t.addEventListener('click', function () { setDay(t.dataset.day); });

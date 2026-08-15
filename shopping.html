@@ -244,6 +244,10 @@
   }
   .dayg { transition: opacity .18s ease; }
   .dayg.dim { opacity: .12; }
+  /*全部檢視：只留區域與站點，路線隱藏以免交錯難讀 */
+  :root[data-day="all"] .dayg polyline { opacity: 0; }
+  .dayg polyline { transition: opacity .18s ease; }
+  @media (prefers-reduced-motion: reduce) { .dayg polyline { transition: none; } }
   .regions { transition: opacity .18s ease; }
   @media (prefers-reduced-motion: reduce) { .dayg, .regions { transition: none; } }
   .regionbox { fill: var(--regionfill); stroke: var(--regionline); stroke-width: 1.4; stroke-dasharray: 5 4; }
@@ -575,7 +579,6 @@
         <a class="navlink" href="map.html">路線全圖</a>
       </div>
     </div>
-    <p class="subline">想買的清單 ｜ 買到就打勾，<strong>紀錄會存在這台裝置上</strong>，關掉頁面也不會消失</p>
   </header>
 
   <div class="toolbar">
