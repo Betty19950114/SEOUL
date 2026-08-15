@@ -449,6 +449,82 @@
   }
   .tr.move.bus .mbadge { color: var(--d4); background: color-mix(in srgb, var(--d4) 14%, transparent); border-color: transparent; }
   .tr.move.bus .tn { color: var(--ink); font-weight: 600; }
+
+  /* ---------- quick find ---------- */
+  .quickfind {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    margin-top: 18px; padding: 12px 14px;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; box-shadow: var(--shadow-s);
+  }
+  .qflabel { font-size: 12px; font-weight: 700; color: var(--ink-faint); letter-spacing: .04em; margin-right: 2px; }
+  .qf { position: relative; }
+  .qf summary {
+    display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
+    font-size: 13px; font-weight: 650; color: var(--ink);
+    background: var(--card-2); border: 1px solid var(--line-2);
+    border-radius: 999px; padding: 6px 13px 6px 10px; list-style: none;
+  }
+  .qf summary::-webkit-details-marker { display: none; }
+  .qf summary:hover { border-color: var(--brand); }
+  .qf summary:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+  .qf[open] summary { background: var(--brand-soft); border-color: var(--brand); color: var(--brand); }
+  .qfdot { width: 10px; height: 10px; border-radius: 50%; padding: 0; flex: none; }
+  .qfn {
+    font-family: ui-monospace, monospace; font-size: 10.5px; font-weight: 700;
+    color: var(--ink-faint); background: var(--card); border: 1px solid var(--line);
+    border-radius: 999px; padding: 0 6px;
+  }
+  .qf > ul {
+    position: absolute; z-index: 40; top: calc(100% + 6px); left: 0;
+    min-width: 262px; max-height: 320px; overflow-y: auto;
+    list-style: none; margin: 0; padding: 6px;
+    background: var(--card); border: 1px solid var(--line-2);
+    border-radius: 12px; box-shadow: var(--shadow-m);
+  }
+  .qf > ul button {
+    width: 100%; display: flex; align-items: center; gap: 9px;
+    font: inherit; font-size: 13px; text-align: left; cursor: pointer;
+    background: none; border: 0; border-radius: 8px; padding: 7px 9px; color: var(--ink);
+  }
+  .qf > ul button:hover { background: var(--brand-soft); }
+  .qf > ul button:focus-visible { outline: 2px solid var(--brand); outline-offset: -2px; }
+  .qfday {
+    font-family: ui-monospace, monospace; font-size: 10px; font-weight: 700;
+    color: var(--pin-ink); background: var(--c); border-radius: 5px;
+    padding: 2px 5px; flex: none;
+  }
+  .qfname { flex: 1; min-width: 0; }
+  .qftime { font-family: ui-monospace, monospace; font-size: 11px; color: var(--ink-faint); flex: none; }
+
+  .tr.flash { animation: flashrow 1.8s ease-out 1; border-radius: 10px; }
+  @keyframes flashrow {
+    0%, 55% { background: color-mix(in srgb, var(--brand) 22%, transparent);
+              box-shadow: 0 0 0 6px color-mix(in srgb, var(--brand) 12%, transparent); }
+    100%    { background: transparent; box-shadow: 0 0 0 6px transparent; }
+  }
+  @media (prefers-reduced-motion: reduce) { .tr.flash { animation: none; outline: 2px solid var(--brand); } }
+
+  /* ---------- map pin tooltip ---------- */
+  .pin { cursor: pointer; }
+  .maptip {
+    position: absolute; z-index: 45; pointer-events: none; opacity: 0;
+    transform: translate(-50%, -100%);
+    background: var(--ink); color: var(--card);
+    font-size: 12px; font-weight: 650; line-height: 1.35;
+    padding: 6px 10px; border-radius: 8px; white-space: nowrap;
+    box-shadow: 0 6px 20px -6px rgba(0,0,0,.6);
+    transition: opacity .12s ease;
+  }
+  .maptip.on { opacity: 1; }
+  .maptip .ttmeta { display: block; font-weight: 500; opacity: .72; font-size: 11px; }
+  @media (prefers-reduced-motion: reduce) { .maptip { transition: none; } }
+
+  @media (max-width: 720px) {
+    .quickfind { padding: 10px; gap: 6px; }
+    .qf { position: static; }
+    .qf > ul { left: 10px; right: 10px; min-width: 0; }
+  }
   /* ---------- BTS hero banner ---------- */
   .masthead { margin: 0 -20px 22px; padding: 0; background: none; border-bottom: 1px solid var(--line); }
   .hero {
@@ -587,6 +663,8 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     </div>
   </div>
 
+<div class="quickfind"><span class="qflabel">快速尋找</span><details class="qf" data-cat="food"><summary><span class="qfdot tag food"></span>美食<span class="qfn">6</span></summary><ul><li><button type="button" data-target="stop-namdaemun" data-day="1"><span class="qfday" style="--c:var(--d1)">D1</span><span class="qfname">南大門市場</span><span class="qftime">19:20</span></button></li><li><button type="button" data-target="stop-mangwon" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">望遠市場</span><span class="qftime">12:15</span></button></li><li><button type="button" data-target="stop-yeopgi" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">獵奇辣炒年糕 신당본점</span><span class="qftime">11:30</span></button></li><li><button type="button" data-target="stop-ggupdang_ss" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">烤黨 Ggupdang 聖水店</span><span class="qftime">14:15</span></button></li><li><button type="button" data-target="stop-gamjatang" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">祖傳三代馬鈴薯排骨湯</span><span class="qftime">18:00</span></button></li><li><button type="button" data-target="stop-ggupdang_sn" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">烤黨 新沙店</span><span class="qftime">19:45</span></button></li></ul></details><details class="qf" data-cat="shop"><summary><span class="qfdot tag shop"></span>購物<span class="qfn">3</span></summary><ul><li><button type="button" data-target="stop-aeae" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">AEAE 弘大店</span><span class="qftime">15:00</span></button></li><li><button type="button" data-target="stop-ept" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">ept鞋子 聖水洞</span><span class="qftime">13:30</span></button></li><li><button type="button" data-target="stop-humanmade" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">Human Made 服飾</span><span class="qftime">15:45</span></button></li></ul></details><details class="qf" data-cat="sight"><summary><span class="qfdot tag sight"></span>景點<span class="qfn">5</span></summary><ul><li><button type="button" data-target="stop-everland" data-day="2"><span class="qfday" style="--c:var(--d2)">D2</span><span class="qfname">愛寶樂園</span><span class="qftime">10:00</span></button></li><li><button type="button" data-target="stop-bukchon" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">北村韓屋村</span><span class="qftime">09:00</span></button></li><li><button type="button" data-target="stop-yeouido" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">汝矣島漢江公園</span><span class="qftime">19:00</span></button></li><li><button type="button" data-target="stop-banpo" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">盤浦大橋 月光彩虹噴泉</span><span class="qftime">21:00</span></button></li><li><button type="button" data-target="stop-myeongdong" data-day="5"><span class="qfday" style="--c:var(--d5)">D5</span><span class="qfname">明洞商圈 散步採買</span><span class="qftime">07:45</span></button></li></ul></details><details class="qf" data-cat="cafe"><summary><span class="qfdot tag cafe"></span>咖啡廳<span class="qfn">6</span></summary><ul><li><button type="button" data-target="stop-artist" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">Artist Bakery</span><span class="qftime">10:15</span></button></li><li><button type="button" data-target="stop-cat" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">漢江貓咪店</span><span class="qftime">13:45</span></button></li><li><button type="button" data-target="stop-compose" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">Compose Coffee 弘大</span><span class="qftime">15:45</span></button></li><li><button type="button" data-target="stop-starbucks" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">星巴克 梨大店</span><span class="qftime">16:30</span></button></li><li><button type="button" data-target="stop-gelato" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">冰淇淋 Maman Gelato</span><span class="qftime">15:00</span></button></li><li><button type="button" data-target="stop-eggtart" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">蛋塔 Meitawang Egg Tart</span><span class="qftime">16:30</span></button></li></ul></details></div>
+
   <figure class="mapcard" style="margin:22px 0 0;">
     <div class="mapscroll">
     <svg viewBox="0 0 910 532" role="img" aria-label="首爾市區路線圖：每天的行程以一種顏色的路線連接，站點依當天順序編號。Day 1 弘大延南洞、Day 2 北村到汝矣島、Day 4 聖水洞到盤浦、Day 5 明洞；Day 3 愛寶樂園位於地圖範圍外的龍仁市。">
@@ -613,36 +691,36 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 </g>
 <g class="dayg" data-day="1">
 <polyline points="389.0,172.9 409.0,161.6" fill="none" stroke="var(--d1)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-<g class="pin"><circle cx="409.0" cy="161.6" r="11.5" fill="var(--d1)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="409.0" y="165.6" text-anchor="middle" class="pnum">2</text></g>
+<g class="pin" data-name="南大門市場" data-time="19:20" data-d="1" data-ord="2"><title>DAY 1 第 2 站 · 南大門市場 · 19:20</title><circle cx="409.0" cy="161.6" r="11.5" fill="var(--d1)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="409.0" cy="161.6" r="16" fill="transparent"/><text x="409.0" y="165.6" text-anchor="middle" class="pnum">2</text></g>
 </g>
 <g class="dayg" data-day="3">
 <polyline points="437.3,45.4 434.3,73.3 82.5,181.3 41.0,181.3 144.4,213.2 150.2,160.2 261.4,167.6 210.7,336.6" fill="none" stroke="var(--d3)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-<g class="pin"><circle cx="437.3" cy="45.4" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="437.3" y="49.4" text-anchor="middle" class="pnum">1</text></g>
-<g class="pin"><circle cx="434.3" cy="73.3" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="434.3" y="77.3" text-anchor="middle" class="pnum">2</text></g>
-<g class="pin"><circle cx="82.5" cy="181.3" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="82.5" y="185.3" text-anchor="middle" class="pnum">3</text></g>
-<g class="pin"><circle cx="41.0" cy="181.3" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="41.0" y="185.3" text-anchor="middle" class="pnum">4</text></g>
-<g class="pin"><circle cx="144.4" cy="213.2" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="144.4" y="217.2" text-anchor="middle" class="pnum">5</text></g>
-<g class="pin"><circle cx="150.2" cy="160.2" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="150.2" y="164.2" text-anchor="middle" class="pnum">6</text></g>
-<g class="pin"><circle cx="261.4" cy="167.6" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="261.4" y="171.6" text-anchor="middle" class="pnum">7</text></g>
-<g class="pin"><circle cx="210.7" cy="336.6" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="210.7" y="340.6" text-anchor="middle" class="pnum">8</text></g>
+<g class="pin" data-name="北村韓屋村" data-time="09:00" data-d="3" data-ord="1"><title>DAY 3 第 1 站 · 北村韓屋村 · 09:00</title><circle cx="437.3" cy="45.4" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="437.3" cy="45.4" r="16" fill="transparent"/><text x="437.3" y="49.4" text-anchor="middle" class="pnum">1</text></g>
+<g class="pin" data-name="Artist Bakery" data-time="10:15" data-d="3" data-ord="2"><title>DAY 3 第 2 站 · Artist Bakery · 10:15</title><circle cx="434.3" cy="73.3" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="434.3" cy="73.3" r="16" fill="transparent"/><text x="434.3" y="77.3" text-anchor="middle" class="pnum">2</text></g>
+<g class="pin" data-name="望遠市場" data-time="12:15" data-d="3" data-ord="3"><title>DAY 3 第 3 站 · 望遠市場 · 12:15</title><circle cx="82.5" cy="181.3" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="82.5" cy="181.3" r="16" fill="transparent"/><text x="82.5" y="185.3" text-anchor="middle" class="pnum">3</text></g>
+<g class="pin" data-name="漢江貓咪店" data-time="13:45" data-d="3" data-ord="4"><title>DAY 3 第 4 站 · 漢江貓咪店 · 13:45</title><circle cx="41.0" cy="181.3" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="41.0" cy="181.3" r="16" fill="transparent"/><text x="41.0" y="185.3" text-anchor="middle" class="pnum">4</text></g>
+<g class="pin" data-name="AEAE 弘大店" data-time="15:00" data-d="3" data-ord="5"><title>DAY 3 第 5 站 · AEAE 弘大店 · 15:00</title><circle cx="144.4" cy="213.2" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="144.4" cy="213.2" r="16" fill="transparent"/><text x="144.4" y="217.2" text-anchor="middle" class="pnum">5</text></g>
+<g class="pin" data-name="Compose Coffee 弘大" data-time="15:45" data-d="3" data-ord="6"><title>DAY 3 第 6 站 · Compose Coffee 弘大 · 15:45</title><circle cx="150.2" cy="160.2" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="150.2" cy="160.2" r="16" fill="transparent"/><text x="150.2" y="164.2" text-anchor="middle" class="pnum">6</text></g>
+<g class="pin" data-name="星巴克 梨大店" data-time="16:30" data-d="3" data-ord="7"><title>DAY 3 第 7 站 · 星巴克 梨大店 · 16:30</title><circle cx="261.4" cy="167.6" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="261.4" cy="167.6" r="16" fill="transparent"/><text x="261.4" y="171.6" text-anchor="middle" class="pnum">7</text></g>
+<g class="pin" data-name="汝矣島漢江公園" data-time="19:00" data-d="3" data-ord="8"><title>DAY 3 第 8 站 · 汝矣島漢江公園 · 19:00</title><circle cx="210.7" cy="336.6" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="210.7" cy="336.6" r="16" fill="transparent"/><text x="210.7" y="340.6" text-anchor="middle" class="pnum">8</text></g>
 </g>
 <g class="dayg" data-day="4">
 <polyline points="575.3,127.3 785.4,262.3 772.1,240.4 761.7,261.0 738.8,263.1 725.5,237.9 748.2,241.5 591.2,390.1 498.4,411.4" fill="none" stroke="var(--d4)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-<g class="pin"><circle cx="575.3" cy="127.3" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="575.3" y="131.3" text-anchor="middle" class="pnum">1</text></g>
-<g class="pin"><circle cx="785.4" cy="262.3" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="785.4" y="266.3" text-anchor="middle" class="pnum">2</text></g>
-<g class="pin"><circle cx="772.1" cy="240.4" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="772.1" y="244.4" text-anchor="middle" class="pnum">3</text></g>
-<g class="pin"><circle cx="761.7" cy="261.0" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="761.7" y="265.0" text-anchor="middle" class="pnum">4</text></g>
-<g class="pin"><circle cx="738.8" cy="263.1" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="738.8" y="267.1" text-anchor="middle" class="pnum">5</text></g>
-<g class="pin"><circle cx="725.5" cy="237.9" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="725.5" y="241.9" text-anchor="middle" class="pnum">6</text></g>
-<g class="pin"><circle cx="748.2" cy="241.5" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="748.2" y="245.5" text-anchor="middle" class="pnum">7</text></g>
-<g class="pin"><circle cx="591.2" cy="390.1" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="591.2" y="394.1" text-anchor="middle" class="pnum">8</text></g>
-<g class="pin"><circle cx="498.4" cy="411.4" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="498.4" y="415.4" text-anchor="middle" class="pnum">9</text></g>
+<g class="pin" data-name="獵奇辣炒年糕 신당본점" data-time="11:30" data-d="4" data-ord="1"><title>DAY 4 第 1 站 · 獵奇辣炒年糕 신당본점 · 11:30</title><circle cx="575.3" cy="127.3" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="575.3" cy="127.3" r="16" fill="transparent"/><text x="575.3" y="131.3" text-anchor="middle" class="pnum">1</text></g>
+<g class="pin" data-name="ept鞋子 聖水洞" data-time="13:30" data-d="4" data-ord="2"><title>DAY 4 第 2 站 · ept鞋子 聖水洞 · 13:30</title><circle cx="785.4" cy="262.3" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="785.4" cy="262.3" r="16" fill="transparent"/><text x="785.4" y="266.3" text-anchor="middle" class="pnum">2</text></g>
+<g class="pin" data-name="烤黨 Ggupdang 聖水店" data-time="14:15" data-d="4" data-ord="3"><title>DAY 4 第 3 站 · 烤黨 Ggupdang 聖水店 · 14:15</title><circle cx="772.1" cy="240.4" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="772.1" cy="240.4" r="16" fill="transparent"/><text x="772.1" y="244.4" text-anchor="middle" class="pnum">3</text></g>
+<g class="pin" data-name="冰淇淋 Maman Gelato" data-time="15:00" data-d="4" data-ord="4"><title>DAY 4 第 4 站 · 冰淇淋 Maman Gelato · 15:00</title><circle cx="761.7" cy="261.0" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="761.7" cy="261.0" r="16" fill="transparent"/><text x="761.7" y="265.0" text-anchor="middle" class="pnum">4</text></g>
+<g class="pin" data-name="Human Made 服飾" data-time="15:45" data-d="4" data-ord="5"><title>DAY 4 第 5 站 · Human Made 服飾 · 15:45</title><circle cx="738.8" cy="263.1" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="738.8" cy="263.1" r="16" fill="transparent"/><text x="738.8" y="267.1" text-anchor="middle" class="pnum">5</text></g>
+<g class="pin" data-name="蛋塔 Meitawang Egg Tart" data-time="16:30" data-d="4" data-ord="6"><title>DAY 4 第 6 站 · 蛋塔 Meitawang Egg Tart · 16:30</title><circle cx="725.5" cy="237.9" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="725.5" cy="237.9" r="16" fill="transparent"/><text x="725.5" y="241.9" text-anchor="middle" class="pnum">6</text></g>
+<g class="pin" data-name="祖傳三代馬鈴薯排骨湯" data-time="18:00" data-d="4" data-ord="7"><title>DAY 4 第 7 站 · 祖傳三代馬鈴薯排骨湯 · 18:00</title><circle cx="748.2" cy="241.5" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="748.2" cy="241.5" r="16" fill="transparent"/><text x="748.2" y="245.5" text-anchor="middle" class="pnum">7</text></g>
+<g class="pin" data-name="烤黨 新沙店" data-time="19:45" data-d="4" data-ord="8"><title>DAY 4 第 8 站 · 烤黨 新沙店 · 19:45</title><circle cx="591.2" cy="390.1" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="591.2" cy="390.1" r="16" fill="transparent"/><text x="591.2" y="394.1" text-anchor="middle" class="pnum">8</text></g>
+<g class="pin" data-name="盤浦大橋 月光彩虹噴泉" data-time="21:00" data-d="4" data-ord="9"><title>DAY 4 第 9 站 · 盤浦大橋 月光彩虹噴泉 · 21:00</title><circle cx="498.4" cy="411.4" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="498.4" cy="411.4" r="16" fill="transparent"/><text x="498.4" y="415.4" text-anchor="middle" class="pnum">9</text></g>
 </g>
 <g class="dayg" data-day="5">
 <polyline points="389.0,172.9 441.5,154.6" fill="none" stroke="var(--d5)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-<g class="pin"><circle cx="441.5" cy="154.6" r="11.5" fill="var(--d5)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="441.5" y="158.6" text-anchor="middle" class="pnum">1</text></g>
+<g class="pin" data-name="明洞商圈 散步採買" data-time="07:45" data-d="5" data-ord="1"><title>DAY 5 第 1 站 · 明洞商圈 散步採買 · 07:45</title><circle cx="441.5" cy="154.6" r="11.5" fill="var(--d5)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="441.5" cy="154.6" r="16" fill="transparent"/><text x="441.5" y="158.6" text-anchor="middle" class="pnum">1</text></g>
 </g>
-<g class="anchor"><rect x="378.5" y="162.4" width="21" height="21" rx="5" transform="rotate(45 389.0 172.9)" fill="var(--ink)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="389.0" y="176.9" text-anchor="middle" class="pnum anchor-t">H</text><text x="389.0" y="199.9" text-anchor="middle" class="anchor-l">首爾站・住宿</text></g>
+<g class="anchor pin" data-name="서울역 라움169（住宿）" data-time="每日出發點" data-d="0" data-ord="H"><title>住宿：서울역 라움169</title><rect x="378.5" y="162.4" width="21" height="21" rx="5" transform="rotate(45 389.0 172.9)" fill="var(--ink)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="389.0" y="176.9" text-anchor="middle" class="pnum anchor-t">H</text><text x="389.0" y="199.9" text-anchor="middle" class="anchor-l">首爾站・住宿</text></g>
 <g class="regionlabels">
 <g class="region"><rect x="118.4" y="115.2" width="83" height="18" rx="9" class="regionchip"/><text x="125.4" y="128.2" class="regiontext">弘大・延南洞</text></g>
 <g class="region"><rect x="15.0" y="136.3" width="48" height="18" rx="9" class="regionchip"/><text x="22.0" y="149.3" class="regiontext">望遠洞</text></g>
@@ -682,7 +760,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 <li class="tr move air"><span class="tt">14:00</span><span class="tbody"><span class="mbadge">航班</span><span class="tn">松山機場 TSA 起飛</span><span class="tnote">飛行時間約 2 小時 25 分</span></span></li>
 <li class="tr move air"><span class="tt">17:25</span><span class="tbody"><span class="mbadge">航班</span><span class="tn">抵達金浦機場 GMP</span><span class="tnote">入境＋領行李約 30–40 分，先辦 T-money 卡</span></span></li>
 <li class="tr move subway"><span class="tt">18:15</span><span class="tbody"><span class="mbadge">地鐵</span><span class="tn">機場鐵路 A&#x27;REX　金浦機場 → 首爾站</span><span class="tnote">直達約 20 分鐘，不用轉車</span></span></li>
-<li class="tr stop"><span class="tt">18:50</span>
+<li class="tr stop" id="stop-hotel"><span class="tt">18:50</span>
 <span class="tbody"><span class="tnum">H</span><span class="tn">서울역 라움169　Check-in</span>
 <span class="tag stay">住宿</span>
 <details class="stopinfo">
@@ -692,7 +770,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 
 </details>
 </span></li>
-<li class="tr stop"><span class="tt">19:20</span>
+<li class="tr stop" id="stop-namdaemun"><span class="tt">19:20</span>
 <span class="tbody"><span class="tnum">2</span><span class="tn">南大門市場</span>
 <span class="tag food">美食</span>
 <details class="stopinfo">
@@ -715,7 +793,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
   <div class="arearoute"><span class="achip">首爾站</span><span class="asep">→</span><span class="achip">龍仁・愛寶樂園</span><span class="asep">→</span><span class="achip">首爾站</span></div>
   <ol class="tl">
 <li class="tr move bus"><span class="tt">08:00</span><span class="tbody"><span class="mbadge">巴士</span><span class="tn">飯店出發，搭巴士前往龍仁</span><span class="tnote">愛寶樂園接駁巴士，或至江南／蠶室轉高速巴士，車程約 1.5 小時</span></span></li>
-<li class="tr stop offmap"><span class="tt">10:00</span>
+<li class="tr stop offmap" id="stop-everland"><span class="tt">10:00</span>
 <span class="tbody"><span class="tnum">1</span><span class="tn">愛寶樂園</span>
 <span class="tag sight">景點</span>
 <details class="stopinfo">
@@ -738,7 +816,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
   </header>
   <div class="arearoute"><span class="achip">北村</span><span class="asep">→</span><span class="achip">望遠洞</span><span class="asep">→</span><span class="achip">弘大</span><span class="asep">→</span><span class="achip">梨大</span><span class="asep">→</span><span class="achip">汝矣島</span></div>
   <ol class="tl">
-<li class="tr stop"><span class="tt">09:00</span>
+<li class="tr stop" id="stop-bukchon"><span class="tt">09:00</span>
 <span class="tbody"><span class="tnum">1</span><span class="tn">北村韓屋村</span>
 <span class="tag sight">景點</span>
 <details class="stopinfo">
@@ -748,9 +826,9 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 
 </details>
 </span></li>
-<li class="tr stop"><span class="tt">10:15</span>
+<li class="tr stop" id="stop-artist"><span class="tt">10:15</span>
 <span class="tbody"><span class="tnum">2</span><span class="tn">Artist Bakery</span>
-<span class="tag cafe">咖啡・甜點</span>
+<span class="tag cafe">咖啡廳</span>
 <details class="stopinfo">
   <summary><span class="sumico" aria-hidden="true"></span>說明 · 營業時間 · 地址</summary>
   <dl class="infogrid"><dt>說明</dt><dd>與北村同為安國站，步行約 8 分鐘即達，順路當早午餐</dd><dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd><dt>地址</dt><dd class="addr">서울특별시 종로구 종로1·2·3·4가동 율곡로 45</dd></dl>
@@ -759,7 +837,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 </details>
 </span></li>
 <li class="tr move subway"><span class="tt">11:15</span><span class="tbody"><span class="mbadge">地鐵</span><span class="tn">安國站 → 望遠站</span><span class="tnote">3 號線至을지로3가 轉 2 號線至합정，再轉 6 號線，約 40 分鐘（今天唯一的長程移動）</span></span></li>
-<li class="tr stop"><span class="tt">12:15</span>
+<li class="tr stop" id="stop-mangwon"><span class="tt">12:15</span>
 <span class="tbody"><span class="tnum">3</span><span class="tn">望遠市場</span>
 <span class="tag food">美食</span>
 <details class="stopinfo">
@@ -770,9 +848,9 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 </details>
 </span></li>
 <li class="tr move walk"><span class="tt">13:30</span><span class="tbody"><span class="mbadge">步行</span><span class="tn">步行前往漢江貓咪店</span><span class="tnote">沿望遠路往西約 800 公尺，步行約 14 分鐘</span></span></li>
-<li class="tr stop"><span class="tt">13:45</span>
+<li class="tr stop" id="stop-cat"><span class="tt">13:45</span>
 <span class="tbody"><span class="tnum">4</span><span class="tn">漢江貓咪店</span>
-<span class="tag cafe">咖啡・甜點</span>
+<span class="tag cafe">咖啡廳</span>
 <details class="stopinfo">
   <summary><span class="sumico" aria-hidden="true"></span>說明 · 地鐵站 · 營業時間 · 地址</summary>
   <dl class="infogrid"><dt>說明</dt><dd>位置離地鐵站較遠，從望遠市場走過來最省事</dd><dt>最近地鐵站</dt><dd>麻浦區廳站（6線）· 步行約 14 分（1026 m）</dd><dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd><dt>地址</dt><dd class="addr">서울특별시 마포구 망원2동 망원로 1</dd></dl>
@@ -781,7 +859,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 </details>
 </span></li>
 <li class="tr move subway"><span class="tt">14:30</span><span class="tbody"><span class="mbadge">地鐵</span><span class="tn">望遠站 → 上水站</span><span class="tnote">步行回망원역，6 號線 2 站（망원－합정－상수），全程約 28 分鐘；趕時間搭計程車約 8 分鐘</span></span></li>
-<li class="tr stop"><span class="tt">15:00</span>
+<li class="tr stop" id="stop-aeae"><span class="tt">15:00</span>
 <span class="tbody"><span class="tnum">5</span><span class="tn">AEAE 弘大店</span>
 <span class="tag shop">購物</span>
 <details class="stopinfo">
@@ -792,9 +870,9 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 </details>
 </span></li>
 <li class="tr move walk"><span class="tt">15:30</span><span class="tbody"><span class="mbadge">步行</span><span class="tn">步行前往弘大商圈北側</span><span class="tnote">上水站往北至弘大入口站一帶約 1.1 公里，步行約 19 分鐘，沿路就是逛街範圍</span></span></li>
-<li class="tr stop"><span class="tt">15:45</span>
+<li class="tr stop" id="stop-compose"><span class="tt">15:45</span>
 <span class="tbody"><span class="tnum">6</span><span class="tn">Compose Coffee 弘大</span>
-<span class="tag cafe">咖啡・甜點</span>
+<span class="tag cafe">咖啡廳</span>
 <details class="stopinfo">
   <summary><span class="sumico" aria-hidden="true"></span>說明 · 地鐵站 · 營業時間 · 地址</summary>
   <dl class="infogrid"><dt>說明</dt><dd>平價連鎖咖啡，外帶補充體力</dd><dt>最近地鐵站</dt><dd>弘大入口站（2·機場快線·京義中央線）· 步行約 5 分（388 m）</dd><dt>營業時間</dt><dd>連鎖店・約 08:00–22:00</dd><dt>地址</dt><dd class="addr">서울특별시 마포구 연남동 동교로27길</dd></dl>
@@ -803,9 +881,9 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 </details>
 </span></li>
 <li class="tr move subway"><span class="tt">16:15</span><span class="tbody"><span class="mbadge">地鐵</span><span class="tn">弘大入口站 → 梨大站</span><span class="tnote">2 號線 2 站（홍대입구－신촌－이대），含步行約 10 分鐘</span></span></li>
-<li class="tr stop"><span class="tt">16:30</span>
+<li class="tr stop" id="stop-starbucks"><span class="tt">16:30</span>
 <span class="tbody"><span class="tnum">7</span><span class="tn">星巴克 梨大店</span>
-<span class="tag cafe">咖啡・甜點</span>
+<span class="tag cafe">咖啡廳</span>
 <details class="stopinfo">
   <summary><span class="sumico" aria-hidden="true"></span>說明 · 地鐵站 · 營業時間 · 地址</summary>
   <dl class="infogrid"><dt>說明</dt><dd>梨大特色門市，出站即達</dd><dt>最近地鐵站</dt><dd>梨大站（2線）· 步行約 2 分（181 m）</dd><dt>營業時間</dt><dd>連鎖店・約 07:00–22:00</dd><dt>地址</dt><dd class="addr">서울특별시 서대문구 신촌동 이화여대길 34</dd></dl>
@@ -814,7 +892,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 </details>
 </span></li>
 <li class="tr move subway"><span class="tt">18:30</span><span class="tbody"><span class="mbadge">地鐵</span><span class="tn">梨大站 → 汝矣渡口站</span><span class="tnote">2 號線至충정로 轉 5 號線，約 25 分鐘，往南過漢江</span></span></li>
-<li class="tr stop"><span class="tt">19:00</span>
+<li class="tr stop" id="stop-yeouido"><span class="tt">19:00</span>
 <span class="tbody"><span class="tnum">8</span><span class="tn">汝矣島漢江公園</span>
 <span class="tag sight">景點</span>
 <details class="stopinfo">
@@ -836,7 +914,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
   </header>
   <div class="arearoute"><span class="achip">新堂洞</span><span class="asep">→</span><span class="achip">聖水洞</span><span class="asep">→</span><span class="achip">新沙洞</span><span class="asep">→</span><span class="achip">盤浦</span></div>
   <ol class="tl">
-<li class="tr stop"><span class="tt">11:30</span>
+<li class="tr stop" id="stop-yeopgi"><span class="tt">11:30</span>
 <span class="tbody"><span class="tnum">1</span><span class="tn">獵奇辣炒年糕 신당본점</span>
 <span class="tag food">美食</span>
 <details class="stopinfo">
@@ -847,7 +925,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 </details>
 </span></li>
 <li class="tr move subway"><span class="tt">13:00</span><span class="tbody"><span class="mbadge">地鐵</span><span class="tn">新堂站 → 聖水站</span><span class="tnote">2 號線 5 站直達（신당－상왕십리－왕십리－한양대－뚝섬－성수），約 15 分鐘</span></span></li>
-<li class="tr stop"><span class="tt">13:30</span>
+<li class="tr stop" id="stop-ept"><span class="tt">13:30</span>
 <span class="tbody"><span class="tnum">2</span><span class="tn">ept鞋子 聖水洞</span>
 <span class="tag shop">購物</span>
 <details class="stopinfo">
@@ -857,7 +935,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 
 </details>
 </span></li>
-<li class="tr stop"><span class="tt">14:15</span>
+<li class="tr stop" id="stop-ggupdang_ss"><span class="tt">14:15</span>
 <span class="tbody"><span class="tnum">3</span><span class="tn">烤黨 Ggupdang 聖水店</span>
 <span class="tag food">美食</span>
 <details class="stopinfo">
@@ -867,9 +945,9 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 
 </details>
 </span></li>
-<li class="tr stop"><span class="tt">15:00</span>
+<li class="tr stop" id="stop-gelato"><span class="tt">15:00</span>
 <span class="tbody"><span class="tnum">4</span><span class="tn">冰淇淋 Maman Gelato</span>
-<span class="tag cafe">咖啡・甜點</span>
+<span class="tag cafe">咖啡廳</span>
 <details class="stopinfo">
   <summary><span class="sumico" aria-hidden="true"></span>說明 · 營業時間 · 地址</summary>
   <dl class="infogrid"><dt>說明</dt><dd>就在隔壁巷，步行約 2 分鐘</dd><dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd><dt>地址</dt><dd class="addr">서울특별시 성동구 성수2가3동 연무장9길 7</dd></dl>
@@ -877,7 +955,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 
 </details>
 </span></li>
-<li class="tr stop"><span class="tt">15:45</span>
+<li class="tr stop" id="stop-humanmade"><span class="tt">15:45</span>
 <span class="tbody"><span class="tnum">5</span><span class="tn">Human Made 服飾</span>
 <span class="tag shop">購物</span>
 <details class="stopinfo">
@@ -887,9 +965,9 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 
 </details>
 </span></li>
-<li class="tr stop"><span class="tt">16:30</span>
+<li class="tr stop" id="stop-eggtart"><span class="tt">16:30</span>
 <span class="tbody"><span class="tnum">6</span><span class="tn">蛋塔 Meitawang Egg Tart</span>
-<span class="tag cafe">咖啡・甜點</span>
+<span class="tag cafe">咖啡廳</span>
 <details class="stopinfo">
   <summary><span class="sumico" aria-hidden="true"></span>說明 · 地鐵站 · 營業時間 · 地址</summary>
   <dl class="infogrid"><dt>說明</dt><dd>聖水洞最西側，靠近纛島站，步行約 5 分鐘</dd><dt>最近地鐵站</dt><dd>纛島站（2線）· 步行約 6 分（426 m）</dd><dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd><dt>地址</dt><dd class="addr">서울특별시 성동구 성수2가3동 연무장길 5-5</dd></dl>
@@ -897,7 +975,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 
 </details>
 </span></li>
-<li class="tr stop"><span class="tt">18:00</span>
+<li class="tr stop" id="stop-gamjatang"><span class="tt">18:00</span>
 <span class="tbody"><span class="tnum">7</span><span class="tn">祖傳三代馬鈴薯排骨湯</span>
 <span class="tag food">美食</span>
 <details class="stopinfo">
@@ -908,7 +986,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 </details>
 </span></li>
 <li class="tr move subway"><span class="tt">19:00</span><span class="tbody"><span class="mbadge">地鐵</span><span class="tn">聖水站 → 新沙站</span><span class="tnote">2 號線至을지로3가 轉 3 號線，約 40 分鐘；搭計程車過漢江約 20 分鐘較快</span></span></li>
-<li class="tr stop"><span class="tt">19:45</span>
+<li class="tr stop" id="stop-ggupdang_sn"><span class="tt">19:45</span>
 <span class="tbody"><span class="tnum">8</span><span class="tn">烤黨 新沙店</span>
 <span class="tag food">美食</span>
 <details class="stopinfo">
@@ -919,7 +997,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 </details>
 </span></li>
 <li class="tr move subway"><span class="tt">20:40</span><span class="tbody"><span class="mbadge">地鐵</span><span class="tn">新沙站 → 高速巴士客運站</span><span class="tnote">3 號線 2 站（신사－잠원－고속터미널），再步行約 14 分鐘到河濱，共約 20 分鐘</span></span></li>
-<li class="tr stop"><span class="tt">21:00</span>
+<li class="tr stop" id="stop-banpo"><span class="tt">21:00</span>
 <span class="tbody"><span class="tnum">9</span><span class="tn">盤浦大橋 月光彩虹噴泉</span>
 <span class="tag sight">景點</span>
 <details class="stopinfo">
@@ -942,7 +1020,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
   <div class="arearoute"><span class="achip">明洞</span><span class="asep">→</span><span class="achip">首爾站</span><span class="asep">→</span><span class="achip">仁川機場</span></div>
   <ol class="tl">
 <li class="tr move walk"><span class="tt">07:30</span><span class="tbody"><span class="mbadge">步行</span><span class="tn">步行前往明洞</span><span class="tnote">從飯店往東約 1 公里，步行約 13 分鐘；也可搭 4 號線會賢站→明洞站 1 站</span></span></li>
-<li class="tr stop"><span class="tt">07:45</span>
+<li class="tr stop" id="stop-myeongdong"><span class="tt">07:45</span>
 <span class="tbody"><span class="tnum">1</span><span class="tn">明洞商圈 散步採買</span>
 <span class="tag sight">景點</span>
 <details class="stopinfo">
@@ -994,6 +1072,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     flows.forEach(function (f) { f.hidden = !(d === 'all' || f.dataset.day === d); });
   }
 
+  window.__setDay = setDay;
   setDay('all');
 
   tabs.forEach(function (t, i) {
@@ -1036,5 +1115,74 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     paint();
   });
   paint();
+})();
+</script>
+
+<script>
+/* map pin tooltip */
+(function () {
+  document.querySelectorAll('.mapcard').forEach(function (card) {
+    var tip = document.createElement('div');
+    tip.className = 'maptip';
+    card.appendChild(tip);
+    function show(pin) {
+      var n = pin.getAttribute('data-name'); if (!n) return;
+      tip.innerHTML = '';
+      tip.appendChild(document.createTextNode(n));
+      var meta = pin.getAttribute('data-time');
+      if (meta) {
+        var s = document.createElement('span');
+        s.className = 'ttmeta';
+        var d = pin.getAttribute('data-d'), o = pin.getAttribute('data-ord');
+        s.textContent = (d && d !== '0' ? 'DAY ' + d + ' 第 ' + o + ' 站 · ' : '') + meta;
+        tip.appendChild(s);
+      }
+      var pr = pin.getBoundingClientRect(), cr = card.getBoundingClientRect();
+      tip.style.left = (pr.left - cr.left + pr.width / 2) + 'px';
+      tip.style.top  = (pr.top - cr.top - 8) + 'px';
+      tip.classList.add('on');
+    }
+    function hide() { tip.classList.remove('on'); }
+    card.querySelectorAll('.pin').forEach(function (pin) {
+      pin.addEventListener('mouseenter', function () { show(pin); });
+      pin.addEventListener('mouseleave', hide);
+      pin.addEventListener('click', function (e) { e.stopPropagation(); show(pin); });
+    });
+    document.addEventListener('click', hide);
+    card.addEventListener('scroll', hide, true);
+  });
+})();
+
+/* quick find */
+(function () {
+  var qfs = Array.prototype.slice.call(document.querySelectorAll('.qf'));
+  if (!qfs.length) return;
+  qfs.forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (d.open) qfs.forEach(function (o) { if (o !== d) o.open = false; });
+    });
+  });
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.quickfind')) qfs.forEach(function (d) { d.open = false; });
+  });
+
+  document.querySelectorAll('.qf button[data-target]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var row = document.getElementById(b.dataset.target);
+      if (!row) return;
+      var card = row.closest('.daycard');
+      if (card && card.hidden && typeof window.__setDay === 'function') window.__setDay(card.dataset.day);
+      qfs.forEach(function (d) { d.open = false; });
+      var det = row.querySelector('.stopinfo');
+      if (det) det.open = true;
+      /* getBoundingClientRect forces a reflow, so the day switch is already applied */
+      var y = row.getBoundingClientRect().top + window.scrollY - 84;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+      row.classList.remove('flash');
+      void row.offsetWidth;
+      row.classList.add('flash');
+      setTimeout(function () { row.classList.remove('flash'); }, 1900);
+    });
+  });
 })();
 </script>
