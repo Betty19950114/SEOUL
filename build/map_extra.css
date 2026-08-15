@@ -1,0 +1,28 @@
+  /* map.html only */
+  .lgroups { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 30px; margin-top: 26px; }
+  @media (max-width: 700px) { .lgroups { grid-template-columns: 1fr; } }
+  .lgroup h3 {
+    display: flex; align-items: center; gap: 9px;
+    font-size: 14px; font-weight: 700; margin: 0 0 10px; padding-bottom: 9px;
+    border-bottom: 1px solid var(--line); color: var(--ink); text-wrap: balance;
+  }
+  .lgroup .lbar { width: 4px; height: 17px; border-radius: 2px; background: var(--c); flex: none; }
+  .lgroup ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+  .lgroup li { display: flex; align-items: center; gap: 9px; font-size: 13.5px; }
+  .lnum {
+    width: 20px; height: 20px; border-radius: 50%; background: var(--c); color: var(--pin-ink);
+    font-family: ui-monospace, monospace; font-size: 10.5px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex: none;
+  }
+  .ltime {
+    font-family: ui-monospace, monospace; font-size: 11.5px; color: var(--ink-faint);
+    font-variant-numeric: tabular-nums; flex: none; width: 38px;
+  }
+  .lname { flex: 1; min-width: 0; }
+  .lname .lstn {
+    display: block; font-size: 11.5px; color: var(--ink-faint);
+    margin-top: 1px; font-weight: 500;
+  }
+  .lgroup li { align-items: flex-start; }
+  .lgroup li .lnum, .lgroup li .ltime, .lgroup li .tag { margin-top: 1px; }
+  .lo { font-size: 11px; color: var(--ink-faint); }

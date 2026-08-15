@@ -537,7 +537,119 @@
     background: var(--card-2); border: 1px solid var(--line);
     border-radius: 6px; padding: 2px 8px;
   }
+  /* ---------- BTS hero banner ---------- */
+  .masthead { margin: 0 -20px 22px; padding: 0; background: none; border-bottom: 1px solid var(--line); }
+  .hero {
+    position: relative; overflow: hidden;
+    height: clamp(196px, 27vw, 288px);
+    background: #2A1050;
+  }
+  .heroimg {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center 20%;
+    filter: saturate(.92) contrast(1.02);
+  }
+  .heroveil {
+    position: absolute; inset: 0; display: block;
+    background:
+      /* keeps the title legible without burying the left group */
+      radial-gradient(120% 130% at 2% 108%, rgba(30,6,60,.88) 0%, rgba(30,6,60,.40) 42%, transparent 68%),
+      linear-gradient(102deg,
+        rgba(46,12,90,.72) 0%,
+        rgba(88,36,166,.50) 34%,
+        rgba(124,58,237,.24) 62%,
+        rgba(167,139,250,.08) 100%),
+      linear-gradient(180deg, rgba(22,6,44,.34) 0%, transparent 42%, rgba(22,6,44,.40) 100%);
+  }
+  .herocontent {
+    position: relative; height: 100%; display: flex; flex-direction: column;
+    justify-content: space-between; padding: 16px 20px 18px;
+  }
+  .hero .navset { justify-content: flex-end; }
+  .hero .navlink {
+    color: #fff; background: rgba(255,255,255,.13);
+    border-color: rgba(255,255,255,.34);
+    backdrop-filter: blur(6px);
+  }
+  .hero .navlink:hover { background: rgba(255,255,255,.24); border-color: #fff; }
+  .hero .navlink:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 
+  .herobrand { display: flex; flex-direction: column; gap: 9px; }
+  .hero .brand h1 {
+    color: #fff; text-shadow: 0 2px 18px rgba(20,4,40,.55);
+    font-size: clamp(38px, 8vw, 60px);
+  }
+  .hero .brand h1 .hv { color: #D6BCFF; }
+  .hero .brand .kr { color: rgba(255,255,255,.82); }
+  .herometa { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .hero .taglabel {
+    margin-top: 0; color: #fff;
+    background: rgba(255,255,255,.16); border-color: rgba(255,255,255,.34);
+    backdrop-filter: blur(6px);
+  }
+  .mastfoot { padding: 0 20px 20px; }
+  .mastfoot .subline { margin-top: 14px; }
+
+  @media (max-width: 720px) {
+    .masthead { margin: 0 -16px 20px; }
+    .herocontent { padding: 12px 16px 14px; }
+    .mastfoot { padding: 0 16px 16px; }
+    .hero .navlink { font-size: 12px; padding: 6px 10px; }
+  }
+
+  /* ---------- 地圖／地鐵圖 切換 ---------- */
+  .mapmodes { display: flex; gap: 8px; align-items: center; margin: 22px 0 -6px; }
+  .modebtn {
+    font: inherit; font-size: 13px; font-weight: 650; cursor: pointer;
+    color: var(--ink-soft); background: var(--card);
+    border: 1px solid var(--line-2); border-radius: 999px; padding: 7px 15px;
+  }
+  .modebtn:hover { border-color: var(--brand); }
+  .modebtn[aria-pressed="true"] { background: var(--brand); border-color: var(--brand); color: var(--brand-ink); }
+  .modebtn:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+
+  .mapcard[data-mode="route"] .layer-metro,
+  .mapcard[data-mode="route"] .metrolegend { display: none; }
+  .mapcard[data-mode="metro"] .layer-route,
+  .mapcard[data-mode="metro"] .inset { display: none; }
+
+  /* 地鐵圖 */
+  .mline { opacity: .85; }
+  .mdot { fill: var(--mapbg); stroke: var(--ink-soft); stroke-width: 2.5; }
+  .mdot.ix { stroke: var(--ink); stroke-width: 3; }
+  .mlabel { font-size: 10.5px; font-weight: 650; fill: var(--ink-soft); paint-order: stroke;
+            stroke: var(--mapbg); stroke-width: 3px; stroke-linejoin: round; }
+  .mstation { cursor: pointer; }
+  .mhalo { fill: none; stroke: var(--brand); stroke-width: 3; opacity: 0; transition: opacity .18s ease; }
+  @media (prefers-reduced-motion: reduce) { .mhalo { transition: none; } }
+
+  /* 選了某一天：該天用到的站高亮，其餘淡出 */
+  :root[data-day="1"] .mstation:not([data-days~="1"]),
+  :root[data-day="2"] .mstation:not([data-days~="2"]),
+  :root[data-day="3"] .mstation:not([data-days~="3"]),
+  :root[data-day="4"] .mstation:not([data-days~="4"]),
+  :root[data-day="5"] .mstation:not([data-days~="5"]) { opacity: .26; }
+  :root[data-day="1"] .mstation[data-days~="1"] .mhalo,
+  :root[data-day="2"] .mstation[data-days~="2"] .mhalo,
+  :root[data-day="3"] .mstation[data-days~="3"] .mhalo,
+  :root[data-day="4"] .mstation[data-days~="4"] .mhalo,
+  :root[data-day="5"] .mstation[data-days~="5"] .mhalo { opacity: 1; }
+  :root[data-day="1"] .mstation[data-days~="1"] .mlabel,
+  :root[data-day="2"] .mstation[data-days~="2"] .mlabel,
+  :root[data-day="3"] .mstation[data-days~="3"] .mlabel,
+  :root[data-day="4"] .mstation[data-days~="4"] .mlabel,
+  :root[data-day="5"] .mstation[data-days~="5"] .mlabel { fill: var(--ink); font-weight: 800; }
+
+  /* 點選單一行程時標出該站 */
+  .mstation.pick .mhalo { opacity: 1; stroke: var(--brand); stroke-width: 4; }
+  .mstation.pick .mdot { fill: var(--brand); stroke: var(--brand); }
+  .mstation.pick .mlabel { fill: var(--ink); font-weight: 800; }
+  .mstation.pick { opacity: 1 !important; }
+
+  .metrolegend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 12px;
+                 padding-top: 12px; border-top: 1px solid var(--line); }
+  .mlg { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-soft); }
+  .mlg i { width: 14px; height: 4px; border-radius: 2px; display: inline-block; }
 
   /* map.html only */
   .lgroups { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 30px; margin-top: 26px; }
@@ -592,7 +704,11 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     </div>
   </header>
 
-  <figure class="mapcard">
+  <div class="mapmodes" role="group" aria-label="地圖模式">
+    <button class="modebtn" type="button" data-mode="route" aria-pressed="true">行程路線</button>
+    <button class="modebtn" type="button" data-mode="metro" aria-pressed="false">地鐵圖</button>
+  </div>
+  <figure class="mapcard" data-mode="route">
     <div class="mapscroll">
     <svg viewBox="0 0 910 532" role="img" aria-label="首爾市區路線全圖：五天行程各以一種顏色的路線連接，站點依當天順序編號。Day 1 弘大延南洞、Day 2 北村到汝矣島、Day 4 聖水洞到盤浦、Day 5 明洞；Day 3 愛寶樂園位於地圖範圍外的龍仁市。">
       <g transform="translate(40,40)">
@@ -603,71 +719,111 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
               fill="none" stroke="var(--water-edge)" stroke-width="1.2" stroke-dasharray="1 7" stroke-linecap="round"/>
         <text x="352" y="396" class="rivertext">HAN RIVER 漢江</text>
 
-
+<g class="layer-route">
 <g class="regionboxes">
-<rect x="118.4" y="134.2" width="57.8" height="105.0" rx="16" class="regionbox"/>
-<rect x="15.0" y="155.3" width="93.5" height="52.0" rx="16" class="regionbox"/>
-<rect x="235.4" y="141.6" width="52.0" height="52.0" rx="16" class="regionbox"/>
-<rect x="408.3" y="19.4" width="55.0" height="79.9" rx="16" class="regionbox"/>
-<rect x="363.0" y="128.6" width="104.5" height="70.3" rx="16" class="regionbox"/>
-<rect x="184.7" y="310.6" width="52.0" height="52.0" rx="16" class="regionbox"/>
-<rect x="549.3" y="101.3" width="52.0" height="52.0" rx="16" class="regionbox"/>
-<rect x="505.1" y="78.3" width="52.0" height="52.0" rx="16" class="regionbox"/>
-<rect x="700.2" y="215.3" width="109.6" height="74.2" rx="16" class="regionbox"/>
-<rect x="565.2" y="364.1" width="52.0" height="52.0" rx="16" class="regionbox"/>
-<rect x="472.4" y="385.4" width="52.0" height="52.0" rx="16" class="regionbox"/>
+<rect x="118.4" y="125.3" width="57.8" height="102.0" rx="16" class="regionbox"/>
+<rect x="15.0" y="145.2" width="93.5" height="52.0" rx="16" class="regionbox"/>
+<rect x="235.4" y="132.2" width="52.0" height="52.0" rx="16" class="regionbox"/>
+<rect x="408.3" y="16.8" width="55.0" height="78.4" rx="16" class="regionbox"/>
+<rect x="346.6" y="120.1" width="120.9" height="84.7" rx="16" class="regionbox"/>
+<rect x="184.7" y="291.9" width="52.0" height="52.0" rx="16" class="regionbox"/>
+<rect x="549.3" y="94.2" width="52.0" height="52.0" rx="16" class="regionbox"/>
+<rect x="505.1" y="72.5" width="52.0" height="52.0" rx="16" class="regionbox"/>
+<rect x="700.1" y="201.4" width="110.0" height="74.1" rx="16" class="regionbox"/>
+<rect x="565.2" y="342.4" width="52.0" height="52.0" rx="16" class="regionbox"/>
+<rect x="472.4" y="362.6" width="52.0" height="52.0" rx="16" class="regionbox"/>
 </g>
 <g class="dayg" data-day="1">
-<polyline points="389.0,172.9 409.0,161.6" fill="none" stroke="var(--d1)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-<g class="pin" data-name="南大門市場" data-time="19:20" data-d="1" data-ord="2"><title>DAY 1 第 2 站 · 南大門市場 · 19:20</title><circle cx="409.0" cy="161.6" r="11.5" fill="var(--d1)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="409.0" cy="161.6" r="16" fill="transparent"/><text x="409.0" y="165.6" text-anchor="middle" class="pnum">2</text></g>
+<polyline points="389.2,162.8 409.6,152.3" fill="none" stroke="var(--d1)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+<g class="pin" data-name="南大門市場" data-time="19:20" data-d="1" data-ord="2"><title>DAY 1 第 2 站 · 南大門市場 · 19:20</title><circle cx="409.6" cy="152.3" r="11.5" fill="var(--d1)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="409.6" cy="152.3" r="16" fill="transparent"/><text x="409.6" y="156.3" text-anchor="middle" class="pnum">2</text></g>
 </g>
 <g class="dayg" data-day="2">
-<g class="pin" data-name="陳玉華一隻雞" data-time="22:00" data-d="2" data-ord="2"><title>DAY 2 第 2 站 · 陳玉華一隻雞 · 22:00</title><circle cx="531.1" cy="104.3" r="11.5" fill="var(--d2)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="531.1" cy="104.3" r="16" fill="transparent"/><text x="531.1" y="108.3" text-anchor="middle" class="pnum">2</text></g>
+<g class="pin" data-name="陳玉華一隻雞" data-time="22:00" data-d="2" data-ord="2"><title>DAY 2 第 2 站 · 陳玉華一隻雞 · 22:00</title><circle cx="531.1" cy="98.5" r="11.5" fill="var(--d2)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="531.1" cy="98.5" r="16" fill="transparent"/><text x="531.1" y="102.5" text-anchor="middle" class="pnum">2</text></g>
 </g>
 <g class="dayg" data-day="3">
-<polyline points="437.3,45.4 434.3,73.3 82.5,181.3 41.0,181.3 144.4,213.2 150.2,160.2 261.4,167.6 210.7,336.6" fill="none" stroke="var(--d3)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-<g class="pin" data-name="北村韓屋村" data-time="09:00" data-d="3" data-ord="1"><title>DAY 3 第 1 站 · 北村韓屋村 · 09:00</title><circle cx="437.3" cy="45.4" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="437.3" cy="45.4" r="16" fill="transparent"/><text x="437.3" y="49.4" text-anchor="middle" class="pnum">1</text></g>
-<g class="pin" data-name="Artist Bakery" data-time="10:15" data-d="3" data-ord="2"><title>DAY 3 第 2 站 · Artist Bakery · 10:15</title><circle cx="434.3" cy="73.3" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="434.3" cy="73.3" r="16" fill="transparent"/><text x="434.3" y="77.3" text-anchor="middle" class="pnum">2</text></g>
-<g class="pin" data-name="望遠市場" data-time="12:15" data-d="3" data-ord="3"><title>DAY 3 第 3 站 · 望遠市場 · 12:15</title><circle cx="82.5" cy="181.3" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="82.5" cy="181.3" r="16" fill="transparent"/><text x="82.5" y="185.3" text-anchor="middle" class="pnum">3</text></g>
-<g class="pin" data-name="漢江貓咪店" data-time="13:45" data-d="3" data-ord="4"><title>DAY 3 第 4 站 · 漢江貓咪店 · 13:45</title><circle cx="41.0" cy="181.3" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="41.0" cy="181.3" r="16" fill="transparent"/><text x="41.0" y="185.3" text-anchor="middle" class="pnum">4</text></g>
-<g class="pin" data-name="弘大商圈 購物" data-time="15:00" data-d="3" data-ord="5"><title>DAY 3 第 5 站 · 弘大商圈 購物 · 15:00</title><circle cx="144.4" cy="213.2" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="144.4" cy="213.2" r="16" fill="transparent"/><text x="144.4" y="217.2" text-anchor="middle" class="pnum">5</text></g>
-<g class="pin" data-name="Compose Coffee 弘大" data-time="15:45" data-d="3" data-ord="6"><title>DAY 3 第 6 站 · Compose Coffee 弘大 · 15:45</title><circle cx="150.2" cy="160.2" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="150.2" cy="160.2" r="16" fill="transparent"/><text x="150.2" y="164.2" text-anchor="middle" class="pnum">6</text></g>
-<g class="pin" data-name="星巴克 梨大店" data-time="16:30" data-d="3" data-ord="7"><title>DAY 3 第 7 站 · 星巴克 梨大店 · 16:30</title><circle cx="261.4" cy="167.6" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="261.4" cy="167.6" r="16" fill="transparent"/><text x="261.4" y="171.6" text-anchor="middle" class="pnum">7</text></g>
-<g class="pin" data-name="汝矣島漢江公園" data-time="19:00" data-d="3" data-ord="8"><title>DAY 3 第 8 站 · 汝矣島漢江公園 · 19:00</title><circle cx="210.7" cy="336.6" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="210.7" cy="336.6" r="16" fill="transparent"/><text x="210.7" y="340.6" text-anchor="middle" class="pnum">8</text></g>
+<polyline points="437.3,42.8 434.3,69.2 82.5,171.2 41.0,171.2 144.4,201.3 150.2,151.3 261.4,158.2 210.7,317.9 372.6,178.8" fill="none" stroke="var(--d3)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+<g class="pin" data-name="北村韓屋村" data-time="09:00" data-d="3" data-ord="1"><title>DAY 3 第 1 站 · 北村韓屋村 · 09:00</title><circle cx="437.3" cy="42.8" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="437.3" cy="42.8" r="16" fill="transparent"/><text x="437.3" y="46.8" text-anchor="middle" class="pnum">1</text></g>
+<g class="pin" data-name="Artist Bakery" data-time="10:15" data-d="3" data-ord="2"><title>DAY 3 第 2 站 · Artist Bakery · 10:15</title><circle cx="434.3" cy="69.2" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="434.3" cy="69.2" r="16" fill="transparent"/><text x="434.3" y="73.2" text-anchor="middle" class="pnum">2</text></g>
+<g class="pin" data-name="望遠市場" data-time="12:15" data-d="3" data-ord="3"><title>DAY 3 第 3 站 · 望遠市場 · 12:15</title><circle cx="82.5" cy="171.2" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="82.5" cy="171.2" r="16" fill="transparent"/><text x="82.5" y="175.2" text-anchor="middle" class="pnum">3</text></g>
+<g class="pin" data-name="漢江貓咪店" data-time="13:45" data-d="3" data-ord="4"><title>DAY 3 第 4 站 · 漢江貓咪店 · 13:45</title><circle cx="41.0" cy="171.2" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="41.0" cy="171.2" r="16" fill="transparent"/><text x="41.0" y="175.2" text-anchor="middle" class="pnum">4</text></g>
+<g class="pin" data-name="弘大商圈 購物" data-time="15:00" data-d="3" data-ord="5"><title>DAY 3 第 5 站 · 弘大商圈 購物 · 15:00</title><circle cx="144.4" cy="201.3" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="144.4" cy="201.3" r="16" fill="transparent"/><text x="144.4" y="205.3" text-anchor="middle" class="pnum">5</text></g>
+<g class="pin" data-name="Compose Coffee 弘大" data-time="15:45" data-d="3" data-ord="6"><title>DAY 3 第 6 站 · Compose Coffee 弘大 · 15:45</title><circle cx="150.2" cy="151.3" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="150.2" cy="151.3" r="16" fill="transparent"/><text x="150.2" y="155.3" text-anchor="middle" class="pnum">6</text></g>
+<g class="pin" data-name="星巴克 梨大店" data-time="16:30" data-d="3" data-ord="7"><title>DAY 3 第 7 站 · 星巴克 梨大店 · 16:30</title><circle cx="261.4" cy="158.2" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="261.4" cy="158.2" r="16" fill="transparent"/><text x="261.4" y="162.2" text-anchor="middle" class="pnum">7</text></g>
+<g class="pin" data-name="汝矣島漢江公園" data-time="19:00" data-d="3" data-ord="8"><title>DAY 3 第 8 站 · 汝矣島漢江公園 · 19:00</title><circle cx="210.7" cy="317.9" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="210.7" cy="317.9" r="16" fill="transparent"/><text x="210.7" y="321.9" text-anchor="middle" class="pnum">8</text></g>
+<g class="pin" data-name="樂天超市 首爾站店" data-time="21:15" data-d="3" data-ord="9"><title>DAY 3 第 9 站 · 樂天超市 首爾站店 · 21:15</title><circle cx="372.6" cy="178.8" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="372.6" cy="178.8" r="16" fill="transparent"/><text x="372.6" y="182.8" text-anchor="middle" class="pnum">9</text></g>
 </g>
 <g class="dayg" data-day="4">
-<polyline points="575.3,127.3 783.8,262.3 772.0,242.6 755.1,263.5 726.2,244.1 749.0,241.3 591.2,390.1 498.4,411.4" fill="none" stroke="var(--d4)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-<g class="pin" data-name="獵奇辣炒年糕 신당본점" data-time="11:30" data-d="4" data-ord="1"><title>DAY 4 第 1 站 · 獵奇辣炒年糕 신당본점 · 11:30</title><circle cx="575.3" cy="127.3" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="575.3" cy="127.3" r="16" fill="transparent"/><text x="575.3" y="131.3" text-anchor="middle" class="pnum">1</text></g>
-<g class="pin" data-name="聖水洞 購物" data-time="13:30" data-d="4" data-ord="2"><title>DAY 4 第 2 站 · 聖水洞 購物 · 13:30</title><circle cx="783.8" cy="262.3" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="783.8" cy="262.3" r="16" fill="transparent"/><text x="783.8" y="266.3" text-anchor="middle" class="pnum">2</text></g>
-<g class="pin" data-name="烤黨 Ggupdang 聖水店" data-time="15:45" data-d="4" data-ord="3"><title>DAY 4 第 3 站 · 烤黨 Ggupdang 聖水店 · 15:45</title><circle cx="772.0" cy="242.6" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="772.0" cy="242.6" r="16" fill="transparent"/><text x="772.0" y="246.6" text-anchor="middle" class="pnum">3</text></g>
-<g class="pin" data-name="冰淇淋 Maman Gelato" data-time="16:15" data-d="4" data-ord="4"><title>DAY 4 第 4 站 · 冰淇淋 Maman Gelato · 16:15</title><circle cx="755.1" cy="263.5" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="755.1" cy="263.5" r="16" fill="transparent"/><text x="755.1" y="267.5" text-anchor="middle" class="pnum">4</text></g>
-<g class="pin" data-name="蛋塔 Meitawang Egg Tart" data-time="16:45" data-d="4" data-ord="5"><title>DAY 4 第 5 站 · 蛋塔 Meitawang Egg Tart · 16:45</title><circle cx="726.2" cy="244.1" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="726.2" cy="244.1" r="16" fill="transparent"/><text x="726.2" y="248.1" text-anchor="middle" class="pnum">5</text></g>
-<g class="pin" data-name="祖傳三代馬鈴薯排骨湯" data-time="18:00" data-d="4" data-ord="6"><title>DAY 4 第 6 站 · 祖傳三代馬鈴薯排骨湯 · 18:00</title><circle cx="749.0" cy="241.3" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="749.0" cy="241.3" r="16" fill="transparent"/><text x="749.0" y="245.3" text-anchor="middle" class="pnum">6</text></g>
-<g class="pin" data-name="烤黨 新沙店" data-time="19:45" data-d="4" data-ord="7"><title>DAY 4 第 7 站 · 烤黨 新沙店 · 19:45</title><circle cx="591.2" cy="390.1" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="591.2" cy="390.1" r="16" fill="transparent"/><text x="591.2" y="394.1" text-anchor="middle" class="pnum">7</text></g>
-<g class="pin" data-name="盤浦大橋 月光彩虹噴泉" data-time="21:00" data-d="4" data-ord="8"><title>DAY 4 第 8 站 · 盤浦大橋 月光彩虹噴泉 · 21:00</title><circle cx="498.4" cy="411.4" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="498.4" cy="411.4" r="16" fill="transparent"/><text x="498.4" y="415.4" text-anchor="middle" class="pnum">8</text></g>
+<polyline points="575.3,120.2 784.1,248.0 771.9,228.5 755.2,249.5 726.1,230.6 748.9,227.4 591.2,368.4 498.4,388.6" fill="none" stroke="var(--d4)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+<g class="pin" data-name="獵奇辣炒年糕 신당본점" data-time="11:30" data-d="4" data-ord="1"><title>DAY 4 第 1 站 · 獵奇辣炒年糕 신당본점 · 11:30</title><circle cx="575.3" cy="120.2" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="575.3" cy="120.2" r="16" fill="transparent"/><text x="575.3" y="124.2" text-anchor="middle" class="pnum">1</text></g>
+<g class="pin" data-name="聖水洞 購物" data-time="13:30" data-d="4" data-ord="2"><title>DAY 4 第 2 站 · 聖水洞 購物 · 13:30</title><circle cx="784.1" cy="248.0" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="784.1" cy="248.0" r="16" fill="transparent"/><text x="784.1" y="252.0" text-anchor="middle" class="pnum">2</text></g>
+<g class="pin" data-name="烤黨 Ggupdang 聖水店" data-time="15:45" data-d="4" data-ord="3"><title>DAY 4 第 3 站 · 烤黨 Ggupdang 聖水店 · 15:45</title><circle cx="771.9" cy="228.5" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="771.9" cy="228.5" r="16" fill="transparent"/><text x="771.9" y="232.5" text-anchor="middle" class="pnum">3</text></g>
+<g class="pin" data-name="冰淇淋 Maman Gelato" data-time="16:15" data-d="4" data-ord="4"><title>DAY 4 第 4 站 · 冰淇淋 Maman Gelato · 16:15</title><circle cx="755.2" cy="249.5" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="755.2" cy="249.5" r="16" fill="transparent"/><text x="755.2" y="253.5" text-anchor="middle" class="pnum">4</text></g>
+<g class="pin" data-name="蛋塔 Meitawang Egg Tart" data-time="16:45" data-d="4" data-ord="5"><title>DAY 4 第 5 站 · 蛋塔 Meitawang Egg Tart · 16:45</title><circle cx="726.1" cy="230.6" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="726.1" cy="230.6" r="16" fill="transparent"/><text x="726.1" y="234.6" text-anchor="middle" class="pnum">5</text></g>
+<g class="pin" data-name="祖傳三代馬鈴薯排骨湯" data-time="18:00" data-d="4" data-ord="6"><title>DAY 4 第 6 站 · 祖傳三代馬鈴薯排骨湯 · 18:00</title><circle cx="748.9" cy="227.4" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="748.9" cy="227.4" r="16" fill="transparent"/><text x="748.9" y="231.4" text-anchor="middle" class="pnum">6</text></g>
+<g class="pin" data-name="烤黨 新沙店" data-time="19:45" data-d="4" data-ord="7"><title>DAY 4 第 7 站 · 烤黨 新沙店 · 19:45</title><circle cx="591.2" cy="368.4" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="591.2" cy="368.4" r="16" fill="transparent"/><text x="591.2" y="372.4" text-anchor="middle" class="pnum">7</text></g>
+<g class="pin" data-name="盤浦大橋 月光彩虹噴泉" data-time="21:00" data-d="4" data-ord="8"><title>DAY 4 第 8 站 · 盤浦大橋 月光彩虹噴泉 · 21:00</title><circle cx="498.4" cy="388.6" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="498.4" cy="388.6" r="16" fill="transparent"/><text x="498.4" y="392.6" text-anchor="middle" class="pnum">8</text></g>
 </g>
 <g class="dayg" data-day="5">
-<polyline points="389.0,172.9 441.5,154.6" fill="none" stroke="var(--d5)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-<g class="pin" data-name="明洞商圈 散步採買" data-time="07:45" data-d="5" data-ord="1"><title>DAY 5 第 1 站 · 明洞商圈 散步採買 · 07:45</title><circle cx="441.5" cy="154.6" r="11.5" fill="var(--d5)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="441.5" cy="154.6" r="16" fill="transparent"/><text x="441.5" y="158.6" text-anchor="middle" class="pnum">1</text></g>
+<polyline points="389.2,162.8 441.5,146.1" fill="none" stroke="var(--d5)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+<g class="pin" data-name="明洞商圈 散步採買" data-time="07:45" data-d="5" data-ord="1"><title>DAY 5 第 1 站 · 明洞商圈 散步採買 · 07:45</title><circle cx="441.5" cy="146.1" r="11.5" fill="var(--d5)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="441.5" cy="146.1" r="16" fill="transparent"/><text x="441.5" y="150.1" text-anchor="middle" class="pnum">1</text></g>
 </g>
-<g class="anchor pin" data-name="서울역 라움169（住宿）" data-time="每日出發點" data-d="0" data-ord="H"><title>住宿：서울역 라움169</title><rect x="378.5" y="162.4" width="21" height="21" rx="5" transform="rotate(45 389.0 172.9)" fill="var(--ink)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="389.0" y="176.9" text-anchor="middle" class="pnum anchor-t">H</text><text x="389.0" y="199.9" text-anchor="middle" class="anchor-l">首爾站・住宿</text></g>
+<g class="anchor pin" data-name="서울역 라움169（住宿）" data-time="每日出發點" data-d="0" data-ord="H"><title>住宿：서울역 라움169</title><rect x="378.7" y="152.3" width="21" height="21" rx="5" transform="rotate(45 389.2 162.8)" fill="var(--ink)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="389.2" y="166.8" text-anchor="middle" class="pnum anchor-t">H</text><text x="389.2" y="189.8" text-anchor="middle" class="anchor-l">首爾站・住宿</text></g>
 <g class="regionlabels">
-<g class="region"><rect x="118.4" y="115.2" width="83" height="18" rx="9" class="regionchip"/><text x="125.4" y="128.2" class="regiontext">弘大・延南洞</text></g>
-<g class="region"><rect x="15.0" y="136.3" width="48" height="18" rx="9" class="regionchip"/><text x="22.0" y="149.3" class="regiontext">望遠洞</text></g>
-<g class="region"><rect x="235.4" y="122.6" width="37" height="18" rx="9" class="regionchip"/><text x="242.4" y="135.6" class="regiontext">梨大</text></g>
-<g class="region"><rect x="408.3" y="0.4" width="72" height="18" rx="9" class="regionchip"/><text x="415.3" y="13.4" class="regiontext">北村・安國</text></g>
-<g class="region"><rect x="363.0" y="109.6" width="83" height="18" rx="9" class="regionchip"/><text x="370.0" y="122.6" class="regiontext">首爾站・明洞</text></g>
-<g class="region"><rect x="184.7" y="291.6" width="48" height="18" rx="9" class="regionchip"/><text x="191.7" y="304.6" class="regiontext">汝矣島</text></g>
-<g class="region"><rect x="549.3" y="82.3" width="48" height="18" rx="9" class="regionchip"/><text x="556.3" y="95.3" class="regiontext">新堂洞</text></g>
-<g class="region"><rect x="505.1" y="59.3" width="48" height="18" rx="9" class="regionchip"/><text x="512.1" y="72.3" class="regiontext">東大門</text></g>
-<g class="region"><rect x="700.2" y="196.3" width="48" height="18" rx="9" class="regionchip"/><text x="707.2" y="209.3" class="regiontext">聖水洞</text></g>
-<g class="region"><rect x="565.2" y="345.1" width="48" height="18" rx="9" class="regionchip"/><text x="572.2" y="358.1" class="regiontext">新沙洞</text></g>
-<g class="region"><rect x="472.4" y="366.4" width="37" height="18" rx="9" class="regionchip"/><text x="479.4" y="379.4" class="regiontext">盤浦</text></g>
+<g class="region"><rect x="118.4" y="106.3" width="83" height="18" rx="9" class="regionchip"/><text x="125.4" y="119.3" class="regiontext">弘大・延南洞</text></g>
+<g class="region"><rect x="15.0" y="126.2" width="48" height="18" rx="9" class="regionchip"/><text x="22.0" y="139.2" class="regiontext">望遠洞</text></g>
+<g class="region"><rect x="235.4" y="113.2" width="37" height="18" rx="9" class="regionchip"/><text x="242.4" y="126.2" class="regiontext">梨大</text></g>
+<g class="region"><rect x="408.3" y="-2.2" width="72" height="18" rx="9" class="regionchip"/><text x="415.3" y="10.8" class="regiontext">北村・安國</text></g>
+<g class="region"><rect x="346.6" y="101.1" width="83" height="18" rx="9" class="regionchip"/><text x="353.6" y="114.1" class="regiontext">首爾站・明洞</text></g>
+<g class="region"><rect x="184.7" y="272.9" width="48" height="18" rx="9" class="regionchip"/><text x="191.7" y="285.9" class="regiontext">汝矣島</text></g>
+<g class="region"><rect x="549.3" y="75.2" width="48" height="18" rx="9" class="regionchip"/><text x="556.3" y="88.2" class="regiontext">新堂洞</text></g>
+<g class="region"><rect x="505.1" y="53.5" width="48" height="18" rx="9" class="regionchip"/><text x="512.1" y="66.5" class="regiontext">東大門</text></g>
+<g class="region"><rect x="700.1" y="182.4" width="48" height="18" rx="9" class="regionchip"/><text x="707.1" y="195.4" class="regiontext">聖水洞</text></g>
+<g class="region"><rect x="565.2" y="323.4" width="48" height="18" rx="9" class="regionchip"/><text x="572.2" y="336.4" class="regiontext">新沙洞</text></g>
+<g class="region"><rect x="472.4" y="343.6" width="37" height="18" rx="9" class="regionchip"/><text x="479.4" y="356.6" class="regiontext">盤浦</text></g>
 </g>
-
+</g>
+<g class="layer-metro">
+<g class="mlines">
+<polyline class="mline" data-line="1" points="373.0,177.3 468.7,98.4 547.6,93.9" fill="none" stroke="#0052A4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline class="mline" data-line="2" points="115.9,203.4 161.5,165.7 220.1,175.3 263.4,166.2 341.0,152.2 427.2,120.5 468.2,118.0 540.0,124.6 586.0,122.0 675.7,144.1 718.6,215.5 756.5,227.5" fill="none" stroke="#00A84D" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline class="mline" data-line="3" points="439.8,67.8 468.7,98.4 468.2,118.0 596.8,370.6 526.4,427.4" fill="none" stroke="#EF7C1C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline class="mline" data-line="4" points="547.6,93.9 540.0,124.6 442.1,146.1 407.8,157.7 373.0,177.3" fill="none" stroke="#00A5DE" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline class="mline" data-line="5" points="202.1,315.9 341.0,152.2 468.7,98.4 540.0,124.6 675.7,144.1" fill="none" stroke="#996CAC" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline class="mline" data-line="6" points="69.0,132.1 101.5,170.8 115.9,203.4 156.5,211.9" fill="none" stroke="#CD7C2F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline class="mline" data-line="A" points="161.5,165.7 373.0,177.3" fill="none" stroke="#0090D2" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="mstations">
+<g class="mstation" data-days="1 3 5" data-zh="首爾" data-name="首爾站" data-time="1·4·A&#x27;REX 線"><title>首爾站（1·4·A&#x27;REX）</title><circle cx="373.0" cy="177.3" r="11.5" class="mhalo"/><circle cx="373.0" cy="177.3" r="7.5" class="mdot ix"/><text x="373.0" y="163.8" text-anchor="middle" class="mlabel">首爾</text></g>
+<g class="mstation" data-days="1" data-zh="會賢" data-name="會賢站" data-time="4 線"><title>會賢站（4）</title><circle cx="407.8" cy="157.7" r="9.5" class="mhalo"/><circle cx="407.8" cy="157.7" r="5.5" class="mdot"/><text x="407.8" y="146.2" text-anchor="middle" class="mlabel">會賢</text></g>
+<g class="mstation" data-days="5" data-zh="明洞" data-name="明洞站" data-time="4 線"><title>明洞站（4）</title><circle cx="442.1" cy="146.1" r="9.5" class="mhalo"/><circle cx="442.1" cy="146.1" r="5.5" class="mdot"/><text x="442.1" y="134.6" text-anchor="middle" class="mlabel">明洞</text></g>
+<g class="mstation" data-days="" data-zh="乙支路入口" data-name="乙支路入口站" data-time="2 線"><title>乙支路入口站（2）</title><circle cx="427.2" cy="120.5" r="9.5" class="mhalo"/><circle cx="427.2" cy="120.5" r="5.5" class="mdot"/><text x="427.2" y="109.0" text-anchor="middle" class="mlabel">乙支路入口</text></g>
+<g class="mstation" data-days="" data-zh="乙支路3街" data-name="乙支路3街站" data-time="2·3·5 線"><title>乙支路3街站（2·3·5）</title><circle cx="468.2" cy="118.0" r="11.5" class="mhalo"/><circle cx="468.2" cy="118.0" r="7.5" class="mdot ix"/><text x="468.2" y="104.5" text-anchor="middle" class="mlabel">乙支路3街</text></g>
+<g class="mstation" data-days="" data-zh="鐘路3街" data-name="鐘路3街站" data-time="1·3·5 線"><title>鐘路3街站（1·3·5）</title><circle cx="468.7" cy="98.4" r="11.5" class="mhalo"/><circle cx="468.7" cy="98.4" r="7.5" class="mdot ix"/><text x="468.7" y="84.9" text-anchor="middle" class="mlabel">鐘路3街</text></g>
+<g class="mstation" data-days="3" data-zh="安國" data-name="安國站" data-time="3 線"><title>安國站（3）</title><circle cx="439.8" cy="67.8" r="9.5" class="mhalo"/><circle cx="439.8" cy="67.8" r="5.5" class="mdot"/><text x="439.8" y="56.3" text-anchor="middle" class="mlabel">安國</text></g>
+<g class="mstation" data-days="2" data-zh="東大門" data-name="東大門站" data-time="1·4 線"><title>東大門站（1·4）</title><circle cx="547.6" cy="93.9" r="11.5" class="mhalo"/><circle cx="547.6" cy="93.9" r="7.5" class="mdot ix"/><text x="547.6" y="80.4" text-anchor="middle" class="mlabel">東大門</text></g>
+<g class="mstation" data-days="" data-zh="東大門歷史文化公園" data-name="東大門歷史文化公園站" data-time="2·4·5 線"><title>東大門歷史文化公園站（2·4·5）</title><circle cx="540.0" cy="124.6" r="11.5" class="mhalo"/><circle cx="540.0" cy="124.6" r="7.5" class="mdot ix"/><text x="540.0" y="111.1" text-anchor="middle" class="mlabel">東大門歷史文化公園</text></g>
+<g class="mstation" data-days="4" data-zh="新堂" data-name="新堂站" data-time="2·6 線"><title>新堂站（2·6）</title><circle cx="586.0" cy="122.0" r="11.5" class="mhalo"/><circle cx="586.0" cy="122.0" r="7.5" class="mdot ix"/><text x="586.0" y="108.5" text-anchor="middle" class="mlabel">新堂</text></g>
+<g class="mstation" data-days="" data-zh="往十里" data-name="往十里站" data-time="2·5 線"><title>往十里站（2·5）</title><circle cx="675.7" cy="144.1" r="11.5" class="mhalo"/><circle cx="675.7" cy="144.1" r="7.5" class="mdot ix"/><text x="675.7" y="130.6" text-anchor="middle" class="mlabel">往十里</text></g>
+<g class="mstation" data-days="4" data-zh="纛島" data-name="纛島站" data-time="2 線"><title>纛島站（2）</title><circle cx="718.6" cy="215.5" r="9.5" class="mhalo"/><circle cx="718.6" cy="215.5" r="5.5" class="mdot"/><text x="718.6" y="204.0" text-anchor="middle" class="mlabel">纛島</text></g>
+<g class="mstation" data-days="4" data-zh="聖水" data-name="聖水站" data-time="2 線"><title>聖水站（2）</title><circle cx="756.5" cy="227.5" r="9.5" class="mhalo"/><circle cx="756.5" cy="227.5" r="5.5" class="mdot"/><text x="756.5" y="216.0" text-anchor="middle" class="mlabel">聖水</text></g>
+<g class="mstation" data-days="" data-zh="忠正路" data-name="忠正路站" data-time="2·5 線"><title>忠正路站（2·5）</title><circle cx="341.0" cy="152.2" r="11.5" class="mhalo"/><circle cx="341.0" cy="152.2" r="7.5" class="mdot ix"/><text x="341.0" y="138.7" text-anchor="middle" class="mlabel">忠正路</text></g>
+<g class="mstation" data-days="3" data-zh="梨大" data-name="梨大站" data-time="2 線"><title>梨大站（2）</title><circle cx="263.4" cy="166.2" r="9.5" class="mhalo"/><circle cx="263.4" cy="166.2" r="5.5" class="mdot"/><text x="263.4" y="154.7" text-anchor="middle" class="mlabel">梨大</text></g>
+<g class="mstation" data-days="" data-zh="新村" data-name="新村站" data-time="2 線"><title>新村站（2）</title><circle cx="220.1" cy="175.3" r="9.5" class="mhalo"/><circle cx="220.1" cy="175.3" r="5.5" class="mdot"/><text x="220.1" y="163.8" text-anchor="middle" class="mlabel">新村</text></g>
+<g class="mstation" data-days="3" data-zh="弘大入口" data-name="弘大入口站" data-time="2·A&#x27;REX 線"><title>弘大入口站（2·A&#x27;REX）</title><circle cx="161.5" cy="165.7" r="11.5" class="mhalo"/><circle cx="161.5" cy="165.7" r="7.5" class="mdot ix"/><text x="161.5" y="152.2" text-anchor="middle" class="mlabel">弘大入口</text></g>
+<g class="mstation" data-days="" data-zh="合井" data-name="合井站" data-time="2·6 線"><title>合井站（2·6）</title><circle cx="115.9" cy="203.4" r="11.5" class="mhalo"/><circle cx="115.9" cy="203.4" r="7.5" class="mdot ix"/><text x="115.9" y="189.9" text-anchor="middle" class="mlabel">合井</text></g>
+<g class="mstation" data-days="3" data-zh="上水" data-name="上水站" data-time="6 線"><title>上水站（6）</title><circle cx="156.5" cy="211.9" r="9.5" class="mhalo"/><circle cx="156.5" cy="211.9" r="5.5" class="mdot"/><text x="156.5" y="200.4" text-anchor="middle" class="mlabel">上水</text></g>
+<g class="mstation" data-days="3" data-zh="望遠" data-name="望遠站" data-time="6 線"><title>望遠站（6）</title><circle cx="101.5" cy="170.8" r="9.5" class="mhalo"/><circle cx="101.5" cy="170.8" r="5.5" class="mdot"/><text x="101.5" y="159.3" text-anchor="middle" class="mlabel">望遠</text></g>
+<g class="mstation" data-days="3" data-zh="麻浦區廳" data-name="麻浦區廳站" data-time="6 線"><title>麻浦區廳站（6）</title><circle cx="69.0" cy="132.1" r="9.5" class="mhalo"/><circle cx="69.0" cy="132.1" r="5.5" class="mdot"/><text x="69.0" y="120.6" text-anchor="middle" class="mlabel">麻浦區廳</text></g>
+<g class="mstation" data-days="3" data-zh="汝矣渡口" data-name="汝矣渡口站" data-time="5 線"><title>汝矣渡口站（5）</title><circle cx="202.1" cy="315.9" r="9.5" class="mhalo"/><circle cx="202.1" cy="315.9" r="5.5" class="mdot"/><text x="202.1" y="304.4" text-anchor="middle" class="mlabel">汝矣渡口</text></g>
+<g class="mstation" data-days="4" data-zh="新沙" data-name="新沙站" data-time="3 線"><title>新沙站（3）</title><circle cx="596.8" cy="370.6" r="9.5" class="mhalo"/><circle cx="596.8" cy="370.6" r="5.5" class="mdot"/><text x="596.8" y="359.1" text-anchor="middle" class="mlabel">新沙</text></g>
+<g class="mstation" data-days="4" data-zh="高速巴士客運站" data-name="高速巴士客運站站" data-time="3·7·9 線"><title>高速巴士客運站站（3·7·9）</title><circle cx="526.4" cy="427.4" r="11.5" class="mhalo"/><circle cx="526.4" cy="427.4" r="7.5" class="mdot ix"/><text x="526.4" y="413.9" text-anchor="middle" class="mlabel">高速巴士客運站</text></g>
+</g>
+</g>
       </g>
     </svg>
     </div>
+
+    <div class="metrolegend"><span class="mlg"><i style="background:#0052A4"></i>1 號線</span><span class="mlg"><i style="background:#00A84D"></i>2 號線</span><span class="mlg"><i style="background:#EF7C1C"></i>3 號線</span><span class="mlg"><i style="background:#00A5DE"></i>4 號線</span><span class="mlg"><i style="background:#996CAC"></i>5 號線</span><span class="mlg"><i style="background:#CD7C2F"></i>6 號線</span><span class="mlg"><i style="background:#0090D2"></i>機場快線</span></div>
 
     <div class="inset">
       <div class="ih"><span class="ib">1</span>DAY 2 · 愛寶樂園</div>
@@ -679,9 +835,9 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
   </p>
 
   <div class="lgroups">
-<div class="lgroup" style="--c:var(--d1)"><h3><span class="lbar"></span>DAY 1 · 抵達首爾・南大門市場</h3><ul><li><span class="lnum">H</span><span class="ltime">18:50</span><span class="tag stay">住宿</span><span class="lname">서울역 라움169　Check-in<span class="lstn">會賢站 · 4分</span></span></li><li><span class="lnum">2</span><span class="ltime">19:20</span><span class="tag food">美食</span><span class="lname">南大門市場<span class="lstn">會賢站 · 1分</span></span></li></ul></div>
+<div class="lgroup" style="--c:var(--d1)"><h3><span class="lbar"></span>DAY 1 · 抵達首爾・南大門市場</h3><ul><li><span class="lnum">H</span><span class="ltime">18:50</span><span class="tag stay">住宿</span><span class="lname">서울역 라움169<span class="lstn">會賢站 · 4分</span></span></li><li><span class="lnum">2</span><span class="ltime">19:20</span><span class="tag food">美食</span><span class="lname">南大門市場<span class="lstn">會賢站 · 1分</span></span></li></ul></div>
 <div class="lgroup" style="--c:var(--d2)"><h3><span class="lbar"></span>DAY 2 · 愛寶樂園 全日遊</h3><ul><li><span class="lnum">1</span><span class="ltime">10:00</span><span class="tag sight">景點</span><span class="lname">愛寶樂園 <span class="lo">（地圖外）</span><span class="lstn">前岱·愛寶樂園站 · 4分</span></span></li><li><span class="lnum">2</span><span class="ltime">22:00</span><span class="tag food">美食</span><span class="lname">陳玉華一隻雞<span class="lstn">東大門站 · 5分</span></span></li></ul></div>
-<div class="lgroup" style="--c:var(--d3)"><h3><span class="lbar"></span>DAY 3 · 北村韓屋村・望遠洞・弘大・汝矣島</h3><ul><li><span class="lnum">1</span><span class="ltime">09:00</span><span class="tag sight">景點</span><span class="lname">北村韓屋村<span class="lstn">安國站 · 7分</span></span></li><li><span class="lnum">2</span><span class="ltime">10:15</span><span class="tag dessert">甜點</span><span class="lname">Artist Bakery<span class="lstn">安國站 · 2分</span></span></li><li><span class="lnum">3</span><span class="ltime">12:15</span><span class="tag food">美食</span><span class="lname">望遠市場<span class="lstn">望遠站 · 5分</span></span></li><li><span class="lnum">4</span><span class="ltime">13:45</span><span class="tag shop">購物</span><span class="lname">漢江貓咪店<span class="lstn">麻浦區廳站 · 14分</span></span></li><li><span class="lnum">5</span><span class="ltime">15:00</span><span class="tag shop">購物</span><span class="lname">弘大商圈 購物<span class="lstn">上水站 · 4分</span></span></li><li><span class="lnum">6</span><span class="ltime">15:45</span><span class="tag cafe">咖啡廳</span><span class="lname">Compose Coffee 弘大<span class="lstn">弘大入口站 · 5分</span></span></li><li><span class="lnum">7</span><span class="ltime">16:30</span><span class="tag cafe">咖啡廳</span><span class="lname">星巴克 梨大店<span class="lstn">梨大站 · 2分</span></span></li><li><span class="lnum">8</span><span class="ltime">19:00</span><span class="tag sight">景點</span><span class="lname">汝矣島漢江公園<span class="lstn">汝矣渡口站 · 2分</span></span></li></ul></div>
+<div class="lgroup" style="--c:var(--d3)"><h3><span class="lbar"></span>DAY 3 · 北村韓屋村・望遠洞・弘大・汝矣島</h3><ul><li><span class="lnum">1</span><span class="ltime">09:00</span><span class="tag sight">景點</span><span class="lname">北村韓屋村<span class="lstn">安國站 · 7分</span></span></li><li><span class="lnum">2</span><span class="ltime">10:15</span><span class="tag dessert">甜點</span><span class="lname">Artist Bakery<span class="lstn">安國站 · 2分</span></span></li><li><span class="lnum">3</span><span class="ltime">12:15</span><span class="tag food">美食</span><span class="lname">望遠市場<span class="lstn">望遠站 · 5分</span></span></li><li><span class="lnum">4</span><span class="ltime">13:45</span><span class="tag shop">購物</span><span class="lname">漢江貓咪店<span class="lstn">麻浦區廳站 · 14分</span></span></li><li><span class="lnum">5</span><span class="ltime">15:00</span><span class="tag shop">購物</span><span class="lname">弘大商圈 購物<span class="lstn">上水站 · 4分</span></span></li><li><span class="lnum">6</span><span class="ltime">15:45</span><span class="tag cafe">咖啡廳</span><span class="lname">Compose Coffee 弘大<span class="lstn">弘大入口站 · 5分</span></span></li><li><span class="lnum">7</span><span class="ltime">16:30</span><span class="tag cafe">咖啡廳</span><span class="lname">星巴克 梨大店<span class="lstn">梨大站 · 2分</span></span></li><li><span class="lnum">8</span><span class="ltime">19:00</span><span class="tag sight">景點</span><span class="lname">汝矣島漢江公園<span class="lstn">汝矣渡口站 · 2分</span></span></li><li><span class="lnum">9</span><span class="ltime">21:15</span><span class="tag shop">購物</span><span class="lname">樂天超市 首爾站店<span class="lstn">首爾站 · 1分</span></span></li></ul></div>
 <div class="lgroup" style="--c:var(--d4)"><h3><span class="lbar"></span>DAY 4 · 新堂洞・聖水洞・新沙洞・盤浦</h3><ul><li><span class="lnum">1</span><span class="ltime">11:30</span><span class="tag food">美食</span><span class="lname">獵奇辣炒年糕 신당본점<span class="lstn">新堂站 · 3分</span></span></li><li><span class="lnum">2</span><span class="ltime">13:30</span><span class="tag shop">購物</span><span class="lname">聖水洞 購物<span class="lstn">聖水站 · 8分</span></span></li><li><span class="lnum">3</span><span class="ltime">15:45</span><span class="tag food">美食</span><span class="lname">烤黨 Ggupdang 聖水店<span class="lstn">聖水站 · 3分</span></span></li><li><span class="lnum">4</span><span class="ltime">16:15</span><span class="tag dessert">甜點</span><span class="lname">冰淇淋 Maman Gelato<span class="lstn">聖水站 · 3分</span></span></li><li><span class="lnum">5</span><span class="ltime">16:45</span><span class="tag dessert">甜點</span><span class="lname">蛋塔 Meitawang Egg Tart<span class="lstn">纛島站 · 6分</span></span></li><li><span class="lnum">6</span><span class="ltime">18:00</span><span class="tag food">美食</span><span class="lname">祖傳三代馬鈴薯排骨湯<span class="lstn">聖水站 · 3分</span></span></li><li><span class="lnum">7</span><span class="ltime">19:45</span><span class="tag food">美食</span><span class="lname">烤黨 新沙店<span class="lstn">新沙站 · 2分</span></span></li><li><span class="lnum">8</span><span class="ltime">21:00</span><span class="tag sight">景點</span><span class="lname">盤浦大橋 月光彩虹噴泉<span class="lstn">高速巴士客運站站 · 14分</span></span></li></ul></div>
 <div class="lgroup" style="--c:var(--d5)"><h3><span class="lbar"></span>DAY 5 · 明洞早晨・賦歸</h3><ul><li><span class="lnum">1</span><span class="ltime">07:45</span><span class="tag sight">景點</span><span class="lname">明洞商圈 散步採買<span class="lstn">明洞站 · 1分</span></span></li></ul></div>
   </div>
@@ -780,5 +936,27 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
       setTimeout(function () { row.classList.remove('flash'); }, 1900);
     });
   });
+})();
+</script>
+
+<script>
+/* 路線圖 / 地鐵圖 切換 */
+(function () {
+  var card = document.querySelector('.mapcard');
+  if (!card) return;
+  var btns = Array.prototype.slice.call(document.querySelectorAll('.modebtn'));
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      card.setAttribute('data-mode', b.dataset.mode);
+      btns.forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
+    });
+  });
+  /* 點選行程時，在地鐵圖標出該站 */
+  window.__markStation = function (zh) {
+    document.querySelectorAll('.mstation.pick').forEach(function (g) { g.classList.remove('pick'); });
+    if (!zh) return;
+    var hit = document.querySelector('.mstation[data-zh="' + zh + '"]');
+    if (hit) hit.classList.add('pick');
+  };
 })();
 </script>

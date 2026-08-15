@@ -1,0 +1,188 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SEOUL 💜 BTS THE CITY ARIRANG</title>
+<style>
+__CSS__
+</style>
+<script>
+(function(){try{if(localStorage.getItem('seoul-theme')==='light')
+document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
+</script>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="topbar">
+      <div>
+        <div class="brand">
+          <h1>SEOUL <span class="hv">ARIRANG</span></h1>
+          <span class="kr">서울 지도</span>
+        </div>
+        <span class="taglabel">💜 BTS THE CITY ARIRANG</span>
+      </div>
+      <div class="navset">
+          <button class="themebtn" type="button" id="themebtn" aria-label="切換亮色／暗色">🌙<span class="tlabel">暗色</span></button>
+        <a class="navlink" href="index.html">← 逐日行程</a>
+        <a class="navlink" href="shopping.html">購物清單</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="mapmodes" role="group" aria-label="地圖模式">
+    <button class="modebtn" type="button" data-mode="route" aria-pressed="true">行程路線</button>
+    <button class="modebtn" type="button" data-mode="metro" aria-pressed="false">地鐵圖</button>
+  </div>
+  <figure class="mapcard" data-mode="route">
+    <div class="mapscroll">
+    <svg viewBox="0 0 910 532" role="img" aria-label="首爾市區路線全圖：五天行程各以一種顏色的路線連接，站點依當天順序編號。Day 1 弘大延南洞、Day 2 北村到汝矣島、Day 4 聖水洞到盤浦、Day 5 明洞；Day 3 愛寶樂園位於地圖範圍外的龍仁市。">
+      <g transform="translate(40,40)">
+        <rect x="-12" y="-12" width="854" height="476" rx="12" fill="var(--mapfield)"/>
+        <path d="M -12,330 C 120,296 180,336 300,380 C 380,410 430,436 503,431 C 570,426 592,392 622,406 C 692,426 762,386 842,342"
+              fill="none" stroke="var(--water)" stroke-width="26" stroke-linecap="round"/>
+        <path d="M -12,330 C 120,296 180,336 300,380 C 380,410 430,436 503,431 C 570,426 592,392 622,406 C 692,426 762,386 842,342"
+              fill="none" stroke="var(--water-edge)" stroke-width="1.2" stroke-dasharray="1 7" stroke-linecap="round"/>
+        <text x="352" y="396" class="rivertext">HAN RIVER 漢江</text>
+
+<g class="layer-route">
+__MAPSVG__
+</g>
+<g class="layer-metro">
+__METROSVG__
+</g>
+      </g>
+    </svg>
+    </div>
+
+    <div class="metrolegend">__METROLEGEND__</div>
+
+    <div class="inset">
+      <div class="ih"><span class="ib">1</span>DAY 2 · 愛寶樂園</div>
+      <p>位於龍仁市，市區東南方約 40 公里（車程約 90 分鐘）——超出地圖範圍，全天往返。</p>
+    </div>
+  </figure>
+  <p class="mapcap">
+    虛線框標示行政區域範圍。地圖依實際經緯度等比例繪製（非街景圖資），密集處已微調間距避免重疊。
+  </p>
+
+  <div class="lgroups">
+__LEGEND__
+  </div>
+
+  <footer>
+    開開心心出門～平平安安回來！
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var btn = document.getElementById('themebtn');
+  if (!btn) return;
+  var label = btn.querySelector('.tlabel');
+  function paint() {
+    var light = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.firstChild.nodeValue = light ? '☀\uFE0E' : '🌙';
+    label.textContent = light ? '亮色' : '暗色';
+    btn.setAttribute('aria-label', light ? '目前亮色，點擊切換暗色' : '目前暗色，點擊切換亮色');
+  }
+  btn.addEventListener('click', function () {
+    var light = document.documentElement.getAttribute('data-theme') === 'light';
+    if (light) document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', 'light');
+    try { localStorage.setItem('seoul-theme', light ? 'dark' : 'light'); } catch (e) {}
+    paint();
+  });
+  paint();
+})();
+</script>
+
+<script>
+/* map pin tooltip */
+(function () {
+  document.querySelectorAll('.mapcard').forEach(function (card) {
+    var tip = document.createElement('div');
+    tip.className = 'maptip';
+    card.appendChild(tip);
+    function show(pin) {
+      var n = pin.getAttribute('data-name'); if (!n) return;
+      tip.innerHTML = '';
+      tip.appendChild(document.createTextNode(n));
+      var meta = pin.getAttribute('data-time');
+      if (meta) {
+        var s = document.createElement('span');
+        s.className = 'ttmeta';
+        var d = pin.getAttribute('data-d'), o = pin.getAttribute('data-ord');
+        s.textContent = (d && d !== '0' ? 'DAY ' + d + ' 第 ' + o + ' 站 · ' : '') + meta;
+        tip.appendChild(s);
+      }
+      var pr = pin.getBoundingClientRect(), cr = card.getBoundingClientRect();
+      tip.style.left = (pr.left - cr.left + pr.width / 2) + 'px';
+      tip.style.top  = (pr.top - cr.top - 8) + 'px';
+      tip.classList.add('on');
+    }
+    function hide() { tip.classList.remove('on'); }
+    card.querySelectorAll('.pin').forEach(function (pin) {
+      pin.addEventListener('mouseenter', function () { show(pin); });
+      pin.addEventListener('mouseleave', hide);
+      pin.addEventListener('click', function (e) { e.stopPropagation(); show(pin); });
+    });
+    document.addEventListener('click', hide);
+    card.addEventListener('scroll', hide, true);
+  });
+})();
+
+/* quick find */
+(function () {
+  var qfs = Array.prototype.slice.call(document.querySelectorAll('.qf'));
+  if (!qfs.length) return;
+  qfs.forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (d.open) qfs.forEach(function (o) { if (o !== d) o.open = false; });
+    });
+  });
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.quickfind')) qfs.forEach(function (d) { d.open = false; });
+  });
+
+  document.querySelectorAll('.qf button[data-target]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var row = document.getElementById(b.dataset.target);
+      if (!row) return;
+      var card = row.closest('.daycard');
+      if (card && card.hidden && typeof window.__setDay === 'function') window.__setDay(card.dataset.day);
+      qfs.forEach(function (d) { d.open = false; });
+      var det = row.querySelector('.stopinfo');
+      if (det) det.open = true;
+      /* getBoundingClientRect forces a reflow, so the day switch is already applied */
+      var y = row.getBoundingClientRect().top + window.scrollY - 84;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+      row.classList.remove('flash');
+      void row.offsetWidth;
+      row.classList.add('flash');
+      setTimeout(function () { row.classList.remove('flash'); }, 1900);
+    });
+  });
+})();
+</script>
+
+<script>
+/* 路線圖 / 地鐵圖 切換 */
+(function () {
+  var card = document.querySelector('.mapcard');
+  if (!card) return;
+  var btns = Array.prototype.slice.call(document.querySelectorAll('.modebtn'));
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      card.setAttribute('data-mode', b.dataset.mode);
+      btns.forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
+    });
+  });
+  /* 點選行程時，在地鐵圖標出該站 */
+  window.__markStation = function (zh) {
+    document.querySelectorAll('.mstation.pick').forEach(function (g) { g.classList.remove('pick'); });
+    if (!zh) return;
+    var hit = document.querySelector('.mstation[data-zh="' + zh + '"]');
+    if (hit) hit.classList.add('pick');
+  };
+})();
+</script>
