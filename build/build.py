@@ -7,6 +7,16 @@ from data import (PLACES, STATION, CAT, MODE, DAYS, REGIONS, ASK,
 def esc(s): return html.escape(str(s), quote=True)
 def naver(q): return "https://map.naver.com/p/search/" + urllib.parse.quote(q)
 
+METRO_ZH = {z for _, z, *_ in METRO_STATIONS}
+
+def ordlabel(n):
+    """1→A 2→B … 27→AA"""
+    out = ""
+    while n > 0:
+        n, r = divmod(n-1, 26)
+        out = chr(65+r) + out
+    return out
+
 def station_of(key):
     zh, line, m = STATION[key]
     return f'{zh}站（{line} 線）· 步行約 {max(1, round(m/75))} 分（{m} m）'
@@ -25,7 +35,10 @@ for d in sorted(DAYS):
     for it in DAYS[d]["items"]:
         if it["k"] != "stop":
             continue
-        o += 1; it["ord"] = o
+        if it["cat"] == "stay":
+            it["ord"] = None          # 住宿不佔字母序
+        else:
+            o += 1; it["ord"] = ordlabel(o)
         it["n"] = PLACES[it["key"]][0]
         it["same_station"] = (STATION[it["key"]][0] == prev)
         prev = STATION[it["key"]][0]
@@ -33,7 +46,7 @@ for d in sorted(DAYS):
             continue
         _, lon, lat, _ = PLACES[it["key"]]
         x, y = project(lon, lat)
-        nodes[it["key"]] = {"day": d, "ord": o, "x": x, "y": y, "cat": it["cat"],
+        nodes[it["key"]] = {"day": d, "ord": it["ord"], "x": x, "y": y, "cat": it["cat"],
                             "key": it["key"], "name": it["n"], "t": it["t"]}
 
 MIN = 23.0
@@ -71,8 +84,14 @@ for label, keys in REGIONS:
       f'height="18" rx="9" class="regionchip"/>'
       f'<text x="{x0+7:.1f}" y="{y0-6:.1f}" class="regiontext">{esc(label)}</text></g>')
 
+ORDER = {}
+for d in sorted(DAYS):
+    seq = [i["key"] for i in DAYS[d]["items"] if i["k"] == "stop"]
+    for i, k in enumerate(seq):
+        ORDER[k] = i
+
 def route_pts(d):
-    pts = sorted([n for n in nl if n["day"] == d], key=lambda n: n["ord"])
+    pts = sorted([n for n in nl if n["day"] == d], key=lambda n: ORDER[n["key"]])
     if d == 5: pts = [nodes["hotel"]] + pts
     return pts
 
@@ -87,7 +106,7 @@ for d in sorted(DAYS):
                      f'stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>')
     for p in pts:
         if p["cat"] == "stay": continue
-        lbl = f'DAY {d} 第 {p["ord"]} 站 · {p["name"]} · {p["t"]}'
+        lbl = f'DAY {d} · {p["ord"]} · {p["name"]} · {p["t"]}'
         parts.append(
           f'<g class="pin" data-name="{esc(p["name"])}" data-time="{p["t"]}" data-d="{d}" data-ord="{p["ord"]}">'
           f'<title>{esc(lbl)}</title>'
@@ -98,7 +117,7 @@ for d in sorted(DAYS):
     groups.append(f'<g class="dayg" data-day="{d}">\n' + "\n".join(parts) + "\n</g>")
 
 h = nodes["hotel"]
-anchor = (f'<g class="anchor pin" data-name="서울역 라움169（住宿）" data-time="每日出發點" data-d="0" data-ord="H">'
+anchor = (f'<g class="anchor pin" data-name="서울역 라움169（住宿）" data-time="每日出發點" data-d="0" data-ord="住">'
           f'<title>住宿：서울역 라움169</title>'
           f'<rect x="{h["x"]-10.5:.1f}" y="{h["y"]-10.5:.1f}" width="21" height="21" rx="5" '
           f'transform="rotate(45 {h["x"]} {h["y"]})" fill="var(--ink)" stroke="var(--mapbg)" stroke-width="2.5"/>'
@@ -205,6 +224,14 @@ def picks_html(it):
       for n, d, hh, a in ps)
     return f'<div class="picks"><div class="pkhead">巷內必吃推薦</div><ul>{rows}</ul></div>'
 
+def metro_btn(it):
+    zh = STATION[it["key"]][0]
+    if zh not in METRO_ZH:
+        return ""
+    return (f'<button type="button" class="tometro" data-station="{esc(zh)}" '
+            f'data-stop="stop-{it["key"]}" data-label="{esc(it["n"])}">'
+            f'<span class="mico" aria-hidden="true">🚇</span>在地鐵圖查看 {esc(zh)}站</button>')
+
 def info_block(it):
     key = it["key"]
     addr = PLACES[key][3]
@@ -218,9 +245,11 @@ def info_block(it):
     rows.append(f'<dt>營業時間</dt><dd{unk}>{esc(hours)}</dd>'); labels.append("營業時間")
     rows.append(f'<dt>地址</dt><dd class="addr">{esc(addr)}</dd>'); labels.append("地址")
     return (f'<details class="stopinfo">'
-            f'<summary><span class="sumico" aria-hidden="true"></span>{" · ".join(labels)}</summary>'
+            f'<summary><span class="sumico" aria-hidden="true"></span>詳細說明</summary>'
             f'<dl class="infogrid">{"".join(rows)}</dl>'
+            f'<div class="stopacts">'
             f'<a class="navermap" href="{naver(addr)}" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>'
+            f'{metro_btn(it)}</div>'
             f'{subs_html(it)}{picks_html(it)}</details>')
 
 cards = []
@@ -236,7 +265,7 @@ for d in sorted(DAYS):
               f'<span class="tn">{esc(it["n"])}</span>'
               + (f'<span class="tnote">{esc(it["note"])}</span>' if it.get("note") else "") + '</span></li>')
         else:
-            num = "H" if it["cat"] == "stay" else str(it["ord"])
+            num = "住" if it["cat"] == "stay" else it["ord"]
             off = ' offmap' if it.get("offmap") else ''
             sub = ""
             if it.get("sub"):
@@ -271,7 +300,7 @@ for d in sorted(DAYS):
     D = DAYS[d]; rows = []
     for it in D["items"]:
         if it["k"] != "stop": continue
-        num = "H" if it["cat"] == "stay" else str(it["ord"])
+        num = "住" if it["cat"] == "stay" else it["ord"]
         extra = ' <span class="lo">（地圖外）</span>' if it.get("offmap") else ''
         zh, _, m = STATION[it["key"]]
         rows.append(f'<li><span class="lnum">{num}</span><span class="ltime">{it["t"]}</span>'

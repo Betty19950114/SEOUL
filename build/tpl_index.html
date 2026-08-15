@@ -122,6 +122,10 @@ __CARDS__
 
 </div>
 
+<button class="backfab" id="backfab" type="button" data-show="0">
+  <span aria-hidden="true">↩</span><span class="bfname" id="backname"></span>
+</button>
+
 <script>
 (function () {
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
@@ -281,5 +285,55 @@ __CARDS__
     var hit = document.querySelector('.mstation[data-zh="' + zh + '"]');
     if (hit) hit.classList.add('pick');
   };
+})();
+</script>
+
+<script>
+/* 行程 ⇄ 地鐵圖 來回導覽 */
+(function () {
+  var card = document.querySelector('.mapcard');
+  var fab  = document.getElementById('backfab');
+  var name = document.getElementById('backname');
+  if (!card || !fab) return;
+  var lastStop = null;
+
+  function goTo(el, offset) {
+    var y = el.getBoundingClientRect().top + window.scrollY - (offset || 84);
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('.tometro').forEach(function (b) {
+    b.addEventListener('click', function (e) {
+      e.stopPropagation();
+      lastStop = b.dataset.stop;
+      name.textContent = '回到 ' + b.dataset.label;
+      fab.dataset.show = '1';
+      /* 切到地鐵圖並標出該站 */
+      var mb = document.querySelector('.modebtn[data-mode="metro"]');
+      if (mb) mb.click();
+      if (typeof window.__markStation === 'function') window.__markStation(b.dataset.station);
+      goTo(document.querySelector('.mapmodes'), 12);
+    });
+  });
+
+  fab.addEventListener('click', function () {
+    var row = lastStop && document.getElementById(lastStop);
+    if (!row) { fab.dataset.show = '0'; return; }
+    var cardEl = row.closest('.daycard');
+    if (cardEl && cardEl.hidden && typeof window.__setDay === 'function') window.__setDay(cardEl.dataset.day);
+    var det = row.querySelector('.stopinfo');
+    if (det) det.open = true;
+    goTo(row);
+    /* 標題輕微震動 ＋ 手機震動回饋 */
+    var title = row.querySelector('.tn');
+    if (title) {
+      title.classList.remove('nudge');
+      void title.offsetWidth;
+      title.classList.add('nudge');
+      setTimeout(function () { title.classList.remove('nudge'); }, 900);
+    }
+    if (navigator.vibrate) { try { navigator.vibrate(35); } catch (e) {} }
+    fab.dataset.show = '0';
+  });
 })();
 </script>
