@@ -453,6 +453,8 @@
   }
   .tr.move.bus .mbadge { color: var(--d4); background: color-mix(in srgb, var(--d4) 14%, transparent); border-color: transparent; }
   .tr.move.bus .tn { color: var(--ink); font-weight: 600; }
+  .tr.move.taxi .mbadge { color: var(--d3); background: color-mix(in srgb, var(--d3) 14%, transparent); border-color: transparent; }
+  .tr.move.taxi .tn { color: var(--ink); font-weight: 600; }
 
   /* ---------- quick find ---------- */
   .quickfind {
