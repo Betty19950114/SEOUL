@@ -230,13 +230,13 @@
     background: var(--card); border: 1px solid var(--line-2); border-radius: 12px;
     padding: 10px 13px; box-shadow: var(--shadow-s);
   }
-  :root[data-day="3"] .inset {
-    border-color: var(--d3);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--d3) 22%, transparent);
+  :root[data-day="2"] .inset {
+    border-color: var(--d2);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--d2) 22%, transparent);
   }
-  .inset .ih { display: flex; align-items: center; gap: 7px; font-weight: 700; font-size: 13px; color: var(--d3); }
+  .inset .ih { display: flex; align-items: center; gap: 7px; font-weight: 700; font-size: 13px; color: var(--d2); }
   .inset .ib {
-    width: 19px; height: 19px; border-radius: 50%; background: var(--d3); color: var(--pin-ink);
+    width: 19px; height: 19px; border-radius: 50%; background: var(--d2); color: var(--pin-ink);
     font-family: ui-monospace, monospace; font-size: 11px; font-weight: 700;
     display: flex; align-items: center; justify-content: center; flex: none;
   }
@@ -413,6 +413,27 @@
   }
   .hero .themebtn:hover { background: rgba(255,255,255,.24); border-color: #fff; }
   .hero .themebtn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+  /* ---------- must-eat picks inside a stop ---------- */
+  .picks {
+    margin-top: 10px; padding: 11px 13px;
+    background: var(--brand-soft); border: 1px solid var(--line-2);
+    border-left: 3px solid var(--brand); border-radius: 10px;
+  }
+  .pkhead {
+    font-size: 11.5px; font-weight: 700; letter-spacing: .04em;
+    color: var(--brand); margin-bottom: 8px;
+  }
+  .picks ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .picks li { display: flex; flex-direction: column; gap: 2px; }
+  .pkname { font-size: 13.5px; font-weight: 700; color: var(--ink); }
+  .pkdesc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.5; }
+  .pkmeta { font-size: 11.5px; color: var(--ink-faint); }
+  .pkmap {
+    font-size: 11.5px; color: var(--brand); text-decoration: none; width: fit-content;
+    border-bottom: 1px solid color-mix(in srgb, var(--brand) 35%, transparent);
+  }
+  .pkmap:hover { border-bottom-color: var(--brand); }
   /* ---------- BTS hero banner ---------- */
   .masthead { margin: 0 -20px 22px; padding: 0; background: none; border-bottom: 1px solid var(--line); }
   .hero {
@@ -534,13 +555,13 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
         <span class="tlab">全部</span><span class="tsub">5 天</span>
       </button>
       <button class="tab" role="tab" data-day="1" aria-selected="false" style="--c:var(--d1)">
-        <span class="tdot"></span><span class="tlab">DAY 1</span><span class="tsub">抵達・延南洞</span>
+        <span class="tdot"></span><span class="tlab">DAY 1</span><span class="tsub">抵達・南大門</span>
       </button>
       <button class="tab" role="tab" data-day="2" aria-selected="false" style="--c:var(--d2)">
-        <span class="tdot"></span><span class="tlab">DAY 2</span><span class="tsub">北村・弘大・汝矣島</span>
+        <span class="tdot"></span><span class="tlab">DAY 2</span><span class="tsub">愛寶樂園</span>
       </button>
       <button class="tab" role="tab" data-day="3" aria-selected="false" style="--c:var(--d3)">
-        <span class="tdot"></span><span class="tlab">DAY 3</span><span class="tsub">愛寶樂園</span>
+        <span class="tdot"></span><span class="tlab">DAY 3</span><span class="tsub">北村・弘大・汝矣島</span>
       </button>
       <button class="tab" role="tab" data-day="4" aria-selected="false" style="--c:var(--d4)">
         <span class="tdot"></span><span class="tlab">DAY 4</span><span class="tsub">聖水・新沙・盤浦</span>
@@ -564,11 +585,11 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 
 
 <g class="regionboxes">
-<rect x="118.4" y="126.1" width="80.6" height="113.1" rx="16" class="regionbox"/>
+<rect x="118.4" y="134.2" width="57.8" height="105.0" rx="16" class="regionbox"/>
 <rect x="15.0" y="155.3" width="93.5" height="52.0" rx="16" class="regionbox"/>
 <rect x="235.4" y="141.6" width="52.0" height="52.0" rx="16" class="regionbox"/>
 <rect x="408.3" y="19.4" width="55.0" height="79.9" rx="16" class="regionbox"/>
-<rect x="367.9" y="128.6" width="99.6" height="67.5" rx="16" class="regionbox"/>
+<rect x="363.0" y="128.6" width="104.5" height="70.3" rx="16" class="regionbox"/>
 <rect x="184.7" y="310.6" width="52.0" height="52.0" rx="16" class="regionbox"/>
 <rect x="549.3" y="101.3" width="52.0" height="52.0" rx="16" class="regionbox"/>
 <rect x="702.3" y="210.2" width="107.6" height="79.8" rx="16" class="regionbox"/>
@@ -576,19 +597,19 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 <rect x="472.4" y="385.4" width="52.0" height="52.0" rx="16" class="regionbox"/>
 </g>
 <g class="dayg" data-day="1">
-<polyline points="173.0,152.1 393.9,170.1" fill="none" stroke="var(--d1)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-<g class="pin"><circle cx="173.0" cy="152.1" r="11.5" fill="var(--d1)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="173.0" y="156.1" text-anchor="middle" class="pnum">1</text></g>
+<polyline points="389.0,172.9 409.0,161.6" fill="none" stroke="var(--d1)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+<g class="pin"><circle cx="409.0" cy="161.6" r="11.5" fill="var(--d1)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="409.0" y="165.6" text-anchor="middle" class="pnum">2</text></g>
 </g>
-<g class="dayg" data-day="2">
-<polyline points="437.3,45.4 434.3,73.3 82.5,181.3 41.0,181.3 144.4,213.2 150.2,160.2 261.4,167.6 210.7,336.6" fill="none" stroke="var(--d2)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-<g class="pin"><circle cx="437.3" cy="45.4" r="11.5" fill="var(--d2)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="437.3" y="49.4" text-anchor="middle" class="pnum">1</text></g>
-<g class="pin"><circle cx="434.3" cy="73.3" r="11.5" fill="var(--d2)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="434.3" y="77.3" text-anchor="middle" class="pnum">2</text></g>
-<g class="pin"><circle cx="82.5" cy="181.3" r="11.5" fill="var(--d2)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="82.5" y="185.3" text-anchor="middle" class="pnum">3</text></g>
-<g class="pin"><circle cx="41.0" cy="181.3" r="11.5" fill="var(--d2)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="41.0" y="185.3" text-anchor="middle" class="pnum">4</text></g>
-<g class="pin"><circle cx="144.4" cy="213.2" r="11.5" fill="var(--d2)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="144.4" y="217.2" text-anchor="middle" class="pnum">5</text></g>
-<g class="pin"><circle cx="150.2" cy="160.2" r="11.5" fill="var(--d2)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="150.2" y="164.2" text-anchor="middle" class="pnum">6</text></g>
-<g class="pin"><circle cx="261.4" cy="167.6" r="11.5" fill="var(--d2)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="261.4" y="171.6" text-anchor="middle" class="pnum">7</text></g>
-<g class="pin"><circle cx="210.7" cy="336.6" r="11.5" fill="var(--d2)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="210.7" y="340.6" text-anchor="middle" class="pnum">8</text></g>
+<g class="dayg" data-day="3">
+<polyline points="437.3,45.4 434.3,73.3 82.5,181.3 41.0,181.3 144.4,213.2 150.2,160.2 261.4,167.6 210.7,336.6" fill="none" stroke="var(--d3)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+<g class="pin"><circle cx="437.3" cy="45.4" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="437.3" y="49.4" text-anchor="middle" class="pnum">1</text></g>
+<g class="pin"><circle cx="434.3" cy="73.3" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="434.3" y="77.3" text-anchor="middle" class="pnum">2</text></g>
+<g class="pin"><circle cx="82.5" cy="181.3" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="82.5" y="185.3" text-anchor="middle" class="pnum">3</text></g>
+<g class="pin"><circle cx="41.0" cy="181.3" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="41.0" y="185.3" text-anchor="middle" class="pnum">4</text></g>
+<g class="pin"><circle cx="144.4" cy="213.2" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="144.4" y="217.2" text-anchor="middle" class="pnum">5</text></g>
+<g class="pin"><circle cx="150.2" cy="160.2" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="150.2" y="164.2" text-anchor="middle" class="pnum">6</text></g>
+<g class="pin"><circle cx="261.4" cy="167.6" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="261.4" y="171.6" text-anchor="middle" class="pnum">7</text></g>
+<g class="pin"><circle cx="210.7" cy="336.6" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="210.7" y="340.6" text-anchor="middle" class="pnum">8</text></g>
 </g>
 <g class="dayg" data-day="4">
 <polyline points="575.3,127.3 783.9,264.0 732.3,263.6 777.2,242.0 728.3,241.0 754.9,259.2 755.0,236.2 591.2,390.1 498.4,411.4" fill="none" stroke="var(--d4)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -603,16 +624,16 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 <g class="pin"><circle cx="498.4" cy="411.4" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="498.4" y="415.4" text-anchor="middle" class="pnum">9</text></g>
 </g>
 <g class="dayg" data-day="5">
-<polyline points="393.9,170.1 441.5,154.6" fill="none" stroke="var(--d5)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="389.0,172.9 441.5,154.6" fill="none" stroke="var(--d5)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="pin"><circle cx="441.5" cy="154.6" r="11.5" fill="var(--d5)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="441.5" y="158.6" text-anchor="middle" class="pnum">1</text></g>
 </g>
-<g class="anchor"><rect x="383.4" y="159.6" width="21" height="21" rx="5" transform="rotate(45 393.9 170.1)" fill="var(--ink)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="393.9" y="174.1" text-anchor="middle" class="pnum anchor-t">H</text><text x="393.9" y="197.1" text-anchor="middle" class="anchor-l">首爾站・住宿</text></g>
+<g class="anchor"><rect x="378.5" y="162.4" width="21" height="21" rx="5" transform="rotate(45 389.0 172.9)" fill="var(--ink)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="389.0" y="176.9" text-anchor="middle" class="pnum anchor-t">H</text><text x="389.0" y="199.9" text-anchor="middle" class="anchor-l">首爾站・住宿</text></g>
 <g class="regionlabels">
-<g class="region"><rect x="118.4" y="107.1" width="83" height="18" rx="9" class="regionchip"/><text x="125.4" y="120.1" class="regiontext">弘大・延南洞</text></g>
+<g class="region"><rect x="118.4" y="115.2" width="83" height="18" rx="9" class="regionchip"/><text x="125.4" y="128.2" class="regiontext">弘大・延南洞</text></g>
 <g class="region"><rect x="15.0" y="136.3" width="48" height="18" rx="9" class="regionchip"/><text x="22.0" y="149.3" class="regiontext">望遠洞</text></g>
 <g class="region"><rect x="235.4" y="122.6" width="37" height="18" rx="9" class="regionchip"/><text x="242.4" y="135.6" class="regiontext">梨大</text></g>
 <g class="region"><rect x="408.3" y="0.4" width="72" height="18" rx="9" class="regionchip"/><text x="415.3" y="13.4" class="regiontext">北村・安國</text></g>
-<g class="region"><rect x="367.9" y="109.6" width="83" height="18" rx="9" class="regionchip"/><text x="374.9" y="122.6" class="regiontext">首爾站・明洞</text></g>
+<g class="region"><rect x="363.0" y="109.6" width="83" height="18" rx="9" class="regionchip"/><text x="370.0" y="122.6" class="regiontext">首爾站・明洞</text></g>
 <g class="region"><rect x="184.7" y="291.6" width="48" height="18" rx="9" class="regionchip"/><text x="191.7" y="304.6" class="regiontext">汝矣島</text></g>
 <g class="region"><rect x="549.3" y="82.3" width="48" height="18" rx="9" class="regionchip"/><text x="556.3" y="95.3" class="regiontext">新堂洞</text></g>
 <g class="region"><rect x="702.3" y="191.2" width="48" height="18" rx="9" class="regionchip"/><text x="709.3" y="204.2" class="regiontext">聖水洞</text></g>
@@ -625,7 +646,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     </div>
 
     <div class="inset">
-      <div class="ih"><span class="ib">1</span>DAY 3 · 愛寶樂園</div>
+      <div class="ih"><span class="ib">1</span>DAY 2 · 愛寶樂園</div>
       <p>位於龍仁市，市區東南方約 40 公里（車程約 90 分鐘）——超出地圖範圍，全天往返。</p>
     </div>
   </figure>
@@ -638,32 +659,18 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
   <header class="dhead">
     <span class="dnum">1</span>
     <span class="dmeta"><span class="ddate">DAY 1 · 08.26 WED 週三</span>
-    <span class="dtheme">抵達首爾・延南洞</span></span>
+    <span class="dtheme">抵達首爾・南大門市場</span></span>
     <span class="dcount">2 站</span>
   </header>
-  <div class="arearoute"><span class="achip">金浦機場</span><span class="asep">→</span><span class="achip">弘大・延南洞</span><span class="asep">→</span><span class="achip">首爾站</span></div>
+  <div class="arearoute"><span class="achip">金浦機場</span><span class="asep">→</span><span class="achip">首爾站</span><span class="asep">→</span><span class="achip">南大門市場</span></div>
   <ol class="tl">
 <li class="tr move"><span class="tt">14:00</span><span class="tbody"><span class="tn">松山機場 TSA 起飛</span><span class="tnote">飛行時間約 2 小時 25 分</span></span></li>
 <li class="tr move"><span class="tt">17:25</span><span class="tbody"><span class="tn">抵達金浦機場 GMP</span><span class="tnote">入境＋領行李約 30–40 分，先辦 T-money 卡</span></span></li>
-<li class="tr move"><span class="tt">18:15</span><span class="tbody"><span class="tn">機場鐵路 A&#x27;REX → 弘大入口站</span><span class="tnote">金浦機場就在機鐵線上，僅約 10 分鐘</span></span></li>
-<li class="tr stop"><span class="tt">19:00</span>
-<span class="tbody"><span class="tnum">1</span><span class="tn">義大利麵 Camello Yeonnam</span>
-<span class="tag food">美食</span>
-<span class="tnote">延南洞人氣義式餐廳，晚餐時段常需候位</span>
-<details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>弘大入口站（2·機場快線·京義中央線）· 步行約 7 分（537 m）</dd>
-    <dt>營業時間</dt><dd class="unk">營業時間常有變動，建議出發前於 Naver 地圖確認</dd>
-    <dt>地址</dt><dd class="addr">서울특별시 마포구 서교동 연희로1길 57</dd>
-  </dl>
-  <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%84%9C%EA%B5%90%EB%8F%99%20%EC%97%B0%ED%9D%AC%EB%A1%9C1%EA%B8%B8%2057" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
-</details>
-</span></li>
-<li class="tr stop"><span class="tt">21:30</span>
+<li class="tr move"><span class="tt">18:15</span><span class="tbody"><span class="tn">機場鐵路 A&#x27;REX → 首爾站</span><span class="tnote">金浦機場就在機鐵線上，約 20 分鐘直達</span></span></li>
+<li class="tr stop"><span class="tt">18:50</span>
 <span class="tbody"><span class="tnum">H</span><span class="tn">서울역 라움169　Check-in</span>
 <span class="tag stay">住宿</span>
-<span class="tnote">首爾站旁，接下來 4 晚都住這裡</span>
+<span class="tnote">先放行李再出門吃飯，南大門市場步行約 5 分鐘就到</span>
 <details class="stopinfo">
   <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
   <dl class="infogrid">
@@ -672,6 +679,22 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <dt>地址</dt><dd class="addr">서울특별시 중구 회현동 세종대로2나길 23</dd>
   </dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%A4%91%EA%B5%AC%20%ED%9A%8C%ED%98%84%EB%8F%99%20%EC%84%B8%EC%A2%85%EB%8C%80%EB%A1%9C2%EB%82%98%EA%B8%B8%2023" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+
+</details>
+</span></li>
+<li class="tr stop"><span class="tt">19:20</span>
+<span class="tbody"><span class="tnum">2</span><span class="tn">南大門市場</span>
+<span class="tag food">美食</span>
+<span class="tnote">會賢站 5 號出口即達。巷內三家必吃見下方推薦；部分店家 20:30 前後打烊，建議先吃冷麵或갈치조림</span>
+<details class="stopinfo">
+  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
+  <dl class="infogrid">
+    <dt>最近地鐵站</dt><dd>會賢站（4線）· 步行約 1 分（91 m）</dd>
+    <dt>營業時間</dt><dd>市場多數店家 09:00–21:00（週日多休，8/26 為週三不受影響）</dd>
+    <dt>地址</dt><dd class="addr">서울특별시 중구 회현동 남대문시장4길</dd>
+  </dl>
+  <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%A4%91%EA%B5%AC%20%ED%9A%8C%ED%98%84%EB%8F%99%20%EB%82%A8%EB%8C%80%EB%AC%B8%EC%8B%9C%EC%9E%A54%EA%B8%B8" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+<div class="picks"><div class="pkhead">巷內必吃推薦</div><ul><li><span class="pkname">갈치조림 골목（白帶魚燉菜巷）</span><span class="pkdesc">招牌辣燉白帶魚，整條下鍋配白飯。巷內名店：중앙갈치식당、동화식당、희락갈치</span><span class="pkmeta">🕘 多數 08:30–21:00 前後，午餐時段最擠</span><a class="pkmap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%EB%82%A8%EB%8C%80%EB%AC%B8%EC%8B%9C%EC%9E%A54%EA%B8%B8%2018-6" target="_blank" rel="noopener noreferrer">서울 중구 남대문시장4길 18-6 ↗</a></li><li><span class="pkname">부원면옥（釜院麵屋）</span><span class="pkdesc">平壤式冷麵老店，水冷麵、拌冷麵，另有綠豆煎餅（빈대떡）</span><span class="pkmeta">🕘 11:00–20:30，每月第 1、3 個週日公休</span><a class="pkmap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%EB%82%A8%EB%8C%80%EB%AC%B8%EC%8B%9C%EC%9E%A54%EA%B8%B8%2041-6" target="_blank" rel="noopener noreferrer">서울 중구 남대문시장4길 41-6 ↗</a></li><li><span class="pkname">가메골손왕만두（Gamegol 手工大왕餃）</span><span class="pkdesc">現蒸手工大顆餃子，5 顆 ₩5,000 起，可外帶邊逛邊吃</span><span class="pkmeta">🕘 白天營業為主，傍晚易售完，建議先繞過去買</span><a class="pkmap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%EB%82%A8%EB%8C%80%EB%AC%B8%EC%8B%9C%EC%9E%A5%20%EB%82%B4" target="_blank" rel="noopener noreferrer">서울 중구 남대문시장 내 ↗</a></li></ul></div>
 </details>
 </span></li>
   </ol>
@@ -681,6 +704,35 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
   <header class="dhead">
     <span class="dnum">2</span>
     <span class="dmeta"><span class="ddate">DAY 2 · 08.27 THU 週四</span>
+    <span class="dtheme">愛寶樂園 全日遊</span></span>
+    <span class="dcount">1 站</span>
+  </header>
+  <div class="arearoute"><span class="achip">首爾站</span><span class="asep">→</span><span class="achip">龍仁・愛寶樂園</span><span class="asep">→</span><span class="achip">首爾站</span></div>
+  <ol class="tl">
+<li class="tr move"><span class="tt">08:00</span><span class="tbody"><span class="tn">飯店出發</span><span class="tnote">搭接駁巴士，或至江南／蠶室轉高速巴士，車程約 1.5 小時</span></span></li>
+<li class="tr stop offmap"><span class="tt">10:00</span>
+<span class="tbody"><span class="tnum">1</span><span class="tn">愛寶樂園</span>
+<span class="tag sight">景點</span>
+<span class="tnote">T Express 雲霄飛車、Zootopia 動物園區。安排在週四平日，排隊比週末短</span>
+<details class="stopinfo">
+  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
+  <dl class="infogrid">
+    <dt>最近地鐵站</dt><dd>前岱·愛寶樂園站（愛寶線線）· 步行約 4 分（303 m）</dd>
+    <dt>營業時間</dt><dd>約 10:00–21:00；夏季夜間延長營業至 8/16 為止，8/28 適用一般時間，請以官網當日公告為準</dd>
+    <dt>地址</dt><dd class="addr">용인시 처인구 에버랜드로 199</dd>
+  </dl>
+  <a class="navermap" href="https://map.naver.com/p/search/%EC%9A%A9%EC%9D%B8%EC%8B%9C%20%EC%B2%98%EC%9D%B8%EA%B5%AC%20%EC%97%90%EB%B2%84%EB%9E%9C%EB%93%9C%EB%A1%9C%20199" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+
+</details>
+</span></li>
+<li class="tr move"><span class="tt">21:30</span><span class="tbody"><span class="tn">返回首爾市區</span><span class="tnote">回程約 1.5 小時，隔天行程滿，建議早點休息</span></span></li>
+  </ol>
+</section>
+
+<section class="daycard" data-day="3" style="--c:var(--d3)">
+  <header class="dhead">
+    <span class="dnum">3</span>
+    <span class="dmeta"><span class="ddate">DAY 3 · 08.28 FRI 週五</span>
     <span class="dtheme">北村韓屋村・望遠洞・弘大・汝矣島</span></span>
     <span class="dcount">8 站</span>
   </header>
@@ -698,6 +750,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <dt>地址</dt><dd class="addr">서울특별시 종로구 가회동 북촌로11길 5</dd>
   </dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%A2%85%EB%A1%9C%EA%B5%AC%20%EA%B0%80%ED%9A%8C%EB%8F%99%20%EB%B6%81%EC%B4%8C%EB%A1%9C11%EA%B8%B8%205" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+
 </details>
 </span></li>
 <li class="tr stop"><span class="tt">10:15</span>
@@ -712,6 +765,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <dt>地址</dt><dd class="addr">서울특별시 종로구 종로1·2·3·4가동 율곡로 45</dd>
   </dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%A2%85%EB%A1%9C%EA%B5%AC%20%EC%A2%85%EB%A1%9C1%C2%B72%C2%B73%C2%B74%EA%B0%80%EB%8F%99%20%EC%9C%A8%EA%B3%A1%EB%A1%9C%2045" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+
 </details>
 </span></li>
 <li class="tr move"><span class="tt">11:30</span><span class="tbody"><span class="tn">地鐵前往望遠洞</span><span class="tnote">約 30 分鐘，橫跨市區往西</span></span></li>
@@ -727,6 +781,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <dt>地址</dt><dd class="addr">서울특별시 마포구 망원1동 망원로8길</dd>
   </dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EB%A7%9D%EC%9B%901%EB%8F%99%20%EB%A7%9D%EC%9B%90%EB%A1%9C8%EA%B8%B8" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+
 </details>
 </span></li>
 <li class="tr stop"><span class="tt">13:45</span>
@@ -741,6 +796,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <dt>地址</dt><dd class="addr">서울특별시 마포구 망원2동 망원로 1</dd>
   </dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EB%A7%9D%EC%9B%902%EB%8F%99%20%EB%A7%9D%EC%9B%90%EB%A1%9C%201" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+
 </details>
 </span></li>
 <li class="tr stop"><span class="tt">15:00</span>
@@ -755,6 +811,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <dt>地址</dt><dd class="addr">서울특별시 마포구 서교동 독막로7길 48</dd>
   </dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%84%9C%EA%B5%90%EB%8F%99%20%EB%8F%85%EB%A7%89%EB%A1%9C7%EA%B8%B8%2048" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+
 </details>
 </span></li>
 <li class="tr stop"><span class="tt">15:45</span>
@@ -769,6 +826,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <dt>地址</dt><dd class="addr">서울특별시 마포구 연남동 동교로27길</dd>
   </dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%97%B0%EB%82%A8%EB%8F%99%20%EB%8F%99%EA%B5%90%EB%A1%9C27%EA%B8%B8" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+
 </details>
 </span></li>
 <li class="tr stop"><span class="tt">16:30</span>
@@ -783,6 +841,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <dt>地址</dt><dd class="addr">서울특별시 서대문구 신촌동 이화여대길 34</dd>
   </dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%9C%EB%8C%80%EB%AC%B8%EA%B5%AC%20%EC%8B%A0%EC%B4%8C%EB%8F%99%20%EC%9D%B4%ED%99%94%EC%97%AC%EB%8C%80%EA%B8%B8%2034" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+
 </details>
 </span></li>
 <li class="tr move"><span class="tt">18:30</span><span class="tbody"><span class="tn">地鐵前往汝矣島</span><span class="tnote">約 25 分鐘，往南過漢江</span></span></li>
@@ -798,36 +857,9 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <dt>地址</dt><dd class="addr">서울특별시 영등포구 여의동 한강남자전거길</dd>
   </dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%98%81%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EC%97%AC%EC%9D%98%EB%8F%99%20%ED%95%9C%EA%B0%95%EB%82%A8%EC%9E%90%EC%A0%84%EA%B1%B0%EA%B8%B8" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
-</details>
-</span></li>
-  </ol>
-</section>
 
-<section class="daycard" data-day="3" style="--c:var(--d3)">
-  <header class="dhead">
-    <span class="dnum">3</span>
-    <span class="dmeta"><span class="ddate">DAY 3 · 08.28 FRI 週五</span>
-    <span class="dtheme">愛寶樂園 全日遊</span></span>
-    <span class="dcount">1 站</span>
-  </header>
-  <div class="arearoute"><span class="achip">首爾站</span><span class="asep">→</span><span class="achip">龍仁・愛寶樂園</span><span class="asep">→</span><span class="achip">首爾站</span></div>
-  <ol class="tl">
-<li class="tr move"><span class="tt">08:00</span><span class="tbody"><span class="tn">飯店出發</span><span class="tnote">搭接駁巴士，或至江南／蠶室轉高速巴士，車程約 1.5 小時</span></span></li>
-<li class="tr stop offmap"><span class="tt">10:00</span>
-<span class="tbody"><span class="tnum">1</span><span class="tn">愛寶樂園</span>
-<span class="tag sight">景點</span>
-<span class="tnote">T Express 雲霄飛車、Zootopia 動物園區。安排在平日，排隊比週末短</span>
-<details class="stopinfo">
-  <summary><span class="sumico" aria-hidden="true"></span>地鐵站 · 營業時間 · 地址</summary>
-  <dl class="infogrid">
-    <dt>最近地鐵站</dt><dd>前岱·愛寶樂園站（愛寶線線）· 步行約 4 分（303 m）</dd>
-    <dt>營業時間</dt><dd>約 10:00–21:00；夏季夜間延長營業至 8/16 為止，8/28 適用一般時間，請以官網當日公告為準</dd>
-    <dt>地址</dt><dd class="addr">용인시 처인구 에버랜드로 199</dd>
-  </dl>
-  <a class="navermap" href="https://map.naver.com/p/search/%EC%9A%A9%EC%9D%B8%EC%8B%9C%20%EC%B2%98%EC%9D%B8%EA%B5%AC%20%EC%97%90%EB%B2%84%EB%9E%9C%EB%93%9C%EB%A1%9C%20199" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
 </details>
 </span></li>
-<li class="tr move"><span class="tt">21:30</span><span class="tbody"><span class="tn">返回首爾市區</span><span class="tnote">回程約 1.5 小時，隔天行程滿，建議早點休息</span></span></li>
   </ol>
 </section>
 
@@ -852,6 +884,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <dt>地址</dt><dd class="addr">서울 중구 퇴계로75길 15 금호빌딩 1층</dd>
   </dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%ED%87%B4%EA%B3%84%EB%A1%9C75%EA%B8%B8%2015%20%EA%B8%88%ED%98%B8%EB%B9%8C%EB%94%A9%201%EC%B8%B5" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+
 </details>
 </span></li>
 <li class="tr move"><span class="tt">13:00</span><span class="tbody"><span class="tn">地鐵前往聖水洞</span><span class="tnote">約 15 分鐘</span></span></li>
@@ -867,6 +900,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <dt>地址</dt><dd class="addr">서울특별시 성동구 성수2가3동 뚝섬로17길</dd>
   </dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%982%EA%B0%803%EB%8F%99%20%EB%9A%9D%EC%84%AC%EB%A1%9C17%EA%B8%B8" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+
 </details>
 </span></li>
 <li class="tr stop"><span class="tt">14:15</span>
@@ -881,6 +915,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <dt>地址</dt><dd class="addr">서울특별시 성동구 성수2가1동 성수이로7길</dd>
   </dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%982%EA%B0%801%EB%8F%99%20%EC%84%B1%EC%88%98%EC%9D%B4%EB%A1%9C7%EA%B8%B8" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+
 </details>
 </span></li>
 <li class="tr stop"><span class="tt">15:00</span>
@@ -895,6 +930,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <dt>地址</dt><dd class="addr">서울특별시 성동구 성수2가3동 성수이로20길 10</dd>
   </dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%982%EA%B0%803%EB%8F%99%20%EC%84%B1%EC%88%98%EC%9D%B4%EB%A1%9C20%EA%B8%B8%2010" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+
 </details>
 </span></li>
 <li class="tr stop"><span class="tt">15:45</span>
@@ -909,6 +945,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <dt>地址</dt><dd class="addr">서울특별시 성동구 성수2가3동 연무장길 5-5</dd>
   </dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%982%EA%B0%803%EB%8F%99%20%EC%97%B0%EB%AC%B4%EC%9E%A5%EA%B8%B8%205-5" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+
 </details>
 </span></li>
 <li class="tr stop"><span class="tt">16:15</span>
@@ -923,6 +960,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <dt>地址</dt><dd class="addr">서울특별시 성동구 성수2가3동 연무장9길 7</dd>
   </dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%982%EA%B0%803%EB%8F%99%20%EC%97%B0%EB%AC%B4%EC%9E%A59%EA%B8%B8%207" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+
 </details>
 </span></li>
 <li class="tr stop"><span class="tt">18:00</span>
@@ -937,6 +975,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <dt>地址</dt><dd class="addr">서울특별시 성동구 성수2가3동 연무장7길 3-1</dd>
   </dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%982%EA%B0%803%EB%8F%99%20%EC%97%B0%EB%AC%B4%EC%9E%A57%EA%B8%B8%203-1" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+
 </details>
 </span></li>
 <li class="tr move"><span class="tt">19:15</span><span class="tbody"><span class="tn">前往新沙洞林蔭道</span><span class="tnote">約 25 分鐘，往西南</span></span></li>
@@ -952,6 +991,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <dt>地址</dt><dd class="addr">서울특별시 서초구 잠원동 강남대로</dd>
   </dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%9C%EC%B4%88%EA%B5%AC%20%EC%9E%A0%EC%9B%90%EB%8F%99%20%EA%B0%95%EB%82%A8%EB%8C%80%EB%A1%9C" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+
 </details>
 </span></li>
 <li class="tr move"><span class="tt">20:30</span><span class="tbody"><span class="tn">計程車前往盤浦漢江公園</span><span class="tnote">約 15 分鐘</span></span></li>
@@ -967,6 +1007,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <dt>地址</dt><dd class="addr">서울특별시 서초구 반포2동 반포대로</dd>
   </dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%9C%EC%B4%88%EA%B5%AC%20%EB%B0%98%ED%8F%AC2%EB%8F%99%20%EB%B0%98%ED%8F%AC%EB%8C%80%EB%A1%9C" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+
 </details>
 </span></li>
   </ol>
@@ -993,6 +1034,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <dt>地址</dt><dd class="addr">서울특별시 중구 명동 퇴계로 127</dd>
   </dl>
   <a class="navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%A4%91%EA%B5%AC%20%EB%AA%85%EB%8F%99%20%ED%87%B4%EA%B3%84%EB%A1%9C%20127" target="_blank" rel="noopener noreferrer">在 Naver 地圖開啟 ↗</a>
+
 </details>
 </span></li>
 <li class="tr move"><span class="tt">09:00</span><span class="tbody"><span class="tn">首爾站搭 A&#x27;REX 前往仁川</span><span class="tnote">車程約 45–60 分鐘</span></span></li>
@@ -1006,8 +1048,10 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <h2>行前提醒</h2>
     <ul>
       <li><strong>住宿固定不換：</strong>서울역 라움169 在首爾站／會賢站一帶，緊鄰明洞，4 晚都住這裡，每天從同一個點出發、回同一個點。</li>
+      <li><strong>南大門市場：</strong>就在飯店與會賢站旁，第一天落地放完行李走過去約 5 分鐘。部分店家 20:30 前後打烊，建議先吃再逛。<br>
+      </li>
       <li><strong>兩間「烤黨」是不同分店：</strong>Day 4 下午的聖水店（第 4 站）與晚上的新沙店（第 8 站），別走錯。</li>
-      <li><strong>愛寶樂園：</strong>建議先在官網或 App 購票，並預約熱門設施的 Smart Pass，可省下大量排隊時間。刻意排在週五，人潮比週末少。</li>
+      <li><strong>愛寶樂園：</strong>建議先在官網或 App 購票，並預約熱門設施的 Smart Pass，可省下大量排隊時間。刻意排在週四平日，人潮比週末少。</li>
       <li><strong>盤浦噴泉：</strong>僅 4–10 月開放，7–8 月場次為 19:30／20:00／20:30／21:00／21:30，雨天、強風或節電政策都可能取消，出發前一天再確認。</li>
       <li><strong>交通卡：</strong>全程用 T-money 或氣候同行卡搭地鐵與 A'REX，金浦、仁川機場都設有售卡櫃檯。</li>
       <li><strong>回程抓時間：</strong>12:45 的班機，最晚 09:15 前要離開飯店，仁川 T2 國際線建議提前 2.5 小時抵達。</li>

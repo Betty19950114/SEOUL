@@ -230,13 +230,13 @@
     background: var(--card); border: 1px solid var(--line-2); border-radius: 12px;
     padding: 10px 13px; box-shadow: var(--shadow-s);
   }
-  :root[data-day="3"] .inset {
-    border-color: var(--d3);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--d3) 22%, transparent);
+  :root[data-day="2"] .inset {
+    border-color: var(--d2);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--d2) 22%, transparent);
   }
-  .inset .ih { display: flex; align-items: center; gap: 7px; font-weight: 700; font-size: 13px; color: var(--d3); }
+  .inset .ih { display: flex; align-items: center; gap: 7px; font-weight: 700; font-size: 13px; color: var(--d2); }
   .inset .ib {
-    width: 19px; height: 19px; border-radius: 50%; background: var(--d3); color: var(--pin-ink);
+    width: 19px; height: 19px; border-radius: 50%; background: var(--d2); color: var(--pin-ink);
     font-family: ui-monospace, monospace; font-size: 11px; font-weight: 700;
     display: flex; align-items: center; justify-content: center; flex: none;
   }
@@ -414,6 +414,27 @@
   .hero .themebtn:hover { background: rgba(255,255,255,.24); border-color: #fff; }
   .hero .themebtn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 
+  /* ---------- must-eat picks inside a stop ---------- */
+  .picks {
+    margin-top: 10px; padding: 11px 13px;
+    background: var(--brand-soft); border: 1px solid var(--line-2);
+    border-left: 3px solid var(--brand); border-radius: 10px;
+  }
+  .pkhead {
+    font-size: 11.5px; font-weight: 700; letter-spacing: .04em;
+    color: var(--brand); margin-bottom: 8px;
+  }
+  .picks ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .picks li { display: flex; flex-direction: column; gap: 2px; }
+  .pkname { font-size: 13.5px; font-weight: 700; color: var(--ink); }
+  .pkdesc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.5; }
+  .pkmeta { font-size: 11.5px; color: var(--ink-faint); }
+  .pkmap {
+    font-size: 11.5px; color: var(--brand); text-decoration: none; width: fit-content;
+    border-bottom: 1px solid color-mix(in srgb, var(--brand) 35%, transparent);
+  }
+  .pkmap:hover { border-bottom-color: var(--brand); }
+
 
   /* map.html only */
   .lgroups { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 30px; margin-top: 26px; }
@@ -481,11 +502,11 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 
 
 <g class="regionboxes">
-<rect x="118.4" y="126.1" width="80.6" height="113.1" rx="16" class="regionbox"/>
+<rect x="118.4" y="134.2" width="57.8" height="105.0" rx="16" class="regionbox"/>
 <rect x="15.0" y="155.3" width="93.5" height="52.0" rx="16" class="regionbox"/>
 <rect x="235.4" y="141.6" width="52.0" height="52.0" rx="16" class="regionbox"/>
 <rect x="408.3" y="19.4" width="55.0" height="79.9" rx="16" class="regionbox"/>
-<rect x="367.9" y="128.6" width="99.6" height="67.5" rx="16" class="regionbox"/>
+<rect x="363.0" y="128.6" width="104.5" height="70.3" rx="16" class="regionbox"/>
 <rect x="184.7" y="310.6" width="52.0" height="52.0" rx="16" class="regionbox"/>
 <rect x="549.3" y="101.3" width="52.0" height="52.0" rx="16" class="regionbox"/>
 <rect x="702.3" y="210.2" width="107.6" height="79.8" rx="16" class="regionbox"/>
@@ -493,19 +514,19 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 <rect x="472.4" y="385.4" width="52.0" height="52.0" rx="16" class="regionbox"/>
 </g>
 <g class="dayg" data-day="1">
-<polyline points="173.0,152.1 393.9,170.1" fill="none" stroke="var(--d1)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-<g class="pin"><circle cx="173.0" cy="152.1" r="11.5" fill="var(--d1)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="173.0" y="156.1" text-anchor="middle" class="pnum">1</text></g>
+<polyline points="389.0,172.9 409.0,161.6" fill="none" stroke="var(--d1)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+<g class="pin"><circle cx="409.0" cy="161.6" r="11.5" fill="var(--d1)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="409.0" y="165.6" text-anchor="middle" class="pnum">2</text></g>
 </g>
-<g class="dayg" data-day="2">
-<polyline points="437.3,45.4 434.3,73.3 82.5,181.3 41.0,181.3 144.4,213.2 150.2,160.2 261.4,167.6 210.7,336.6" fill="none" stroke="var(--d2)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-<g class="pin"><circle cx="437.3" cy="45.4" r="11.5" fill="var(--d2)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="437.3" y="49.4" text-anchor="middle" class="pnum">1</text></g>
-<g class="pin"><circle cx="434.3" cy="73.3" r="11.5" fill="var(--d2)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="434.3" y="77.3" text-anchor="middle" class="pnum">2</text></g>
-<g class="pin"><circle cx="82.5" cy="181.3" r="11.5" fill="var(--d2)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="82.5" y="185.3" text-anchor="middle" class="pnum">3</text></g>
-<g class="pin"><circle cx="41.0" cy="181.3" r="11.5" fill="var(--d2)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="41.0" y="185.3" text-anchor="middle" class="pnum">4</text></g>
-<g class="pin"><circle cx="144.4" cy="213.2" r="11.5" fill="var(--d2)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="144.4" y="217.2" text-anchor="middle" class="pnum">5</text></g>
-<g class="pin"><circle cx="150.2" cy="160.2" r="11.5" fill="var(--d2)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="150.2" y="164.2" text-anchor="middle" class="pnum">6</text></g>
-<g class="pin"><circle cx="261.4" cy="167.6" r="11.5" fill="var(--d2)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="261.4" y="171.6" text-anchor="middle" class="pnum">7</text></g>
-<g class="pin"><circle cx="210.7" cy="336.6" r="11.5" fill="var(--d2)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="210.7" y="340.6" text-anchor="middle" class="pnum">8</text></g>
+<g class="dayg" data-day="3">
+<polyline points="437.3,45.4 434.3,73.3 82.5,181.3 41.0,181.3 144.4,213.2 150.2,160.2 261.4,167.6 210.7,336.6" fill="none" stroke="var(--d3)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+<g class="pin"><circle cx="437.3" cy="45.4" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="437.3" y="49.4" text-anchor="middle" class="pnum">1</text></g>
+<g class="pin"><circle cx="434.3" cy="73.3" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="434.3" y="77.3" text-anchor="middle" class="pnum">2</text></g>
+<g class="pin"><circle cx="82.5" cy="181.3" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="82.5" y="185.3" text-anchor="middle" class="pnum">3</text></g>
+<g class="pin"><circle cx="41.0" cy="181.3" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="41.0" y="185.3" text-anchor="middle" class="pnum">4</text></g>
+<g class="pin"><circle cx="144.4" cy="213.2" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="144.4" y="217.2" text-anchor="middle" class="pnum">5</text></g>
+<g class="pin"><circle cx="150.2" cy="160.2" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="150.2" y="164.2" text-anchor="middle" class="pnum">6</text></g>
+<g class="pin"><circle cx="261.4" cy="167.6" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="261.4" y="171.6" text-anchor="middle" class="pnum">7</text></g>
+<g class="pin"><circle cx="210.7" cy="336.6" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="210.7" y="340.6" text-anchor="middle" class="pnum">8</text></g>
 </g>
 <g class="dayg" data-day="4">
 <polyline points="575.3,127.3 783.9,264.0 732.3,263.6 777.2,242.0 728.3,241.0 754.9,259.2 755.0,236.2 591.2,390.1 498.4,411.4" fill="none" stroke="var(--d4)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -520,16 +541,16 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 <g class="pin"><circle cx="498.4" cy="411.4" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="498.4" y="415.4" text-anchor="middle" class="pnum">9</text></g>
 </g>
 <g class="dayg" data-day="5">
-<polyline points="393.9,170.1 441.5,154.6" fill="none" stroke="var(--d5)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="389.0,172.9 441.5,154.6" fill="none" stroke="var(--d5)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="pin"><circle cx="441.5" cy="154.6" r="11.5" fill="var(--d5)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="441.5" y="158.6" text-anchor="middle" class="pnum">1</text></g>
 </g>
-<g class="anchor"><rect x="383.4" y="159.6" width="21" height="21" rx="5" transform="rotate(45 393.9 170.1)" fill="var(--ink)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="393.9" y="174.1" text-anchor="middle" class="pnum anchor-t">H</text><text x="393.9" y="197.1" text-anchor="middle" class="anchor-l">首爾站・住宿</text></g>
+<g class="anchor"><rect x="378.5" y="162.4" width="21" height="21" rx="5" transform="rotate(45 389.0 172.9)" fill="var(--ink)" stroke="var(--mapbg)" stroke-width="2.5"/><text x="389.0" y="176.9" text-anchor="middle" class="pnum anchor-t">H</text><text x="389.0" y="199.9" text-anchor="middle" class="anchor-l">首爾站・住宿</text></g>
 <g class="regionlabels">
-<g class="region"><rect x="118.4" y="107.1" width="83" height="18" rx="9" class="regionchip"/><text x="125.4" y="120.1" class="regiontext">弘大・延南洞</text></g>
+<g class="region"><rect x="118.4" y="115.2" width="83" height="18" rx="9" class="regionchip"/><text x="125.4" y="128.2" class="regiontext">弘大・延南洞</text></g>
 <g class="region"><rect x="15.0" y="136.3" width="48" height="18" rx="9" class="regionchip"/><text x="22.0" y="149.3" class="regiontext">望遠洞</text></g>
 <g class="region"><rect x="235.4" y="122.6" width="37" height="18" rx="9" class="regionchip"/><text x="242.4" y="135.6" class="regiontext">梨大</text></g>
 <g class="region"><rect x="408.3" y="0.4" width="72" height="18" rx="9" class="regionchip"/><text x="415.3" y="13.4" class="regiontext">北村・安國</text></g>
-<g class="region"><rect x="367.9" y="109.6" width="83" height="18" rx="9" class="regionchip"/><text x="374.9" y="122.6" class="regiontext">首爾站・明洞</text></g>
+<g class="region"><rect x="363.0" y="109.6" width="83" height="18" rx="9" class="regionchip"/><text x="370.0" y="122.6" class="regiontext">首爾站・明洞</text></g>
 <g class="region"><rect x="184.7" y="291.6" width="48" height="18" rx="9" class="regionchip"/><text x="191.7" y="304.6" class="regiontext">汝矣島</text></g>
 <g class="region"><rect x="549.3" y="82.3" width="48" height="18" rx="9" class="regionchip"/><text x="556.3" y="95.3" class="regiontext">新堂洞</text></g>
 <g class="region"><rect x="702.3" y="191.2" width="48" height="18" rx="9" class="regionchip"/><text x="709.3" y="204.2" class="regiontext">聖水洞</text></g>
@@ -542,7 +563,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     </div>
 
     <div class="inset">
-      <div class="ih"><span class="ib">1</span>DAY 3 · 愛寶樂園</div>
+      <div class="ih"><span class="ib">1</span>DAY 2 · 愛寶樂園</div>
       <p>位於龍仁市，市區東南方約 40 公里（車程約 90 分鐘）——超出地圖範圍，全天往返。</p>
     </div>
   </figure>
@@ -551,9 +572,9 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
   </p>
 
   <div class="lgroups">
-<div class="lgroup" style="--c:var(--d1)"><h3><span class="lbar"></span>DAY 1 · 抵達首爾・延南洞</h3><ul><li><span class="lnum">1</span><span class="ltime">19:00</span><span class="lname">義大利麵 Camello Yeonnam<span class="lstn">弘大入口站 · 7分</span></span><span class="tag food">美食</span></li><li><span class="lnum">H</span><span class="ltime">21:30</span><span class="lname">서울역 라움169　Check-in<span class="lstn">會賢站 · 4分</span></span><span class="tag stay">住宿</span></li></ul></div>
-<div class="lgroup" style="--c:var(--d2)"><h3><span class="lbar"></span>DAY 2 · 北村韓屋村・望遠洞・弘大・汝矣島</h3><ul><li><span class="lnum">1</span><span class="ltime">09:00</span><span class="lname">北村韓屋村<span class="lstn">安國站 · 7分</span></span><span class="tag sight">景點</span></li><li><span class="lnum">2</span><span class="ltime">10:15</span><span class="lname">Artist Bakery<span class="lstn">安國站 · 2分</span></span><span class="tag cafe">咖啡・甜點</span></li><li><span class="lnum">3</span><span class="ltime">12:15</span><span class="lname">望遠市場<span class="lstn">望遠站 · 5分</span></span><span class="tag food">美食</span></li><li><span class="lnum">4</span><span class="ltime">13:45</span><span class="lname">漢江貓咪店<span class="lstn">麻浦區廳站 · 14分</span></span><span class="tag cafe">咖啡・甜點</span></li><li><span class="lnum">5</span><span class="ltime">15:00</span><span class="lname">AEAE 弘大店<span class="lstn">上水站 · 4分</span></span><span class="tag shop">購物</span></li><li><span class="lnum">6</span><span class="ltime">15:45</span><span class="lname">Compose Coffee 弘大<span class="lstn">弘大入口站 · 5分</span></span><span class="tag cafe">咖啡・甜點</span></li><li><span class="lnum">7</span><span class="ltime">16:30</span><span class="lname">星巴克 梨大店<span class="lstn">梨大站 · 2分</span></span><span class="tag cafe">咖啡・甜點</span></li><li><span class="lnum">8</span><span class="ltime">19:00</span><span class="lname">汝矣島漢江公園<span class="lstn">汝矣渡口站 · 2分</span></span><span class="tag sight">景點</span></li></ul></div>
-<div class="lgroup" style="--c:var(--d3)"><h3><span class="lbar"></span>DAY 3 · 愛寶樂園 全日遊</h3><ul><li><span class="lnum">1</span><span class="ltime">10:00</span><span class="lname">愛寶樂園 <span class="lo">（地圖外）</span><span class="lstn">前岱·愛寶樂園站 · 4分</span></span><span class="tag sight">景點</span></li></ul></div>
+<div class="lgroup" style="--c:var(--d1)"><h3><span class="lbar"></span>DAY 1 · 抵達首爾・南大門市場</h3><ul><li><span class="lnum">H</span><span class="ltime">18:50</span><span class="lname">서울역 라움169　Check-in<span class="lstn">會賢站 · 4分</span></span><span class="tag stay">住宿</span></li><li><span class="lnum">2</span><span class="ltime">19:20</span><span class="lname">南大門市場<span class="lstn">會賢站 · 1分</span></span><span class="tag food">美食</span></li></ul></div>
+<div class="lgroup" style="--c:var(--d2)"><h3><span class="lbar"></span>DAY 2 · 愛寶樂園 全日遊</h3><ul><li><span class="lnum">1</span><span class="ltime">10:00</span><span class="lname">愛寶樂園 <span class="lo">（地圖外）</span><span class="lstn">前岱·愛寶樂園站 · 4分</span></span><span class="tag sight">景點</span></li></ul></div>
+<div class="lgroup" style="--c:var(--d3)"><h3><span class="lbar"></span>DAY 3 · 北村韓屋村・望遠洞・弘大・汝矣島</h3><ul><li><span class="lnum">1</span><span class="ltime">09:00</span><span class="lname">北村韓屋村<span class="lstn">安國站 · 7分</span></span><span class="tag sight">景點</span></li><li><span class="lnum">2</span><span class="ltime">10:15</span><span class="lname">Artist Bakery<span class="lstn">安國站 · 2分</span></span><span class="tag cafe">咖啡・甜點</span></li><li><span class="lnum">3</span><span class="ltime">12:15</span><span class="lname">望遠市場<span class="lstn">望遠站 · 5分</span></span><span class="tag food">美食</span></li><li><span class="lnum">4</span><span class="ltime">13:45</span><span class="lname">漢江貓咪店<span class="lstn">麻浦區廳站 · 14分</span></span><span class="tag cafe">咖啡・甜點</span></li><li><span class="lnum">5</span><span class="ltime">15:00</span><span class="lname">AEAE 弘大店<span class="lstn">上水站 · 4分</span></span><span class="tag shop">購物</span></li><li><span class="lnum">6</span><span class="ltime">15:45</span><span class="lname">Compose Coffee 弘大<span class="lstn">弘大入口站 · 5分</span></span><span class="tag cafe">咖啡・甜點</span></li><li><span class="lnum">7</span><span class="ltime">16:30</span><span class="lname">星巴克 梨大店<span class="lstn">梨大站 · 2分</span></span><span class="tag cafe">咖啡・甜點</span></li><li><span class="lnum">8</span><span class="ltime">19:00</span><span class="lname">汝矣島漢江公園<span class="lstn">汝矣渡口站 · 2分</span></span><span class="tag sight">景點</span></li></ul></div>
 <div class="lgroup" style="--c:var(--d4)"><h3><span class="lbar"></span>DAY 4 · 新堂洞・聖水洞・新沙洞・盤浦</h3><ul><li><span class="lnum">1</span><span class="ltime">11:30</span><span class="lname">獵奇辣炒年糕 신당본점<span class="lstn">新堂站 · 3分</span></span><span class="tag food">美食</span></li><li><span class="lnum">2</span><span class="ltime">13:30</span><span class="lname">ept鞋子 聖水洞<span class="lstn">聖水站 · 8分</span></span><span class="tag shop">購物</span></li><li><span class="lnum">3</span><span class="ltime">14:15</span><span class="lname">Human Made 服飾<span class="lstn">聖水站 · 4分</span></span><span class="tag shop">購物</span></li><li><span class="lnum">4</span><span class="ltime">15:00</span><span class="lname">烤黨 Ggupdang 聖水店<span class="lstn">聖水站 · 3分</span></span><span class="tag food">美食</span></li><li><span class="lnum">5</span><span class="ltime">15:45</span><span class="lname">蛋塔 Meitawang Egg Tart<span class="lstn">纛島站 · 6分</span></span><span class="tag cafe">咖啡・甜點</span></li><li><span class="lnum">6</span><span class="ltime">16:15</span><span class="lname">冰淇淋 Maman Gelato<span class="lstn">聖水站 · 3分</span></span><span class="tag cafe">咖啡・甜點</span></li><li><span class="lnum">7</span><span class="ltime">18:00</span><span class="lname">祖傳三代馬鈴薯排骨湯<span class="lstn">聖水站 · 3分</span></span><span class="tag food">美食</span></li><li><span class="lnum">8</span><span class="ltime">19:45</span><span class="lname">烤黨 新沙店<span class="lstn">新沙站 · 2分</span></span><span class="tag food">美食</span></li><li><span class="lnum">9</span><span class="ltime">21:00</span><span class="lname">盤浦大橋 月光彩虹噴泉<span class="lstn">高速巴士客運站站 · 14分</span></span><span class="tag sight">景點</span></li></ul></div>
 <div class="lgroup" style="--c:var(--d5)"><h3><span class="lbar"></span>DAY 5 · 明洞早晨・賦歸</h3><ul><li><span class="lnum">1</span><span class="ltime">07:30</span><span class="lname">明洞商圈 散步採買<span class="lstn">明洞站 · 1分</span></span><span class="tag sight">景點</span></li></ul></div>
   </div>

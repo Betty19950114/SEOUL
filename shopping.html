@@ -230,13 +230,13 @@
     background: var(--card); border: 1px solid var(--line-2); border-radius: 12px;
     padding: 10px 13px; box-shadow: var(--shadow-s);
   }
-  :root[data-day="3"] .inset {
-    border-color: var(--d3);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--d3) 22%, transparent);
+  :root[data-day="2"] .inset {
+    border-color: var(--d2);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--d2) 22%, transparent);
   }
-  .inset .ih { display: flex; align-items: center; gap: 7px; font-weight: 700; font-size: 13px; color: var(--d3); }
+  .inset .ih { display: flex; align-items: center; gap: 7px; font-weight: 700; font-size: 13px; color: var(--d2); }
   .inset .ib {
-    width: 19px; height: 19px; border-radius: 50%; background: var(--d3); color: var(--pin-ink);
+    width: 19px; height: 19px; border-radius: 50%; background: var(--d2); color: var(--pin-ink);
     font-family: ui-monospace, monospace; font-size: 11px; font-weight: 700;
     display: flex; align-items: center; justify-content: center; flex: none;
   }
@@ -413,6 +413,27 @@
   }
   .hero .themebtn:hover { background: rgba(255,255,255,.24); border-color: #fff; }
   .hero .themebtn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+  /* ---------- must-eat picks inside a stop ---------- */
+  .picks {
+    margin-top: 10px; padding: 11px 13px;
+    background: var(--brand-soft); border: 1px solid var(--line-2);
+    border-left: 3px solid var(--brand); border-radius: 10px;
+  }
+  .pkhead {
+    font-size: 11.5px; font-weight: 700; letter-spacing: .04em;
+    color: var(--brand); margin-bottom: 8px;
+  }
+  .picks ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .picks li { display: flex; flex-direction: column; gap: 2px; }
+  .pkname { font-size: 13.5px; font-weight: 700; color: var(--ink); }
+  .pkdesc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.5; }
+  .pkmeta { font-size: 11.5px; color: var(--ink-faint); }
+  .pkmap {
+    font-size: 11.5px; color: var(--brand); text-decoration: none; width: fit-content;
+    border-bottom: 1px solid color-mix(in srgb, var(--brand) 35%, transparent);
+  }
+  .pkmap:hover { border-bottom-color: var(--brand); }
 
   /* ---------- shopping list ---------- */
   .toolbar {
