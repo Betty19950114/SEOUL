@@ -445,12 +445,8 @@
     padding: 2px 7px; border-radius: 5px; flex: none;
     color: var(--ink-faint); background: var(--card-2); border: 1px solid var(--line);
   }
-  .tr.move.subway .mbadge { color: var(--brand); background: var(--brand-soft); border-color: var(--line-2); }
-  .tr.move.subway .tn { color: var(--ink); font-weight: 600; }
-  .tr.move.subway .tbody::before {
-    background: var(--brand); border-color: var(--brand); opacity: 1;
-    width: 9px; height: 9px; left: 8px; top: 9px;
-  }
+  .tr.move.subway .tbody::before { display: none; }   /* 地鐵段不顯示圓點 */
+  .tr.move.subway .mbadge { font-size: 10px; padding: 1px 6px; }
   .tr.move.bus .mbadge { color: var(--d4); background: color-mix(in srgb, var(--d4) 14%, transparent); border-color: transparent; }
   .tr.move.bus .tn { color: var(--ink); font-weight: 600; }
   .tr.move.taxi .mbadge { color: var(--d3); background: color-mix(in srgb, var(--d3) 14%, transparent); border-color: transparent; }
@@ -718,3 +714,13 @@
     .tn.nudge { animation: none; outline: 2px solid var(--pick); outline-offset: 3px; border-radius: 4px; }
     .stopinfo.nudge { animation: none; }
   }
+
+  /* 觸控裝置：左右滑動切換天數的提示 */
+  .swipehint {
+    display: none; text-align: center; font-size: 11.5px; color: var(--ink-faint);
+    padding: 8px 0 2px; letter-spacing: .02em;
+  }
+  @media (hover: none) and (pointer: coarse) {
+    :root:not([data-day="all"]) .swipehint { display: block; }
+  }
+  .cards { touch-action: pan-y; }

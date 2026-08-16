@@ -107,6 +107,7 @@ __METROSVG__
     <div class="metrolegend">__METROLEGEND__</div>
   </figure>
 
+  <p class="swipehint">← 左右滑動可切換天數 →</p>
   <div class="cards" id="cards">
 __CARDS__
   </div>
@@ -133,6 +134,8 @@ __CARDS__
     document.documentElement.setAttribute('data-day', d);
     tabs.forEach(function (t) { t.setAttribute('aria-pressed', String(t.dataset.day === d)); });
     cards.forEach(function (c) { c.hidden = !(d === 'all' || c.dataset.day === d); });
+    /* 換天時把已展開的說明收起來 */
+    document.querySelectorAll('.stopinfo[open]').forEach(function (x) { x.open = false; });
     groups.forEach(function (g) { g.classList.toggle('dim', !(d === 'all' || g.dataset.day === d)); });
     flows.forEach(function (f) { f.hidden = !(d === 'all' || f.dataset.day === d); });
   }
@@ -374,5 +377,40 @@ __CARDS__
     if (typeof window.__gotoStop === 'function') window.__gotoStop(lastStop);
     fab.dataset.show = '0';
   });
+})();
+</script>
+
+<script>
+/* 手指左右滑切換天數 */
+(function () {
+  var box = document.getElementById('cards');
+  if (!box) return;
+  var x0 = 0, y0 = 0, on = false;
+  box.addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1) { on = false; return; }
+    x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; on = true;
+  }, { passive: true });
+  box.addEventListener('touchend', function (e) {
+    if (!on) return; on = false;
+    var t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0;
+    if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;  /* 需明顯橫向 */
+    var cur = document.documentElement.getAttribute('data-day');
+    if (cur === 'all') return;                       /* 全部檢視時不攔截 */
+    var n = parseInt(cur, 10) + (dx < 0 ? 1 : -1);
+    if (n < 1 || n > 5) return;
+    var tab = document.querySelector('.tab[data-day="' + n + '"]');
+    if (!tab) return;
+    if (typeof window.__setDay === 'function') window.__setDay(String(n));
+    document.querySelectorAll('.tab').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b === tab));
+    });
+    var bar = document.querySelector('.tabsbar');
+    var off = (bar ? bar.getBoundingClientRect().height : 0) + 14;
+    var card = document.querySelector('.daycard[data-day="' + n + '"]');
+    if (card) window.scrollTo({ top: card.getBoundingClientRect().top + window.scrollY - off,
+                                behavior: 'smooth' });
+    tab.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+    if (navigator.vibrate) { try { navigator.vibrate(20); } catch (err) {} }
+  }, { passive: true });
 })();
 </script>

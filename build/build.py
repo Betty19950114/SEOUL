@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """由 data.py 產生行程頁的各個片段（地圖 SVG、地鐵圖、每日卡片、圖例、快速尋找）。"""
 import math, html, json, urllib.parse
-from data import (PLACES, STATION, CAT, MODE, DAYS, REGIONS, ASK,
+from data import (PLACES, STATION, CAT, MODE, DAYS, REGIONS, ASK, EXIT,
                   METRO_STATIONS, METRO_LINES, LINE_COLOUR)
 
 def esc(s): return html.escape(str(s), quote=True)
@@ -19,7 +19,13 @@ def ordlabel(n):
 
 def station_of(key):
     zh, line, m = STATION[key]
-    return f'{zh}站（{line} 線）· 步行約 {max(1, round(m/75))} 分（{m} m）'
+    if m < 0:                       # 非步行可達（愛寶樂園需轉接駁巴士）
+        return f'{zh}站（{line} 線）· 需再轉免費接駁巴士，非步行可達'
+    ex = EXIT.get(key)
+    out = f'{zh}站（{line} 線）'
+    if ex:
+        out += f' {ex} 號出口'
+    return out + f' · 步行約 {max(1, round(m/75))} 分（{m} m）'
 
 # ---------------- projection（地圖與地鐵圖共用，切換時位置一致） ----------------
 lonMin, lonMax = 126.888, 127.072
