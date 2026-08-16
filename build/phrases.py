@@ -5,16 +5,6 @@ def esc(s): return html.escape(str(s), quote=True)
 
 # (中文, 韓文, 羅馬拼音, 備註)
 SECTIONS = [
- ("聽不懂時", "basic", [
-   ("請說慢一點", "천천히 말해 주세요", "cheon-cheon-hi mal-hae ju-se-yo", "聽得懂但跟不上速度時最好用"),
-   ("可以再說一次嗎？", "다시 한번 말해 주시겠어요?", "da-si han-beon mal-hae ju-si-ge-sseo-yo?", ""),
-   ("可以寫下來嗎？", "좀 써 주시겠어요?", "jom sseo ju-si-ge-sseo-yo?", "數字、時間聽不清時直接請對方寫"),
-   ("這個怎麼唸？", "이거 어떻게 읽어요?", "i-geo eo-tteo-ke il-geo-yo?", "看得懂諺文但不確定發音時"),
-   ("這是什麼？", "이게 뭐예요?", "i-ge mwo-ye-yo?", "指著小菜或食材問"),
-   ("有中文或英文菜單嗎？", "중국어나 영어 메뉴판 있어요?", "jung-gu-geo-na yeong-eo me-nyu-pan i-sseo-yo?", ""),
-   ("洗手間在哪裡？", "화장실 어디예요?", "hwa-jang-sil eo-di-ye-yo?", ""),
-   ("可以幫我們拍張合照嗎？", "저희 사진 좀 찍어 주시겠어요?", "jeo-hui sa-jin jom jji-geo ju-si-ge-sseo-yo?", "저희＝我們，兩人同行用這個"),
- ]),
  ("點餐・用餐", "food", [
    ("兩位", "두 명이요", "du myeong-i-yo", "進店時先講這句"),
    ("請給我這個（指菜單）", "이거 주세요", "i-geo ju-se-yo", "配合手指最好用"),

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """由 data.py 產生行程頁的各個片段（地圖 SVG、地鐵圖、每日卡片、圖例、快速尋找）。"""
 import math, html, json, urllib.parse
-from data import (PLACES, STATION, CAT, MODE, DAYS, REGIONS, ASK, EXIT,
+from data import (PLACES, STATION, CAT, MODE, DAYS, REGIONS, ASK, EXIT, BRIEF,
                   METRO_STATIONS, METRO_LINES, LINE_COLOUR)
 
 def esc(s): return html.escape(str(s), quote=True)
@@ -309,6 +309,14 @@ for d in sorted(DAYS):
     <span class="dtheme">{esc(D["theme"])}</span></span>
     <span class="dcount">{sc} 站</span>
   </header>
+  <div class="daybrief" data-kind="{BRIEF[d]["cat"]}">
+    <span class="dbtype">{esc(BRIEF[d]["type"])}</span>
+    <dl class="dbgrid">
+      <dt>穿搭</dt><dd>{esc(BRIEF[d]["wear"])}</dd>
+      <dt>背包</dt><dd>{esc(BRIEF[d]["bag"])}</dd>
+      <dt>購物袋</dt><dd>{esc(BRIEF[d]["tote"])}</dd>
+    </dl>
+  </div>
   <div class="arearoute">{chips}</div>
   <ol class="tl">
 {chr(10).join(rows)}

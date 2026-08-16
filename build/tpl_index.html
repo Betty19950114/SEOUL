@@ -371,6 +371,18 @@ __CARDS__
     });
   });
 
+  /* 換到別天時，返回鈕就沒有意義了，自動收起 */
+  new MutationObserver(function () {
+    if (!lastStop || fab.dataset.show !== '1') return;
+    var row = document.getElementById(lastStop);
+    var dc  = row && row.closest('.daycard');
+    var cur = document.documentElement.getAttribute('data-day');
+    if (dc && cur !== 'all' && dc.dataset.day !== cur) {
+      fab.dataset.show = '0';
+      lastStop = null;
+    }
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-day'] });
+
   fab.addEventListener('click', function () {
     var row = lastStop && document.getElementById(lastStop);
     if (!row) { fab.dataset.show = '0'; return; }

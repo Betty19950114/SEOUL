@@ -721,3 +721,28 @@
   }
   .tr.move.back .tn { color: var(--ink-soft); font-weight: 600; }
   .tr.move.back .tt { color: transparent; }        /* 無時間點，保留對齊 */
+
+  /* ---------- 每日行程摘要 ---------- */
+  .daybrief {
+    margin: 0 20px 14px; padding: 12px 14px;
+    background: var(--card-2); border: 1px solid var(--line);
+    border-left: 3px solid var(--c); border-radius: 11px;
+  }
+  .dbtype {
+    display: inline-block; font-size: 12.5px; font-weight: 700; letter-spacing: .04em;
+    color: var(--pin-ink); background: var(--c);
+    border-radius: 999px; padding: 3px 12px; margin-bottom: 9px;
+  }
+  .dbgrid {
+    display: grid; grid-template-columns: max-content 1fr; gap: 5px 12px; margin: 0;
+    font-size: 12.5px;
+  }
+  .dbgrid dt { color: var(--ink-faint); font-weight: 650; white-space: nowrap; }
+  .dbgrid dd { margin: 0; color: var(--ink-soft); line-height: 1.6;
+               text-wrap: pretty; overflow-wrap: break-word; line-break: strict; }
+  @media (max-width: 720px) {
+    .daybrief { margin: 0 16px 12px; padding: 11px 12px; }
+    .dbgrid { grid-template-columns: 1fr; gap: 2px; }
+    .dbgrid dt { margin-top: 7px; }
+    .dbgrid dt:first-child { margin-top: 0; }
+  }
