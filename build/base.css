@@ -116,7 +116,10 @@
       linear-gradient(180deg, var(--brand-soft), transparent);
     border-bottom: 1px solid var(--line);
   }
-  .topbar { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .topbar { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: nowrap; }
+  /* 窄螢幕讓左側標題先換行，主題鈕留在第一行右上角 */
+  .topbar > :first-child { flex: 1 1 auto; min-width: 0; }
+  .topbar > .navset { flex: 0 0 auto; }
   .brand { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
   .brand h1 {
     font-family: 'BigShoulders', -apple-system, sans-serif; font-weight: 800;
