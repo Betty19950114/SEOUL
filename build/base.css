@@ -710,3 +710,11 @@
   }
 
   .cards { touch-action: pan-y; }
+
+  /* 每日最後一列：回飯店的方式 */
+  .tr.move.back { padding-top: 4px; }
+  .tr.move.back .mbadge {
+    color: var(--brand); background: var(--brand-soft); border-color: var(--line-2);
+  }
+  .tr.move.back .tn { color: var(--ink-soft); font-weight: 600; }
+  .tr.move.back .tt { color: transparent; }        /* 無時間點，保留對齊 */
