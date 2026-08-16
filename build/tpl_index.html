@@ -428,7 +428,7 @@ __CARDS__
 </script>
 
 <script>
-/* 有裝 Naver 地圖 App 就直接開 App，未安裝則退回網頁版 */
+/* 有裝 Naver 地圖 App 就直接交給 App；全程不開新分頁 */
 (function () {
   var touch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
   if (!touch) return;
@@ -439,13 +439,16 @@ __CARDS__
       e.preventDefault();
       var web = a.href, left = false;
       function bye() { left = true; }
-      window.addEventListener('pagehide', bye, { once: true });
-      document.addEventListener('visibilitychange', bye, { once: true });
-      window.location.href = deep;
-      setTimeout(function () {                 /* App 沒接手就開網頁 */
+      window.addEventListener('pagehide', bye);
+      window.addEventListener('blur', bye);
+      document.addEventListener('visibilitychange', bye);
+      window.location.href = deep;             /* App 接手後本頁原地保留 */
+      setTimeout(function () {                 /* 沒接手才在同一分頁退回網頁版 */
         window.removeEventListener('pagehide', bye);
-        if (!left && !document.hidden) window.open(web, '_blank', 'noopener');
-      }, 700);
+        window.removeEventListener('blur', bye);
+        document.removeEventListener('visibilitychange', bye);
+        if (!left && !document.hidden) window.location.href = web;
+      }, 1400);
     });
   });
 })();

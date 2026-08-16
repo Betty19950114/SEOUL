@@ -226,8 +226,7 @@ def subs_html(it):
                  f'<span class="pkmeta">🕘 {esc(hrs)}</span>'
                  f'<span class="pkmeta{"" if known else " unk"}">📍 {esc(addr)}</span>'
                  f'<a class="actbtn pkmap" href="{naver(addr if known else q)}" '
-                 f'data-nmap="{esc(nmap(addr if known else q))}" '
-                 f'target="_blank" rel="noopener noreferrer">'
+                 f'data-nmap="{esc(nmap(addr if known else q))}">'
                  f'<span class="aico" aria-hidden="true">🗺</span>Naver開啟</a></li>')
     return f'<div class="picks"><div class="pkhead">此站包含 {len(ss)} 家</div><ul>{rows}</ul></div>'
 
@@ -238,8 +237,7 @@ def picks_html(it):
       f'<li><span class="pkname">{esc(n)}</span><span class="pkdesc">{esc(d)}</span>'
       f'<span class="pkmeta">🕘 {esc(hh)}</span>'
       f'<span class="pkmeta">📍 {esc(a)}</span>'
-      f'<a class="actbtn pkmap" href="{naver(a)}" data-nmap="{esc(nmap(a))}" '
-      f'target="_blank" rel="noopener noreferrer">'
+      f'<a class="actbtn pkmap" href="{naver(a)}" data-nmap="{esc(nmap(a))}">'
       f'<span class="aico" aria-hidden="true">🗺</span>Naver開啟</a></li>'
       for n, d, hh, a in ps)
     return f'<div class="picks"><div class="pkhead">巷內必吃推薦</div><ul>{rows}</ul></div>'
@@ -268,9 +266,8 @@ def info_block(it):
             f'<summary><span class="sumico" aria-hidden="true"></span>詳細說明</summary>'
             f'<dl class="infogrid">{"".join(rows)}</dl>'
             f'<div class="stopacts">'
-            f'<a class="actbtn navermap" href="{naver(addr)}" data-nmap="{esc(nmap(addr))}" '
-            f'target="_blank" rel="noopener noreferrer">'
-            f'<span class="aico" aria-hidden="true">🗺</span>Naver開啟</a>'
+            f'<a class="actbtn navermap" href="{naver(addr)}" data-nmap="{esc(nmap(addr))}">'
+                  f'<span class="aico" aria-hidden="true">🗺</span>Naver開啟</a>'
             f'{metro_btn(it)}</div>'
             f'{subs_html(it)}{picks_html(it)}</details>')
 
