@@ -64,6 +64,10 @@ __LEGEND__
 
 </div>
 
+<button class="backfab" id="backfab" type="button" data-show="0">
+  <span aria-hidden="true">↩</span><span class="bfname" id="backname"></span>
+</button>
+
 <nav class="tabbar" aria-label="頁面導覽"><a class="tb" href="index.html"><span class="tbi" aria-hidden="true">🗓</span><span class="tbl">行程</span></a><a class="tb" href="map.html" aria-current="page"><span class="tbi" aria-hidden="true">🗺</span><span class="tbl">地圖</span></a><a class="tb" href="shopping.html"><span class="tbi" aria-hidden="true">🛍</span><span class="tbl">購物</span></a><a class="tb" href="phrases.html"><span class="tbi" aria-hidden="true">💬</span><span class="tbl">韓文</span></a></nav>
 
 <script>
@@ -112,14 +116,62 @@ __LEGEND__
       tip.style.top  = (pr.top - cr.top - 8) + 'px';
       tip.classList.add('on');
     }
-    function hide() { tip.classList.remove('on'); }
+    function hide() { tip.classList.remove('on'); armed = null; }
+    var armed = null;                       /* 已顯示名稱、等第二下的站點 */
     card.querySelectorAll('.pin').forEach(function (pin) {
       pin.addEventListener('mouseenter', function () { show(pin); });
-      pin.addEventListener('mouseleave', hide);
-      pin.addEventListener('click', function (e) { e.stopPropagation(); show(pin); });
+      pin.addEventListener('mouseleave', function () { tip.classList.remove('on'); });
+      pin.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (armed !== pin) { armed = pin; show(pin); return; }   /* 第一下只顯示名稱 */
+        armed = null;                                            /* 第二下才跳行程 */
+        window.__gotoLeg(pin.getAttribute('data-d'), pin.getAttribute('data-stop'));
+      });
     });
     document.addEventListener('click', hide);
     card.addEventListener('scroll', hide, true);
+  });
+})();
+
+/* 跳到下方該天的行程清單，並給一顆 3 秒後自動收起的返回鍵 */
+(function () {
+  var fab = document.getElementById('backfab'), name = document.getElementById('backname');
+  var timer = null;
+
+  window.__gotoLeg = function (day, stopId) {
+    var box = document.getElementById('leg' + day);
+    if (!box) return;
+    var row = stopId && box.querySelector('[data-stop="' + stopId + '"]');
+    var y = box.getBoundingClientRect().top + window.scrollY - 16;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+    if (row) {
+      row.classList.remove('flash'); void row.offsetWidth; row.classList.add('flash');
+      setTimeout(function () { row.classList.remove('flash'); }, 1900);
+    }
+    if (navigator.vibrate) { try { navigator.vibrate([30, 60, 30]); } catch (e) {} }
+    if (!fab) return;
+    name.textContent = '回到路線圖';
+    fab.dataset.show = '1';
+    clearTimeout(timer);
+    timer = setTimeout(function () { fab.dataset.show = '0'; }, 3000);
+  };
+
+  if (fab) fab.addEventListener('click', function () {
+    clearTimeout(timer);
+    fab.dataset.show = '0';
+    var top = document.querySelector('.mapmodes');
+    if (top) window.scrollTo({ top: top.getBoundingClientRect().top + window.scrollY - 12, behavior: 'smooth' });
+  });
+
+  /* 地鐵圖：點一下就直接跳 */
+  document.querySelectorAll('.mstation').forEach(function (st) {
+    st.style.cursor = 'pointer';
+    st.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var days = (st.getAttribute('data-days') || '').trim().split(/\s+/).filter(Boolean);
+      if (!days.length) return;
+      window.__gotoLeg(days[0], null);
+    });
   });
 })();
 

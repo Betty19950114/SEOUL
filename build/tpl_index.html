@@ -138,7 +138,29 @@ __CARDS__
     document.querySelectorAll('.stopinfo[open], .daybrief[open]').forEach(function (x) { x.open = false; });
     groups.forEach(function (g) { g.classList.toggle('dim', !(d === 'all' || g.dataset.day === d)); });
     flows.forEach(function (f) { f.hidden = !(d === 'all' || f.dataset.day === d); });
+    if (d !== 'all') focusDay(d);
   }
+
+  /* 平滑捲動被環境擋掉時，退回直接定位 */
+  function hscroll(sc, left) {
+    var before = sc.scrollLeft;
+    if (Math.abs(left - before) < 1) return;
+    if (sc.scrollTo) { try { sc.scrollTo({ left: left, behavior: 'smooth' }); } catch (e) {} }
+    setTimeout(function () { if (Math.abs(sc.scrollLeft - before) < 1) sc.scrollLeft = left; }, 260);
+  }
+
+  /* 選定某天後，把該天的路線橫向捲到地圖中央，不用手動左右滑 */
+  function focusDay(d) {
+    var g = document.querySelector('.dayg[data-day="' + d + '"]');
+    var sc = g && g.closest('.mapcard') && g.closest('.mapcard').querySelector('.mapscroll');
+    if (!g || !sc || sc.scrollWidth <= sc.clientWidth) return;
+    var gr = g.getBoundingClientRect(), sr = sc.getBoundingClientRect();
+    if (!gr.width) return;
+    var delta = (gr.left + gr.width / 2) - (sr.left + sr.width / 2);
+    hscroll(sc, Math.max(0, Math.min(sc.scrollWidth - sc.clientWidth, sc.scrollLeft + delta)));
+  }
+  window.__focusDay = focusDay;
+  window.__hscroll = hscroll;
 
   window.__setDay = setDay;
   setDay('all');
@@ -229,16 +251,19 @@ __CARDS__
       tip.style.top  = (pr.top - cr.top - 8) + 'px';
       tip.classList.add('on');
     }
-    function hide() { tip.classList.remove('on'); }
+    function hide() { tip.classList.remove('on'); armed = null; }
+    var armed = null;                       /* 已顯示名稱、等第二下的站點 */
     card.querySelectorAll('.pin').forEach(function (pin) {
       pin.addEventListener('mouseenter', function () { show(pin); });
-      pin.addEventListener('mouseleave', hide);
+      pin.addEventListener('mouseleave', function () { tip.classList.remove('on'); });
       pin.addEventListener('click', function (e) {
         e.stopPropagation();
-        show(pin);
+        if (armed !== pin) { armed = pin; show(pin); return; }   /* 第一下只顯示名稱 */
+        armed = null;                                            /* 第二下才跳行程 */
         var target = pin.getAttribute('data-stop');
         if (target && typeof window.__gotoStop === 'function') {
-          setTimeout(function () { window.__gotoStop(target); }, 120);
+          window.__gotoStop(target);
+          if (typeof window.__backToMap === 'function') window.__backToMap();
         }
       });
     });
@@ -337,8 +362,7 @@ __CARDS__
     var hr = hit.getBoundingClientRect(), sr = sc.getBoundingClientRect();
     var delta = (hr.left + hr.width / 2) - (sr.left + sr.width / 2);
     var left = Math.max(0, Math.min(sc.scrollWidth - sc.clientWidth, sc.scrollLeft + delta));
-    if (sc.scrollTo) sc.scrollTo({ left: left, behavior: 'smooth' });
-    else sc.scrollLeft = left;
+    if (window.__hscroll) window.__hscroll(sc, left); else sc.scrollLeft = left;
   };
 })();
 </script>
@@ -350,16 +374,45 @@ __CARDS__
   var fab  = document.getElementById('backfab');
   var name = document.getElementById('backname');
   if (!card || !fab) return;
-  var lastStop = null;
+  var lastStop = null, mode = 'stop', timer = null;
 
   function goTo(el, offset) {
     var y = el.getBoundingClientRect().top + window.scrollY - (offset || 84);
     window.scrollTo({ top: y, behavior: 'smooth' });
   }
 
+  /* 從地圖點進行程後，給一顆 3 秒後自動收起的返回鍵 */
+  window.__backToMap = function () {
+    mode = 'map'; lastStop = null;
+    name.textContent = '回到路線圖';
+    fab.dataset.show = '1';
+    clearTimeout(timer);
+    timer = setTimeout(function () { fab.dataset.show = '0'; }, 3000);
+  };
+
+  /* 地鐵圖：點一下就直接跳到該站的行程 */
+  document.querySelectorAll('.mstation').forEach(function (st) {
+    st.style.cursor = 'pointer';
+    st.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var zh = st.getAttribute('data-zh');
+      var cur = document.documentElement.getAttribute('data-day');
+      var rows = Array.prototype.slice.call(document.querySelectorAll('.tr.stop[data-station="' + zh + '"]'));
+      if (!rows.length) return;
+      var hit = rows.filter(function (r) {
+        var dc = r.closest('.daycard');
+        return cur === 'all' || (dc && dc.dataset.day === cur);
+      })[0] || rows[0];
+      if (typeof window.__gotoStop === 'function') window.__gotoStop(hit.id);
+      window.__backToMap();
+    });
+  });
+
   document.querySelectorAll('.tometro').forEach(function (b) {
     b.addEventListener('click', function (e) {
       e.stopPropagation();
+      clearTimeout(timer);
+      mode = 'stop';
       lastStop = b.dataset.stop;
       name.textContent = '回到 ' + b.dataset.label;
       fab.dataset.show = '1';
@@ -373,7 +426,7 @@ __CARDS__
 
   /* 換到別天時，返回鈕就沒有意義了，自動收起 */
   new MutationObserver(function () {
-    if (!lastStop || fab.dataset.show !== '1') return;
+    if (mode !== 'stop' || !lastStop || fab.dataset.show !== '1') return;
     var row = document.getElementById(lastStop);
     var dc  = row && row.closest('.daycard');
     var cur = document.documentElement.getAttribute('data-day');
@@ -384,10 +437,10 @@ __CARDS__
   }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-day'] });
 
   fab.addEventListener('click', function () {
-    var row = lastStop && document.getElementById(lastStop);
-    if (!row) { fab.dataset.show = '0'; return; }
-    if (typeof window.__gotoStop === 'function') window.__gotoStop(lastStop);
+    clearTimeout(timer);
     fab.dataset.show = '0';
+    if (mode === 'map') { goTo(document.querySelector('.mapmodes') || card, 12); return; }
+    if (lastStop && typeof window.__gotoStop === 'function') window.__gotoStop(lastStop);
   });
 })();
 </script>

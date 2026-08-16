@@ -47,7 +47,7 @@
     --food:  #F58BA6;  --food-bg:  #351926;
     --cafe:  #EDB44F;  --cafe-bg:  #33260F;
     --shop:  #D8A8FC;  --shop-bg:  #2B1B3D;
-    --dessert: #F5A3C7; --dessert-bg: #351E2B;
+    --dessert: #EE8FDE; --dessert-bg: #331A33;
     --money: #6FD8B4;  --money-bg: #10302A;
     --pick: #FF4D5E;
     --stay:  #ADA1C6;  --stay-bg:  #241D33;
@@ -89,7 +89,7 @@
     --food:  #BE123C;  --food-bg:  #FCE7EE;
     --cafe:  #92610C;  --cafe-bg:  #FBF0D8;
     --shop:  #7E22CE;  --shop-bg:  #F3E8FE;
-    --dessert: #BE185D; --dessert-bg: #FCE7F1;
+    --dessert: #A21CAF; --dessert-bg: #FAE8FD;
     --money: #0F766E;  --money-bg: #D9F2EC;
     --pick: #DC2626;
     --stay:  #52496B;  --stay-bg:  #EDE9F6;
@@ -174,8 +174,10 @@
   .fl .fdate { font-size: 11px; color: var(--ink-faint); white-space: nowrap; }
 
   /* ---------- day tabs ---------- */
+  /* 緊貼頁首，讓兩條分隔線之間的膠囊真正上下置中 */
+  .masthead:has(+ .tabsbar) { margin-bottom: 0; }
   .tabsbar {
-    position: sticky; top: 0; z-index: 30; margin: 24px -20px 0;
+    position: sticky; top: 0; z-index: 30; margin: 0 -20px;
     display: flex; align-items: center; padding: 10px 20px 9px;
     background: color-mix(in srgb, var(--bg) 90%, transparent);
     backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
@@ -212,11 +214,11 @@
     fill: var(--pin-ink); pointer-events: none;
   }
   .dayg { transition: opacity .18s ease; }
-  .dayg.dim { opacity: .12; }
+  .dayg.dim { opacity: 0; pointer-events: none; }   /* 選定某天時只留該天 */
   /*全部檢視：只留區域與站點，路線隱藏以免交錯難讀 */
-  :root[data-day="all"] .dayg polyline { opacity: 0; }
-  .dayg polyline { transition: opacity .18s ease; }
-  @media (prefers-reduced-motion: reduce) { .dayg polyline { transition: none; } }
+  :root[data-day="all"] .dayg .route { opacity: 0; }
+  .dayg .route { transition: opacity .18s ease; }
+  @media (prefers-reduced-motion: reduce) { .dayg .route { transition: none; } }
   .regions { transition: opacity .18s ease; }
   @media (prefers-reduced-motion: reduce) { .dayg, .regions { transition: none; } }
   .regionbox { fill: var(--regionfill); stroke: var(--regionline); stroke-width: 1.4; stroke-dasharray: 5 4; }
@@ -550,7 +552,7 @@
     border-radius: 6px; padding: 2px 8px;
   }
   /* ---------- BTS hero banner ---------- */
-  .masthead { margin: 0 -20px 22px; padding: 0; background: none; border-bottom: 1px solid var(--line); }
+  .masthead:has(.hero) { padding: 0; background: none; }
   .hero {
     position: relative; overflow: hidden;
     height: clamp(196px, 27vw, 288px);
@@ -914,18 +916,21 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 <rect x="472.4" y="362.6" width="52.0" height="52.0" rx="16" class="regionbox"/>
 </g>
 <g class="dayg" data-day="1">
-<polyline points="387.6,163.0 409.2,155.1 417.3,133.5 444.7,160.5" fill="none" stroke="var(--d1)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="route casing" d="M 387.6,163.0 C 390.7,161.9 405.0,159.3 409.2,155.1 C 413.4,150.9 412.3,132.7 417.3,133.5 C 422.3,134.3 440.8,156.7 444.7,160.5" fill="none" stroke="var(--mapbg)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
+<path class="route" d="M 387.6,163.0 C 390.7,161.9 405.0,159.3 409.2,155.1 C 413.4,150.9 412.3,132.7 417.3,133.5 C 422.3,134.3 440.8,156.7 444.7,160.5" fill="none" stroke="var(--d1)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="pin" data-name="南大門市場" data-time="19:10" data-d="1" data-ord="A" data-stop="stop-namdaemun"><title>DAY 1 · A · 南大門市場 · 19:10</title><circle cx="409.2" cy="155.1" r="11.5" fill="var(--d1)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="409.2" cy="155.1" r="16" fill="transparent"/><text x="409.2" y="159.1" text-anchor="middle" class="pnum">A</text></g>
 <g class="pin" data-name="大使館換錢所" data-time="20:25" data-d="1" data-ord="B" data-stop="stop-exchange"><title>DAY 1 · B · 大使館換錢所 · 20:25</title><circle cx="417.3" cy="133.5" r="11.5" fill="var(--d1)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="417.3" cy="133.5" r="16" fill="transparent"/><text x="417.3" y="137.5" text-anchor="middle" class="pnum">B</text></g>
 <g class="pin" data-name="明洞商圈" data-time="20:45" data-d="1" data-ord="C" data-stop="stop-myeongdong"><title>DAY 1 · C · 明洞商圈 · 20:45</title><circle cx="444.7" cy="160.5" r="11.5" fill="var(--d1)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="444.7" cy="160.5" r="16" fill="transparent"/><text x="444.7" y="164.5" text-anchor="middle" class="pnum">C</text></g>
 </g>
 <g class="dayg" data-day="2">
-<polyline points="531.1,98.5 546.7,118.0" fill="none" stroke="var(--d2)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="route casing" d="M 531.1,98.5 L 546.7,118.0" fill="none" stroke="var(--mapbg)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
+<path class="route" d="M 531.1,98.5 L 546.7,118.0" fill="none" stroke="var(--d2)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="pin" data-name="陳玉華一隻雞" data-time="21:00" data-d="2" data-ord="B" data-stop="stop-jinokhwa"><title>DAY 2 · B · 陳玉華一隻雞 · 21:00</title><circle cx="531.1" cy="98.5" r="11.5" fill="var(--d2)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="531.1" cy="98.5" r="16" fill="transparent"/><text x="531.1" y="102.5" text-anchor="middle" class="pnum">B</text></g>
 <g class="pin" data-name="東大門 두타몰" data-time="22:15" data-d="2" data-ord="C" data-stop="stop-doota"><title>DAY 2 · C · 東大門 두타몰 · 22:15</title><circle cx="546.7" cy="118.0" r="11.5" fill="var(--d2)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="546.7" cy="118.0" r="16" fill="transparent"/><text x="546.7" y="122.0" text-anchor="middle" class="pnum">C</text></g>
 </g>
 <g class="dayg" data-day="3">
-<polyline points="400.8,86.6 401.5,52.2 437.3,42.8 434.3,69.2 459.4,82.9 82.5,171.2 41.0,171.2 144.4,201.3 150.2,151.3 371.8,179.6" fill="none" stroke="var(--d3)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="route casing" d="M 400.8,86.6 C 400.9,81.7 396.3,58.4 401.5,52.2 C 406.7,46.0 432.7,40.4 437.3,42.8 C 441.9,45.2 431.2,63.5 434.3,69.2 C 437.4,74.9 509.2,68.5 459.4,82.9 C 409.6,97.3 141.8,158.7 82.5,171.2 C 23.2,183.7 32.2,166.9 41.0,171.2 C 49.8,175.5 128.9,204.1 144.4,201.3 C 159.9,198.5 118.0,154.4 150.2,151.3 C 182.4,148.2 340.4,175.6 371.8,179.6" fill="none" stroke="var(--mapbg)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
+<path class="route" d="M 400.8,86.6 C 400.9,81.7 396.3,58.4 401.5,52.2 C 406.7,46.0 432.7,40.4 437.3,42.8 C 441.9,45.2 431.2,63.5 434.3,69.2 C 437.4,74.9 509.2,68.5 459.4,82.9 C 409.6,97.3 141.8,158.7 82.5,171.2 C 23.2,183.7 32.2,166.9 41.0,171.2 C 49.8,175.5 128.9,204.1 144.4,201.3 C 159.9,198.5 118.0,154.4 150.2,151.3 C 182.4,148.2 340.4,175.6 371.8,179.6" fill="none" stroke="var(--d3)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="pin" data-name="光化門廣場" data-time="08:45" data-d="3" data-ord="A" data-stop="stop-gwanghwamun"><title>DAY 3 · A · 光化門廣場 · 08:45</title><circle cx="400.8" cy="86.6" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="400.8" cy="86.6" r="16" fill="transparent"/><text x="400.8" y="90.6" text-anchor="middle" class="pnum">A</text></g>
 <g class="pin" data-name="景福宮" data-time="09:25" data-d="3" data-ord="B" data-stop="stop-gyeongbok"><title>DAY 3 · B · 景福宮 · 09:25</title><circle cx="401.5" cy="52.2" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="401.5" cy="52.2" r="16" fill="transparent"/><text x="401.5" y="56.2" text-anchor="middle" class="pnum">B</text></g>
 <g class="pin" data-name="北村韓屋村" data-time="10:40" data-d="3" data-ord="C" data-stop="stop-bukchon"><title>DAY 3 · C · 北村韓屋村 · 10:40</title><circle cx="437.3" cy="42.8" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="437.3" cy="42.8" r="16" fill="transparent"/><text x="437.3" y="46.8" text-anchor="middle" class="pnum">C</text></g>
@@ -938,7 +943,8 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 <g class="pin" data-name="樂天超市 首爾站店" data-time="18:50" data-d="3" data-ord="J" data-stop="stop-lottemart"><title>DAY 3 · J · 樂天超市 首爾站店 · 18:50</title><circle cx="371.8" cy="179.6" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="371.8" cy="179.6" r="16" fill="transparent"/><text x="371.8" y="183.6" text-anchor="middle" class="pnum">J</text></g>
 </g>
 <g class="dayg" data-day="4">
-<polyline points="575.3,120.2 784.1,248.0 771.9,228.5 755.2,249.5 726.1,230.6 748.9,227.4 498.4,388.6" fill="none" stroke="var(--d4)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="route casing" d="M 575.3,120.2 C 604.9,138.3 756.2,232.7 784.1,248.0 C 812.0,263.3 776.0,228.3 771.9,228.5 C 767.8,228.7 761.7,249.2 755.2,249.5 C 748.7,249.8 727.0,233.7 726.1,230.6 C 725.2,227.5 781.2,205.0 748.9,227.4 C 716.6,249.8 533.9,365.8 498.4,388.6" fill="none" stroke="var(--mapbg)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
+<path class="route" d="M 575.3,120.2 C 604.9,138.3 756.2,232.7 784.1,248.0 C 812.0,263.3 776.0,228.3 771.9,228.5 C 767.8,228.7 761.7,249.2 755.2,249.5 C 748.7,249.8 727.0,233.7 726.1,230.6 C 725.2,227.5 781.2,205.0 748.9,227.4 C 716.6,249.8 533.9,365.8 498.4,388.6" fill="none" stroke="var(--d4)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="pin" data-name="獵奇辣炒年糕 신당본점" data-time="11:30" data-d="4" data-ord="A" data-stop="stop-yeopgi"><title>DAY 4 · A · 獵奇辣炒年糕 신당본점 · 11:30</title><circle cx="575.3" cy="120.2" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="575.3" cy="120.2" r="16" fill="transparent"/><text x="575.3" y="124.2" text-anchor="middle" class="pnum">A</text></g>
 <g class="pin" data-name="聖水洞 購物" data-time="13:30" data-d="4" data-ord="B" data-stop="stop-ept"><title>DAY 4 · B · 聖水洞 購物 · 13:30</title><circle cx="784.1" cy="248.0" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="784.1" cy="248.0" r="16" fill="transparent"/><text x="784.1" y="252.0" text-anchor="middle" class="pnum">B</text></g>
 <g class="pin" data-name="烤黨 Ggupdang 聖水店" data-time="15:45" data-d="4" data-ord="C" data-stop="stop-ggupdang_ss"><title>DAY 4 · C · 烤黨 Ggupdang 聖水店 · 15:45</title><circle cx="771.9" cy="228.5" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="771.9" cy="228.5" r="16" fill="transparent"/><text x="771.9" y="232.5" text-anchor="middle" class="pnum">C</text></g>
@@ -948,7 +954,8 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 <g class="pin" data-name="盤浦大橋 月光彩虹噴泉" data-time="20:20" data-d="4" data-ord="G" data-stop="stop-banpo"><title>DAY 4 · G · 盤浦大橋 月光彩虹噴泉 · 20:20</title><circle cx="498.4" cy="388.6" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="498.4" cy="388.6" r="16" fill="transparent"/><text x="498.4" y="392.6" text-anchor="middle" class="pnum">G</text></g>
 </g>
 <g class="dayg" data-day="5">
-<polyline points="387.6,163.0 457.0,122.6 439.9,138.0" fill="none" stroke="var(--d5)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="route casing" d="M 387.6,163.0 C 397.4,157.3 449.6,126.1 457.0,122.6 C 464.4,119.1 442.3,135.8 439.9,138.0" fill="none" stroke="var(--mapbg)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
+<path class="route" d="M 387.6,163.0 C 397.4,157.3 449.6,126.1 457.0,122.6 C 464.4,119.1 442.3,135.8 439.9,138.0" fill="none" stroke="var(--d5)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="pin" data-name="明洞聖堂" data-time="07:55" data-d="5" data-ord="A" data-stop="stop-cathedral"><title>DAY 5 · A · 明洞聖堂 · 07:55</title><circle cx="457.0" cy="122.6" r="11.5" fill="var(--d5)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="457.0" cy="122.6" r="16" fill="transparent"/><text x="457.0" y="126.6" text-anchor="middle" class="pnum">A</text></g>
 <g class="pin" data-name="Isaac Toast 明洞聖堂店" data-time="08:25" data-d="5" data-ord="B" data-stop="stop-isaac"><title>DAY 5 · B · Isaac Toast 明洞聖堂店 · 08:25</title><circle cx="439.9" cy="138.0" r="11.5" fill="var(--d5)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="439.9" cy="138.0" r="16" fill="transparent"/><text x="439.9" y="142.0" text-anchor="middle" class="pnum">B</text></g>
 </g>
@@ -1025,7 +1032,6 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
       <span class="sumico" aria-hidden="true"></span>
       <span class="dbtype">購物行程</span>
       <span class="dbgo"><span class="dbgoi" aria-hidden="true">🏨</span><span class="dbgow">建議 </span><b>19:05</b> 出發</span>
-      <span class="dbhint">穿搭・攜帶建議</span>
     </summary>
     <dl class="dbgrid">
       <dt>出發</dt><dd>從飯店 19:05 出發：當天 18:50 才抵達飯店，放好行李就能出門，走 4 分鐘到南大門市場</dd>
@@ -1060,7 +1066,6 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
       <span class="sumico" aria-hidden="true"></span>
       <span class="dbtype">玩樂行程</span>
       <span class="dbgo"><span class="dbgoi" aria-hidden="true">🏨</span><span class="dbgow">建議 </span><b>08:00</b> 出發</span>
-      <span class="dbhint">穿搭・攜帶建議</span>
     </summary>
     <dl class="dbgrid">
       <dt>出發</dt><dd>從飯店 08:00 出發：搭接駁巴士，或到江南／蠶室轉高速巴士，車程約 1.5 小時</dd>
@@ -1092,7 +1097,6 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
       <span class="sumico" aria-hidden="true"></span>
       <span class="dbtype">觀光行程</span>
       <span class="dbgo"><span class="dbgoi" aria-hidden="true">🏨</span><span class="dbgow">建議 </span><b>08:20</b> 出發</span>
-      <span class="dbhint">穿搭・攜帶建議</span>
     </summary>
     <dl class="dbgrid">
       <dt>出發</dt><dd>從飯店 08:20 出發：走到首爾站搭 1 號線一站到市廳，出站再走約 12 分，全程約 25 分</dd>
@@ -1137,7 +1141,6 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
       <span class="sumico" aria-hidden="true"></span>
       <span class="dbtype">吃貨行程</span>
       <span class="dbgo"><span class="dbgoi" aria-hidden="true">🏨</span><span class="dbgow">建議 </span><b>11:05</b> 出發</span>
-      <span class="dbhint">穿搭・攜帶建議</span>
     </summary>
     <dl class="dbgrid">
       <dt>出發</dt><dd>從飯店 11:05 出發：會賢站搭 4 號線到東大門歷史文化公園，轉 2 號線一站到新堂，全程約 25 分</dd>
@@ -1173,7 +1176,6 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
       <span class="sumico" aria-hidden="true"></span>
       <span class="dbtype">觀光行程</span>
       <span class="dbgo"><span class="dbgoi" aria-hidden="true">🏨</span><span class="dbgow">建議 </span><b>07:40</b> 出發</span>
-      <span class="dbhint">穿搭・攜帶建議</span>
     </summary>
     <dl class="dbgrid">
       <dt>出發</dt><dd>從飯店 07:40 出發：步行前往明洞約 1 公里、15 分；行李先寄放飯店櫃檯，回程再拿</dd>
@@ -1225,7 +1227,29 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     document.querySelectorAll('.stopinfo[open], .daybrief[open]').forEach(function (x) { x.open = false; });
     groups.forEach(function (g) { g.classList.toggle('dim', !(d === 'all' || g.dataset.day === d)); });
     flows.forEach(function (f) { f.hidden = !(d === 'all' || f.dataset.day === d); });
+    if (d !== 'all') focusDay(d);
   }
+
+  /* 平滑捲動被環境擋掉時，退回直接定位 */
+  function hscroll(sc, left) {
+    var before = sc.scrollLeft;
+    if (Math.abs(left - before) < 1) return;
+    if (sc.scrollTo) { try { sc.scrollTo({ left: left, behavior: 'smooth' }); } catch (e) {} }
+    setTimeout(function () { if (Math.abs(sc.scrollLeft - before) < 1) sc.scrollLeft = left; }, 260);
+  }
+
+  /* 選定某天後，把該天的路線橫向捲到地圖中央，不用手動左右滑 */
+  function focusDay(d) {
+    var g = document.querySelector('.dayg[data-day="' + d + '"]');
+    var sc = g && g.closest('.mapcard') && g.closest('.mapcard').querySelector('.mapscroll');
+    if (!g || !sc || sc.scrollWidth <= sc.clientWidth) return;
+    var gr = g.getBoundingClientRect(), sr = sc.getBoundingClientRect();
+    if (!gr.width) return;
+    var delta = (gr.left + gr.width / 2) - (sr.left + sr.width / 2);
+    hscroll(sc, Math.max(0, Math.min(sc.scrollWidth - sc.clientWidth, sc.scrollLeft + delta)));
+  }
+  window.__focusDay = focusDay;
+  window.__hscroll = hscroll;
 
   window.__setDay = setDay;
   setDay('all');
@@ -1316,16 +1340,19 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
       tip.style.top  = (pr.top - cr.top - 8) + 'px';
       tip.classList.add('on');
     }
-    function hide() { tip.classList.remove('on'); }
+    function hide() { tip.classList.remove('on'); armed = null; }
+    var armed = null;                       /* 已顯示名稱、等第二下的站點 */
     card.querySelectorAll('.pin').forEach(function (pin) {
       pin.addEventListener('mouseenter', function () { show(pin); });
-      pin.addEventListener('mouseleave', hide);
+      pin.addEventListener('mouseleave', function () { tip.classList.remove('on'); });
       pin.addEventListener('click', function (e) {
         e.stopPropagation();
-        show(pin);
+        if (armed !== pin) { armed = pin; show(pin); return; }   /* 第一下只顯示名稱 */
+        armed = null;                                            /* 第二下才跳行程 */
         var target = pin.getAttribute('data-stop');
         if (target && typeof window.__gotoStop === 'function') {
-          setTimeout(function () { window.__gotoStop(target); }, 120);
+          window.__gotoStop(target);
+          if (typeof window.__backToMap === 'function') window.__backToMap();
         }
       });
     });
@@ -1424,8 +1451,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     var hr = hit.getBoundingClientRect(), sr = sc.getBoundingClientRect();
     var delta = (hr.left + hr.width / 2) - (sr.left + sr.width / 2);
     var left = Math.max(0, Math.min(sc.scrollWidth - sc.clientWidth, sc.scrollLeft + delta));
-    if (sc.scrollTo) sc.scrollTo({ left: left, behavior: 'smooth' });
-    else sc.scrollLeft = left;
+    if (window.__hscroll) window.__hscroll(sc, left); else sc.scrollLeft = left;
   };
 })();
 </script>
@@ -1437,16 +1463,45 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
   var fab  = document.getElementById('backfab');
   var name = document.getElementById('backname');
   if (!card || !fab) return;
-  var lastStop = null;
+  var lastStop = null, mode = 'stop', timer = null;
 
   function goTo(el, offset) {
     var y = el.getBoundingClientRect().top + window.scrollY - (offset || 84);
     window.scrollTo({ top: y, behavior: 'smooth' });
   }
 
+  /* 從地圖點進行程後，給一顆 3 秒後自動收起的返回鍵 */
+  window.__backToMap = function () {
+    mode = 'map'; lastStop = null;
+    name.textContent = '回到路線圖';
+    fab.dataset.show = '1';
+    clearTimeout(timer);
+    timer = setTimeout(function () { fab.dataset.show = '0'; }, 3000);
+  };
+
+  /* 地鐵圖：點一下就直接跳到該站的行程 */
+  document.querySelectorAll('.mstation').forEach(function (st) {
+    st.style.cursor = 'pointer';
+    st.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var zh = st.getAttribute('data-zh');
+      var cur = document.documentElement.getAttribute('data-day');
+      var rows = Array.prototype.slice.call(document.querySelectorAll('.tr.stop[data-station="' + zh + '"]'));
+      if (!rows.length) return;
+      var hit = rows.filter(function (r) {
+        var dc = r.closest('.daycard');
+        return cur === 'all' || (dc && dc.dataset.day === cur);
+      })[0] || rows[0];
+      if (typeof window.__gotoStop === 'function') window.__gotoStop(hit.id);
+      window.__backToMap();
+    });
+  });
+
   document.querySelectorAll('.tometro').forEach(function (b) {
     b.addEventListener('click', function (e) {
       e.stopPropagation();
+      clearTimeout(timer);
+      mode = 'stop';
       lastStop = b.dataset.stop;
       name.textContent = '回到 ' + b.dataset.label;
       fab.dataset.show = '1';
@@ -1460,7 +1515,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
 
   /* 換到別天時，返回鈕就沒有意義了，自動收起 */
   new MutationObserver(function () {
-    if (!lastStop || fab.dataset.show !== '1') return;
+    if (mode !== 'stop' || !lastStop || fab.dataset.show !== '1') return;
     var row = document.getElementById(lastStop);
     var dc  = row && row.closest('.daycard');
     var cur = document.documentElement.getAttribute('data-day');
@@ -1471,10 +1526,10 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
   }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-day'] });
 
   fab.addEventListener('click', function () {
-    var row = lastStop && document.getElementById(lastStop);
-    if (!row) { fab.dataset.show = '0'; return; }
-    if (typeof window.__gotoStop === 'function') window.__gotoStop(lastStop);
+    clearTimeout(timer);
     fab.dataset.show = '0';
+    if (mode === 'map') { goTo(document.querySelector('.mapmodes') || card, 12); return; }
+    if (lastStop && typeof window.__gotoStop === 'function') window.__gotoStop(lastStop);
   });
 })();
 </script>

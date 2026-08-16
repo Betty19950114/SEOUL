@@ -137,6 +137,23 @@ for label, x0, y0, x1, y1 in sorted(boxes, key=lambda b: (b[2], b[1])):
       f'height="{LH:.0f}" rx="9" class="regionchip"/>'
       f'<text x="{cx+7:.1f}" y="{cy+LH-5:.1f}" class="regiontext">{esc(label)}</text></g>')
 
+
+def smooth_path(pts, tension=0.85):
+    """把折線轉成 Catmull-Rom 平滑曲線，避免路線出現生硬的銳角"""
+    P = [(p["x"], p["y"]) for p in pts]
+    if len(P) < 2:
+        return ""
+    if len(P) == 2:
+        return f'M {P[0][0]:.1f},{P[0][1]:.1f} L {P[1][0]:.1f},{P[1][1]:.1f}'
+    d = [f'M {P[0][0]:.1f},{P[0][1]:.1f}']
+    ext = [P[0]] + P + [P[-1]]
+    for i in range(1, len(ext)-2):
+        p0, p1, p2, p3 = ext[i-1], ext[i], ext[i+1], ext[i+2]
+        c1 = (p1[0] + (p2[0]-p0[0])/6*tension, p1[1] + (p2[1]-p0[1])/6*tension)
+        c2 = (p2[0] - (p3[0]-p1[0])/6*tension, p2[1] - (p3[1]-p1[1])/6*tension)
+        d.append(f'C {c1[0]:.1f},{c1[1]:.1f} {c2[0]:.1f},{c2[1]:.1f} {p2[0]:.1f},{p2[1]:.1f}')
+    return " ".join(d)
+
 ORDER = {}
 for d in sorted(DAYS):
     seq = [i["key"] for i in DAYS[d]["items"] if i["k"] == "stop"]
@@ -154,8 +171,11 @@ for d in sorted(DAYS):
     if not pts: continue
     parts = []
     if len(pts) > 1:
-        poly = " ".join(f'{p["x"]},{p["y"]}' for p in pts)
-        parts.append(f'<polyline points="{poly}" fill="none" stroke="var(--d{d})" '
+        dpath = smooth_path(pts)
+        # 底襯先畫一層地圖底色，讓同日路線交叉處不會糊在一起
+        parts.append(f'<path class="route casing" d="{dpath}" fill="none" stroke="var(--mapbg)" '
+                     f'stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>')
+        parts.append(f'<path class="route" d="{dpath}" fill="none" stroke="var(--d{d})" '
                      f'stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>')
     for p in pts:
         if p["cat"] == "stay": continue
@@ -351,7 +371,6 @@ for d in sorted(DAYS):
       <span class="sumico" aria-hidden="true"></span>
       <span class="dbtype">{esc(BRIEF[d]["type"])}</span>
       <span class="dbgo"><span class="dbgoi" aria-hidden="true">🏨</span><span class="dbgow">建議 </span><b>{D["depart"][0]}</b> 出發</span>
-      <span class="dbhint">穿搭・攜帶建議</span>
     </summary>
     <dl class="dbgrid">
       <dt>出發</dt><dd>從飯店 {D["depart"][0]} 出發：{esc(D["depart"][1])}</dd>
@@ -376,11 +395,11 @@ for d in sorted(DAYS):
         num = it["ord"] or ""
         extra = ' <span class="lo">（地圖外）</span>' if it.get("offmap") else ''
         zh, _, m = STATION[it["key"]]
-        rows.append(f'<li><span class="lnum">{num}</span><span class="ltime">{it["t"]}</span>'
+        rows.append(f'<li data-stop="stop-{it["key"]}"><span class="lnum">{num}</span><span class="ltime">{it["t"]}</span>'
                     f'<span class="tag {it["cat"]}">{CAT[it["cat"]]}</span>'
                     f'<span class="lname">{esc(it["n"])}{extra}'
                     f'<span class="lstn">{esc(zh)}站 · {max(1,round(m/75))}分</span></span></li>')
-    leg.append(f'<div class="lgroup" style="--c:var(--d{d})">'
+    leg.append(f'<div class="lgroup" id="leg{d}" data-day="{d}" style="--c:var(--d{d})">'
                f'<h3><span class="lbar"></span><span class="lgtitle">DAY {d} · {esc(D["theme"])}</span>'
                f'<a class="daylink" href="index.html#day{d}">看行程 →</a></h3>'
                f'<p class="lgdep"><span aria-hidden="true">🏨</span>建議 <b>{D["depart"][0]}</b> 從飯店出發</p>'

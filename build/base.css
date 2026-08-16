@@ -43,7 +43,7 @@
     --food:  #F58BA6;  --food-bg:  #351926;
     --cafe:  #EDB44F;  --cafe-bg:  #33260F;
     --shop:  #D8A8FC;  --shop-bg:  #2B1B3D;
-    --dessert: #F5A3C7; --dessert-bg: #351E2B;
+    --dessert: #EE8FDE; --dessert-bg: #331A33;
     --money: #6FD8B4;  --money-bg: #10302A;
     --pick: #FF4D5E;
     --stay:  #ADA1C6;  --stay-bg:  #241D33;
@@ -85,7 +85,7 @@
     --food:  #BE123C;  --food-bg:  #FCE7EE;
     --cafe:  #92610C;  --cafe-bg:  #FBF0D8;
     --shop:  #7E22CE;  --shop-bg:  #F3E8FE;
-    --dessert: #BE185D; --dessert-bg: #FCE7F1;
+    --dessert: #A21CAF; --dessert-bg: #FAE8FD;
     --money: #0F766E;  --money-bg: #D9F2EC;
     --pick: #DC2626;
     --stay:  #52496B;  --stay-bg:  #EDE9F6;
@@ -170,8 +170,10 @@
   .fl .fdate { font-size: 11px; color: var(--ink-faint); white-space: nowrap; }
 
   /* ---------- day tabs ---------- */
+  /* 緊貼頁首，讓兩條分隔線之間的膠囊真正上下置中 */
+  .masthead:has(+ .tabsbar) { margin-bottom: 0; }
   .tabsbar {
-    position: sticky; top: 0; z-index: 30; margin: 24px -20px 0;
+    position: sticky; top: 0; z-index: 30; margin: 0 -20px;
     display: flex; align-items: center; padding: 10px 20px 9px;
     background: color-mix(in srgb, var(--bg) 90%, transparent);
     backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
@@ -208,11 +210,11 @@
     fill: var(--pin-ink); pointer-events: none;
   }
   .dayg { transition: opacity .18s ease; }
-  .dayg.dim { opacity: .12; }
+  .dayg.dim { opacity: 0; pointer-events: none; }   /* 選定某天時只留該天 */
   /*全部檢視：只留區域與站點，路線隱藏以免交錯難讀 */
-  :root[data-day="all"] .dayg polyline { opacity: 0; }
-  .dayg polyline { transition: opacity .18s ease; }
-  @media (prefers-reduced-motion: reduce) { .dayg polyline { transition: none; } }
+  :root[data-day="all"] .dayg .route { opacity: 0; }
+  .dayg .route { transition: opacity .18s ease; }
+  @media (prefers-reduced-motion: reduce) { .dayg .route { transition: none; } }
   .regions { transition: opacity .18s ease; }
   @media (prefers-reduced-motion: reduce) { .dayg, .regions { transition: none; } }
   .regionbox { fill: var(--regionfill); stroke: var(--regionline); stroke-width: 1.4; stroke-dasharray: 5 4; }
@@ -546,7 +548,7 @@
     border-radius: 6px; padding: 2px 8px;
   }
   /* ---------- BTS hero banner ---------- */
-  .masthead { margin: 0 -20px 22px; padding: 0; background: none; border-bottom: 1px solid var(--line); }
+  .masthead:has(.hero) { padding: 0; background: none; }
   .hero {
     position: relative; overflow: hidden;
     height: clamp(196px, 27vw, 288px);

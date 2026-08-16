@@ -42,3 +42,6 @@
   }
   .daylink:hover { background: color-mix(in srgb, var(--c) 24%, transparent); }
   .daylink:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
+
+  /* 從地圖點進來時，把對應那筆行程閃一下 */
+  .lgroup li.flash { animation: flashrow 1.8s ease-out 1; border-radius: 8px; }
