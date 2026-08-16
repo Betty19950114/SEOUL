@@ -9,9 +9,11 @@
     <summary>
       <span class="sumico" aria-hidden="true"></span>
       <span class="dbtype">購物行程</span>
+      <span class="dbgo"><span class="dbgoi" aria-hidden="true">🏨</span><span class="dbgow">建議 </span><b>19:05</b> 出發</span>
       <span class="dbhint">穿搭・攜帶建議</span>
     </summary>
     <dl class="dbgrid">
+      <dt>出發</dt><dd>從飯店 19:05 出發：當天 18:50 才抵達飯店，放好行李就能出門，走 4 分鐘到南大門市場</dd>
       <dt>穿搭</dt><dd>落地就走，鞋子要好走的。八月底首爾約 26–30°C，短袖加件薄外套應付冷氣</dd>
       <dt>背包</dt><dd>小側背包就好，大行李已放飯店；晚上要在明洞換匯，台幣或美金現鈔記得隨身帶</dd>
       <dt>購物袋</dt><dd>需要，明洞店家不一定附袋</dd>
@@ -42,9 +44,11 @@
     <summary>
       <span class="sumico" aria-hidden="true"></span>
       <span class="dbtype">玩樂行程</span>
+      <span class="dbgo"><span class="dbgoi" aria-hidden="true">🏨</span><span class="dbgow">建議 </span><b>08:00</b> 出發</span>
       <span class="dbhint">穿搭・攜帶建議</span>
     </summary>
     <dl class="dbgrid">
+      <dt>出發</dt><dd>從飯店 08:00 出發：搭接駁巴士，或到江南／蠶室轉高速巴士，車程約 1.5 小時</dd>
       <dt>穿搭</dt><dd>排汗透氣衣物、好走的鞋。園區日曬強，戴帽子或備防曬；搭雲霄飛車前記得收好帽子與鬆的配件</dd>
       <dt>背包</dt><dd>後背包，裝水、防曬、雨具與行動電源。園區有置物櫃可寄放</dd>
       <dt>購物袋</dt><dd>需要，晚上會逛東大門</dd>
@@ -72,9 +76,11 @@
     <summary>
       <span class="sumico" aria-hidden="true"></span>
       <span class="dbtype">觀光行程</span>
+      <span class="dbgo"><span class="dbgoi" aria-hidden="true">🏨</span><span class="dbgow">建議 </span><b>08:20</b> 出發</span>
       <span class="dbhint">穿搭・攜帶建議</span>
     </summary>
     <dl class="dbgrid">
+      <dt>出發</dt><dd>從飯店 08:20 出發：走到首爾站搭 1 號線一站到市廳，出站再走約 12 分，全程約 25 分</dd>
       <dt>穿搭</dt><dd>全天步行約 5–6 公里，好走的鞋是重點。宮殿與韓屋拍照建議穿亮色；穿韓服進景福宮免門票</dd>
       <dt>背包</dt><dd>中型後背包，宮殿區有陽光要帶水</dd>
       <dt>購物袋</dt><dd>需要，弘大加樂天超市會買不少（樂天購物袋要另外付費）</dd>
@@ -115,9 +121,11 @@
     <summary>
       <span class="sumico" aria-hidden="true"></span>
       <span class="dbtype">吃貨行程</span>
+      <span class="dbgo"><span class="dbgoi" aria-hidden="true">🏨</span><span class="dbgow">建議 </span><b>11:05</b> 出發</span>
       <span class="dbhint">穿搭・攜帶建議</span>
     </summary>
     <dl class="dbgrid">
+      <dt>出發</dt><dd>從飯店 11:05 出發：會賢站搭 4 號線到東大門歷史文化公園，轉 2 號線一站到新堂，全程約 25 分</dd>
       <dt>穿搭</dt><dd>聖水洞是潮流區，可以穿有型一點。晚上盤浦河邊風大，帶件薄外套</dd>
       <dt>背包</dt><dd>後背包留空間，聖水洞七家店會提，衣物體積不小</dd>
       <dt>購物袋</dt><dd>需要，而且建議帶大一點的</dd>
@@ -149,9 +157,11 @@
     <summary>
       <span class="sumico" aria-hidden="true"></span>
       <span class="dbtype">觀光行程</span>
+      <span class="dbgo"><span class="dbgoi" aria-hidden="true">🏨</span><span class="dbgow">建議 </span><b>07:40</b> 出發</span>
       <span class="dbhint">穿搭・攜帶建議</span>
     </summary>
     <dl class="dbgrid">
+      <dt>出發</dt><dd>從飯店 07:40 出發：步行前往明洞約 1 公里、15 分；行李先寄放飯店櫃檯，回程再拿</dd>
       <dt>穿搭</dt><dd>搭機舒適為主。聖堂是宗教場所，避免過於暴露的穿著</dd>
       <dt>背包</dt><dd>隨身小包，行李寄放飯店櫃檯回程再拿</dd>
       <dt>購物袋</dt><dd>不需要，今天不採買</dd>

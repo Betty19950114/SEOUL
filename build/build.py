@@ -350,9 +350,11 @@ for d in sorted(DAYS):
     <summary>
       <span class="sumico" aria-hidden="true"></span>
       <span class="dbtype">{esc(BRIEF[d]["type"])}</span>
+      <span class="dbgo"><span class="dbgoi" aria-hidden="true">🏨</span><span class="dbgow">建議 </span><b>{D["depart"][0]}</b> 出發</span>
       <span class="dbhint">穿搭・攜帶建議</span>
     </summary>
     <dl class="dbgrid">
+      <dt>出發</dt><dd>從飯店 {D["depart"][0]} 出發：{esc(D["depart"][1])}</dd>
       <dt>穿搭</dt><dd>{esc(BRIEF[d]["wear"])}</dd>
       <dt>背包</dt><dd>{esc(BRIEF[d]["bag"])}</dd>
       <dt>購物袋</dt><dd>{esc(BRIEF[d]["tote"])}</dd>
@@ -381,6 +383,7 @@ for d in sorted(DAYS):
     leg.append(f'<div class="lgroup" style="--c:var(--d{d})">'
                f'<h3><span class="lbar"></span><span class="lgtitle">DAY {d} · {esc(D["theme"])}</span>'
                f'<a class="daylink" href="index.html#day{d}">看行程 →</a></h3>'
+               f'<p class="lgdep"><span aria-hidden="true">🏨</span>建議 <b>{D["depart"][0]}</b> 從飯店出發</p>'
                f'<ul>{"".join(rows)}</ul></div>')
 open("frag_legend.html.txt", "w", encoding="utf-8").write("\n".join(leg))
 
@@ -401,6 +404,7 @@ for cat, label, icon in QF:
         qf.append(f'<details class="qf" data-cat="{cat}">'
                   f'<summary title="{label}" aria-label="{label} {len(ent)} 個">'
                   f'<span class="qfico" aria-hidden="true">{icon}</span>'
+                  f'<span class="qflab">{label}</span>'
                   f'<span class="qfn">{len(ent)}</span></summary>'
                   f'<ul><li class="qfhead">{label}</li>{"".join(ent)}</ul></details>')
 open("frag_quickfind.html.txt", "w", encoding="utf-8").write(

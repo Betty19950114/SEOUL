@@ -171,11 +171,13 @@
 
   /* ---------- day tabs ---------- */
   .tabsbar {
-    position: sticky; top: 0; z-index: 30; margin: 24px -20px 0; padding: 10px 20px;
+    position: sticky; top: 0; z-index: 30; margin: 24px -20px 0;
+    display: flex; align-items: center; padding: 10px 20px 9px;
     background: color-mix(in srgb, var(--bg) 90%, transparent);
     backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
   }
-  .tabs { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+  .tabs { display: flex; align-items: center; gap: 8px; width: 100%;
+          overflow-x: auto; scrollbar-width: none;
           justify-content: center; justify-content: safe center; }
   .tabs::-webkit-scrollbar { display: none; }
   .tab {
@@ -736,19 +738,28 @@
   /* ---------- 每日行程摘要（可收合） ---------- */
   .daybrief { margin: 0 20px 14px; }
   .daybrief > summary {
-    display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
-    list-style: none; width: fit-content; padding: 0;
+    display: flex; align-items: center; flex-wrap: wrap; gap: 7px 8px; cursor: pointer;
+    list-style: none; padding: 0;
   }
   .daybrief > summary::-webkit-details-marker { display: none; }
   .daybrief > summary:focus-visible { outline: 2px solid var(--c); outline-offset: 3px; border-radius: 999px; }
   .daybrief .sumico { border-left-color: var(--c); }
   .daybrief[open] .sumico { transform: rotate(90deg); }
   .dbtype {
-    font-size: 12.5px; font-weight: 700; letter-spacing: .04em;
+    font-size: 12.5px; font-weight: 700; letter-spacing: .04em; white-space: nowrap;
     color: var(--pin-ink); background: var(--c);
     border-radius: 999px; padding: 3px 12px;
   }
-  .dbhint { font-size: 12px; color: var(--ink-faint); }
+  .dbgo {
+    display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;
+    font-size: 12px; color: var(--ink-soft);
+    background: var(--card-2); border: 1px solid var(--line);
+    border-radius: 999px; padding: 2px 10px 2px 8px;
+  }
+  .dbgo b { font-family: ui-monospace, monospace; font-weight: 700; color: var(--ink); }
+  .dbgoi { font-size: 12px; line-height: 1; }
+  @media (max-width: 720px) { .dbgow { display: none; } }   /* 手機省掉「建議」讓三個標籤併一行 */
+  .dbhint { font-size: 12px; color: var(--ink-faint); white-space: nowrap; }
   .dbgrid {
     display: grid; grid-template-columns: max-content 1fr; gap: 5px 12px;
     margin: 10px 0 0; padding: 12px 14px; font-size: 12.5px;
@@ -780,9 +791,14 @@
   .tb:focus-visible { outline: 2px solid var(--brand); outline-offset: -3px; }
 
   /* ---------- 快速尋找：圖示化 ---------- */
-  .qf > summary { gap: 3px; padding: 7px 7px; }    /* 高 32px，五個一定排得下一行 */
+  .qf > summary { gap: 6px; padding: 7px 11px 7px 9px; }
   .qfico { font-size: 13.5px; line-height: 1; }
+  .qflab { font-size: 12.5px; font-weight: 650; }
   .qfn { padding: 0 4px; font-size: 9.5px; }
+  @media (max-width: 720px) {                      /* 手機：只留圖示與數字 */
+    .qflab { display: none; }
+    .qf > summary { gap: 3px; padding: 7px 7px; }
+  }
   .quickfind { gap: 6px; padding: 8px 10px; justify-content: center; flex-wrap: nowrap;
                width: fit-content; margin-left: auto; margin-right: auto; }
   .qfhead {
