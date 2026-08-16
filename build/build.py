@@ -309,14 +309,18 @@ for d in sorted(DAYS):
     <span class="dtheme">{esc(D["theme"])}</span></span>
     <span class="dcount">{sc} 站</span>
   </header>
-  <div class="daybrief" data-kind="{BRIEF[d]["cat"]}">
-    <span class="dbtype">{esc(BRIEF[d]["type"])}</span>
+  <details class="daybrief" data-kind="{BRIEF[d]["cat"]}">
+    <summary>
+      <span class="sumico" aria-hidden="true"></span>
+      <span class="dbtype">{esc(BRIEF[d]["type"])}</span>
+      <span class="dbhint">穿搭・攜帶建議</span>
+    </summary>
     <dl class="dbgrid">
       <dt>穿搭</dt><dd>{esc(BRIEF[d]["wear"])}</dd>
       <dt>背包</dt><dd>{esc(BRIEF[d]["bag"])}</dd>
       <dt>購物袋</dt><dd>{esc(BRIEF[d]["tote"])}</dd>
     </dl>
-  </div>
+  </details>
   <div class="arearoute">{chips}</div>
   <ol class="tl">
 {chr(10).join(rows)}
@@ -344,9 +348,10 @@ for d in sorted(DAYS):
 open("frag_legend.html.txt", "w", encoding="utf-8").write("\n".join(leg))
 
 # ---------------- 快速尋找 ----------------
-QF = [("food","美食"), ("shop","購物"), ("sight","景點"), ("dessert","甜點"), ("cafe","咖啡廳")]
+QF = [("food","美食","🍜"), ("shop","購物","🛍"), ("sight","景點","🏛"),
+      ("dessert","甜點","🍰"), ("cafe","咖啡廳","☕")]
 qf = []
-for cat, label in QF:
+for cat, label, icon in QF:
     ent = []
     for d in sorted(DAYS):
         for it in DAYS[d]["items"]:
@@ -357,10 +362,12 @@ for cat, label in QF:
                        f'<span class="qftime">{it["t"]}</span></button></li>')
     if ent:
         qf.append(f'<details class="qf" data-cat="{cat}">'
-                  f'<summary><span class="qfdot tag {cat}"></span>{label}'
-                  f'<span class="qfn">{len(ent)}</span></summary><ul>{"".join(ent)}</ul></details>')
+                  f'<summary title="{label}" aria-label="{label} {len(ent)} 個">'
+                  f'<span class="qfico" aria-hidden="true">{icon}</span>'
+                  f'<span class="qfn">{len(ent)}</span></summary>'
+                  f'<ul><li class="qfhead">{label}</li>{"".join(ent)}</ul></details>')
 open("frag_quickfind.html.txt", "w", encoding="utf-8").write(
-    '<div class="quickfind"><span class="qflabel">快速尋找</span>' + "".join(qf) + '</div>')
+    '<div class="quickfind" role="group" aria-label="依類別快速尋找">' + "".join(qf) + '</div>')
 
 print("stops:", len(nl), "| regions:", len(region_boxes), "| metro stations:", len(METRO_STATIONS))
 for d in sorted(DAYS):

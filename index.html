@@ -107,7 +107,7 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
-  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 20px 72px; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 20px calc(96px + env(safe-area-inset-bottom, 0px)); }
   .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
 
   /* ---------- brand header ---------- */
@@ -386,7 +386,11 @@
 
   /* ---------- small screens ---------- */
   @media (max-width: 720px) {
-    .wrap { padding: 0 16px 56px; }
+    .wrap { padding: 0 16px calc(92px + env(safe-area-inset-bottom, 0px)); }
+    .daybrief { margin: 0 16px 12px; }
+    .dbgrid { grid-template-columns: 1fr; gap: 2px; }
+    .dbgrid dt { margin-top: 7px; }
+    .dbgrid dt:first-child { margin-top: 0; }
     .masthead { margin: 0 -16px 20px; padding: 22px 16px 18px; }
     .tabsbar { margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px; }
     .inset { position: static; max-width: none; margin: 12px 0 0; }
@@ -661,7 +665,8 @@
 
   /* ---------- 回到剛才的行程 ---------- */
   .backfab {
-    position: fixed; right: 16px; bottom: 18px; z-index: 55;
+    position: fixed; right: 16px; z-index: 55;
+    bottom: calc(76px + env(safe-area-inset-bottom, 0px));
     display: none; align-items: center; gap: 8px; max-width: min(78vw, 320px);
     font: inherit; font-size: 13px; font-weight: 650; cursor: pointer;
     color: var(--brand-ink); background: var(--brand);
@@ -726,29 +731,61 @@
   .tr.move.back .tn { color: var(--ink-soft); font-weight: 600; }
   .tr.move.back .tt { color: transparent; }        /* 無時間點，保留對齊 */
 
-  /* ---------- 每日行程摘要 ---------- */
-  .daybrief {
-    margin: 0 20px 14px; padding: 12px 14px;
+
+  /* ---------- 每日行程摘要（可收合） ---------- */
+  .daybrief { margin: 0 20px 14px; }
+  .daybrief > summary {
+    display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+    list-style: none; width: fit-content; padding: 0;
+  }
+  .daybrief > summary::-webkit-details-marker { display: none; }
+  .daybrief > summary:focus-visible { outline: 2px solid var(--c); outline-offset: 3px; border-radius: 999px; }
+  .daybrief .sumico { border-left-color: var(--c); }
+  .daybrief[open] .sumico { transform: rotate(90deg); }
+  .dbtype {
+    font-size: 12.5px; font-weight: 700; letter-spacing: .04em;
+    color: var(--pin-ink); background: var(--c);
+    border-radius: 999px; padding: 3px 12px;
+  }
+  .dbhint { font-size: 12px; color: var(--ink-faint); }
+  .dbgrid {
+    display: grid; grid-template-columns: max-content 1fr; gap: 5px 12px;
+    margin: 10px 0 0; padding: 12px 14px; font-size: 12.5px;
     background: var(--card-2); border: 1px solid var(--line);
     border-left: 3px solid var(--c); border-radius: 11px;
-  }
-  .dbtype {
-    display: inline-block; font-size: 12.5px; font-weight: 700; letter-spacing: .04em;
-    color: var(--pin-ink); background: var(--c);
-    border-radius: 999px; padding: 3px 12px; margin-bottom: 9px;
-  }
-  .dbgrid {
-    display: grid; grid-template-columns: max-content 1fr; gap: 5px 12px; margin: 0;
-    font-size: 12.5px;
   }
   .dbgrid dt { color: var(--ink-faint); font-weight: 650; white-space: nowrap; }
   .dbgrid dd { margin: 0; color: var(--ink-soft); line-height: 1.6;
                text-wrap: pretty; overflow-wrap: break-word; line-break: strict; }
-  @media (max-width: 720px) {
-    .daybrief { margin: 0 16px 12px; padding: 11px 12px; }
-    .dbgrid { grid-template-columns: 1fr; gap: 2px; }
-    .dbgrid dt { margin-top: 7px; }
-    .dbgrid dt:first-child { margin-top: 0; }
+
+  /* ---------- 底部頁面導覽 ---------- */
+  .tabbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    background: color-mix(in srgb, var(--card) 92%, transparent);
+    backdrop-filter: blur(14px);
+    border-top: 1px solid var(--line);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .tb {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 3px; min-height: 58px; padding: 8px 4px;
+    text-decoration: none; color: var(--ink-faint);
+    font-size: 11.5px; font-weight: 650; letter-spacing: .02em;
+  }
+  .tb .tbi { font-size: 19px; line-height: 1; }
+  .tb:hover { color: var(--ink-soft); background: var(--card-2); }
+  .tb[aria-current="page"] { color: var(--brand); background: var(--brand-soft); }
+  .tb:focus-visible { outline: 2px solid var(--brand); outline-offset: -3px; }
+
+  /* ---------- 快速尋找：圖示化 ---------- */
+  .qf > summary { gap: 4px; padding: 10px 8px; }   /* 高 40px，寬度收緊讓五個排一行 */
+  .qfico { font-size: 16px; line-height: 1; }
+  .qfn { padding: 0 5px; font-size: 10px; }
+  .quickfind { gap: 5px; padding: 10px 12px; justify-content: space-between; }
+  .qfhead {
+    font-size: 11.5px; font-weight: 700; letter-spacing: .06em; color: var(--ink-faint);
+    padding: 4px 9px 7px; border-bottom: 1px solid var(--line); margin-bottom: 4px;
   }
 
 </style>
@@ -766,9 +803,6 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
       <div class="herocontent">
         <div class="navset">
           <button class="themebtn" type="button" id="themebtn" aria-label="切換亮色／暗色">🌙<span class="tlabel">暗色</span></button>
-          <a class="navlink" href="map.html">路線全圖</a>
-          <a class="navlink" href="shopping.html">購物清單</a>
-        <a class="navlink" href="phrases.html">韓文用語</a>
         </div>
         <div class="herobrand">
           <div class="brand">
@@ -826,7 +860,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     </div>
   </div>
 
-<div class="quickfind"><span class="qflabel">快速尋找</span><details class="qf" data-cat="food"><summary><span class="qfdot tag food"></span>美食<span class="qfn">7</span></summary><ul><li><button type="button" data-target="stop-namdaemun" data-day="1"><span class="qfday" style="--c:var(--d1)">D1</span><span class="qfname">南大門市場</span><span class="qftime">19:20</span></button></li><li><button type="button" data-target="stop-jinokhwa" data-day="2"><span class="qfday" style="--c:var(--d2)">D2</span><span class="qfname">陳玉華一隻雞</span><span class="qftime">21:00</span></button></li><li><button type="button" data-target="stop-mangwon" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">望遠市場</span><span class="qftime">13:50</span></button></li><li><button type="button" data-target="stop-yeopgi" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">獵奇辣炒年糕 신당본점</span><span class="qftime">11:30</span></button></li><li><button type="button" data-target="stop-ggupdang_ss" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">烤黨 Ggupdang 聖水店</span><span class="qftime">15:45</span></button></li><li><button type="button" data-target="stop-gamjatang" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">祖傳三代馬鈴薯排骨湯</span><span class="qftime">18:00</span></button></li><li><button type="button" data-target="stop-isaac" data-day="5"><span class="qfday" style="--c:var(--d5)">D5</span><span class="qfname">Isaac Toast 明洞聖堂店</span><span class="qftime">08:25</span></button></li></ul></details><details class="qf" data-cat="shop"><summary><span class="qfdot tag shop"></span>購物<span class="qfn">6</span></summary><ul><li><button type="button" data-target="stop-myeongdong" data-day="1"><span class="qfday" style="--c:var(--d1)">D1</span><span class="qfname">明洞商圈</span><span class="qftime">20:45</span></button></li><li><button type="button" data-target="stop-doota" data-day="2"><span class="qfday" style="--c:var(--d2)">D2</span><span class="qfname">東大門 두타몰</span><span class="qftime">22:15</span></button></li><li><button type="button" data-target="stop-cat" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">漢江貓咪店</span><span class="qftime">15:05</span></button></li><li><button type="button" data-target="stop-aeae" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">弘大商圈 購物</span><span class="qftime">16:15</span></button></li><li><button type="button" data-target="stop-lottemart" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">樂天超市 首爾站店</span><span class="qftime">18:50</span></button></li><li><button type="button" data-target="stop-ept" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">聖水洞 購物</span><span class="qftime">13:30</span></button></li></ul></details><details class="qf" data-cat="sight"><summary><span class="qfdot tag sight"></span>景點<span class="qfn">7</span></summary><ul><li><button type="button" data-target="stop-everland" data-day="2"><span class="qfday" style="--c:var(--d2)">D2</span><span class="qfname">愛寶樂園</span><span class="qftime">10:00</span></button></li><li><button type="button" data-target="stop-gwanghwamun" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">光化門廣場</span><span class="qftime">08:45</span></button></li><li><button type="button" data-target="stop-gyeongbok" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">景福宮</span><span class="qftime">09:25</span></button></li><li><button type="button" data-target="stop-bukchon" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">北村韓屋村</span><span class="qftime">10:40</span></button></li><li><button type="button" data-target="stop-ikseon" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">益善洞韓屋街</span><span class="qftime">12:15</span></button></li><li><button type="button" data-target="stop-banpo" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">盤浦大橋 月光彩虹噴泉</span><span class="qftime">20:20</span></button></li><li><button type="button" data-target="stop-cathedral" data-day="5"><span class="qfday" style="--c:var(--d5)">D5</span><span class="qfname">明洞聖堂</span><span class="qftime">07:55</span></button></li></ul></details><details class="qf" data-cat="dessert"><summary><span class="qfdot tag dessert"></span>甜點<span class="qfn">3</span></summary><ul><li><button type="button" data-target="stop-artist" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">Artist Bakery</span><span class="qftime">11:30</span></button></li><li><button type="button" data-target="stop-gelato" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">冰淇淋 Maman Gelato</span><span class="qftime">16:15</span></button></li><li><button type="button" data-target="stop-eggtart" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">蛋塔 Meitawang Egg Tart</span><span class="qftime">16:45</span></button></li></ul></details><details class="qf" data-cat="cafe"><summary><span class="qfdot tag cafe"></span>咖啡廳<span class="qfn">1</span></summary><ul><li><button type="button" data-target="stop-compose" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">Compose Coffee 弘大</span><span class="qftime">17:55</span></button></li></ul></details></div>
+<div class="quickfind" role="group" aria-label="依類別快速尋找"><details class="qf" data-cat="food"><summary title="美食" aria-label="美食 7 個"><span class="qfico" aria-hidden="true">🍜</span><span class="qfn">7</span></summary><ul><li class="qfhead">美食</li><li><button type="button" data-target="stop-namdaemun" data-day="1"><span class="qfday" style="--c:var(--d1)">D1</span><span class="qfname">南大門市場</span><span class="qftime">19:20</span></button></li><li><button type="button" data-target="stop-jinokhwa" data-day="2"><span class="qfday" style="--c:var(--d2)">D2</span><span class="qfname">陳玉華一隻雞</span><span class="qftime">21:00</span></button></li><li><button type="button" data-target="stop-mangwon" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">望遠市場</span><span class="qftime">13:50</span></button></li><li><button type="button" data-target="stop-yeopgi" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">獵奇辣炒年糕 신당본점</span><span class="qftime">11:30</span></button></li><li><button type="button" data-target="stop-ggupdang_ss" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">烤黨 Ggupdang 聖水店</span><span class="qftime">15:45</span></button></li><li><button type="button" data-target="stop-gamjatang" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">祖傳三代馬鈴薯排骨湯</span><span class="qftime">18:00</span></button></li><li><button type="button" data-target="stop-isaac" data-day="5"><span class="qfday" style="--c:var(--d5)">D5</span><span class="qfname">Isaac Toast 明洞聖堂店</span><span class="qftime">08:25</span></button></li></ul></details><details class="qf" data-cat="shop"><summary title="購物" aria-label="購物 6 個"><span class="qfico" aria-hidden="true">🛍</span><span class="qfn">6</span></summary><ul><li class="qfhead">購物</li><li><button type="button" data-target="stop-myeongdong" data-day="1"><span class="qfday" style="--c:var(--d1)">D1</span><span class="qfname">明洞商圈</span><span class="qftime">20:45</span></button></li><li><button type="button" data-target="stop-doota" data-day="2"><span class="qfday" style="--c:var(--d2)">D2</span><span class="qfname">東大門 두타몰</span><span class="qftime">22:15</span></button></li><li><button type="button" data-target="stop-cat" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">漢江貓咪店</span><span class="qftime">15:05</span></button></li><li><button type="button" data-target="stop-aeae" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">弘大商圈 購物</span><span class="qftime">16:15</span></button></li><li><button type="button" data-target="stop-lottemart" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">樂天超市 首爾站店</span><span class="qftime">18:50</span></button></li><li><button type="button" data-target="stop-ept" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">聖水洞 購物</span><span class="qftime">13:30</span></button></li></ul></details><details class="qf" data-cat="sight"><summary title="景點" aria-label="景點 7 個"><span class="qfico" aria-hidden="true">🏛</span><span class="qfn">7</span></summary><ul><li class="qfhead">景點</li><li><button type="button" data-target="stop-everland" data-day="2"><span class="qfday" style="--c:var(--d2)">D2</span><span class="qfname">愛寶樂園</span><span class="qftime">10:00</span></button></li><li><button type="button" data-target="stop-gwanghwamun" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">光化門廣場</span><span class="qftime">08:45</span></button></li><li><button type="button" data-target="stop-gyeongbok" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">景福宮</span><span class="qftime">09:25</span></button></li><li><button type="button" data-target="stop-bukchon" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">北村韓屋村</span><span class="qftime">10:40</span></button></li><li><button type="button" data-target="stop-ikseon" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">益善洞韓屋街</span><span class="qftime">12:15</span></button></li><li><button type="button" data-target="stop-banpo" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">盤浦大橋 月光彩虹噴泉</span><span class="qftime">20:20</span></button></li><li><button type="button" data-target="stop-cathedral" data-day="5"><span class="qfday" style="--c:var(--d5)">D5</span><span class="qfname">明洞聖堂</span><span class="qftime">07:55</span></button></li></ul></details><details class="qf" data-cat="dessert"><summary title="甜點" aria-label="甜點 3 個"><span class="qfico" aria-hidden="true">🍰</span><span class="qfn">3</span></summary><ul><li class="qfhead">甜點</li><li><button type="button" data-target="stop-artist" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">Artist Bakery</span><span class="qftime">11:30</span></button></li><li><button type="button" data-target="stop-gelato" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">冰淇淋 Maman Gelato</span><span class="qftime">16:15</span></button></li><li><button type="button" data-target="stop-eggtart" data-day="4"><span class="qfday" style="--c:var(--d4)">D4</span><span class="qfname">蛋塔 Meitawang Egg Tart</span><span class="qftime">16:45</span></button></li></ul></details><details class="qf" data-cat="cafe"><summary title="咖啡廳" aria-label="咖啡廳 1 個"><span class="qfico" aria-hidden="true">☕</span><span class="qfn">1</span></summary><ul><li class="qfhead">咖啡廳</li><li><button type="button" data-target="stop-compose" data-day="3"><span class="qfday" style="--c:var(--d3)">D3</span><span class="qfname">Compose Coffee 弘大</span><span class="qftime">17:55</span></button></li></ul></details></div>
 
   <div class="mapmodes" role="group" aria-label="地圖模式">
     <button class="modebtn" type="button" data-mode="route" aria-pressed="true">行程路線</button>
@@ -963,14 +997,18 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <span class="dtheme">抵達首爾・南大門・明洞</span></span>
     <span class="dcount">3 站</span>
   </header>
-  <div class="daybrief" data-kind="shop">
-    <span class="dbtype">購物行程</span>
+  <details class="daybrief" data-kind="shop">
+    <summary>
+      <span class="sumico" aria-hidden="true"></span>
+      <span class="dbtype">購物行程</span>
+      <span class="dbhint">穿搭・攜帶建議</span>
+    </summary>
     <dl class="dbgrid">
       <dt>穿搭</dt><dd>落地就走，鞋子要好走的。八月底首爾約 26–30°C，短袖加件薄外套應付冷氣</dd>
       <dt>背包</dt><dd>小側背包就好，大行李已放飯店</dd>
       <dt>購物袋</dt><dd>需要，明洞店家不一定附袋</dd>
     </dl>
-  </div>
+  </details>
   <div class="arearoute"><span class="achip">金浦機場</span><span class="asep">→</span><span class="achip">首爾站</span><span class="asep">→</span><span class="achip">南大門</span><span class="asep">→</span><span class="achip">明洞</span></div>
   <ol class="tl">
 <li class="tr move air"><span class="tt">14:00</span><span class="tbody"><span class="mbadge">航班</span><span class="tn">松山機場 TSA 起飛</span><span class="tnote">飛行約 2 小時 25 分</span></span></li>
@@ -991,14 +1029,18 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <span class="dtheme">愛寶樂園・東大門</span></span>
     <span class="dcount">3 站</span>
   </header>
-  <div class="daybrief" data-kind="play">
-    <span class="dbtype">玩樂行程</span>
+  <details class="daybrief" data-kind="play">
+    <summary>
+      <span class="sumico" aria-hidden="true"></span>
+      <span class="dbtype">玩樂行程</span>
+      <span class="dbhint">穿搭・攜帶建議</span>
+    </summary>
     <dl class="dbgrid">
       <dt>穿搭</dt><dd>排汗透氣衣物、好走的鞋。園區日曬強，戴帽子或備防曬；搭雲霄飛車前記得收好帽子與鬆的配件</dd>
       <dt>背包</dt><dd>後背包，裝水、防曬、雨具與行動電源。園區有置物櫃可寄放</dd>
       <dt>購物袋</dt><dd>需要，晚上會逛東大門</dd>
     </dl>
-  </div>
+  </details>
   <div class="arearoute"><span class="achip">首爾站</span><span class="asep">→</span><span class="achip">龍仁・愛寶樂園</span><span class="asep">→</span><span class="achip">東大門</span></div>
   <ol class="tl">
 <li class="tr move bus"><span class="tt">08:00</span><span class="tbody"><span class="mbadge">巴士</span><span class="tn">飯店出發，搭巴士前往龍仁</span><span class="tnote">接駁巴士或到江南／蠶室轉高速巴士，約 1.5 小時</span></span></li>
@@ -1017,14 +1059,18 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <span class="dtheme">光化門・景福宮・北村・弘大</span></span>
     <span class="dcount">10 站</span>
   </header>
-  <div class="daybrief" data-kind="sight">
-    <span class="dbtype">觀光行程</span>
+  <details class="daybrief" data-kind="sight">
+    <summary>
+      <span class="sumico" aria-hidden="true"></span>
+      <span class="dbtype">觀光行程</span>
+      <span class="dbhint">穿搭・攜帶建議</span>
+    </summary>
     <dl class="dbgrid">
       <dt>穿搭</dt><dd>全天步行約 5–6 公里，好走的鞋是重點。宮殿與韓屋拍照建議穿亮色；穿韓服進景福宮免門票</dd>
       <dt>背包</dt><dd>中型後背包，宮殿區有陽光要帶水</dd>
       <dt>購物袋</dt><dd>需要，弘大加樂天超市會買不少（樂天購物袋要另外付費）</dd>
     </dl>
-  </div>
+  </details>
   <div class="arearoute"><span class="achip">光化門</span><span class="asep">→</span><span class="achip">景福宮</span><span class="asep">→</span><span class="achip">北村</span><span class="asep">→</span><span class="achip">益善洞</span><span class="asep">→</span><span class="achip">望遠洞</span><span class="asep">→</span><span class="achip">弘大</span></div>
   <ol class="tl">
 <li class="tr stop" id="stop-gwanghwamun" data-station="光化門"><span class="tt">08:45</span><span class="tbody"><span class="tnum">A</span><span class="tag sight">景點</span><span class="tn">光化門廣場</span><details class="stopinfo"><summary><span class="sumico" aria-hidden="true"></span>詳細說明</summary><dl class="infogrid"><dt>說明</dt><dd>世宗大王與李舜臣銅像所在的市中心廣場，光化門站 2 號出口上來就是。早上人少好拍</dd><dt>最近地鐵站</dt><dd>光化門站（5 號線）2 號出口・步行 1 分（86 m）</dd><dt>營業時間</dt><dd>開放式廣場，全日可逛</dd><dt>地址</dt><dd class="addr">서울특별시 종로구 세종대로 172</dd></dl><div class="stopacts"><a class="actbtn navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%A2%85%EB%A1%9C%EA%B5%AC%20%EC%84%B8%EC%A2%85%EB%8C%80%EB%A1%9C%20172" data-nmap="nmap://search?query=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%A2%85%EB%A1%9C%EA%B5%AC%20%EC%84%B8%EC%A2%85%EB%8C%80%EB%A1%9C%20172&amp;appname=betty19950114.github.io" target="_blank" rel="noopener noreferrer"><span class="aico" aria-hidden="true">🗺</span>Naver開啟</a><button type="button" class="actbtn tometro" data-station="光化門" data-stop="stop-gwanghwamun" data-label="光化門廣場"><span class="aico" aria-hidden="true">🚇</span>在地鐵圖查看</button></div></details></span></li>
@@ -1056,14 +1102,18 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <span class="dtheme">新堂洞・聖水洞・盤浦</span></span>
     <span class="dcount">7 站</span>
   </header>
-  <div class="daybrief" data-kind="food">
-    <span class="dbtype">吃貨行程</span>
+  <details class="daybrief" data-kind="food">
+    <summary>
+      <span class="sumico" aria-hidden="true"></span>
+      <span class="dbtype">吃貨行程</span>
+      <span class="dbhint">穿搭・攜帶建議</span>
+    </summary>
     <dl class="dbgrid">
       <dt>穿搭</dt><dd>聖水洞是潮流區，可以穿有型一點。晚上盤浦河邊風大，帶件薄外套</dd>
       <dt>背包</dt><dd>後背包留空間，聖水洞七家店會提，衣物體積不小</dd>
       <dt>購物袋</dt><dd>需要，而且建議帶大一點的</dd>
     </dl>
-  </div>
+  </details>
   <div class="arearoute"><span class="achip">新堂洞</span><span class="asep">→</span><span class="achip">聖水洞</span><span class="asep">→</span><span class="achip">盤浦</span></div>
   <ol class="tl">
 <li class="tr stop" id="stop-yeopgi" data-station="新堂"><span class="tt">11:30</span><span class="tbody"><span class="tnum">A</span><span class="tag food">美食</span><span class="tn">獵奇辣炒年糕 신당본점</span><details class="stopinfo"><summary><span class="sumico" aria-hidden="true"></span>詳細說明</summary><dl class="infogrid"><dt>說明</dt><dd>엽기떡볶이本店，辣度出名。新堂站 10 號出口右側巷內，跟外送專門店不同址</dd><dt>最近地鐵站</dt><dd>新堂站（2·6 號線）10 號出口・步行 3 分（212 m）</dd><dt>營業時間</dt><dd>週六 10:00–翌日 01:00；平日與週日 10:00–23:30</dd><dt>地址</dt><dd class="addr">서울 중구 퇴계로75길 15 금호빌딩 1층</dd></dl><div class="stopacts"><a class="actbtn navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%ED%87%B4%EA%B3%84%EB%A1%9C75%EA%B8%B8%2015%20%EA%B8%88%ED%98%B8%EB%B9%8C%EB%94%A9%201%EC%B8%B5" data-nmap="nmap://search?query=%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%ED%87%B4%EA%B3%84%EB%A1%9C75%EA%B8%B8%2015%20%EA%B8%88%ED%98%B8%EB%B9%8C%EB%94%A9%201%EC%B8%B5&amp;appname=betty19950114.github.io" target="_blank" rel="noopener noreferrer"><span class="aico" aria-hidden="true">🗺</span>Naver開啟</a><button type="button" class="actbtn tometro" data-station="新堂" data-stop="stop-yeopgi" data-label="獵奇辣炒年糕 신당본점"><span class="aico" aria-hidden="true">🚇</span>在地鐵圖查看</button></div></details></span></li>
@@ -1086,14 +1136,18 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     <span class="dtheme">明洞聖堂・賦歸</span></span>
     <span class="dcount">2 站</span>
   </header>
-  <div class="daybrief" data-kind="sight">
-    <span class="dbtype">觀光行程</span>
+  <details class="daybrief" data-kind="sight">
+    <summary>
+      <span class="sumico" aria-hidden="true"></span>
+      <span class="dbtype">觀光行程</span>
+      <span class="dbhint">穿搭・攜帶建議</span>
+    </summary>
     <dl class="dbgrid">
       <dt>穿搭</dt><dd>搭機舒適為主。聖堂是宗教場所，避免過於暴露的穿著</dd>
       <dt>背包</dt><dd>隨身小包，行李寄放飯店櫃檯回程再拿</dd>
       <dt>購物袋</dt><dd>不需要，今天不採買</dd>
     </dl>
-  </div>
+  </details>
   <div class="arearoute"><span class="achip">明洞</span><span class="asep">→</span><span class="achip">首爾站</span><span class="asep">→</span><span class="achip">仁川機場</span></div>
   <ol class="tl">
 <li class="tr move walk"><span class="tt">07:40</span><span class="tbody"><span class="mbadge">步行</span><span class="tn">飯店出發，步行前往明洞</span><span class="tnote">約 1 公里、走 15 分鐘。行李先寄放飯店櫃檯，回程再拿</span></span></li>
@@ -1114,6 +1168,9 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
   </footer>
 
 </div>
+
+
+<nav class="tabbar" aria-label="頁面導覽"><a class="tb" href="index.html" aria-current="page"><span class="tbi" aria-hidden="true">🗓</span><span class="tbl">行程</span></a><a class="tb" href="map.html"><span class="tbi" aria-hidden="true">🗺</span><span class="tbl">地圖</span></a><a class="tb" href="shopping.html"><span class="tbi" aria-hidden="true">🛍</span><span class="tbl">購物</span></a><a class="tb" href="phrases.html"><span class="tbi" aria-hidden="true">💬</span><span class="tbl">韓文</span></a></nav>
 
 <button class="backfab" id="backfab" type="button" data-show="0">
   <span aria-hidden="true">↩</span><span class="bfname" id="backname"></span>

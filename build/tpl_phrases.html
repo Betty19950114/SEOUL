@@ -23,9 +23,6 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
       </div>
       <div class="navset">
           <button class="themebtn" type="button" id="themebtn" aria-label="切換亮色／暗色">🌙<span class="tlabel">暗色</span></button>
-        <a class="navlink" href="index.html">← 逐日行程</a>
-        <a class="navlink" href="map.html">路線全圖</a>
-        <a class="navlink" href="shopping.html">購物清單</a>
       </div>
     </div>
     <p class="subline">卡關的時候，<strong>點任一句可放大</strong>，直接把手機拿給店員看</p>
@@ -45,6 +42,8 @@ __PHRASES__
   <p class="sw-tip">把畫面拿給對方看</p>
   <button class="sw-close" id="swClose" type="button">關閉</button>
 </div>
+
+<nav class="tabbar" aria-label="頁面導覽"><a class="tb" href="index.html"><span class="tbi" aria-hidden="true">🗓</span><span class="tbl">行程</span></a><a class="tb" href="map.html"><span class="tbi" aria-hidden="true">🗺</span><span class="tbl">地圖</span></a><a class="tb" href="shopping.html"><span class="tbi" aria-hidden="true">🛍</span><span class="tbl">購物</span></a><a class="tb" href="phrases.html" aria-current="page"><span class="tbi" aria-hidden="true">💬</span><span class="tbl">韓文</span></a></nav>
 
 <script>
 (function () {

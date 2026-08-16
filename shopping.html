@@ -649,6 +649,27 @@
     .thumb { width: 56px; height: 56px; }
   }
 
+  /* ---------- 底部頁面導覽 ---------- */
+  .tabbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    background: color-mix(in srgb, var(--card) 92%, transparent);
+    backdrop-filter: blur(14px);
+    border-top: 1px solid var(--line);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .tb {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 3px; min-height: 58px; padding: 8px 4px;
+    text-decoration: none; color: var(--ink-faint);
+    font-size: 11.5px; font-weight: 650; letter-spacing: .02em;
+  }
+  .tb .tbi { font-size: 19px; line-height: 1; }
+  .tb:hover { color: var(--ink-soft); background: var(--card-2); }
+  .tb[aria-current="page"] { color: var(--brand); background: var(--brand-soft); }
+  .tb:focus-visible { outline: 2px solid var(--brand); outline-offset: -3px; }
+
+  .wrap { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
 </style>
 <script>
 (function(){try{if(localStorage.getItem('seoul-theme')==='light')
@@ -668,8 +689,6 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
       </div>
       <div class="navset">
           <button class="themebtn" type="button" id="themebtn" aria-label="切換亮色／暗色">🌙<span class="tlabel">暗色</span></button>
-        <a class="navlink" href="index.html">← 逐日行程</a>
-        <a class="navlink" href="map.html">路線全圖</a>
       </div>
     </div>
   </header>
@@ -837,6 +856,8 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
   </footer>
 
 </div>
+
+<nav class="tabbar" aria-label="頁面導覽"><a class="tb" href="index.html"><span class="tbi" aria-hidden="true">🗓</span><span class="tbl">行程</span></a><a class="tb" href="map.html"><span class="tbi" aria-hidden="true">🗺</span><span class="tbl">地圖</span></a><a class="tb" href="shopping.html" aria-current="page"><span class="tbi" aria-hidden="true">🛍</span><span class="tbl">購物</span></a><a class="tb" href="phrases.html"><span class="tbi" aria-hidden="true">💬</span><span class="tbl">韓文</span></a></nav>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="商品照片">
   <button class="lbclose" id="lbclose" type="button" aria-label="關閉">×</button>

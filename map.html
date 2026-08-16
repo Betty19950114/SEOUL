@@ -107,7 +107,7 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
-  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 20px 72px; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 20px calc(96px + env(safe-area-inset-bottom, 0px)); }
   .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
 
   /* ---------- brand header ---------- */
@@ -386,7 +386,11 @@
 
   /* ---------- small screens ---------- */
   @media (max-width: 720px) {
-    .wrap { padding: 0 16px 56px; }
+    .wrap { padding: 0 16px calc(92px + env(safe-area-inset-bottom, 0px)); }
+    .daybrief { margin: 0 16px 12px; }
+    .dbgrid { grid-template-columns: 1fr; gap: 2px; }
+    .dbgrid dt { margin-top: 7px; }
+    .dbgrid dt:first-child { margin-top: 0; }
     .masthead { margin: 0 -16px 20px; padding: 22px 16px 18px; }
     .tabsbar { margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px; }
     .inset { position: static; max-width: none; margin: 12px 0 0; }
@@ -661,7 +665,8 @@
 
   /* ---------- 回到剛才的行程 ---------- */
   .backfab {
-    position: fixed; right: 16px; bottom: 18px; z-index: 55;
+    position: fixed; right: 16px; z-index: 55;
+    bottom: calc(76px + env(safe-area-inset-bottom, 0px));
     display: none; align-items: center; gap: 8px; max-width: min(78vw, 320px);
     font: inherit; font-size: 13px; font-weight: 650; cursor: pointer;
     color: var(--brand-ink); background: var(--brand);
@@ -726,29 +731,61 @@
   .tr.move.back .tn { color: var(--ink-soft); font-weight: 600; }
   .tr.move.back .tt { color: transparent; }        /* 無時間點，保留對齊 */
 
-  /* ---------- 每日行程摘要 ---------- */
-  .daybrief {
-    margin: 0 20px 14px; padding: 12px 14px;
+
+  /* ---------- 每日行程摘要（可收合） ---------- */
+  .daybrief { margin: 0 20px 14px; }
+  .daybrief > summary {
+    display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+    list-style: none; width: fit-content; padding: 0;
+  }
+  .daybrief > summary::-webkit-details-marker { display: none; }
+  .daybrief > summary:focus-visible { outline: 2px solid var(--c); outline-offset: 3px; border-radius: 999px; }
+  .daybrief .sumico { border-left-color: var(--c); }
+  .daybrief[open] .sumico { transform: rotate(90deg); }
+  .dbtype {
+    font-size: 12.5px; font-weight: 700; letter-spacing: .04em;
+    color: var(--pin-ink); background: var(--c);
+    border-radius: 999px; padding: 3px 12px;
+  }
+  .dbhint { font-size: 12px; color: var(--ink-faint); }
+  .dbgrid {
+    display: grid; grid-template-columns: max-content 1fr; gap: 5px 12px;
+    margin: 10px 0 0; padding: 12px 14px; font-size: 12.5px;
     background: var(--card-2); border: 1px solid var(--line);
     border-left: 3px solid var(--c); border-radius: 11px;
-  }
-  .dbtype {
-    display: inline-block; font-size: 12.5px; font-weight: 700; letter-spacing: .04em;
-    color: var(--pin-ink); background: var(--c);
-    border-radius: 999px; padding: 3px 12px; margin-bottom: 9px;
-  }
-  .dbgrid {
-    display: grid; grid-template-columns: max-content 1fr; gap: 5px 12px; margin: 0;
-    font-size: 12.5px;
   }
   .dbgrid dt { color: var(--ink-faint); font-weight: 650; white-space: nowrap; }
   .dbgrid dd { margin: 0; color: var(--ink-soft); line-height: 1.6;
                text-wrap: pretty; overflow-wrap: break-word; line-break: strict; }
-  @media (max-width: 720px) {
-    .daybrief { margin: 0 16px 12px; padding: 11px 12px; }
-    .dbgrid { grid-template-columns: 1fr; gap: 2px; }
-    .dbgrid dt { margin-top: 7px; }
-    .dbgrid dt:first-child { margin-top: 0; }
+
+  /* ---------- 底部頁面導覽 ---------- */
+  .tabbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    background: color-mix(in srgb, var(--card) 92%, transparent);
+    backdrop-filter: blur(14px);
+    border-top: 1px solid var(--line);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .tb {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 3px; min-height: 58px; padding: 8px 4px;
+    text-decoration: none; color: var(--ink-faint);
+    font-size: 11.5px; font-weight: 650; letter-spacing: .02em;
+  }
+  .tb .tbi { font-size: 19px; line-height: 1; }
+  .tb:hover { color: var(--ink-soft); background: var(--card-2); }
+  .tb[aria-current="page"] { color: var(--brand); background: var(--brand-soft); }
+  .tb:focus-visible { outline: 2px solid var(--brand); outline-offset: -3px; }
+
+  /* ---------- 快速尋找：圖示化 ---------- */
+  .qf > summary { gap: 4px; padding: 10px 8px; }   /* 高 40px，寬度收緊讓五個排一行 */
+  .qfico { font-size: 16px; line-height: 1; }
+  .qfn { padding: 0 5px; font-size: 10px; }
+  .quickfind { gap: 5px; padding: 10px 12px; justify-content: space-between; }
+  .qfhead {
+    font-size: 11.5px; font-weight: 700; letter-spacing: .06em; color: var(--ink-faint);
+    padding: 4px 9px 7px; border-bottom: 1px solid var(--line); margin-bottom: 4px;
   }
 
   /* map.html only */
@@ -808,9 +845,6 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
       </div>
       <div class="navset">
           <button class="themebtn" type="button" id="themebtn" aria-label="切換亮色／暗色">🌙<span class="tlabel">暗色</span></button>
-        <a class="navlink" href="index.html">← 逐日行程</a>
-        <a class="navlink" href="shopping.html">購物清單</a>
-        <a class="navlink" href="phrases.html">韓文用語</a>
       </div>
     </div>
   </header>
@@ -955,6 +989,8 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
   </footer>
 
 </div>
+
+<nav class="tabbar" aria-label="頁面導覽"><a class="tb" href="index.html"><span class="tbi" aria-hidden="true">🗓</span><span class="tbl">行程</span></a><a class="tb" href="map.html" aria-current="page"><span class="tbi" aria-hidden="true">🗺</span><span class="tbl">地圖</span></a><a class="tb" href="shopping.html"><span class="tbi" aria-hidden="true">🛍</span><span class="tbl">購物</span></a><a class="tb" href="phrases.html"><span class="tbi" aria-hidden="true">💬</span><span class="tbl">韓文</span></a></nav>
 
 <script>
 (function () {

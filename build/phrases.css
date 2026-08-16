@@ -68,3 +68,6 @@
     .ph { padding: 12px 14px; }
     .ph-ko { font-size: 19px; }
   }
+
+  /* tabbar-space */
+  .wrap { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }

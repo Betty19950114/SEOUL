@@ -120,3 +120,6 @@
     .sname { font-size: 15px; }
     .thumb { width: 56px; height: 56px; }
   }
+
+  /* tabbar-space */
+  .wrap { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
