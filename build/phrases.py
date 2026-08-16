@@ -5,25 +5,31 @@ def esc(s): return html.escape(str(s), quote=True)
 
 # (中文, 韓文, 羅馬拼音, 備註)
 SECTIONS = [
- ("基本", "basic", [
-   ("你好／不好意思（叫人）", "저기요", "jeo-gi-yo", "在店裡叫店員用這句最自然"),
-   ("謝謝", "감사합니다", "gam-sa-ham-ni-da", ""),
-   ("對不起", "죄송합니다", "joe-song-ham-ni-da", ""),
-   ("我不會說韓文", "한국어를 못해요", "han-gu-geo-reul mot-hae-yo", ""),
+ ("聽不懂時", "basic", [
+   ("請說慢一點", "천천히 말해 주세요", "cheon-cheon-hi mal-hae ju-se-yo", "聽得懂但跟不上速度時最好用"),
+   ("可以再說一次嗎？", "다시 한번 말해 주시겠어요?", "da-si han-beon mal-hae ju-si-ge-sseo-yo?", ""),
+   ("可以寫下來嗎？", "좀 써 주시겠어요?", "jom sseo ju-si-ge-sseo-yo?", "數字、時間聽不清時直接請對方寫"),
+   ("這個怎麼唸？", "이거 어떻게 읽어요?", "i-geo eo-tteo-ke il-geo-yo?", "看得懂諺文但不確定發音時"),
+   ("這是什麼？", "이게 뭐예요?", "i-ge mwo-ye-yo?", "指著小菜或食材問"),
    ("有中文或英文菜單嗎？", "중국어나 영어 메뉴판 있어요?", "jung-gu-geo-na yeong-eo me-nyu-pan i-sseo-yo?", ""),
    ("洗手間在哪裡？", "화장실 어디예요?", "hwa-jang-sil eo-di-ye-yo?", ""),
-   ("可以幫我拍照嗎？", "사진 좀 찍어 주시겠어요?", "sa-jin jom jji-geo ju-si-ge-sseo-yo?", ""),
+   ("可以幫我們拍張合照嗎？", "저희 사진 좀 찍어 주시겠어요?", "jeo-hui sa-jin jom jji-geo ju-si-ge-sseo-yo?", "저희＝我們，兩人同行用這個"),
  ]),
  ("點餐・用餐", "food", [
+   ("兩位", "두 명이요", "du myeong-i-yo", "進店時先講這句"),
    ("請給我這個（指菜單）", "이거 주세요", "i-geo ju-se-yo", "配合手指最好用"),
-   ("兩人份", "2인분 주세요", "i-in-bun ju-se-yo", "一人份是 1인분（il-in-bun）"),
-   ("一個人可以嗎？", "혼자인데 괜찮아요?", "hon-ja-in-de gwaen-cha-na-yo?", "部分店家有兩人以上限制"),
+   ("兩人份", "2인분 주세요", "i-in-bun ju-se-yo", ""),
+   ("要等多久？", "얼마나 기다려야 돼요?", "eol-ma-na gi-da-ryeo-ya dwae-yo?", "熱門店先問再決定排不排"),
+   ("可以先候位嗎？", "웨이팅 걸어도 돼요?", "we-i-ting geo-reo-do dwae-yo?", "웨이팅＝候位，韓國店家常用"),
+   ("可以坐這裡嗎？", "여기 앉아도 돼요?", "yeo-gi an-ja-do dwae-yo?", ""),
    ("請不要太辣", "덜 맵게 해주세요", "deol maep-ge hae-ju-se-yo", "獵奇辣炒年糕必備"),
    ("完全不要辣", "안 맵게 해주세요", "an maep-ge hae-ju-se-yo", ""),
    ("哪一個最好吃？", "뭐가 제일 맛있어요?", "mwo-ga je-il ma-si-sseo-yo?", ""),
    ("請幫我打包", "포장해 주세요", "po-jang-hae ju-se-yo", ""),
    ("請結帳", "계산해 주세요", "gye-san-hae ju-se-yo", ""),
    ("可以刷卡嗎？", "카드 되나요?", "ka-deu doe-na-yo?", ""),
+   ("可以分開結帳嗎？", "따로 계산해 주세요", "tta-ro gye-san-hae ju-se-yo", "兩人各付各的"),
+   ("這裡只收現金嗎？", "현금만 받아요?", "hyeon-geum-man ba-da-yo?", "市場攤販常見"),
    ("請再給我一份小菜", "반찬 좀 더 주세요", "ban-chan jom deo ju-se-yo", "小菜通常可免費續"),
    ("請給我水", "물 좀 주세요", "mul jom ju-se-yo", ""),
    ("我對○○過敏", "저는 ○○ 알레르기가 있어요", "jeo-neun ○○ al-le-reu-gi-ga i-sseo-yo", "海鮮 해산물／花生 땅콩／蛋 계란"),
@@ -55,7 +61,7 @@ SECTIONS = [
  ]),
  ("這趟行程專用", "trip", [
    ("請給我兩張自由券", "자유이용권 두 장 주세요", "ja-yu-i-yong-gwon du jang ju-se-yo", "愛寶樂園售票口"),
-   ("這個要排多久？", "얼마나 기다려야 돼요?", "eol-ma-na gi-da-ryeo-ya dwae-yo?", "排隊時問"),
+   ("接駁巴士在哪裡搭？", "셔틀버스 어디서 타요?", "syeo-teul-beo-seu eo-di-seo ta-yo?", "愛寶樂園往返必問"),
    ("請給我兩人份的辣燉白帶魚", "갈치조림 2인분 주세요", "gal-chi-jo-rim i-in-bun ju-se-yo", "南大門갈치조림골목"),
    ("一隻雞一份，加刀削麵", "닭한마리 하나랑 칼국수 사리 주세요", "dak-han-ma-ri ha-na-rang kal-guk-su sa-ri ju-se-yo", "陳玉華必點吃法"),
    ("最後請幫我炒飯", "마지막에 볶음밥 해주세요", "ma-ji-ma-ge bo-kkeum-bap hae-ju-se-yo", "一隻雞收尾"),
