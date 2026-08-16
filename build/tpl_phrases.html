@@ -1,0 +1,94 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SEOUL 💜 BTS THE CITY ARIRANG</title>
+<style>
+__CSS__
+__PHRASESCSS__
+</style>
+<script>
+(function(){try{if(localStorage.getItem('seoul-theme')==='light')
+document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
+</script>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="topbar">
+      <div>
+        <div class="brand">
+          <h1>SEOUL <span class="hv">ARIRANG</span></h1>
+          <span class="kr">한국어 회화</span>
+        </div>
+        <span class="taglabel">💜 BTS THE CITY ARIRANG</span>
+      </div>
+      <div class="navset">
+          <button class="themebtn" type="button" id="themebtn" aria-label="切換亮色／暗色">🌙<span class="tlabel">暗色</span></button>
+        <a class="navlink" href="index.html">← 逐日行程</a>
+        <a class="navlink" href="map.html">路線全圖</a>
+        <a class="navlink" href="shopping.html">購物清單</a>
+      </div>
+    </div>
+    <p class="subline">卡關的時候，<strong>點任一句可放大</strong>，直接把手機拿給店員看</p>
+  </header>
+
+__PHRASES__
+
+  <footer>
+    開開心心出門～平平安安回來！
+  </footer>
+
+</div>
+
+<div class="shower" id="shower" role="dialog" aria-modal="true" aria-label="放大顯示">
+  <p class="sw-zh" id="swZh"></p>
+  <p class="sw-ko" id="swKo"></p>
+  <p class="sw-tip">把畫面拿給對方看</p>
+  <button class="sw-close" id="swClose" type="button">關閉</button>
+</div>
+
+<script>
+(function () {
+  var box = document.getElementById('shower');
+  var ko = document.getElementById('swKo'), zh = document.getElementById('swZh');
+  var last = null;
+  function open(el) {
+    last = el;
+    ko.textContent = el.dataset.ko;
+    zh.textContent = el.dataset.zh;
+    box.setAttribute('open', '');
+    document.getElementById('swClose').focus();
+  }
+  function close() { box.removeAttribute('open'); if (last) last.focus(); }
+  document.querySelectorAll('.ph').forEach(function (el) {
+    el.addEventListener('click', function () { open(el); });
+    el.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(el); }
+    });
+  });
+  document.getElementById('swClose').addEventListener('click', close);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && box.hasAttribute('open')) close();
+  });
+})();
+</script>
+
+<script>
+(function () {
+  var btn = document.getElementById('themebtn');
+  if (!btn) return;
+  var label = btn.querySelector('.tlabel');
+  function paint() {
+    var light = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.firstChild.nodeValue = light ? '☀︎' : '🌙';
+    label.textContent = light ? '亮色' : '暗色';
+  }
+  btn.addEventListener('click', function () {
+    var light = document.documentElement.getAttribute('data-theme') === 'light';
+    if (light) document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', 'light');
+    try { localStorage.setItem('seoul-theme', light ? 'dark' : 'light'); } catch (e) {}
+    paint();
+  });
+  paint();
+})();
+</script>

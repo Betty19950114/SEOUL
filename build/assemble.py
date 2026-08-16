@@ -16,6 +16,8 @@ metroleg  = read('frag_metrolegend.txt')
 cards     = read('frag_cards.html.txt')
 legend    = read('frag_legend.html.txt')
 quickfind = read('frag_quickfind.html.txt')
+phrasescss = read('phrases.css')
+phrases   = read('frag_phrases.html.txt')
 
 css = css.replace('__FONT600__', f600).replace('__FONT800__', f800)
 
@@ -30,8 +32,9 @@ def fill(tpl, extra_css='', **kw):
 
 idx = fill('tpl_index.html', HERO=hero, CARDS=cards, QUICKFIND=quickfind)
 mp  = fill('tpl_map.html', extra_css='\n' + mapextra, LEGEND=legend)
+ph  = read('tpl_phrases.html').replace('__CSS__', css).replace('__PHRASESCSS__', phrasescss).replace('__PHRASES__', phrases)
 
-for name, body in [('index.html', idx), ('map.html', mp)]:
+for name, body in [('index.html', idx), ('map.html', mp), ('phrases.html', ph)]:
     left = sorted(set(re.findall(r'__[A-Z0-9]+__', body)))
     (OUT / name).write_text(body, encoding='utf-8')
     print(f'{name:12s} {len(body)//1024:4d} KB   unreplaced: {left}')

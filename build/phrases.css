@@ -1,0 +1,70 @@
+  /* ---------- 韓文用語 ---------- */
+  .phnavbar {
+    position: sticky; top: 0; z-index: 30; display: flex; gap: 7px; overflow-x: auto;
+    margin: 18px -20px 0; padding: 11px 20px; scrollbar-width: none;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
+  }
+  .phnavbar::-webkit-scrollbar { display: none; }
+  .phnav {
+    flex: none; font-size: 13px; font-weight: 650; text-decoration: none; white-space: nowrap;
+    color: var(--brand); background: var(--brand-soft);
+    border: 1px solid var(--line-2); border-radius: 999px; padding: 6px 14px;
+  }
+  .phnav:hover { border-color: var(--brand); }
+  .phnav:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+
+  .phsec { scroll-margin-top: 76px; margin-top: 26px; }
+  .phsec h2 {
+    display: flex; align-items: center; gap: 9px;
+    font-family: 'BigShoulders', sans-serif; font-weight: 800; font-size: 24px;
+    letter-spacing: .02em; margin: 0 0 12px; color: var(--ink);
+  }
+  .phn {
+    font-family: ui-monospace, monospace; font-size: 11px; font-weight: 700;
+    color: var(--ink-faint); background: var(--card-2);
+    border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+  }
+  .phlist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .ph {
+    display: flex; flex-direction: column; gap: 3px; cursor: pointer;
+    background: var(--card); border: 1px solid var(--line);
+    border-left: 3px solid var(--brand); border-radius: 12px;
+    padding: 13px 16px; box-shadow: var(--shadow-s);
+  }
+  .ph:hover { border-color: var(--line-2); border-left-color: var(--brand); }
+  .ph:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+  .ph-zh { font-size: 13px; color: var(--ink-faint); }
+  .ph-ko { font-size: 20px; font-weight: 700; color: var(--ink); line-height: 1.4; text-wrap: pretty; }
+  .ph-ro { font-family: ui-monospace, monospace; font-size: 11.5px; color: var(--ink-soft); }
+  .ph-note {
+    font-size: 12px; color: var(--brand); margin-top: 4px;
+    background: var(--brand-soft); border-radius: 6px; padding: 3px 9px; width: fit-content;
+  }
+
+  /* 出示給店員看的放大模式 */
+  .shower {
+    position: fixed; inset: 0; z-index: 70; display: none;
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 22px; padding: 28px; text-align: center;
+    background: var(--card);
+  }
+  .shower[open] { display: flex; }
+  .shower .sw-ko {
+    font-size: clamp(30px, 8vw, 52px); font-weight: 800; color: var(--ink);
+    line-height: 1.35; text-wrap: balance; max-width: 16ch;
+  }
+  .shower .sw-zh { font-size: 15px; color: var(--ink-faint); }
+  .shower .sw-tip { font-size: 12.5px; color: var(--ink-faint); }
+  .shower .sw-close {
+    margin-top: 8px; font: inherit; font-size: 14px; font-weight: 650; cursor: pointer;
+    color: var(--brand-ink); background: var(--brand);
+    border: 0; border-radius: 999px; padding: 11px 26px;
+  }
+  .shower .sw-close:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+  @media (max-width: 720px) {
+    .phnavbar { margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px; }
+    .ph { padding: 12px 14px; }
+    .ph-ko { font-size: 19px; }
+  }
