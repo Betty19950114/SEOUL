@@ -134,8 +134,8 @@ __CARDS__
     document.documentElement.setAttribute('data-day', d);
     tabs.forEach(function (t) { t.setAttribute('aria-pressed', String(t.dataset.day === d)); });
     cards.forEach(function (c) { c.hidden = !(d === 'all' || c.dataset.day === d); });
-    /* 換天時把已展開的說明收起來 */
-    document.querySelectorAll('.stopinfo[open]').forEach(function (x) { x.open = false; });
+    /* 換天時把已展開的說明與摘要收起來 */
+    document.querySelectorAll('.stopinfo[open], .daybrief[open]').forEach(function (x) { x.open = false; });
     groups.forEach(function (g) { g.classList.toggle('dim', !(d === 'all' || g.dataset.day === d)); });
     flows.forEach(function (f) { f.hidden = !(d === 'all' || f.dataset.day === d); });
   }
@@ -424,6 +424,28 @@ __CARDS__
     tab.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
     if (navigator.vibrate) { try { navigator.vibrate(20); } catch (err) {} }
   }, { passive: true });
+})();
+</script>
+
+<script>
+/* 每日行程摘要：整塊捲離畫面後自動收起，免得一路占著版面 */
+(function () {
+  var briefs = Array.prototype.slice.call(document.querySelectorAll('details.daybrief'));
+  if (!briefs.length || !('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      var el = en.target;
+      if (en.isIntersecting || !el.open) return;
+      var r = el.getBoundingClientRect(), h0 = r.height;
+      el.open = false;
+      /* 收起的是畫面上方的內容 → 補回捲動位置，避免整頁往上跳 */
+      if (r.bottom < 0) {
+        var d = el.getBoundingClientRect().height - h0;
+        if (d) window.scrollBy({ top: d, behavior: 'instant' });
+      }
+    });
+  }, { threshold: 0 });
+  briefs.forEach(function (b) { io.observe(b); });
 })();
 </script>
 

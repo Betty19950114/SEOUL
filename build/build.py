@@ -83,20 +83,59 @@ for n in nl:
     n["x"] = round(n["x"], 1); n["y"] = round(n["y"], 1)
 
 # ---------------- 路線圖 SVG ----------------
-region_boxes, region_labels = [], []
+# 地圖可用範圍（對應 svg 內 translate(40,40) 後的底圖 rect）
+FX0, FY0, FX1, FY1 = -12.0, -12.0, 842.0, 464.0
+
+def overlap(a, b, m=2.0):
+    """兩個 (x, y, w, h) 是否相碰（含 m 的安全間距）"""
+    return not (a[0] >= b[0]+b[2]+m or b[0] >= a[0]+a[2]+m or
+                a[1] >= b[1]+b[3]+m or b[1] >= a[1]+a[3]+m)
+
+# 標籤要避開的既有元素：所有站點圓點 + 住宿菱形與其文字
+blockers = [(n["x"]-13, n["y"]-13, 26, 26) for n in nl]
+_h = nodes["hotel"]
+blockers.append((_h["x"]-13, _h["y"]-13, 26, 42))   # 菱形 + 底下的「住宿」小字
+
+boxes = []
 for label, keys in REGIONS:
     ks = [k for k in keys if k in nodes]
     if not ks: continue
     xs = [nodes[k]["x"] for k in ks]; ys = [nodes[k]["y"] for k in ks]
     pad = 26
-    x0, x1 = min(xs)-pad, max(xs)+pad
-    y0, y1 = min(ys)-pad, max(ys)+pad
+    boxes.append((label, min(xs)-pad, min(ys)-pad, max(xs)+pad, max(ys)+pad))
+
+region_boxes, region_labels = [], []
+placed = []
+LH = 18.0
+# 由上到下處理，讓上方的區域優先取用外側位置
+for label, x0, y0, x1, y1 in sorted(boxes, key=lambda b: (b[2], b[1])):
     region_boxes.append(
       f'<rect x="{x0:.1f}" y="{y0:.1f}" width="{x1-x0:.1f}" height="{y1-y0:.1f}" rx="16" class="regionbox"/>')
+    lw = len(label)*11.5+14
+    ymid = (y0+y1)/2 - LH/2
+    cands = [                                   # 依偏好排序的候選落點
+        (x0,      y0-LH-1), (x1-lw,   y0-LH-1),          # 框上方，靠左／靠右
+        (x0,      y1+1),    (x1-lw,   y1+1),             # 框下方，靠左／靠右
+        (x0-lw-5, y0-LH-1), (x1+5,    y0-LH-1),          # 框外側上緣
+        (x0-lw-5, ymid),    (x1+5,    ymid),             # 框外側中線
+        (x0,      y0-LH-1-LH-4), (x1-lw, y1+1+LH+4),     # 再往外推一層
+    ]
+    spot = None
+    for cx, cy in cands:
+        if cx < FX0 or cx+lw > FX1 or cy < FY0 or cy+LH > FY1:
+            continue
+        r = (cx, cy, lw, LH)
+        if any(overlap(r, o) for o in placed + blockers):
+            continue
+        spot = r; break
+    if spot is None:                            # 全部塞不下就回到預設位置
+        spot = (max(FX0, min(x0, FX1-lw)), max(FY0, y0-LH-1), lw, LH)
+    placed.append(spot)
+    cx, cy, _, _ = spot
     region_labels.append(
-      f'<g class="region"><rect x="{x0:.1f}" y="{y0-19:.1f}" width="{len(label)*11.5+14:.0f}" '
-      f'height="18" rx="9" class="regionchip"/>'
-      f'<text x="{x0+7:.1f}" y="{y0-6:.1f}" class="regiontext">{esc(label)}</text></g>')
+      f'<g class="region"><rect x="{cx:.1f}" y="{cy:.1f}" width="{lw:.0f}" '
+      f'height="{LH:.0f}" rx="9" class="regionchip"/>'
+      f'<text x="{cx+7:.1f}" y="{cy+LH-5:.1f}" class="regiontext">{esc(label)}</text></g>')
 
 ORDER = {}
 for d in sorted(DAYS):
@@ -137,7 +176,8 @@ anchor = (f'<g class="anchor pin" data-name="서울역 라움169（住宿）" da
           f'<rect x="{h["x"]-10.5:.1f}" y="{h["y"]-10.5:.1f}" width="21" height="21" rx="5" '
           f'transform="rotate(45 {h["x"]} {h["y"]})" fill="var(--ink)" stroke="var(--mapbg)" stroke-width="2.5"/>'
           f'<text x="{h["x"]:.1f}" y="{h["y"]+4:.1f}" text-anchor="middle" class="pnum anchor-t">H</text>'
-          f'<text x="{h["x"]:.1f}" y="{h["y"]+27:.1f}" text-anchor="middle" class="anchor-l">首爾站・住宿</text></g>')
+          f'<rect x="{h["x"]-17:.1f}" y="{h["y"]+16:.1f}" width="34" height="14" rx="7" class="anchor-bg"/>'
+          f'<text x="{h["x"]:.1f}" y="{h["y"]+26:.1f}" text-anchor="middle" class="anchor-l">住宿</text></g>')
 
 open("frag_map.svg.txt", "w", encoding="utf-8").write(
     '<g class="regionboxes">\n' + "\n".join(region_boxes) + '\n</g>\n'
@@ -345,7 +385,7 @@ for d in sorted(DAYS):
 open("frag_legend.html.txt", "w", encoding="utf-8").write("\n".join(leg))
 
 # ---------------- 快速尋找 ----------------
-QF = [("food","美食","🍜"), ("shop","購物","🛍"), ("sight","景點","🏛"),
+QF = [("food","美食","🍜"), ("shop","購物","🛍"), ("sight","景點","🏯"),
       ("dessert","甜點","🍰"), ("cafe","咖啡廳","☕")]
 qf = []
 for cat, label, icon in QF:
