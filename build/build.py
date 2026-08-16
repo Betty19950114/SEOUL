@@ -6,6 +6,10 @@ from data import (PLACES, STATION, CAT, MODE, DAYS, REGIONS, ASK, EXIT,
 
 def esc(s): return html.escape(str(s), quote=True)
 def naver(q): return "https://map.naver.com/p/search/" + urllib.parse.quote(q)
+def nmap(q):
+    """Naver 地圖 App 深層連結；未安裝時由前端退回網頁版"""
+    return ("nmap://search?query=" + urllib.parse.quote(q)
+            + "&appname=betty19950114.github.io")
 
 METRO_ZH = {z for _, z, *_ in METRO_STATIONS}
 
@@ -17,15 +21,19 @@ def ordlabel(n):
         out = chr(65+r) + out
     return out
 
+def linelabel(line):
+    """純線號補「號線」；混合線別（如 2·機場快線·京義中央）維持原樣"""
+    return f'{line} 號線' if all(c.isdigit() or c == '·' for c in line) else line
+
 def station_of(key):
     zh, line, m = STATION[key]
+    head = f'{zh}站（{linelabel(line)}）'
     if m < 0:                       # 非步行可達（愛寶樂園需轉接駁巴士）
-        return f'{zh}站（{line} 線）· 需再轉免費接駁巴士，非步行可達'
+        return head + '需轉免費接駁巴士，非步行可達'
     ex = EXIT.get(key)
-    out = f'{zh}站（{line} 線）'
     if ex:
-        out += f' {ex} 號出口'
-    return out + f' · 步行約 {max(1, round(m/75))} 分（{m} m）'
+        head += f'{ex} 號出口'
+    return f'{head}・步行 {max(1, round(m/75))} 分（{m} m）'      # 間隔號，不留多餘空白
 
 # ---------------- projection（地圖與地鐵圖共用，切換時位置一致） ----------------
 lonMin, lonMax = 126.888, 127.072
@@ -218,8 +226,9 @@ def subs_html(it):
                  f'<span class="pkmeta">🕘 {esc(hrs)}</span>'
                  f'<span class="pkmeta{"" if known else " unk"}">📍 {esc(addr)}</span>'
                  f'<a class="actbtn pkmap" href="{naver(addr if known else q)}" '
+                 f'data-nmap="{esc(nmap(addr if known else q))}" '
                  f'target="_blank" rel="noopener noreferrer">'
-                 f'<span class="aico" aria-hidden="true">📍</span>Naver開啟</a></li>')
+                 f'<span class="aico" aria-hidden="true">🗺</span>Naver開啟</a></li>')
     return f'<div class="picks"><div class="pkhead">此站包含 {len(ss)} 家</div><ul>{rows}</ul></div>'
 
 def picks_html(it):
@@ -229,8 +238,9 @@ def picks_html(it):
       f'<li><span class="pkname">{esc(n)}</span><span class="pkdesc">{esc(d)}</span>'
       f'<span class="pkmeta">🕘 {esc(hh)}</span>'
       f'<span class="pkmeta">📍 {esc(a)}</span>'
-      f'<a class="actbtn pkmap" href="{naver(a)}" target="_blank" rel="noopener noreferrer">'
-      f'<span class="aico" aria-hidden="true">📍</span>Naver開啟</a></li>'
+      f'<a class="actbtn pkmap" href="{naver(a)}" data-nmap="{esc(nmap(a))}" '
+      f'target="_blank" rel="noopener noreferrer">'
+      f'<span class="aico" aria-hidden="true">🗺</span>Naver開啟</a></li>'
       for n, d, hh, a in ps)
     return f'<div class="picks"><div class="pkhead">巷內必吃推薦</div><ul>{rows}</ul></div>'
 
@@ -258,8 +268,9 @@ def info_block(it):
             f'<summary><span class="sumico" aria-hidden="true"></span>詳細說明</summary>'
             f'<dl class="infogrid">{"".join(rows)}</dl>'
             f'<div class="stopacts">'
-            f'<a class="actbtn navermap" href="{naver(addr)}" target="_blank" rel="noopener noreferrer">'
-            f'<span class="aico" aria-hidden="true">📍</span>Naver開啟</a>'
+            f'<a class="actbtn navermap" href="{naver(addr)}" data-nmap="{esc(nmap(addr))}" '
+            f'target="_blank" rel="noopener noreferrer">'
+            f'<span class="aico" aria-hidden="true">🗺</span>Naver開啟</a>'
             f'{metro_btn(it)}</div>'
             f'{subs_html(it)}{picks_html(it)}</details>')
 
@@ -276,7 +287,7 @@ for d in sorted(DAYS):
               f'<span class="tn">{esc(it["n"])}</span>'
               + (f'<span class="tnote">{esc(it["note"])}</span>' if it.get("note") else "") + '</span></li>')
         else:
-            num = "住" if it["cat"] == "stay" else it["ord"]
+            num = it["ord"]
             off = ' offmap' if it.get("offmap") else ''
             sub = ""
             if it.get("sub"):
@@ -287,7 +298,7 @@ for d in sorted(DAYS):
             rows.append(
               f'<li class="tr stop{off}" id="stop-{it["key"]}" data-station="{esc(stn)}">'
               f'<span class="tt">{it["t"]}</span>'
-              f'<span class="tbody"><span class="tnum">{num}</span>'
+              f'<span class="tbody">' + (f'<span class="tnum">{num}</span>' if num else '') +
               f'<span class="tag {it["cat"]}">{CAT[it["cat"]]}</span>'
               f'<span class="tn">{esc(it["n"])}</span>{sub}{info_block(it)}</span></li>')
     sc = sum(1 for it in D["items"] if it["k"] == "stop")
@@ -311,7 +322,7 @@ for d in sorted(DAYS):
     D = DAYS[d]; rows = []
     for it in D["items"]:
         if it["k"] != "stop": continue
-        num = "住" if it["cat"] == "stay" else it["ord"]
+        num = it["ord"] or ""
         extra = ' <span class="lo">（地圖外）</span>' if it.get("offmap") else ''
         zh, _, m = STATION[it["key"]]
         rows.append(f'<li><span class="lnum">{num}</span><span class="ltime">{it["t"]}</span>'

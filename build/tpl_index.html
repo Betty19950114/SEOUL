@@ -107,7 +107,6 @@ __METROSVG__
     <div class="metrolegend">__METROLEGEND__</div>
   </figure>
 
-  <p class="swipehint">← 左右滑動可切換天數 →</p>
   <div class="cards" id="cards">
 __CARDS__
   </div>
@@ -412,5 +411,29 @@ __CARDS__
     tab.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
     if (navigator.vibrate) { try { navigator.vibrate(20); } catch (err) {} }
   }, { passive: true });
+})();
+</script>
+
+<script>
+/* 有裝 Naver 地圖 App 就直接開 App，未安裝則退回網頁版 */
+(function () {
+  var touch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  if (!touch) return;
+  document.querySelectorAll('a[data-nmap]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var deep = a.getAttribute('data-nmap');
+      if (!deep) return;
+      e.preventDefault();
+      var web = a.href, left = false;
+      function bye() { left = true; }
+      window.addEventListener('pagehide', bye, { once: true });
+      document.addEventListener('visibilitychange', bye, { once: true });
+      window.location.href = deep;
+      setTimeout(function () {                 /* App 沒接手就開網頁 */
+        window.removeEventListener('pagehide', bye);
+        if (!left && !document.hidden) window.open(web, '_blank', 'noopener');
+      }, 700);
+    });
+  });
 })();
 </script>

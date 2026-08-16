@@ -258,6 +258,7 @@
   .dmeta { display: flex; flex-direction: column; flex: 1; min-width: 0; }
   .ddate { font-family: ui-monospace, monospace; font-size: 11.5px; letter-spacing: .06em; color: var(--c); font-weight: 700; }
   .dtheme { font-size: 17px; font-weight: 700; text-wrap: balance; }
+  .tn { text-wrap: pretty; }
   .dcount {
     font-size: 12px; color: var(--ink-soft); background: var(--card-2);
     border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; white-space: nowrap;
@@ -300,7 +301,8 @@
   }
   .tn { font-size: 15px; font-weight: 650; color: var(--ink); }
   .tr.move .tn { font-size: 13px; font-weight: 500; color: var(--ink-faint); }
-  .tnote { flex-basis: 100%; font-size: 12.5px; color: var(--ink-soft); line-height: 1.5; }
+  .tnote { flex-basis: 100%; font-size: 12.5px; color: var(--ink-soft); line-height: 1.55;
+           text-wrap: pretty; overflow-wrap: anywhere; }
   .tr.offmap .tnum { box-shadow: 0 0 0 2px color-mix(in srgb, var(--c) 35%, transparent); }
 
   .tag {
@@ -341,14 +343,14 @@
     font-size: 12.5px;
   }
   .infogrid dt { color: var(--ink-faint); font-weight: 650; white-space: nowrap; }
-  .infogrid dd { margin: 0; color: var(--ink); }
+  .infogrid dd { margin: 0; color: var(--ink); text-wrap: pretty; overflow-wrap: anywhere; }
   .infogrid dd.unk { color: var(--ink-faint); font-style: normal; }
-  .infogrid dd.addr { font-size: 12px; line-height: 1.45; }
+  .infogrid dd.addr { font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
   .actbtn {
     font: inherit; font-size: 12px; font-weight: 650; cursor: pointer;
     color: var(--brand); background: var(--brand-soft); text-decoration: none;
     border: 1px solid var(--line-2); border-radius: 999px;
-    padding: 5px 12px; display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 12px; display: inline-flex; align-items: center; gap: 3px;
     white-space: nowrap;
   }
   .actbtn:hover { border-color: var(--brand); }
@@ -381,11 +383,6 @@
     .masthead { margin: 0 -16px 20px; padding: 22px 16px 18px; }
     .tabsbar { margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px; }
     .inset { position: static; max-width: none; margin: 12px 0 0; }
-    .mapscroll::after {
-      content: "← 左右滑動看完整地圖 →";
-      display: block; text-align: center; font-size: 11px;
-      color: var(--ink-faint); padding: 8px 0 2px;
-    }
     .dhead { gap: 11px; padding: 14px 16px 10px; }
     .dnum { width: 40px; height: 40px; font-size: 26px; }
     .dtheme { font-size: 15.5px; }
@@ -431,7 +428,8 @@
   .picks ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
   .picks li { display: flex; flex-direction: column; gap: 2px; }
   .pkname { font-size: 13.5px; font-weight: 700; color: var(--ink); }
-  .pkdesc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.5; }
+  .pkdesc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.55;
+            text-wrap: pretty; overflow-wrap: anywhere; }
   .pkmeta { font-size: 11.5px; color: var(--ink-faint); }
   .pkmap {
     font-size: 11.5px; color: var(--brand); text-decoration: none; width: fit-content;
@@ -445,12 +443,8 @@
     padding: 2px 7px; border-radius: 5px; flex: none;
     color: var(--ink-faint); background: var(--card-2); border: 1px solid var(--line);
   }
-  .tr.move.subway .tbody::before { display: none; }   /* 地鐵段不顯示圓點 */
-  .tr.move.subway .mbadge { font-size: 10px; padding: 1px 6px; }
-  .tr.move.bus .mbadge { color: var(--d4); background: color-mix(in srgb, var(--d4) 14%, transparent); border-color: transparent; }
-  .tr.move.bus .tn { color: var(--ink); font-weight: 600; }
-  .tr.move.taxi .mbadge { color: var(--d3); background: color-mix(in srgb, var(--d3) 14%, transparent); border-color: transparent; }
-  .tr.move.taxi .tn { color: var(--ink); font-weight: 600; }
+  /* 交通列（步行／地鐵／航班／巴士／計程車）樣式一致 */
+  .tr.move .mbadge { font-size: 10px; padding: 1px 6px; }
 
   /* ---------- quick find ---------- */
   .quickfind {
@@ -715,12 +709,4 @@
     .stopinfo.nudge { animation: none; }
   }
 
-  /* 觸控裝置：左右滑動切換天數的提示 */
-  .swipehint {
-    display: none; text-align: center; font-size: 11.5px; color: var(--ink-faint);
-    padding: 8px 0 2px; letter-spacing: .02em;
-  }
-  @media (hover: none) and (pointer: coarse) {
-    :root:not([data-day="all"]) .swipehint { display: block; }
-  }
   .cards { touch-action: pan-y; }
