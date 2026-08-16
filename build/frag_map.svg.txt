@@ -4,7 +4,6 @@
 <rect x="235.4" y="132.2" width="52.0" height="52.0" rx="16" class="regionbox"/>
 <rect x="408.3" y="16.8" width="55.0" height="78.4" rx="16" class="regionbox"/>
 <rect x="346.6" y="126.3" width="89.0" height="78.5" rx="16" class="regionbox"/>
-<rect x="184.7" y="291.9" width="52.0" height="52.0" rx="16" class="regionbox"/>
 <rect x="549.3" y="94.2" width="52.0" height="52.0" rx="16" class="regionbox"/>
 <rect x="505.1" y="72.5" width="67.6" height="71.5" rx="16" class="regionbox"/>
 <rect x="700.1" y="201.4" width="110.0" height="74.1" rx="16" class="regionbox"/>
@@ -32,15 +31,14 @@
 <g class="pin" data-name="樂天超市 首爾站店" data-time="19:15" data-d="3" data-ord="I" data-stop="stop-lottemart"><title>DAY 3 · I · 樂天超市 首爾站店 · 19:15</title><circle cx="372.6" cy="178.8" r="11.5" fill="var(--d3)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="372.6" cy="178.8" r="16" fill="transparent"/><text x="372.6" y="182.8" text-anchor="middle" class="pnum">I</text></g>
 </g>
 <g class="dayg" data-day="4">
-<polyline points="575.3,120.2 784.1,248.0 771.9,228.5 755.2,249.5 726.1,230.6 748.9,227.4 210.7,317.9 498.4,388.6" fill="none" stroke="var(--d4)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="575.3,120.2 784.1,248.0 771.9,228.5 755.2,249.5 726.1,230.6 748.9,227.4 498.4,388.6" fill="none" stroke="var(--d4)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="pin" data-name="獵奇辣炒年糕 신당본점" data-time="11:30" data-d="4" data-ord="A" data-stop="stop-yeopgi"><title>DAY 4 · A · 獵奇辣炒年糕 신당본점 · 11:30</title><circle cx="575.3" cy="120.2" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="575.3" cy="120.2" r="16" fill="transparent"/><text x="575.3" y="124.2" text-anchor="middle" class="pnum">A</text></g>
 <g class="pin" data-name="聖水洞 購物" data-time="13:30" data-d="4" data-ord="B" data-stop="stop-ept"><title>DAY 4 · B · 聖水洞 購物 · 13:30</title><circle cx="784.1" cy="248.0" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="784.1" cy="248.0" r="16" fill="transparent"/><text x="784.1" y="252.0" text-anchor="middle" class="pnum">B</text></g>
 <g class="pin" data-name="烤黨 Ggupdang 聖水店" data-time="15:45" data-d="4" data-ord="C" data-stop="stop-ggupdang_ss"><title>DAY 4 · C · 烤黨 Ggupdang 聖水店 · 15:45</title><circle cx="771.9" cy="228.5" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="771.9" cy="228.5" r="16" fill="transparent"/><text x="771.9" y="232.5" text-anchor="middle" class="pnum">C</text></g>
 <g class="pin" data-name="冰淇淋 Maman Gelato" data-time="16:15" data-d="4" data-ord="D" data-stop="stop-gelato"><title>DAY 4 · D · 冰淇淋 Maman Gelato · 16:15</title><circle cx="755.2" cy="249.5" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="755.2" cy="249.5" r="16" fill="transparent"/><text x="755.2" y="253.5" text-anchor="middle" class="pnum">D</text></g>
 <g class="pin" data-name="蛋塔 Meitawang Egg Tart" data-time="16:45" data-d="4" data-ord="E" data-stop="stop-eggtart"><title>DAY 4 · E · 蛋塔 Meitawang Egg Tart · 16:45</title><circle cx="726.1" cy="230.6" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="726.1" cy="230.6" r="16" fill="transparent"/><text x="726.1" y="234.6" text-anchor="middle" class="pnum">E</text></g>
 <g class="pin" data-name="祖傳三代馬鈴薯排骨湯" data-time="18:00" data-d="4" data-ord="F" data-stop="stop-gamjatang"><title>DAY 4 · F · 祖傳三代馬鈴薯排骨湯 · 18:00</title><circle cx="748.9" cy="227.4" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="748.9" cy="227.4" r="16" fill="transparent"/><text x="748.9" y="231.4" text-anchor="middle" class="pnum">F</text></g>
-<g class="pin" data-name="汝矣島漢江公園" data-time="19:35" data-d="4" data-ord="G" data-stop="stop-yeouido"><title>DAY 4 · G · 汝矣島漢江公園 · 19:35</title><circle cx="210.7" cy="317.9" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="210.7" cy="317.9" r="16" fill="transparent"/><text x="210.7" y="321.9" text-anchor="middle" class="pnum">G</text></g>
-<g class="pin" data-name="盤浦大橋 月光彩虹噴泉" data-time="21:00" data-d="4" data-ord="H" data-stop="stop-banpo"><title>DAY 4 · H · 盤浦大橋 月光彩虹噴泉 · 21:00</title><circle cx="498.4" cy="388.6" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="498.4" cy="388.6" r="16" fill="transparent"/><text x="498.4" y="392.6" text-anchor="middle" class="pnum">H</text></g>
+<g class="pin" data-name="盤浦大橋 月光彩虹噴泉" data-time="20:20" data-d="4" data-ord="G" data-stop="stop-banpo"><title>DAY 4 · G · 盤浦大橋 月光彩虹噴泉 · 20:20</title><circle cx="498.4" cy="388.6" r="11.5" fill="var(--d4)" stroke="var(--mapbg)" stroke-width="2.5"/><circle class="pinhit" cx="498.4" cy="388.6" r="16" fill="transparent"/><text x="498.4" y="392.6" text-anchor="middle" class="pnum">G</text></g>
 </g>
 <g class="dayg" data-day="5">
 
@@ -52,7 +50,6 @@
 <g class="region"><rect x="235.4" y="113.2" width="37" height="18" rx="9" class="regionchip"/><text x="242.4" y="126.2" class="regiontext">梨大</text></g>
 <g class="region"><rect x="408.3" y="-2.2" width="72" height="18" rx="9" class="regionchip"/><text x="415.3" y="10.8" class="regiontext">北村・安國</text></g>
 <g class="region"><rect x="346.6" y="107.3" width="94" height="18" rx="9" class="regionchip"/><text x="353.6" y="120.3" class="regiontext">首爾站・南大門</text></g>
-<g class="region"><rect x="184.7" y="272.9" width="48" height="18" rx="9" class="regionchip"/><text x="191.7" y="285.9" class="regiontext">汝矣島</text></g>
 <g class="region"><rect x="549.3" y="75.2" width="48" height="18" rx="9" class="regionchip"/><text x="556.3" y="88.2" class="regiontext">新堂洞</text></g>
 <g class="region"><rect x="505.1" y="53.5" width="48" height="18" rx="9" class="regionchip"/><text x="512.1" y="66.5" class="regiontext">東大門</text></g>
 <g class="region"><rect x="700.1" y="182.4" width="48" height="18" rx="9" class="regionchip"/><text x="707.1" y="195.4" class="regiontext">聖水洞</text></g>
