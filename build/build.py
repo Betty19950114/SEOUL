@@ -302,7 +302,7 @@ for d in sorted(DAYS):
               f'<span class="tag {it["cat"]}">{CAT[it["cat"]]}</span>'
               f'<span class="tn">{esc(it["n"])}</span>{sub}{info_block(it)}</span></li>')
     sc = sum(1 for it in D["items"] if it["k"] == "stop")
-    cards.append(f'''<section class="daycard" data-day="{d}" style="--c:var(--d{d})">
+    cards.append(f'''<section class="daycard" id="day{d}" data-day="{d}" style="--c:var(--d{d})">
   <header class="dhead">
     <span class="dnum">{d}</span>
     <span class="dmeta"><span class="ddate">DAY {d} · {D["date"]} {D["dow"]}</span>
@@ -330,7 +330,9 @@ for d in sorted(DAYS):
                     f'<span class="lname">{esc(it["n"])}{extra}'
                     f'<span class="lstn">{esc(zh)}站 · {max(1,round(m/75))}分</span></span></li>')
     leg.append(f'<div class="lgroup" style="--c:var(--d{d})">'
-               f'<h3><span class="lbar"></span>DAY {d} · {esc(D["theme"])}</h3><ul>{"".join(rows)}</ul></div>')
+               f'<h3><span class="lbar"></span><span class="lgtitle">DAY {d} · {esc(D["theme"])}</span>'
+               f'<a class="daylink" href="index.html#day{d}">看行程 →</a></h3>'
+               f'<ul>{"".join(rows)}</ul></div>')
 open("frag_legend.html.txt", "w", encoding="utf-8").write("\n".join(leg))
 
 # ---------------- 快速尋找 ----------------

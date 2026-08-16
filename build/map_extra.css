@@ -2,7 +2,7 @@
   .lgroups { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 30px; margin-top: 26px; }
   @media (max-width: 700px) { .lgroups { grid-template-columns: 1fr; } }
   .lgroup h3 {
-    display: flex; align-items: center; gap: 9px;
+    display: flex; align-items: center; gap: 9px; flex-wrap: wrap;
     font-size: 14px; font-weight: 700; margin: 0 0 10px; padding-bottom: 9px;
     border-bottom: 1px solid var(--line); color: var(--ink); text-wrap: balance;
   }
@@ -26,3 +26,12 @@
   .lgroup li { align-items: flex-start; }
   .lgroup li .lnum, .lgroup li .ltime, .lgroup li .tag { margin-top: 1px; }
   .lo { font-size: 11px; color: var(--ink-faint); }
+  .lgtitle { flex: 1; min-width: 0; }
+  .daylink {
+    font-size: 12px; font-weight: 650; text-decoration: none; white-space: nowrap;
+    color: var(--c); background: color-mix(in srgb, var(--c) 13%, transparent);
+    border: 1px solid color-mix(in srgb, var(--c) 32%, transparent);
+    border-radius: 999px; padding: 3px 11px;
+  }
+  .daylink:hover { background: color-mix(in srgb, var(--c) 24%, transparent); }
+  .daylink:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }

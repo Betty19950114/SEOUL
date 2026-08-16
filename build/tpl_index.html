@@ -437,3 +437,23 @@ __CARDS__
   });
 })();
 </script>
+
+<script>
+/* 從路線全圖點「看行程」進來：自動篩選該天並捲到位置 */
+(function () {
+  var m = /^#day([1-5])$/.exec(window.location.hash || '');
+  if (!m) return;
+  var d = m[1];
+  if (typeof window.__setDay === 'function') window.__setDay(d);
+  document.querySelectorAll('.tab').forEach(function (b) {
+    b.setAttribute('aria-pressed', String(b.dataset.day === d));
+  });
+  var card = document.querySelector('.daycard[data-day="' + d + '"]');
+  if (!card) return;
+  /* 定位交給瀏覽器的錨點機制（CSS scroll-margin-top 已避開黏性列），
+     主視覺載入後版面高度會變，載完再校正一次 */
+  function land() { card.scrollIntoView({ block: 'start', behavior: 'auto' }); }
+  land();
+  window.addEventListener('load', land);
+})();
+</script>

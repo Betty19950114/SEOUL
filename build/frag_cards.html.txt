@@ -1,4 +1,4 @@
-<section class="daycard" data-day="1" style="--c:var(--d1)">
+<section class="daycard" id="day1" data-day="1" style="--c:var(--d1)">
   <header class="dhead">
     <span class="dnum">1</span>
     <span class="dmeta"><span class="ddate">DAY 1 · 08.26 WED 週三</span>
@@ -16,7 +16,7 @@
   </ol>
 </section>
 
-<section class="daycard" data-day="2" style="--c:var(--d2)">
+<section class="daycard" id="day2" data-day="2" style="--c:var(--d2)">
   <header class="dhead">
     <span class="dnum">2</span>
     <span class="dmeta"><span class="ddate">DAY 2 · 08.27 THU 週四</span>
@@ -34,7 +34,7 @@
   </ol>
 </section>
 
-<section class="daycard" data-day="3" style="--c:var(--d3)">
+<section class="daycard" id="day3" data-day="3" style="--c:var(--d3)">
   <header class="dhead">
     <span class="dnum">3</span>
     <span class="dmeta"><span class="ddate">DAY 3 · 08.28 FRI 週五</span>
@@ -63,7 +63,7 @@
   </ol>
 </section>
 
-<section class="daycard" data-day="4" style="--c:var(--d4)">
+<section class="daycard" id="day4" data-day="4" style="--c:var(--d4)">
   <header class="dhead">
     <span class="dnum">4</span>
     <span class="dmeta"><span class="ddate">DAY 4 · 08.29 SAT 週六</span>
@@ -85,17 +85,21 @@
   </ol>
 </section>
 
-<section class="daycard" data-day="5" style="--c:var(--d5)">
+<section class="daycard" id="day5" data-day="5" style="--c:var(--d5)">
   <header class="dhead">
     <span class="dnum">5</span>
     <span class="dmeta"><span class="ddate">DAY 5 · 08.30 SUN 週日</span>
-    <span class="dtheme">賦歸</span></span>
-    <span class="dcount">0 站</span>
+    <span class="dtheme">明洞聖堂・賦歸</span></span>
+    <span class="dcount">2 站</span>
   </header>
-  <div class="arearoute"><span class="achip">首爾站</span><span class="asep">→</span><span class="achip">仁川機場</span></div>
+  <div class="arearoute"><span class="achip">明洞</span><span class="asep">→</span><span class="achip">首爾站</span><span class="asep">→</span><span class="achip">仁川機場</span></div>
   <ol class="tl">
-<li class="tr move walk"><span class="tt">08:30</span><span class="tbody"><span class="mbadge">步行</span><span class="tn">飯店退房，首爾站周邊吃早餐</span><span class="tnote">今天是週日，南大門市場與樂天超市都沒開，伴手禮已在第三晚買齊。首爾站內有不少早餐選擇</span></span></li>
-<li class="tr move subway"><span class="tt">09:30</span><span class="tbody"><span class="mbadge">地鐵</span><span class="tn">首爾站搭 A&#x27;REX → 仁川機場</span><span class="tnote">約 45–60 分</span></span></li>
+<li class="tr move walk"><span class="tt">07:40</span><span class="tbody"><span class="mbadge">步行</span><span class="tn">飯店出發，步行前往明洞</span><span class="tnote">約 1 公里、走 15 分鐘。行李先寄放飯店櫃檯，回程再拿</span></span></li>
+<li class="tr stop" id="stop-cathedral" data-station="明洞"><span class="tt">07:55</span><span class="tbody"><span class="tnum">A</span><span class="tag sight">景點</span><span class="tn">明洞聖堂</span><details class="stopinfo"><summary><span class="sumico" aria-hidden="true"></span>詳細說明</summary><dl class="infogrid"><dt>說明</dt><dd>哥德式建築的主教座堂，週日早上有彌撒，氣氛跟平日觀光很不一樣。這時間明洞的店都還沒開，正好安靜地看建築</dd><dt>最近地鐵站</dt><dd>明洞站（4 號線）・步行 4 分（271 m）</dd><dt>營業時間</dt><dd>聖堂全日開放，彌撒時間依公告；周邊商圈店家 10:00 才開</dd><dt>地址</dt><dd class="addr">서울특별시 중구 명동길 74</dd></dl><div class="stopacts"><a class="actbtn navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%A4%91%EA%B5%AC%20%EB%AA%85%EB%8F%99%EA%B8%B8%2074" data-nmap="nmap://search?query=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%A4%91%EA%B5%AC%20%EB%AA%85%EB%8F%99%EA%B8%B8%2074&amp;appname=betty19950114.github.io" target="_blank" rel="noopener noreferrer"><span class="aico" aria-hidden="true">🗺</span>Naver開啟</a><button type="button" class="actbtn tometro" data-station="明洞" data-stop="stop-cathedral" data-label="明洞聖堂"><span class="aico" aria-hidden="true">🚇</span>在地鐵圖查看</button></div></details></span></li>
+<li class="tr move walk"><span class="tt">08:20</span><span class="tbody"><span class="mbadge">步行</span><span class="tn">步行前往 Isaac Toast</span><span class="tnote">就在聖堂旁，約 150 公尺、走 2 分鐘</span></span></li>
+<li class="tr stop" id="stop-isaac" data-station="明洞"><span class="tt">08:25</span><span class="tbody"><span class="tnum">B</span><span class="tag food">美食</span><span class="tn">Isaac Toast 明洞聖堂店</span><details class="stopinfo"><summary><span class="sumico" aria-hidden="true"></span>詳細說明</summary><dl class="infogrid"><dt>說明</dt><dd>韓國國民早餐吐司連鎖，現煎蛋加火腿起司，點完現做。08:00 開門，週日也有營業</dd><dt>營業時間</dt><dd>08:00–20:00，全年無休</dd><dt>地址</dt><dd class="addr">서울특별시 중구 명동10길 17-1</dd></dl><div class="stopacts"><a class="actbtn navermap" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%A4%91%EA%B5%AC%20%EB%AA%85%EB%8F%9910%EA%B8%B8%2017-1" data-nmap="nmap://search?query=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%A4%91%EA%B5%AC%20%EB%AA%85%EB%8F%9910%EA%B8%B8%2017-1&amp;appname=betty19950114.github.io" target="_blank" rel="noopener noreferrer"><span class="aico" aria-hidden="true">🗺</span>Naver開啟</a><button type="button" class="actbtn tometro" data-station="明洞" data-stop="stop-isaac" data-label="Isaac Toast 明洞聖堂店"><span class="aico" aria-hidden="true">🚇</span>在地鐵圖查看</button></div></details></span></li>
+<li class="tr move walk"><span class="tt">08:55</span><span class="tbody"><span class="mbadge">步行</span><span class="tn">步行回飯店拿行李</span><span class="tnote">約 15 分鐘，取行李後直接走到首爾站</span></span></li>
+<li class="tr move subway"><span class="tt">09:30</span><span class="tbody"><span class="mbadge">地鐵</span><span class="tn">首爾站搭 A&#x27;REX → 仁川機場</span><span class="tnote">約 45–60 分。今天是週日，南大門市場與樂天超市都沒開，伴手禮已在第三晚買齊</span></span></li>
 <li class="tr move air"><span class="tt">10:30</span><span class="tbody"><span class="mbadge">航班</span><span class="tn">抵達 ICN T2，辦理登機</span><span class="tnote">國際線建議提前 2.5 小時</span></span></li>
 <li class="tr move air"><span class="tt">12:45</span><span class="tbody"><span class="mbadge">航班</span><span class="tn">仁川起飛 → 14:20 抵達桃園 T1</span><span class="tnote">飛行約 1 小時 35 分</span></span></li>
   </ol>
