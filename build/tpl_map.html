@@ -139,7 +139,7 @@ __LEGEND__
   });
 })();
 
-/* 跳到下方該天的行程清單，並給一顆 3 秒後自動收起的返回鍵 */
+/* 跳到下方該天的行程清單，並給一顆 5 秒後自動收起的返回鍵 */
 (function () {
   var fab = document.getElementById('backfab'), name = document.getElementById('backname');
   var timer = null;
@@ -159,7 +159,7 @@ __LEGEND__
     name.textContent = '回到路線圖';
     fab.dataset.show = '1';
     clearTimeout(timer);
-    timer = setTimeout(function () { fab.dataset.show = '0'; }, 3000);
+    timer = setTimeout(function () { fab.dataset.show = '0'; }, 5000);
   };
 
   if (fab) fab.addEventListener('click', function () {

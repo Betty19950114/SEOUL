@@ -1478,13 +1478,13 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     window.scrollTo({ top: y, behavior: 'smooth' });
   }
 
-  /* 從地圖點進行程後，給一顆 3 秒後自動收起的返回鍵 */
+  /* 從地圖點進行程後，給一顆 5 秒後自動收起的返回鍵 */
   window.__backToMap = function () {
     mode = 'map'; lastStop = null;
     name.textContent = '回到路線圖';
     fab.dataset.show = '1';
     clearTimeout(timer);
-    timer = setTimeout(function () { fab.dataset.show = '0'; }, 3000);
+    timer = setTimeout(function () { fab.dataset.show = '0'; }, 5000);
   };
 
   /* 地鐵圖：由地圖的兩段式點擊呼叫，跳到該站的行程 */
@@ -1508,7 +1508,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
       lastStop = b.dataset.stop;
       name.textContent = '回到 ' + b.dataset.label;
       fab.dataset.show = '1';
-      timer = setTimeout(function () { fab.dataset.show = '0'; }, 3000);
+      timer = setTimeout(function () { fab.dataset.show = '0'; }, 5000);
       /* 切到地鐵圖並標出該站 */
       var mb = document.querySelector('.modebtn[data-mode="metro"]');
       if (mb) mb.click();
