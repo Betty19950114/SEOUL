@@ -1342,13 +1342,18 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     }
     function hide() { tip.classList.remove('on'); armed = null; }
     var armed = null;                       /* 已顯示名稱、等第二下的站點 */
-    card.querySelectorAll('.pin').forEach(function (pin) {
+    card.querySelectorAll('.pin, .mstation').forEach(function (pin) {
+      pin.style.cursor = 'pointer';
       pin.addEventListener('mouseenter', function () { show(pin); });
       pin.addEventListener('mouseleave', function () { tip.classList.remove('on'); });
       pin.addEventListener('click', function (e) {
         e.stopPropagation();
         if (armed !== pin) { armed = pin; show(pin); return; }   /* 第一下只顯示名稱 */
         armed = null;                                            /* 第二下才跳行程 */
+        if (pin.classList.contains('mstation')) {
+          if (typeof window.__jumpFromMetro === 'function') window.__jumpFromMetro(pin.getAttribute('data-zh'));
+          return;
+        }
         var target = pin.getAttribute('data-stop');
         if (target && typeof window.__gotoStop === 'function') {
           window.__gotoStop(target);
@@ -1479,23 +1484,18 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     timer = setTimeout(function () { fab.dataset.show = '0'; }, 3000);
   };
 
-  /* 地鐵圖：點一下就直接跳到該站的行程 */
-  document.querySelectorAll('.mstation').forEach(function (st) {
-    st.style.cursor = 'pointer';
-    st.addEventListener('click', function (e) {
-      e.stopPropagation();
-      var zh = st.getAttribute('data-zh');
-      var cur = document.documentElement.getAttribute('data-day');
-      var rows = Array.prototype.slice.call(document.querySelectorAll('.tr.stop[data-station="' + zh + '"]'));
-      if (!rows.length) return;
-      var hit = rows.filter(function (r) {
-        var dc = r.closest('.daycard');
-        return cur === 'all' || (dc && dc.dataset.day === cur);
-      })[0] || rows[0];
-      if (typeof window.__gotoStop === 'function') window.__gotoStop(hit.id);
-      window.__backToMap();
-    });
-  });
+  /* 地鐵圖：由地圖的兩段式點擊呼叫，跳到該站的行程 */
+  window.__jumpFromMetro = function (zh) {
+    var cur = document.documentElement.getAttribute('data-day');
+    var rows = Array.prototype.slice.call(document.querySelectorAll('.tr.stop[data-station="' + zh + '"]'));
+    if (!rows.length) return;
+    var hit = rows.filter(function (r) {
+      var dc = r.closest('.daycard');
+      return cur === 'all' || (dc && dc.dataset.day === cur);
+    })[0] || rows[0];
+    if (typeof window.__gotoStop === 'function') window.__gotoStop(hit.id);
+    window.__backToMap();
+  };
 
   document.querySelectorAll('.tometro').forEach(function (b) {
     b.addEventListener('click', function (e) {
@@ -1505,6 +1505,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
       lastStop = b.dataset.stop;
       name.textContent = '回到 ' + b.dataset.label;
       fab.dataset.show = '1';
+      timer = setTimeout(function () { fab.dataset.show = '0'; }, 3000);
       /* 切到地鐵圖並標出該站 */
       var mb = document.querySelector('.modebtn[data-mode="metro"]');
       if (mb) mb.click();

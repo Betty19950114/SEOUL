@@ -118,13 +118,19 @@ __LEGEND__
     }
     function hide() { tip.classList.remove('on'); armed = null; }
     var armed = null;                       /* 已顯示名稱、等第二下的站點 */
-    card.querySelectorAll('.pin').forEach(function (pin) {
+    card.querySelectorAll('.pin, .mstation').forEach(function (pin) {
+      pin.style.cursor = 'pointer';
       pin.addEventListener('mouseenter', function () { show(pin); });
       pin.addEventListener('mouseleave', function () { tip.classList.remove('on'); });
       pin.addEventListener('click', function (e) {
         e.stopPropagation();
         if (armed !== pin) { armed = pin; show(pin); return; }   /* 第一下只顯示名稱 */
         armed = null;                                            /* 第二下才跳行程 */
+        if (pin.classList.contains('mstation')) {
+          var days = (pin.getAttribute('data-days') || '').trim().split(/\s+/).filter(Boolean);
+          if (days.length) window.__gotoLeg(days[0], null);
+          return;
+        }
         window.__gotoLeg(pin.getAttribute('data-d'), pin.getAttribute('data-stop'));
       });
     });
@@ -146,7 +152,7 @@ __LEGEND__
     window.scrollTo({ top: y, behavior: 'smooth' });
     if (row) {
       row.classList.remove('flash'); void row.offsetWidth; row.classList.add('flash');
-      setTimeout(function () { row.classList.remove('flash'); }, 1900);
+      setTimeout(function () { row.classList.remove('flash'); }, 1500);
     }
     if (navigator.vibrate) { try { navigator.vibrate([30, 60, 30]); } catch (e) {} }
     if (!fab) return;
@@ -161,17 +167,6 @@ __LEGEND__
     fab.dataset.show = '0';
     var top = document.querySelector('.mapmodes');
     if (top) window.scrollTo({ top: top.getBoundingClientRect().top + window.scrollY - 12, behavior: 'smooth' });
-  });
-
-  /* 地鐵圖：點一下就直接跳 */
-  document.querySelectorAll('.mstation').forEach(function (st) {
-    st.style.cursor = 'pointer';
-    st.addEventListener('click', function (e) {
-      e.stopPropagation();
-      var days = (st.getAttribute('data-days') || '').trim().split(/\s+/).filter(Boolean);
-      if (!days.length) return;
-      window.__gotoLeg(days[0], null);
-    });
   });
 })();
 

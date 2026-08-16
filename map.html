@@ -858,7 +858,7 @@
   .daylink:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
 
   /* 從地圖點進來時，把對應那筆行程閃一下 */
-  .lgroup li.flash { animation: flashrow 1.8s ease-out 1; border-radius: 8px; }
+  .lgroup li.flash { animation: flashrow .7s ease-out 2; border-radius: 8px; }
 
 </style>
 <script>
@@ -1084,13 +1084,19 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     }
     function hide() { tip.classList.remove('on'); armed = null; }
     var armed = null;                       /* 已顯示名稱、等第二下的站點 */
-    card.querySelectorAll('.pin').forEach(function (pin) {
+    card.querySelectorAll('.pin, .mstation').forEach(function (pin) {
+      pin.style.cursor = 'pointer';
       pin.addEventListener('mouseenter', function () { show(pin); });
       pin.addEventListener('mouseleave', function () { tip.classList.remove('on'); });
       pin.addEventListener('click', function (e) {
         e.stopPropagation();
         if (armed !== pin) { armed = pin; show(pin); return; }   /* 第一下只顯示名稱 */
         armed = null;                                            /* 第二下才跳行程 */
+        if (pin.classList.contains('mstation')) {
+          var days = (pin.getAttribute('data-days') || '').trim().split(/\s+/).filter(Boolean);
+          if (days.length) window.__gotoLeg(days[0], null);
+          return;
+        }
         window.__gotoLeg(pin.getAttribute('data-d'), pin.getAttribute('data-stop'));
       });
     });
@@ -1112,7 +1118,7 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     window.scrollTo({ top: y, behavior: 'smooth' });
     if (row) {
       row.classList.remove('flash'); void row.offsetWidth; row.classList.add('flash');
-      setTimeout(function () { row.classList.remove('flash'); }, 1900);
+      setTimeout(function () { row.classList.remove('flash'); }, 1500);
     }
     if (navigator.vibrate) { try { navigator.vibrate([30, 60, 30]); } catch (e) {} }
     if (!fab) return;
@@ -1127,17 +1133,6 @@ document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
     fab.dataset.show = '0';
     var top = document.querySelector('.mapmodes');
     if (top) window.scrollTo({ top: top.getBoundingClientRect().top + window.scrollY - 12, behavior: 'smooth' });
-  });
-
-  /* 地鐵圖：點一下就直接跳 */
-  document.querySelectorAll('.mstation').forEach(function (st) {
-    st.style.cursor = 'pointer';
-    st.addEventListener('click', function (e) {
-      e.stopPropagation();
-      var days = (st.getAttribute('data-days') || '').trim().split(/\s+/).filter(Boolean);
-      if (!days.length) return;
-      window.__gotoLeg(days[0], null);
-    });
   });
 })();
 
