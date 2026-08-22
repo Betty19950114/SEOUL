@@ -165,7 +165,12 @@
   .fl .ap .code { font-family: 'BigShoulders', sans-serif; font-weight: 800; font-size: 22px; line-height: 1.05; }
   .fl .ap .tm { font-family: ui-monospace, monospace; font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; }
   .fl .ap .nm { font-size: 10.5px; color: var(--ink-faint); }
-  .fl .dash { flex: 1; height: 1px; background: var(--line-2); position: relative; min-width: 26px; }
+  .fl .mid { flex: 1; min-width: 56px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .fl .flno {
+    font-family: ui-monospace, monospace; font-size: 10px; font-weight: 700;
+    letter-spacing: .06em; color: var(--brand); white-space: nowrap;
+  }
+  .fl .dash { width: 100%; flex: none; height: 1px; background: var(--line-2); position: relative; min-width: 26px; }
   .fl .dash::after {
     content: "✈"; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
     background: var(--card); padding: 0 4px; font-size: 11px; color: var(--brand);
